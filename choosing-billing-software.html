@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What to Look for in Billing Software for Your Homeschool Co-op — Microschool Ledger</title>
+<meta name="description" content="Most billing and accounting tools weren't built for homeschool co-ops. Here's what actually matters when evaluating software — and what to watch out for.">
+<link rel="canonical" href="https://microschoolledger.com/resources/choosing-billing-software.html">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --green-deep:  #1a3a2a;
+  --green-mid:   #2d6a4f;
+  --green-light: #52b788;
+  --green-pale:  #d8f3dc;
+  --green-faint: #f0faf3;
+  --gold:        #c9a84c;
+  --gold-light:  #f7f0e0;
+  --cream:       #faf8f3;
+  --ink:         #1a1a1a;
+  --muted:       #5a6b5a;
+  --rule:        #dde8df;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.7; }
+
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(26,58,42,0.97); backdrop-filter: blur(12px); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; border-bottom: 1px solid rgba(82,183,136,0.2); }
+.nav-logo { font-family: 'Lora', serif; font-size: 1.15rem; font-weight: 700; color: white; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+.nav-logo-leaf { width: 26px; height: 26px; background: var(--gold); border-radius: 50% 0 50% 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+.nav-back { font-size: 0.82rem; color: rgba(255,255,255,0.6); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+.nav-back:hover { color: white; }
+
+.article-hero { background: var(--green-deep); padding: 8rem 2rem 4rem; position: relative; overflow: hidden; }
+.article-hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; border-radius: 50%; background: rgba(82,183,136,0.07); pointer-events: none; }
+.article-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+.article-category { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); font-size: 0.67rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 100px; margin-bottom: 1.5rem; }
+.article-hero h1 { font-family: 'Lora', serif; font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 700; color: white; line-height: 1.2; margin-bottom: 1.25rem; }
+.article-hero h1 em { font-style: italic; color: var(--gold); }
+.article-meta { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+.article-meta-item { font-size: 0.78rem; color: rgba(255,255,255,0.45); }
+.article-byline { font-size: 0.82rem; color: rgba(255,255,255,0.62); }
+.article-byline strong { color: white; }
+.gold-stripe { height: 3px; background: linear-gradient(90deg, var(--gold), var(--green-light), var(--gold)); }
+
+.article-layout { max-width: 760px; margin: 0 auto; padding: 3.5rem 2rem 5rem; }
+
+.prose h2 { font-family: 'Lora', serif; font-size: 1.55rem; font-weight: 700; color: var(--green-deep); margin: 2.5rem 0 0.9rem; line-height: 1.25; padding-bottom: 0.5rem; border-bottom: 2px solid var(--green-pale); }
+.prose h3 { font-family: 'Lora', serif; font-size: 1.15rem; font-weight: 600; color: var(--green-mid); margin: 1.75rem 0 0.6rem; }
+.prose p { font-size: 1rem; color: #2a2a2a; line-height: 1.8; margin-bottom: 1.2rem; }
+.prose p:first-child { font-size: 1.08rem; color: var(--green-deep); font-weight: 400; line-height: 1.75; }
+.prose ul, .prose ol { margin: 0.5rem 0 1.2rem 1.4rem; }
+.prose li { font-size: 0.97rem; color: #2a2a2a; line-height: 1.75; margin-bottom: 0.45rem; }
+.prose strong { font-weight: 600; color: var(--green-deep); }
+.prose a { color: var(--green-mid); text-decoration: underline; text-decoration-color: var(--green-pale); text-underline-offset: 3px; }
+.prose a:hover { color: var(--green-deep); }
+
+.callout { background: var(--green-faint); border-left: 3px solid var(--green-light); border-radius: 0 6px 6px 0; padding: 1.1rem 1.3rem; margin: 1.5rem 0; }
+.callout-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 0.4rem; }
+.callout p { font-size: 0.92rem; color: var(--green-deep); margin: 0; line-height: 1.65; }
+.callout-gold { background: var(--gold-light); border-left-color: var(--gold); }
+.callout-gold .callout-label { color: #9a7320; }
+.callout-gold p { color: #5a4010; }
+
+/* Criteria cards */
+.criteria-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.25rem 0 1.75rem; }
+.criteria-card { border: 1px solid var(--rule); border-radius: 8px; padding: 1.2rem; background: white; }
+.criteria-card.must { border-color: var(--green-light); background: var(--green-faint); }
+.criteria-card.nice { border-color: var(--rule); }
+.criteria-card.avoid { border-color: #f0b8a0; background: #fff8f5; }
+.criteria-badge { display: inline-block; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.18rem 0.45rem; border-radius: 3px; margin-bottom: 0.55rem; }
+.badge-must { background: var(--green-pale); color: var(--green-mid); }
+.badge-nice { background: var(--gold-light); color: #9a7320; }
+.badge-avoid { background: #ffe0d0; color: #c05020; }
+.criteria-title { font-weight: 600; font-size: 0.9rem; color: var(--green-deep); margin-bottom: 0.35rem; }
+.criteria-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+
+/* Comparison table */
+.compare-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0 1.75rem; font-size: 0.85rem; }
+.compare-table th { background: var(--green-deep); color: white; font-weight: 600; font-size: 0.73rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.65rem 0.9rem; text-align: left; }
+.compare-table th:first-child { border-radius: 6px 0 0 0; }
+.compare-table th:last-child { border-radius: 0 6px 0 0; }
+.compare-table td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--rule); color: #333; vertical-align: top; line-height: 1.5; }
+.compare-table tr:nth-child(even) td { background: #fafcfa; }
+.compare-table tr:last-child td { border-bottom: none; }
+.check { color: var(--green-light); font-weight: 700; }
+.cross { color: #e05c5c; }
+.partial { color: #c9a84c; }
+
+.article-cta { background: var(--green-deep); border-radius: 10px; padding: 2rem; margin-top: 3rem; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.article-cta-text h3 { font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 700; color: white; margin-bottom: 0.4rem; }
+.article-cta-text p { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin: 0; line-height: 1.55; }
+.article-cta-btn { background: var(--gold); color: var(--green-deep); padding: 0.75rem 1.5rem; border-radius: 5px; font-weight: 600; font-size: 0.88rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
+.article-cta-btn:hover { background: #d4b35c; }
+
+footer { background: #111f16; padding: 2.5rem 2rem; border-top: 1px solid rgba(255,255,255,0.06); }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.footer-logo { font-family: 'Lora', serif; font-size: 1rem; font-weight: 700; color: rgba(255,255,255,0.5); text-decoration: none; }
+.footer-meta { font-size: 0.77rem; color: rgba(255,255,255,0.28); line-height: 1.6; }
+.footer-meta a { color: var(--gold); text-decoration: none; }
+
+@media (max-width: 680px) {
+  .article-hero { padding: 6.5rem 1.5rem 3rem; }
+  .article-layout { padding: 2.5rem 1.5rem 4rem; }
+  .criteria-grid { grid-template-columns: 1fr; }
+  .article-cta { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-leaf">🌿</div>
+    Microschool Ledger
+  </a>
+  <a href="/#resources" class="nav-back">← Resources</a>
+</nav>
+
+<div class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-category">🧾 Operations</div>
+    <h1>What to look for in billing software for your <em>homeschool co-op</em></h1>
+    <div class="article-meta">
+      <span class="article-byline">By <strong>Rajeev, The Grow Co-op</strong></span>
+      <span class="article-meta-item">📅 March 2026</span>
+      <span class="article-meta-item">⏱ 7 min read</span>
+    </div>
+  </div>
+</div>
+<div class="gold-stripe"></div>
+
+<div class="article-layout">
+<div class="prose">
+
+<p>Most billing and accounting tools were built for businesses that invoice individual clients for services rendered. Homeschool co-ops work completely differently — and the mismatch between how those tools think and how co-ops actually operate is the source of most administrative pain. This guide is about what to actually look for, based on what makes co-op billing genuinely hard.</p>
+
+<div class="callout">
+  <div class="callout-label">Honest disclosure</div>
+  <p>We built Microschool Ledger specifically for this problem. This article is our honest attempt to describe what matters — including things we don't do yet. We'd rather you make the right choice for your co-op than the wrong one because we oversold.</p>
+</div>
+
+<h2>Why generic tools struggle with co-op billing</h2>
+
+<p>Before getting into what to look for, it's worth being specific about why the standard options — QuickBooks, FreshBooks, Wave, invoicing through your bank — don't work well. The answer isn't that they're bad software. It's that they're solving a different problem.</p>
+
+<p>Standard billing tools are built around one core concept: <strong>you provide a service, you send an invoice, the client pays it.</strong> That model fits a freelancer or a service business well. It doesn't fit a co-op because:</p>
+
+<ul>
+  <li><strong>You bill families, not students.</strong> The paying unit is the family, but the service is delivered to individual children within that family. You need to track per-student enrollment and per-family billing simultaneously.</li>
+  <li><strong>Sibling discounts are structural, not manual.</strong> The 2nd and 3rd child in a family pay less — and this varies by program, not just by family. Applying this manually on every invoice is error-prone.</li>
+  <li><strong>Two payment streams converge on one balance.</strong> A family might be paying $400/month by check and receiving $533/month from Step-Up. Both count against the same tuition balance. Generic tools treat these as separate transactions with no common ledger.</li>
+  <li><strong>The school year doesn't match the calendar year.</strong> June–May billing, March deposits for the next year, 10-month and 12-month payment plans — general accounting tools have none of this concept built in.</li>
+</ul>
+
+<h2>The criteria that actually matter</h2>
+
+<p>Here's how to think about evaluating any tool for co-op billing — the must-haves, the nice-to-haves, and the red flags.</p>
+
+<div class="criteria-grid">
+  <div class="criteria-card must">
+    <span class="criteria-badge badge-must">Must have</span>
+    <div class="criteria-title">Family-level billing</div>
+    <div class="criteria-desc">The tool must understand that multiple students belong to one family and that the invoice goes to the family, not each child separately.</div>
+  </div>
+  <div class="criteria-card must">
+    <span class="criteria-badge badge-must">Must have</span>
+    <div class="criteria-title">Multiple programs</div>
+    <div class="criteria-desc">If you run more than one program with different pricing, the tool needs to track enrollments and charges per program — not just a single tuition line.</div>
+  </div>
+  <div class="criteria-card must">
+    <span class="criteria-badge badge-must">Must have</span>
+    <div class="criteria-title">Scholarship reconciliation</div>
+    <div class="criteria-desc">If you accept Step-Up or other scholarships, you need a way to record those payments against family balances without manually attributing each one.</div>
+  </div>
+  <div class="criteria-card must">
+    <span class="criteria-badge badge-must">Must have</span>
+    <div class="criteria-title">Simple enough for non-finance staff</div>
+    <div class="criteria-desc">Your administrator is a teacher and a parent first. If the tool requires accounting knowledge to operate, it won't get used correctly.</div>
+  </div>
+  <div class="criteria-card nice">
+    <span class="criteria-badge badge-nice">Nice to have</span>
+    <div class="criteria-title">Automatic charge generation</div>
+    <div class="criteria-desc">Monthly tuition charges calculated from enrollment data, not manually entered. Reduces errors significantly as enrollment grows.</div>
+  </div>
+  <div class="criteria-card nice">
+    <span class="criteria-badge badge-nice">Nice to have</span>
+    <div class="criteria-title">Collections visibility</div>
+    <div class="criteria-desc">A clear view of who owes what, sorted by overdue status — so collections are proactive rather than reactive.</div>
+  </div>
+  <div class="criteria-card avoid">
+    <span class="criteria-badge badge-avoid">Watch out for</span>
+    <div class="criteria-title">Per-user pricing</div>
+    <div class="criteria-desc">Tools that charge per admin seat punish growth. A co-op often needs 2–4 people with access for legitimate reasons.</div>
+  </div>
+  <div class="criteria-card avoid">
+    <span class="criteria-badge badge-avoid">Watch out for</span>
+    <div class="criteria-title">Requires IT to maintain</div>
+    <div class="criteria-desc">Self-hosted tools, local databases, or anything requiring regular updates by someone technical are a liability for a small org.</div>
+  </div>
+</div>
+
+<h2>How common options stack up</h2>
+
+<p>Here's an honest comparison of the tools co-ops typically try, against the criteria that matter.</p>
+
+<table class="compare-table">
+  <thead>
+    <tr>
+      <th>Tool</th>
+      <th>Family billing</th>
+      <th>Multiple programs</th>
+      <th>Step-Up reconciliation</th>
+      <th>Ease of use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>QuickBooks</strong></td>
+      <td><span class="partial">⚠ Workaround</span></td>
+      <td><span class="partial">⚠ Manual</span></td>
+      <td><span class="cross">✗ None</span></td>
+      <td><span class="partial">⚠ Moderate</span></td>
+    </tr>
+    <tr>
+      <td><strong>Google Sheets</strong></td>
+      <td><span class="partial">⚠ Manual</span></td>
+      <td><span class="partial">⚠ Manual</span></td>
+      <td><span class="cross">✗ None</span></td>
+      <td><span class="check">✓ Familiar</span></td>
+    </tr>
+    <tr>
+      <td><strong>FreshBooks / Wave</strong></td>
+      <td><span class="cross">✗ Individual invoicing</span></td>
+      <td><span class="partial">⚠ Items/services</span></td>
+      <td><span class="cross">✗ None</span></td>
+      <td><span class="check">✓ Easy</span></td>
+    </tr>
+    <tr>
+      <td><strong>Procare / Brightwheel</strong></td>
+      <td><span class="check">✓ Family-based</span></td>
+      <td><span class="partial">⚠ Limited</span></td>
+      <td><span class="cross">✗ None</span></td>
+      <td><span class="check">✓ Easy</span></td>
+    </tr>
+    <tr>
+      <td><strong>Microschool Ledger</strong></td>
+      <td><span class="check">✓ Native</span></td>
+      <td><span class="check">✓ Native</span></td>
+      <td><span class="check">✓ Automated</span></td>
+      <td><span class="check">✓ Purpose-built</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout callout-gold">
+  <div class="callout-label">On Procare and Brightwheel</div>
+  <p>These tools were built for daycare and childcare centers, which have more in common with co-ops than general accounting tools do. They handle family billing well. Where they fall short for Florida co-ops is Step-Up reconciliation — they have no concept of state scholarship payment streams. You'd still be reconciling those manually.</p>
+</div>
+
+<h2>Questions to ask any vendor</h2>
+
+<p>When you're evaluating billing software, these questions cut through the marketing quickly:</p>
+
+<h3>"How does your software handle a family with three children in two different programs, each with sibling discounts?"</h3>
+<p>This is the core co-op billing scenario. If the answer involves manual calculation, custom fields, or "you'd set that up as separate clients," it's not the right tool.</p>
+
+<h3>"We accept Florida Step-Up EMA scholarships. How would those payments get recorded against a family's balance?"</h3>
+<p>Most tools will tell you to record them as manual payments. That's workable, but it means you're still doing the matching work yourself. Push on whether there's any automation.</p>
+
+<h3>"How do you handle the March–May period when we're collecting deposits for the next year while still billing current-year tuition?"</h3>
+<p>Blank stares here are a bad sign. A tool that doesn't understand school year boundaries will constantly show incorrect balances during enrollment season.</p>
+
+<h3>"If we need to correct a sibling discount on twelve families across two programs, how long does that take?"</h3>
+<p>This tests how much manual work errors create. The answer tells you a lot about the tool's data model.</p>
+
+<h2>When a spreadsheet is actually the right answer</h2>
+
+<p>If you have fewer than 10 families, one program, no Step-Up students, and one person doing all the admin — a well-structured spreadsheet is probably fine. The overhead of setting up and learning billing software isn't justified at that scale.</p>
+
+<p>The inflection points where a dedicated tool starts to earn its cost:</p>
+
+<ul>
+  <li>You have Step-Up families and spend more than an hour per billing cycle reconciling</li>
+  <li>You run multiple programs with different pricing and a sibling discount error has created an awkward conversation</li>
+  <li>You're manually building invoices for 15+ families every month</li>
+  <li>A second administrator needs access and you're worried about version control on shared spreadsheets</li>
+  <li>You've discovered a billing error after the fact and had no audit trail to understand how it happened</li>
+</ul>
+
+<p>If any of those sound familiar, the spreadsheet has already outgrown you — even if it still technically works.</p>
+
+<h2>The honest bottom line</h2>
+
+<p>There is no perfect tool for homeschool co-op billing. The options are: (1) adapt a general-purpose tool and accept its limitations, (2) use a childcare-focused tool and handle the scholarship gap manually, or (3) use a purpose-built tool that was designed with co-op billing logic from the start.</p>
+
+<p>We built Microschool Ledger because we lived option 1 for too long. We're not going to pretend there's no alternative — the alternatives exist and some co-ops use them fine. But if Step-Up reconciliation and family-based billing are causing you real pain, the right tool is one that was designed for exactly that problem.</p>
+
+<div class="article-cta">
+  <div class="article-cta-text">
+    <h3>See what purpose-built looks like</h3>
+    <p>Explore a live demo with sample families, Step-Up payments, and real data — no login required.</p>
+  </div>
+  <a href="https://msledger-a2525.web.app?org=demo" target="_blank" rel="noopener" class="article-cta-btn">Explore Demo →</a>
+</div>
+
+</div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="footer-logo">Microschool Ledger</a>
+    <div class="footer-meta">Built by The Grow Co-op · Boca Raton, FL · <a href="/cdn-cgi/l/email-protection#85ecebe3eac5e8ece6f7eaf6e6edeaeae9e9e0e1e2e0f7abe6eae8"><span class="__cf_email__" data-cfemail="95fcfbf3fad5f8fcf6e7fae6f6fdfafaf9f9f0f1f2f0e7bbf6faf8">[email&#160;pro
