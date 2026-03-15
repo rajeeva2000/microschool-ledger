@@ -471,56 +471,32 @@ section { padding: 5rem 2rem; }
 .cred-stat-label { font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
 
 /* ── CTA ── */
-.cta-section {
-  background: var(--green-deep);
-  text-align: center; position: relative; overflow: hidden;
-}
-.cta-section::before {
-  content: ''; position: absolute; top: -150px; left: 50%;
-  transform: translateX(-50%);
-  width: 600px; height: 600px; border-radius: 50%;
-  background: rgba(82,183,136,0.06); pointer-events: none;
-}
-.cta-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
-.cta-eyebrow {
-  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--green-light);
-  margin-bottom: 1rem; display: block;
-}
-.cta-title {
-  font-family: 'Lora', serif;
-  font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
-  color: white; line-height: 1.2; margin-bottom: 1.25rem;
-}
-.cta-sub {
-  font-size: 1rem; color: rgba(255,255,255,0.65); line-height: 1.7;
-  margin-bottom: 2.5rem;
-}
-.cta-form {
-  display: flex; gap: 0.75rem; max-width: 420px; margin: 0 auto 1rem;
-}
-.cta-input {
-  flex: 1; padding: 0.85rem 1rem; border-radius: 4px;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.08); color: white;
-  font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
-  outline: none;
-}
-.cta-input::placeholder { color: rgba(255,255,255,0.35); }
-.cta-input:focus { border-color: var(--gold); background: rgba(255,255,255,0.12); }
-.cta-submit {
-  background: var(--gold); color: var(--green-deep);
-  padding: 0.85rem 1.5rem; border-radius: 4px; border: none;
-  font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.9rem;
-  cursor: pointer; white-space: nowrap; transition: background 0.2s;
-}
-.cta-submit:hover { background: #d4b35c; }
-.cta-note { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
-.cta-email-alt {
-  margin-top: 1.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.55);
-}
-.cta-email-alt a { color: var(--gold); text-decoration: none; }
-.cta-email-alt a:hover { text-decoration: underline; }
+.cta-section { background: var(--green-deep); text-align: center; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; top: -150px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; border-radius: 50%; background: rgba(82,183,136,0.06); pointer-events: none; }
+.cta-inner { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
+.cta-eyebrow { font-size: 0.67rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green-light); margin-bottom: 1rem; display: block; }
+.cta-title { font-family: 'Lora', serif; font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 700; color: white; line-height: 1.2; margin-bottom: 0.9rem; }
+.cta-sub { font-size: 0.98rem; color: rgba(255,255,255,0.58); line-height: 1.75; margin-bottom: 2.5rem; }
+.cta-cards { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 1.25rem; text-align: left; }
+.cta-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.11); border-radius: 12px; padding: 1.75rem 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; transition: background 0.2s, border-color 0.2s; }
+.cta-card:hover { background: rgba(255,255,255,0.09); }
+.cta-card-featured { background: rgba(255,255,255,0.09); border-color: rgba(201,168,76,0.4); box-shadow: 0 4px 32px rgba(201,168,76,0.12); }
+.cta-card-icon { font-size: 1.4rem; }
+.cta-card-label { font-size: 0.63rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-light); }
+.cta-card-title { font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 700; color: white; }
+.cta-card-desc { font-size: 0.83rem; color: rgba(255,255,255,0.58); line-height: 1.65; flex: 1; margin-bottom: 0.5rem; }
+.cta-card-btn { display: inline-block; padding: 0.72rem 1.3rem; border-radius: 5px; font-weight: 600; font-size: 0.87rem; text-decoration: none; text-align: center; transition: background 0.2s, opacity 0.2s; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; }
+.cta-card-btn-gold { background: var(--gold); color: var(--green-deep); }
+.cta-card-btn-gold:hover { background: #d4b35c; }
+.cta-card-btn-outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.28); }
+.cta-card-btn-outline:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
+.cta-card-note { font-size: 0.75rem; color: rgba(255,255,255,0.32); line-height: 1.5; margin-top: 0.5rem; }
+.cta-card-note a { color: var(--gold); text-decoration: none; }
+.cta-card-note a:hover { text-decoration: underline; }
+.cta-form-fields { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.25rem; }
+.cta-field { padding: 0.68rem 0.9rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.07); color: white; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; outline: none; }
+.cta-field::placeholder { color: rgba(255,255,255,0.3); }
+.cta-field:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); }
 
 /* ── FOOTER ── */
 footer {
@@ -559,7 +535,7 @@ footer {
   .hero { padding: 7rem 1.5rem 4rem; }
   section { padding: 3.5rem 1.5rem; }
   .pricing-card.featured { transform: none; }
-  .cta-form { flex-direction: column; }
+  .cta-cards { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -576,7 +552,7 @@ footer {
     <a href="#stepup">Step-Up</a>
     <a href="#how-it-works">Features</a>
     <a href="#resources">Resources</a>
-    <a href="#contact" class="nav-cta">Get a Demo</a>
+    <a href="https://msledger-a2525.web.app?org=demo" target="_blank" rel="noopener" class="nav-cta">Explore Demo</a>
   </div>
 </nav>
 
@@ -594,8 +570,8 @@ footer {
       <h1 class="fade-up fade-up-2">Your school deserves better than <em>spreadsheets.</em></h1>
       <p class="hero-sub fade-up fade-up-3">Microschool Ledger handles tuition billing, sibling discounts, Florida Step-Up reconciliation, and family collections — all in one place. No servers. No IT. No spreadsheet chaos.</p>
       <div class="hero-actions fade-up fade-up-4">
-        <a href="#contact" class="btn-primary">Get a Demo</a>
-        <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+        <a href="https://msledger-a2525.web.app?org=demo" target="_blank" rel="noopener" class="btn-primary">Explore Demo</a>
+        <a href="#contact" class="btn-secondary">Request Access</a>
       </div>
     </div>
     <div class="hero-stats fade-up fade-up-3">
@@ -865,14 +841,47 @@ footer {
   <div class="section-inner">
     <div class="cta-inner">
       <span class="cta-eyebrow">Get Started</span>
-      <h2 class="cta-title">Ready to close the spreadsheet for good?</h2>
-      <p class="cta-sub">We'll walk you through a live demo of Microschool Ledger using your own co-op's setup — programs, pricing, and family structure. White-glove onboarding included on Roots and Canopy.</p>
-      <div class="cta-form">
-        <input type="email" class="cta-input" id="cta-email" placeholder="Your email address">
-        <button class="cta-submit" id="cta-btn">Request Demo</button>
+      <h2 class="cta-title">Three ways in.</h2>
+      <p class="cta-sub">Try the live demo, request access for your school, or log in if you're already set up.</p>
+
+      <div class="cta-cards">
+
+        <!-- 1. Explore Demo -->
+        <div class="cta-card">
+          <div class="cta-card-icon">🔍</div>
+          <div class="cta-card-label">See it live</div>
+          <div class="cta-card-title">Explore the Demo</div>
+          <div class="cta-card-desc">Jump into a live app pre-loaded with sample families, Step-Up payments, and real data. No login required.</div>
+          <a href="https://msledger-a2525.web.app?org=demo" target="_blank" rel="noopener" class="cta-card-btn cta-card-btn-gold">Open Demo →</a>
+        </div>
+
+        <!-- 2. Request Access -->
+        <div class="cta-card cta-card-featured">
+          <div class="cta-card-icon">✋</div>
+          <div class="cta-card-label">For new schools</div>
+          <div class="cta-card-title">Request Access</div>
+          <div class="cta-card-desc">Tell us about your co-op and we'll get you set up with your own instance and a white-glove onboarding session.</div>
+          <div class="cta-form-fields" id="access-form">
+            <input class="cta-field" type="text" id="f-school" placeholder="School name" autocomplete="organization">
+            <input class="cta-field" type="text" id="f-name" placeholder="Your name" autocomplete="name">
+            <input class="cta-field" type="email" id="f-email" placeholder="Email address" autocomplete="email">
+            <input class="cta-field" type="tel" id="f-phone" placeholder="Phone (optional)" autocomplete="tel">
+            <button class="cta-card-btn cta-card-btn-gold" id="submit-btn" style="width:100%;">Request Access</button>
+            <div id="form-success" style="display:none; font-size:0.82rem; color:#52b788; text-align:center; padding-top:0.5rem;">✓ Sent! We'll be in touch within one business day.</div>
+          </div>
+        </div>
+
+        <!-- 3. Log In -->
+        <div class="cta-card">
+          <div class="cta-card-icon">🔑</div>
+          <div class="cta-card-label">Existing schools</div>
+          <div class="cta-card-title">Log In</div>
+          <div class="cta-card-desc">Your school has its own dedicated URL. Check your welcome email, or use the link below to get to the app.</div>
+          <a href="https://app.microschoolledger.com" target="_blank" rel="noopener" class="cta-card-btn cta-card-btn-outline">Go to App →</a>
+          <p class="cta-card-note">Can't find your URL? Email <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a></p>
+        </div>
+
       </div>
-      <p class="cta-note">No pressure. No sales funnel. Just a real conversation about your co-op's setup.</p>
-      <p class="cta-email-alt">Or email us directly: <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a></p>
     </div>
   </div>
 </section>
@@ -893,39 +902,57 @@ footer {
 </footer>
 
 <script>
-  // Smooth scroll for nav links
+  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
   });
 
-  // Nav background on scroll
+  // Nav highlight on scroll
   const nav = document.querySelector('nav');
   window.addEventListener('scroll', () => {
-    nav.style.borderBottomColor = window.scrollY > 60
-      ? 'rgba(82,183,136,0.3)'
-      : 'rgba(82,183,136,0.2)';
+    nav.style.borderBottomColor = window.scrollY > 60 ? 'rgba(82,183,136,0.35)' : 'rgba(82,183,136,0.2)';
   });
 
-  // CTA form intercept
-  document.getElementById('cta-btn').addEventListener('click', () => {
-    const input = document.getElementById('cta-email');
-    const email = input.value.trim();
-    if (email && email.includes('@')) {
-      window.location.href = `mailto:info@microschoolledger.com?subject=Demo Request from ${encodeURIComponent(email)}&body=Hi Rajeev,%0A%0AI'd like to learn more about Microschool Ledger.%0A%0AMy email: ${encodeURIComponent(email)}`;
-    } else {
-      input.style.borderColor = '#dc6b6b';
-      setTimeout(() => { input.style.borderColor = ''; }, 2000);
-      input.focus();
+  // Request Access form
+  document.getElementById('submit-btn').addEventListener('click', () => {
+    const school = document.getElementById('f-school').value.trim();
+    const name   = document.getElementById('f-name').value.trim();
+    const email  = document.getElementById('f-email').value.trim();
+    const phone  = document.getElementById('f-phone').value.trim();
+
+    if (!school || !name || !email || !email.includes('@')) {
+      [['f-school', school], ['f-name', name], ['f-email', email]].forEach(([id, val]) => {
+        const el = document.getElementById(id);
+        if (!val || (id === 'f-email' && !val.includes('@'))) {
+          el.style.borderColor = '#e05c5c';
+          setTimeout(() => { el.style.borderColor = ''; }, 2500);
+        }
+      });
+      return;
     }
+
+    const body = [
+      'New access request from microschoolledger.com',
+      '',
+      `School: ${school}`,
+      `Name:   ${name}`,
+      `Email:  ${email}`,
+      `Phone:  ${phone || '—'}`,
+    ].join('%0A');
+
+    window.location.href = `mailto:info@microschoolledger.com?subject=Access Request — ${encodeURIComponent(school)}&body=${body}`;
+
+    document.getElementById('submit-btn').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
   });
-  document.getElementById('cta-email').addEventListener('keydown', e => {
-    if (e.key === 'Enter') document.getElementById('cta-btn').click();
-  });</script>
+
+  // Allow Enter key on last field
+  document.getElementById('f-phone').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('submit-btn').click();
+  });
+</script>
 </body>
 </html>
