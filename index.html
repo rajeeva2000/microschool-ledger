@@ -934,19 +934,24 @@ footer {
       return;
     }
 
-    const body = [
-      'New access request from microschoolledger.com',
-      '',
-      `School: ${school}`,
-      `Name:   ${name}`,
-      `Email:  ${email}`,
-      `Phone:  ${phone || '—'}`,
-    ].join('%0A');
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
 
-    window.location.href = `mailto:info@microschoolledger.com?subject=Access Request — ${encodeURIComponent(school)}&body=${body}`;
-
-    document.getElementById('submit-btn').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ school, name, email, phone }),
+    })
+      .then(r => {
+        if (!r.ok) throw new Error('request failed');
+        btn.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      })
+      .catch(() => {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+      });
   });
 
   // Allow Enter key on last field
