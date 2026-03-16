@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Microschool Ledger — Financial Management for Microschools & Homeschool Co-ops</title>
 <meta name="description" content="Microschool Ledger replaces spreadsheets with purpose-built billing, enrollment, and Florida Step-Up scholarship reconciliation for microschools and homeschool co-ops.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,16 +47,9 @@ nav {
 }
 .nav-logo {
   font-family: 'Lora', serif;
-  font-size: 1.2rem; font-weight: 700;
+  font-size: 1.15rem; font-weight: 700;
   color: white; text-decoration: none;
-  display: flex; align-items: center; gap: 0.5rem;
-}
-.nav-logo-leaf {
-  width: 28px; height: 28px;
-  background: var(--gold);
-  border-radius: 50% 0 50% 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.9rem;
+  display: flex; align-items: center; gap: 0.6rem;
 }
 .nav-links { display: flex; gap: 2rem; align-items: center; }
 .nav-links a {
@@ -544,7 +538,14 @@ footer {
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
-    <div class="nav-logo-leaf">🌿</div>
+    <svg width="28" height="28" viewBox="0 0 40 40" style="flex-shrink:0;">
+      <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+      <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2" opacity="0.9"/>
+      <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.6" opacity="0.2"/>
+      <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.6" opacity="0.2"/>
+      <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.6" opacity="0.2"/>
+      <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
+    </svg>
     Microschool Ledger
   </a>
   <div class="nav-links">
@@ -920,7 +921,17 @@ footer {
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <a href="#" class="footer-logo">Microschool Ledger</a>
+    <a href="#" class="footer-logo" style="display:flex; align-items:center; gap:0.5rem;">
+      <svg width="22" height="22" viewBox="0 0 40 40" style="flex-shrink:0; opacity:0.6;">
+        <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+        <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.5" opacity="0.9"/>
+        <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.7" opacity="0.2"/>
+        <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.7" opacity="0.2"/>
+        <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.7" opacity="0.2"/>
+        <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
+      </svg>
+      Microschool Ledger
+    </a>
     <div class="footer-meta">
       Built by <a href="#">The Grow Co-op</a> · Boca Raton, FL<br>
       <a href="/cdn-cgi/l/email-protection#660f080009260b0f05140915050e09090a0a03020103144805090b"><span class="__cf_email__" data-cfemail="95fcfbf3fad5f8fcf6e7fae6f6fdfafaf9f9f0f1f2f0e7bbf6faf8">[email&#160;protected]</span></a>
