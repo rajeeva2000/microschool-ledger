@@ -10,17 +10,17 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --green-deep:  #1a3a2a;
-  --green-mid:   #2d6a4f;
-  --green-light: #52b788;
-  --green-pale:  #d8f3dc;
-  --green-faint: #f0faf3;
+  --green-deep:  #3C4535;
+  --green-mid:   #4a5c3f;
+  --green-light: #ADB76D;
+  --green-pale:  #F0EDE8;
+  --green-faint: #F8EDDD;
   --gold:        #c9a84c;
   --gold-light:  #f7f0e0;
-  --cream:       #faf8f3;
+  --cream:       #F8EDDD;
   --ink:         #1a1a1a;
-  --muted:       #5a6b5a;
-  --rule:        #dde8df;
+  --muted:       #6b7066;
+  --rule:        #DDDFDE;
 }
 html { scroll-behavior: smooth; }
 body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.7; }
@@ -91,10 +91,10 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba
 .article-cta-text h3 { font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 700; color: white; margin-bottom: 0.4rem; }
 .article-cta-text p { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin: 0; line-height: 1.55; }
 .article-cta-btn { background: var(--gold); color: var(--green-deep); padding: 0.75rem 1.5rem; border-radius: 5px; font-weight: 600; font-size: 0.88rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
-.article-cta-btn:hover { background: #d4b35c; }
+.article-cta-btn:hover { background: #d4a84c; }
 
 /* FOOTER */
-footer { background: #111f16; padding: 2.5rem 2rem; border-top: 1px solid rgba(255,255,255,0.06); }
+footer { background: #2d3528; padding: 2.5rem 2rem; border-top: 1px solid rgba(255,255,255,0.06); }
 .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
 .footer-logo { font-family: 'Lora', serif; font-size: 1rem; font-weight: 700; color: rgba(255,255,255,0.5); text-decoration: none; }
 .footer-meta { font-size: 0.77rem; color: rgba(255,255,255,0.28); line-height: 1.6; }
@@ -111,7 +111,7 @@ footer { background: #111f16; padding: 2.5rem 2rem; border-top: 1px solid rgba(2
 
 <nav>
   <a href="/" class="nav-logo">
-    <div class="nav-logo-leaf">🌿</div>
+    <svg width="24" height="24" viewBox="0 0 40 40" style="flex-shrink:0;"><rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/><line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.5" opacity="0.9"/><line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.6" opacity="0.2"/><line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.6" opacity="0.2"/><line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.6" opacity="0.2"/><text x="26" y="25" font-family="Georgia,serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text></svg>
     Microschool Ledger
   </a>
   <a href="/#resources" class="nav-back">← Resources</a>

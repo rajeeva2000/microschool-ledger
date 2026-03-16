@@ -8,17 +8,17 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --green-deep:  #1a3a2a;
-    --green-mid:   #2d6a4f;
-    --green-fresh: #52b788;
-    --green-pale:  #d8f3dc;
-    --green-faint: #f0faf3;
+    --green-deep:  #3C4535;
+    --green-mid:   #4a5c3f;
+    --green-fresh: #ADB76D;
+    --green-pale:  #F0EDE8;
+    --green-faint: #F8EDDD;
     --gold:        #c9a84c;
     --gold-light:  #f7f0e0;
-    --cream:       #faf8f3;
+    --cream:       #F8EDDD;
     --ink:         #1c1c1c;
-    --muted:       #5a6b5a;
-    --rule:        #dde8df;
+    --muted:       #6b7066;
+    --rule:        #DDDFDE;
   }
   body { font-family: 'DM Sans', sans-serif; background: #ccc; color: var(--ink); }
   @media print {
@@ -77,7 +77,7 @@
   .tier-card.popular { border-color: var(--gold); box-shadow: 0 2px 18px rgba(201,168,76,0.18); }
   .tier-badge { background: var(--gold); color: white; font-size: 0.57rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; padding: 0.23rem; }
   .tier-head { padding: 0.95rem 1.05rem 0.8rem; background: var(--green-deep); }
-  .tier-card:not(.popular) .tier-head { background: #253d2e; }
+  .tier-card:not(.popular) .tier-head { background: #2d3528; }
   .tier-name { font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 700; color: white; line-height: 1; margin-bottom: 0.18rem; }
   .tier-tagline { font-size: 0.66rem; color: rgba(255,255,255,0.55); font-style: italic; }
   .tier-price { margin-top: 0.55rem; }
@@ -148,7 +148,7 @@
   /* progress bar */
   .stmt-progress { padding: 0.55rem 1.1rem; background: var(--green-faint); border-bottom: 1px solid #cddfd2; display: flex; align-items: center; gap: 0.85rem; }
   .stmt-progress-label { font-size: 0.62rem; color: var(--muted); white-space: nowrap; }
-  .stmt-progress-bar-wrap { flex: 1; background: #dde8df; border-radius: 4px; height: 8px; overflow: hidden; }
+  .stmt-progress-bar-wrap { flex: 1; background: #DDDFDE; border-radius: 4px; height: 8px; overflow: hidden; }
   .stmt-progress-bar { height: 100%; background: linear-gradient(90deg, var(--green-mid), var(--green-fresh)); border-radius: 4px; width: 79%; }
   .stmt-progress-pct { font-size: 0.65rem; font-weight: 600; color: var(--green-mid); white-space: nowrap; }
 
@@ -195,7 +195,7 @@
   /* health dot demo */
   .health-dot-demo { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.65rem; color: var(--muted); }
   .hdot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
-  .hdot-green { background: #52b788; }
+  .hdot-green { background: #ADB76D; }
   .hdot-yellow { background: #f4b942; }
   .hdot-red { background: #e05c5c; }
 
