@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What to Look for in Billing Software for Your Homeschool Co-op — Microschool Ledger</title>
+  <meta name="description" content="What actually matters when choosing billing software for a homeschool co-op or microschool — family billing, scholarship tracking, parent visibility, and fewer spreadsheets." />
+  <link rel="canonical" href="https://microschoolledger.com/resources/choosing-billing-software.html" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pine:#3C4535;
+      --pine-dark:#2d3528;
+      --sand:#F8EDDD;
+      --offwhite:#F0EDE8;
+      --rock:#DDDFDE;
+      --grass:#ADB76D;
+      --gold:#c9a84c;
+      --gold-light:#f7f0e0;
+      --ink:#1a1a1a;
+      --muted:#6b7066;
+      --warn-bg:#fff8f0;
+      --warn-border:#e08030;
+      --warn-text:#5a2a05;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family:'DM Sans', Arial, Helvetica, sans-serif;
+      background:var(--sand);
+      color:var(--ink);
+      line-height:1.75;
+    }
+
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      background:rgba(60,69,53,.96);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      height:64px;
+      display:flex; align-items:center;
+    }
+    .nav-inner {
+      width:min(calc(100% - 2rem), 1100px);
+      margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    }
+    .brand {
+      display:flex; align-items:center; gap:.7rem;
+      text-decoration:none; color:white;
+      font-family:'Lora', Georgia, serif; font-weight:700; font-size:1.08rem;
+    }
+    .nav-back {
+      text-decoration:none;
+      color:rgba(255,255,255,.68);
+      font-size:.84rem;
+      font-weight:500;
+    }
+    .nav-back:hover { color:white; }
+
+    .hero {
+      background:var(--pine);
+      color:white;
+      padding:8rem 0 4rem;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before {
+      content:"";
+      position:absolute;
+      right:-120px; top:-110px;
+      width:420px; height:420px;
+      border-radius:50%;
+      background:rgba(173,183,109,.07);
+    }
+    .container {
+      width:min(calc(100% - 2rem), 760px);
+      margin:0 auto;
+      position:relative;
+      z-index:1;
+    }
+    .eyebrow {
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      background:rgba(201,168,76,.14);
+      border:1px solid rgba(201,168,76,.24);
+      color:var(--gold);
+      padding:.34rem .8rem;
+      border-radius:999px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:.67rem;
+      font-weight:700;
+      margin-bottom:1.35rem;
+    }
+    h1, h2, h3 {
+      font-family:'Lora', Georgia, serif;
+      line-height:1.22;
+      color:var(--pine);
+    }
+    .hero h1 {
+      color:white;
+      font-size:clamp(2rem, 4vw, 3rem);
+      margin-bottom:1rem;
+    }
+    .hero h1 em { color:var(--gold); font-style:italic; }
+    .hero-meta {
+      display:flex; gap:1.4rem; flex-wrap:wrap;
+      color:rgba(255,255,255,.55);
+      font-size:.8rem;
+    }
+    .gold-stripe {
+      height:3px;
+      background:linear-gradient(90deg, var(--gold), var(--grass), var(--gold));
+    }
+
+    .article {
+      padding:3.25rem 0 5rem;
+    }
+    .article p {
+      color:#2a2a2a;
+      font-size:1rem;
+      line-height:1.85;
+      margin-bottom:1.2rem;
+    }
+    .article p.lead {
+      color:var(--pine);
+      font-size:1.08rem;
+      line-height:1.82;
+    }
+    .article h2 {
+      font-size:1.6rem;
+      margin:2.6rem 0 .9rem;
+      padding-bottom:.45rem;
+      border-bottom:2px solid var(--offwhite);
+    }
+    .article h3 {
+      font-size:1.13rem;
+      color:#4a5c3f;
+      margin:1.65rem 0 .55rem;
+    }
+    .article ul, .article ol {
+      margin:0.5rem 0 1.25rem 1.35rem;
+    }
+    .article li {
+      color:#2a2a2a;
+      font-size:.97rem;
+      line-height:1.8;
+      margin-bottom:.45rem;
+    }
+    .article strong { color:var(--pine); }
+    .article a {
+      color:#4a5c3f;
+      text-decoration:underline;
+      text-underline-offset:3px;
+      text-decoration-color:var(--offwhite);
+    }
+
+    .callout {
+      background:var(--offwhite);
+      border-left:3px solid var(--grass);
+      border-radius:0 8px 8px 0;
+      padding:1rem 1.2rem;
+      margin:1.45rem 0;
+    }
+    .callout.gold {
+      background:var(--gold-light);
+      border-left-color:var(--gold);
+    }
+    .callout.warn {
+      background:var(--warn-bg);
+      border-left-color:var(--warn-border);
+    }
+    .callout-label {
+      font-size:.63rem;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#4a5c3f;
+      margin-bottom:.35rem;
+    }
+    .callout.gold .callout-label { color:#8f6d1c; }
+    .callout.warn .callout-label { color:#a55512; }
+    .callout p {
+      margin:0;
+      font-size:.93rem;
+      line-height:1.65;
+      color:var(--pine);
+    }
+    .callout.warn p { color:var(--warn-text); }
+
+    .criteria-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1rem;
+      margin:1.2rem 0 1.8rem;
+    }
+    .criteria-card {
+      border:1px solid var(--rock);
+      border-radius:10px;
+      background:white;
+      padding:1.15rem;
+    }
+    .criteria-card.must { background:#f7fbf5; border-color:#cdd9b8; }
+    .criteria-card.avoid { background:#fff8f5; border-color:#f0b8a0; }
+    .badge {
+      display:inline-block;
+      font-size:.58rem;
+      font-weight:700;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      padding:.18rem .46rem;
+      border-radius:4px;
+      margin-bottom:.55rem;
+    }
+    .badge.must { background:var(--offwhite); color:#4a5c3f; }
+    .badge.nice { background:var(--gold-light); color:#8f6d1c; }
+    .badge.avoid { background:#ffe0d0; color:#c05020; }
+    .criteria-card h3 {
+      font-size:.95rem;
+      margin:0 0 .32rem 0;
+      color:var(--pine);
+    }
+    .criteria-card p {
+      margin:0;
+      color:var(--muted);
+      font-size:.82rem;
+      line-height:1.58;
+    }
+
+    table {
+      width:100%;
+      border-collapse:collapse;
+      margin:1.2rem 0 1.8rem;
+      font-size:.87rem;
+    }
+    th {
+      background:var(--pine);
+      color:white;
+      text-align:left;
+      font-size:.73rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      padding:.68rem .9rem;
+    }
+    td {
+      padding:.7rem .9rem;
+      border-bottom:1px solid var(--rock);
+      vertical-align:top;
+      line-height:1.55;
+      color:#333;
+    }
+    tr:nth-child(even) td { background:#fafcfa; }
+
+    .cta {
+      margin-top:3rem;
+      background:var(--pine);
+      color:white;
+      border-radius:12px;
+      padding:2rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+      flex-wrap:wrap;
+    }
+    .cta h3 {
+      color:white;
+      font-size:1.2rem;
+      margin-bottom:.35rem;
+    }
+    .cta p {
+      color:rgba(255,255,255,.62);
+      font-size:.87rem;
+      line-height:1.6;
+      margin:0;
+      max-width:520px;
+    }
+    .cta a {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:var(--gold);
+      color:var(--pine);
+      min-height:44px;
+      padding:.8rem 1.3rem;
+      border-radius:8px;
+      font-weight:700;
+    }
+
+    footer {
+      background:var(--pine-dark);
+      border-top:1px solid rgba(255,255,255,.06);
+      padding:2.3rem 1rem;
+    }
+    .footer-inner {
+      width:min(calc(100% - 2rem), 1100px);
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+    .footer-logo {
+      color:rgba(255,255,255,.72);
+      text-decoration:none;
+      font-family:'Lora', Georgia, serif;
+      font-weight:700;
+    }
+    .footer-copy {
+      font-size:.78rem;
+      color:rgba(255,255,255,.42);
+      line-height:1.6;
+      text-align:right;
+    }
+
+    @media (max-width: 720px) {
+      .criteria-grid { grid-template-columns:1fr; }
+      .cta { flex-direction:column; align-items:flex-start; }
+      .footer-copy { text-align:left; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="brand">
+        <svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+          <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.3" opacity="0.9"/>
+          <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
+        </svg>
+        Microschool Ledger
+      </a>
+      <a href="/#resources" class="nav-back">← Back to resources</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="eyebrow">Operations guide</div>
+      <h1>What to look for in billing software for your <em>homeschool co-op</em></h1>
+      <div class="hero-meta">
+        <span>By Rajeev, The Grow Co-op</span>
+        <span>March 2026</span>
+        <span>7 min read</span>
+      </div>
+    </div>
+  </header>
+  <div class="gold-stripe"></div>
+
+  <main class="article">
+    <div class="container">
+      <p class="lead">
+        Most billing tools weren’t built for the way homeschool co-ops and microschools actually run. The problem usually isn’t that the software is bad — it’s that it assumes a completely different structure than the one your school lives with every month.
+      </p>
+
+      <div class="callout">
+        <div class="callout-label">Honest disclosure</div>
+        <p>
+          We built Microschool Ledger specifically for this problem. This guide is our honest attempt to explain what actually matters when you’re choosing software — including places where many schools outgrow spreadsheets long before they realize it.
+        </p>
+      </div>
+
+      <h2>Why generic tools struggle with co-op billing</h2>
+
+      <p>
+        Standard invoicing and accounting tools are usually built around one simple model: one customer, one invoice, one payment stream. That works fine for a service business. It breaks down fast in a co-op or microschool because your structure is more layered and more human.
+      </p>
+
+      <ul>
+        <li><strong>You bill families, not students.</strong> The paying relationship is with the family, but the work is delivered across multiple students and often across multiple programs.</li>
+        <li><strong>Sibling discounts are structural, not occasional.</strong> They affect pricing logic, not just the occasional special case.</li>
+        <li><strong>You often have two payment streams converging on one balance.</strong> Direct family payments and scholarship disbursements both need to land cleanly against the same family ledger.</li>
+        <li><strong>Your school year has its own rhythm.</strong> Deposits, monthly plans, next-year overlap, and year-specific tracking don’t map cleanly to off-the-shelf invoicing tools.</li>
+        <li><strong>Your administrator is usually wearing three other hats.</strong> If a tool feels like accounting software, it often doesn’t get used consistently.</li>
+      </ul>
+
+      <div class="callout gold">
+        <div class="callout-label">The real goal</div>
+        <p>
+          You’re not just buying “billing software.” You’re trying to create financial clarity for a small school that runs on trust, relationships, and very limited admin time.
+        </p>
+      </div>
+
+      <h2>The criteria that actually matter</h2>
+
+      <p>
+        If you’re comparing tools, here’s a better framework than “Which one has the most features?” Ask which one fits the real structure of your school and reduces the most cognitive load.
+      </p>
+
+      <div class="criteria-grid">
+        <div class="criteria-card must">
+          <span class="badge must">Must have</span>
+          <h3>Family-level billing</h3>
+          <p>The system should understand that multiple students belong to one paying family and that the school needs both views at once.</p>
+        </div>
+
+        <div class="criteria-card must">
+          <span class="badge must">Must have</span>
+          <h3>Multiple programs and pricing rules</h3>
+          <p>If a family can enroll across different programs, the software should be able to track those differences without workarounds.</p>
+        </div>
+
+        <div class="criteria-card must">
+          <span class="badge must">Must have</span>
+          <h3>Scholarship reconciliation</h3>
+          <p>If you accept Florida Step-Up or similar programs, you need a clean way to post scholarship credits against family balances.</p>
+        </div>
+
+        <div class="criteria-card must">
+          <span class="badge must">Must have</span>
+          <h3>Simple enough for non-accountants</h3>
+          <p>If the software requires bookkeeping confidence to operate, it will create stress instead of relieving it.</p>
+        </div>
+
+        <div class="criteria-card">
+          <span class="badge nice">Nice to have</span>
+          <h3>Automatic charge generation</h3>
+          <p>Generating monthly tuition from enrollment and payment plan data saves time and reduces avoidable errors.</p>
+        </div>
+
+        <div class="criteria-card">
+          <span class="badge nice">Nice to have</span>
+          <h3>Collections visibility</h3>
+          <p>A clear view of who owes what makes follow-up more proactive and much less emotionally draining.</p>
+        </div>
+
+        <div class="criteria-card avoid">
+          <span class="badge avoid">Watch out for</span>
+          <h3>Per-user pricing</h3>
+          <p>Small schools often need access for multiple trusted adults. Seat-based pricing can punish healthy delegation.</p>
+        </div>
+
+        <div class="criteria-card avoid">
+          <span class="badge avoid">Watch out for</span>
+          <h3>Anything that needs “IT” to keep running</h3>
+          <p>If setup, hosting, updates, or backups feel fragile, the tool is probably not built for a microschool reality.</p>
+        </div>
+      </div>
+
+      <h2>What most schools underestimate</h2>
+
+      <p>
+        The biggest mistake is thinking the problem is only invoicing. Usually it isn’t. The real problem is the stack of small tasks that grow around billing:
+      </p>
+
+      <ul>
+        <li>recalculating sibling discounts</li>
+        <li>remembering which family payment was for which month</li>
+        <li>matching scholarship disbursements after they hit the bank</li>
+        <li>answering “what do I owe?” emails over and over</li>
+        <li>sorting out next-year deposits while still collecting this year’s tuition</li>
+      </ul>
+
+      <p>
+        A tool that solves only the invoice itself can still leave most of the actual admin burden in place.
+      </p>
+
+      <h2>A simple comparison framework</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Good answer</th>
+            <th>Concerning answer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Does it understand family billing?</td>
+            <td>Yes — family account with student-level detail</td>
+            <td>No — one invoice per student or manual workaround</td>
+          </tr>
+          <tr>
+            <td>Can it handle scholarships cleanly?</td>
+            <td>Yes — credits post against balances and can be imported or tracked</td>
+            <td>No — scholarship payments live outside the main ledger</td>
+          </tr>
+          <tr>
+            <td>Can parents see their own account?</td>
+            <td>Yes — some form of self-service portal or easy statement access</td>
+            <td>No — every question comes back through admin</td>
+          </tr>
+          <tr>
+            <td>Will it feel usable to a stretched-thin founder?</td>
+            <td>Yes — clear, calm, specific, no accounting jargon required</td>
+            <td>No — feels like enterprise software or bookkeeping software</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout warn">
+        <div class="callout-label">A practical warning</div>
+        <p>
+          Many schools stay with spreadsheets too long because spreadsheets are familiar. But familiarity and sustainability are not the same thing. Once your billing system starts living partly in your head, that’s usually the moment to upgrade.
+        </p>
+      </div>
+
+      <h2>What we believe is worth prioritizing</h2>
+
+      <p>
+        If you run a homeschool co-op or microschool, the best billing software is not the one with the longest feature list. It’s the one that gives your school more clarity, asks less of your administrator, and fits the real shape of your work.
+      </p>
+
+      <p>
+        That means prioritizing:
+      </p>
+
+      <ul>
+        <li>family billing over generic invoicing</li>
+        <li>clarity over complexity</li>
+        <li>self-service for parents where possible</li>
+        <li>clean scholarship handling if you operate in Florida</li>
+        <li>a calmer workflow instead of more software to manage</li>
+      </ul>
+
+      <div class="cta">
+        <div>
+          <h3>Want to see what this looks like in practice?</h3>
+          <p>
+            Microschool Ledger was built inside a real microschool and is designed specifically for co-ops and small schools that need financial clarity — not spreadsheets.
+          </p>
+        </div>
+        <a href="/#contact">Request a demo</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="/" class="footer-logo">Microschool Ledger</a>
+      <div class="footer-copy">
+        Financial clarity for microschools & homeschool co-ops — not spreadsheets.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Microschool Ledger — Brochure</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root{
+      --pine:#3C4535;
+      --pine-dark:#2d3528;
+      --sand:#F8EDDD;
+      --offwhite:#F0EDE8;
+      --rock:#DDDFDE;
+      --grass:#ADB76D;
+      --gold:#c9a84c;
+      --gold-light:#f7f0e0;
+      --ink:#1a1a1a;
+      --muted:#6b7066;
+      --paid:#52b788;
+      --due:#f4b942;
+      --overdue:#e05c5c;
+      --stepup-bg:#dbeeff;
+      --stepup-text:#1a6aad;
+      --shadow:0 8px 40px rgba(0,0,0,.14);
+    }
+
+    body{
+      font-family:'DM Sans', Arial, sans-serif;
+      background:#d9d4ca;
+      color:var(--ink);
+      padding:2rem 1rem;
+    }
+    .page{
+      max-width:980px;
+      margin:0 auto 2rem;
+      background:white;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    @media print{
+      body{ background:white; padding:0; }
+      .page{ box-shadow:none; margin:0; max-width:none; page-break-after:always; }
+      .page:last-child{ page-break-after:auto; }
+    }
+
+    .header{
+      background:var(--pine);
+      color:white;
+      padding:2.4rem 3rem 2rem;
+      position:relative;
+      overflow:hidden;
+    }
+    .header::before{
+      content:"";
+      position:absolute;
+      right:-120px; top:-120px;
+      width:360px; height:360px;
+      border-radius:50%;
+      background:rgba(173,183,109,.08);
+    }
+    .header-inner{
+      position:relative;
+      z-index:1;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:2rem;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      color:var(--grass);
+      font-size:.62rem;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      margin-bottom:.7rem;
+    }
+    .eyebrow::before{
+      content:"";
+      width:26px;
+      height:2px;
+      background:var(--grass);
+      display:block;
+    }
+    .logo-line{
+      display:flex;
+      align-items:center;
+      gap:.85rem;
+      margin-bottom:.55rem;
+    }
+    .logo-name{
+      font-family:'Lora', Georgia, serif;
+      color:white;
+      font-size:2.55rem;
+      line-height:1;
+      font-weight:700;
+    }
+    .tagline{
+      color:rgba(255,255,255,.72);
+      max-width:520px;
+      line-height:1.7;
+      font-size:.95rem;
+    }
+    .header-contact{
+      text-align:right;
+      flex:0 0 auto;
+    }
+    .header-contact-label{
+      color:rgba(255,255,255,.34);
+      font-size:.58rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      margin-bottom:.28rem;
+    }
+    .header-contact-email{
+      color:var(--gold);
+      font-size:.88rem;
+      font-weight:500;
+    }
+    .gold-stripe{
+      height:3px;
+      background:linear-gradient(90deg, var(--gold), var(--grass), var(--gold));
+    }
+
+    .hero-strip{
+      background:var(--offwhite);
+      border-bottom:1px solid var(--rock);
+      padding:1.25rem 3rem;
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:2rem;
+      align-items:center;
+    }
+    .hero-strip h2{
+      font-family:'Lora', Georgia, serif;
+      color:var(--pine);
+      font-size:1.35rem;
+      line-height:1.35;
+    }
+    .hero-strip h2 em{ color:var(--gold); font-style:italic; }
+    .hero-strip p{
+      color:var(--muted);
+      font-size:.86rem;
+      line-height:1.65;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:1px;
+      background:var(--rock);
+      border-bottom:1px solid var(--rock);
+    }
+    .stat{
+      background:white;
+      padding:1rem 1.15rem;
+    }
+    .stat-value{
+      font-family:'Lora', Georgia, serif;
+      font-size:1.9rem;
+      line-height:1;
+      color:var(--pine);
+      margin-bottom:.25rem;
+    }
+    .stat-label{
+      color:var(--muted);
+      font-size:.74rem;
+      line-height:1.45;
+    }
+
+    .section{
+      padding:1.55rem 3rem;
+      border-bottom:1px solid var(--rock);
+    }
+    .section:last-child{ border-bottom:none; }
+    .section-title{
+      font-family:'Lora', Georgia, serif;
+      font-size:1.22rem;
+      color:var(--pine);
+      margin-bottom:.85rem;
+      line-height:1.3;
+    }
+    .section-title em{ color:var(--gold); font-style:italic; }
+    .section-sub{
+      color:var(--muted);
+      font-size:.88rem;
+      line-height:1.75;
+      max-width:760px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:.95rem;
+      margin-top:1rem;
+    }
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1rem;
+      margin-top:1rem;
+    }
+
+    .card{
+      border:1px solid var(--rock);
+      border-radius:12px;
+      background:var(--offwhite);
+      padding:1rem;
+    }
+    .card.white{ background:white; }
+    .card h3{
+      font-size:.98rem;
+      color:var(--pine);
+      margin-bottom:.42rem;
+      line-height:1.35;
+      font-family:'Lora', Georgia, serif;
+    }
+    .card p{
+      color:var(--muted);
+      font-size:.79rem;
+      line-height:1.62;
+    }
+    .card ul{
+      list-style:none;
+      margin-top:.65rem;
+      display:grid;
+      gap:.35rem;
+    }
+    .card li{
+      position:relative;
+      padding-left:.9rem;
+      color:var(--pine);
+      font-size:.75rem;
+      line-height:1.5;
+    }
+    .card li::before{
+      content:"•";
+      position:absolute;
+      left:0;
+      color:var(--grass);
+    }
+
+    .stepup-band{
+      background:var(--pine);
+      color:white;
+      padding:1.45rem 3rem;
+    }
+    .stepup-band h2{
+      font-family:'Lora', Georgia, serif;
+      font-size:1.4rem;
+      line-height:1.3;
+      margin-bottom:.55rem;
+      color:white;
+    }
+    .stepup-band h2 em{ color:var(--gold); font-style:italic; }
+    .stepup-band p{
+      color:rgba(255,255,255,.72);
+      font-size:.86rem;
+      line-height:1.7;
+      max-width:780px;
+    }
+    .step-list{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:.8rem;
+      margin-top:1rem;
+    }
+    .step{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:12px;
+      padding:.9rem;
+    }
+    .step-num{
+      width:26px; height:26px;
+      border-radius:50%;
+      background:var(--gold);
+      color:var(--pine);
+      font-weight:700;
+      font-size:.72rem;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:.55rem;
+    }
+    .step strong{
+      display:block;
+      font-size:.8rem;
+      margin-bottom:.2rem;
+      color:white;
+    }
+    .step span{
+      color:rgba(255,255,255,.66);
+      font-size:.72rem;
+      line-height:1.5;
+    }
+
+    .story-box{
+      background:var(--gold-light);
+      border:1px solid #ead9b0;
+      border-radius:12px;
+      padding:1rem 1.1rem;
+      margin-top:1rem;
+    }
+    .story-box h3{
+      font-family:'Lora', Georgia, serif;
+      color:var(--pine);
+      font-size:1rem;
+      margin-bottom:.45rem;
+    }
+    .story-box p{
+      color:#5b564a;
+      font-size:.8rem;
+      line-height:1.7;
+    }
+
+    .tier-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:.9rem;
+      margin-top:1rem;
+    }
+    .tier{
+      border:1px solid var(--rock);
+      border-radius:12px;
+      overflow:hidden;
+      background:white;
+    }
+    .tier.featured{
+      border-color:var(--gold);
+      box-shadow:0 2px 16px rgba(201,168,76,.14);
+    }
+    .tier-badge{
+      background:var(--gold);
+      color:var(--pine);
+      text-align:center;
+      font-size:.56rem;
+      font-weight:700;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      padding:.26rem;
+    }
+    .tier-head{
+      background:var(--pine);
+      color:white;
+      padding:.95rem 1rem .85rem;
+    }
+    .tier:not(.featured) .tier-head{ background:var(--pine-dark); }
+    .tier-name{
+      font-family:'Lora', Georgia, serif;
+      font-size:1.1rem;
+      margin-bottom:.15rem;
+    }
+    .tier-tag{
+      color:rgba(255,255,255,.54);
+      font-size:.68rem;
+      font-style:italic;
+      margin-bottom:.7rem;
+    }
+    .tier-price{
+      font-family:'Lora', Georgia, serif;
+      color:var(--gold);
+      font-size:1.9rem;
+      line-height:1;
+    }
+    .tier-price span{
+      font-family:'DM Sans', Arial, sans-serif;
+      font-size:.72rem;
+      color:rgba(255,255,255,.46);
+      margin-left:.15rem;
+    }
+    .tier-body{
+      padding:.95rem 1rem;
+    }
+    .tier-body ul{
+      list-style:none;
+      display:grid;
+      gap:.34rem;
+    }
+    .tier-body li{
+      position:relative;
+      padding-left:.95rem;
+      font-size:.75rem;
+      line-height:1.48;
+      color:#2f2f2f;
+    }
+    .tier-body li::before{
+      content:"✓";
+      position:absolute;
+      left:0;
+      color:var(--grass);
+      font-weight:700;
+    }
+
+    .footer{
+      background:var(--pine-dark);
+      color:rgba(255,255,255,.72);
+      padding:1.1rem 3rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+    }
+    .footer-title{
+      color:white;
+      font-weight:600;
+      font-size:.86rem;
+    }
+    .footer-copy{
+      font-size:.78rem;
+      line-height:1.6;
+    }
+    .footer-copy a{
+      color:var(--gold);
+      text-decoration:none;
+    }
+
+    @media (max-width: 900px){
+      .hero-strip, .grid-3, .grid-2, .tier-grid, .step-list, .stats { grid-template-columns:1fr; }
+      .header-inner, .footer { display:block; }
+      .header-contact{ text-align:left; margin-top:1rem; }
+      .footer > div + div{ margin-top:.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+    <div class="header">
+      <div class="header-inner">
+        <div>
+          <div class="eyebrow">Financial clarity for microschools & homeschool co-ops</div>
+          <div class="logo-line">
+            <svg width="44" height="44" viewBox="0 0 40 40" aria-hidden="true">
+              <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+              <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.5" opacity="0.9"/>
+              <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.7" opacity="0.22"/>
+              <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.7" opacity="0.22"/>
+              <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.7" opacity="0.22"/>
+              <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
+            </svg>
+            <div class="logo-name">Microschool Ledger</div>
+          </div>
+          <div class="tagline">
+            Know where your school stands — without spreadsheets. Tuition, family billing,
+            Florida Step-Up scholarship credits, collections, and parent self-service in one
+            warm, purpose-built system.
+          </div>
+        </div>
+        <div class="header-contact">
+          <div class="header-contact-label">Get in touch</div>
+          <div class="header-contact-email">info@microschoolledger.com</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gold-stripe"></div>
+
+    <div class="hero-strip">
+      <h2>Built for schools that need <em>clarity</em>, not another pile of admin work.</h2>
+      <p>
+        Microschool Ledger was shaped inside a real microschool and now helps other co-ops and
+        microschools manage the full billing year with less chaos, better family communication,
+        and a clearer picture of where the school stands.
+      </p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value">10+</div>
+        <div class="stat-label">Admin hours saved per month by replacing spreadsheet work and hand-built invoices</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">2</div>
+        <div class="stat-label">Payment streams reconciled in one place: direct payments + Florida Step-Up</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">6-figures</div>
+        <div class="stat-label">Annual program revenue supported in active production at a real microschool</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">0</div>
+        <div class="stat-label">Servers, installs, or IT staff required to get started</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Why generic billing tools break down for <em>small schools</em></div>
+      <div class="section-sub">
+        Most accounting tools think in terms of one client, one invoice, one payment stream.
+        Microschools and homeschool co-ops work differently: families span multiple students,
+        sibling discounts vary by program, scholarship disbursements arrive separately, and
+        the person doing billing is often also teaching.
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>You bill families, not students</h3>
+          <p>One family may have multiple students, multiple programs, and different pricing rules tied to sibling order.</p>
+        </div>
+        <div class="card">
+          <h3>Scholarships complicate the ledger</h3>
+          <p>Florida Step-Up credits arrive separately and still need to land against the same family balance as checks or Stripe payments.</p>
+        </div>
+        <div class="card">
+          <h3>Parents want answers fast</h3>
+          <p>“What do I owe?” and “Did my payment go through?” become constant admin interruptions unless families can check for themselves.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stepup-band">
+      <h2>Florida Step-Up reconciliation that takes <em>minutes</em>, not hours.</h2>
+      <p>
+        Paste the provider portal export directly into Microschool Ledger. The system matches disbursements by student sequence number, attributes them to the right program, and keeps re-imports clean.
+      </p>
+      <div class="step-list">
+        <div class="step">
+          <div class="step-num">1</div>
+          <strong>Export the portal history</strong>
+          <span>No file conversion or cleanup project first.</span>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <strong>Paste it in directly</strong>
+          <span>Tab-delimited imports are handled as-is.</span>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <strong>Match by sequence number</strong>
+          <span>Payments land on the right student and family.</span>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <strong>Deduplicate on re-import</strong>
+          <span>So you can safely refresh without double-counting.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">What Microschool Ledger gives your school</div>
+      <div class="section-sub">
+        This is more than a billing tool. It’s a calmer way to run the financial side of a school year.
+      </div>
+
+      <div class="grid-3">
+        <div class="card white">
+          <h3>For administrators</h3>
+          <ul>
+            <li>Action-oriented home dashboard with overdue follow-up</li>
+            <li>Automatic charge schedules from enrollments and payment plans</li>
+            <li>Collections view with one-click statements and payment shortcuts</li>
+            <li>P&amp;L, expenses, and budget tracking as your school grows</li>
+          </ul>
+        </div>
+        <div class="card white">
+          <h3>For families</h3>
+          <ul>
+            <li>Passwordless family portal access</li>
+            <li>Self-serve invoices and payment history by year</li>
+            <li>Clear view of direct payments and scholarship credits</li>
+            <li>Less back-and-forth with your school office</li>
+          </ul>
+        </div>
+        <div class="card white">
+          <h3>For founders</h3>
+          <ul>
+            <li>Clarity about what’s been collected and what’s still due</li>
+            <li>Confidence during the spring overlap between school years</li>
+            <li>A system shaped by real school operations, not generic SaaS assumptions</li>
+            <li>A path from spreadsheet replacement to financial intelligence</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="story-box">
+        <h3>Built in a real microschool — not a lab</h3>
+        <p>
+          Microschool Ledger was developed at The Grow Co-op in Boca Raton, Florida and has been running
+          in active production since 2024 — supporting a growing, six-figure annual program with family billing,
+          multiple payment streams, and Florida Step-Up reconciliation. Every feature exists because it solved a real problem first.
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">A closer look at the core workflow</div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Enrollment & tuition</h3>
+          <p>Guided enrollment flow, automatic monthly charge generation, deposits, payment plans, sibling discounts, and support for overlapping school years.</p>
+        </div>
+        <div class="card">
+          <h3>Payments & collections</h3>
+          <p>Manual payment entry, Stripe imports, Step-Up credits, family statements, and collections sorted by who needs follow-up first.</p>
+        </div>
+        <div class="card">
+          <h3>Family portal</h3>
+          <p>A read-only self-service view where parents can see balances, payment history, enrollments, and printable invoices without emailing your team.</p>
+        </div>
+        <div class="card">
+          <h3>Reporting & financial health</h3>
+          <p>Revenue, expenses, budgets, and a growing set of tools that help schools move from reactive bookkeeping to confident financial decisions.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Pricing that grows with your school</div>
+      <div class="section-sub">
+        Every plan includes the core billing engine: family records, enrollments, manual payments, collections, statements, Step-Up import, and the home dashboard.
+      </div>
+
+      <div class="tier-grid">
+        <div class="tier">
+          <div class="tier-head">
+            <div class="tier-name">Essentials</div>
+            <div class="tier-tag">Replace the spreadsheet</div>
+            <div class="tier-price">$49 <span>/ month</span></div>
+          </div>
+          <div class="tier-body">
+            <ul>
+              <li>Families, students, and enrollments</li>
+              <li>Manual payments and imports</li>
+              <li>Collections dashboard and statements</li>
+              <li>Florida Step-Up import included</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tier featured">
+          <div class="tier-badge">Most popular</div>
+          <div class="tier-head">
+            <div class="tier-name">Standard</div>
+            <div class="tier-tag">Add the family-facing layer</div>
+            <div class="tier-price">$99 <span>/ month</span></div>
+          </div>
+          <div class="tier-body">
+            <ul>
+              <li>Everything in Essentials</li>
+              <li>Family portal access</li>
+              <li>Portal invite flow</li>
+              <li>Automated reminders</li>
+              <li>“Are you on track?” summary card</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tier">
+          <div class="tier-head">
+            <div class="tier-name">Pro</div>
+            <div class="tier-tag">Full financial intelligence</div>
+            <div class="tier-price">$199 <span>/ month</span></div>
+          </div>
+          <div class="tier-body">
+            <ul>
+              <li>Everything in Standard</li>
+              <li>Full P&amp;L and expense tracking</li>
+              <li>Budget vs. actual reporting</li>
+              <li>Program attribution audit tools</li>
+              <li>Financial health dashboard</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>
+        <div class="footer-title">Microschool Ledger</div>
+        <div class="footer-copy">Financial clarity for microschools & homeschool co-ops — not spreadsheets.</div>
+      </div>
+      <div class="footer-copy">
+        Built by The Grow Co-op • Boca Raton, Florida •
+        <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

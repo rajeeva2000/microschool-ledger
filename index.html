@@ -1,1071 +1,1129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Microschool Ledger — Financial Management for Microschools & Homeschool Co-ops</title>
-<meta name="description" content="Microschool Ledger replaces spreadsheets with purpose-built billing, enrollment, and Florida Step-Up scholarship reconciliation for microschools and homeschool co-ops.">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Microschool Ledger — Financial clarity for microschools & homeschool co-ops</title>
+  <meta
+    name="description"
+    content="Know where your school stands without spreadsheets. Manage tuition, Florida Step-Up scholarships, family billing, collections, and parent account access in one purpose-built system."
+  />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root{
+      --pine:#3C4535;
+      --pine-dark:#2d3528;
+      --sand:#F8EDDD;
+      --offwhite:#F0EDE8;
+      --rock:#DDDFDE;
+      --grass:#ADB76D;
+      --gold:#c9a84c;
+      --gold-light:#f7f0e0;
+      --sky:#6E9CDA;
+      --ink:#1a1a1a;
+      --muted:#6b7066;
+      --paid:#52b788;
+      --due:#f4b942;
+      --overdue:#e05c5c;
+      --stepup-bg:#dbeeff;
+      --stepup-text:#1a6aad;
+      --stripe-bg:#e8e4ff;
+      --stripe-text:#5a3fcf;
+      --shadow:0 20px 60px rgba(26,26,26,.08);
+      --max:1140px;
+    }
 
-:root {
-  --green-deep:  #3C4535;
-  --green-mid:   #4a5c3f;
-  --green-light: #ADB76D;
-  --green-pale:  #F0EDE8;
-  --green-faint: #F8EDDD;
-  --gold:        #c9a84c;
-  --gold-light:  #f7f0e0;
-  --cream:       #F8EDDD;
-  --ink:         #1a1a1a;
-  --muted:       #6b7066;
-  --rule:        #DDDFDE;
-  --white:       #ffffff;
-}
+    html { scroll-behavior: smooth; }
+    body{
+      font-family:'DM Sans', Arial, Helvetica, sans-serif;
+      background:var(--sand);
+      color:var(--ink);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    a { color: inherit; }
+    .container{ width:min(calc(100% - 2rem), var(--max)); margin:0 auto; }
+    .section{ padding:5.5rem 0; }
+    .gold-stripe{ height:3px; background:linear-gradient(90deg, var(--gold), var(--grass), var(--gold)); }
 
-html { scroll-behavior: smooth; }
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:.65rem;
+      font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
+      color:var(--grass); font-weight:600; margin-bottom:1rem;
+    }
+    .eyebrow::before{
+      content:""; width:28px; height:2px; background:var(--grass); display:block;
+    }
 
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--cream);
-  color: var(--ink);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
+    h1,h2,h3,h4{
+      font-family:'Lora', Georgia, 'Times New Roman', serif;
+      line-height:1.18; color:var(--pine);
+    }
 
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(26, 58, 42, 0.97);
-  backdrop-filter: blur(12px);
-  padding: 0 2rem;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 64px;
-  border-bottom: 1px solid rgba(82,183,136,0.2);
-}
-.nav-logo {
-  font-family: 'Lora', serif;
-  font-size: 1.15rem; font-weight: 700;
-  color: white; text-decoration: none;
-  display: flex; align-items: center; gap: 0.6rem;
-}
-.nav-links { display: flex; gap: 2rem; align-items: center; }
-.nav-links a {
-  font-size: 0.85rem; font-weight: 500; color: rgba(255,255,255,0.75);
-  text-decoration: none; transition: color 0.2s;
-}
-.nav-links a:hover { color: white; }
-.nav-cta {
-  background: var(--gold); color: var(--green-deep) !important;
-  padding: 0.45rem 1.1rem; border-radius: 4px; font-weight: 600 !important;
-  font-size: 0.82rem !important;
-}
-.nav-cta:hover { background: #d4a84c !important; }
+    p.lead{
+      color:var(--muted); font-size:1.05rem; line-height:1.8; max-width:680px;
+    }
 
-/* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  background: var(--green-deep);
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 8rem 2rem 5rem;
-  position: relative; overflow: hidden;
-}
-.hero-bg-rings {
-  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none;
-}
-.hero-ring {
-  position: absolute; border-radius: 50%;
-  border: 1px solid rgba(82,183,136,0.12);
-}
-.hero-ring-1 { width: 600px; height: 600px; top: -200px; right: -200px; }
-.hero-ring-2 { width: 400px; height: 400px; top: -100px; right: -50px; }
-.hero-ring-3 { width: 800px; height: 800px; bottom: -400px; left: -300px; border-color: rgba(201,168,76,0.08); }
-.hero-grain {
-  position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity: 0.4;
-}
-.hero-inner {
-  max-width: 1100px; margin: 0 auto; width: 100%;
-  position: relative; z-index: 1;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
-}
-.hero-eyebrow {
-  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--green-light);
-  margin-bottom: 1.25rem;
-  display: flex; align-items: center; gap: 0.75rem;
-}
-.hero-eyebrow::before {
-  content: ''; display: block; width: 32px; height: 2px;
-  background: var(--green-light);
-}
-.hero h1 {
-  font-family: 'Lora', serif;
-  font-size: clamp(2.4rem, 5vw, 3.6rem);
-  font-weight: 700; color: white; line-height: 1.15;
-  margin-bottom: 1.5rem;
-}
-.hero h1 em {
-  font-style: italic; color: var(--gold);
-}
-.hero-sub {
-  font-size: 1.05rem; font-weight: 300;
-  color: rgba(255,255,255,0.72); line-height: 1.7;
-  margin-bottom: 2.5rem; max-width: 460px;
-}
-.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-.btn-primary {
-  background: var(--gold); color: var(--green-deep);
-  padding: 0.85rem 2rem; border-radius: 4px;
-  font-weight: 600; font-size: 0.95rem;
-  text-decoration: none; display: inline-block;
-  transition: transform 0.2s, background 0.2s;
-}
-.btn-primary:hover { background: #d4a84c; transform: translateY(-1px); }
-.btn-secondary {
-  border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.85);
-  padding: 0.85rem 2rem; border-radius: 4px;
-  font-weight: 500; font-size: 0.95rem;
-  text-decoration: none; display: inline-block;
-  transition: border-color 0.2s, color 0.2s;
-}
-.btn-secondary:hover { border-color: rgba(255,255,255,0.7); color: white; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:.55rem;
+      min-height:46px; padding:.85rem 1.35rem; border-radius:8px;
+      text-decoration:none; font-weight:600; font-size:.95rem;
+      border:1px solid transparent; cursor:pointer; transition:.18s ease;
+    }
+    .btn:hover{ transform:translateY(-1px); }
+    .btn-primary{ background:var(--gold); color:var(--pine); }
+    .btn-primary:hover{ background:#d7b45d; }
+    .btn-secondary{ background:transparent; border-color:rgba(255,255,255,.26); color:white; }
+    .btn-secondary:hover{ border-color:rgba(255,255,255,.55); background:rgba(255,255,255,.05); }
+    .btn-dark{ background:var(--pine); color:white; }
+    .btn-dark:hover{ background:var(--pine-dark); }
 
-/* Hero stats */
-.hero-stats {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-  background: rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-.hero-stat {
-  background: rgba(255,255,255,0.04);
-  padding: 1.75rem 1.5rem;
-  transition: background 0.2s;
-}
-.hero-stat:hover { background: rgba(255,255,255,0.07); }
-.hero-stat-num {
-  font-family: 'Lora', serif;
-  font-size: 2.4rem; font-weight: 700; color: var(--gold);
-  line-height: 1; margin-bottom: 0.4rem;
-}
-.hero-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.6); line-height: 1.4; }
+    nav{
+      position:fixed; top:0; left:0; right:0; z-index:1000; height:68px;
+      display:flex; align-items:center; border-bottom:1px solid rgba(255,255,255,.08);
+      background:rgba(60,69,53,.94); backdrop-filter: blur(12px);
+    }
+    .nav-inner{
+      width:min(calc(100% - 2rem), var(--max)); margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    }
+    .brand{
+      display:flex; align-items:center; gap:.8rem; text-decoration:none; color:white;
+      font-family:'Lora', Georgia, serif; font-size:1.12rem; font-weight:700; white-space:nowrap;
+    }
+    .nav-links{ display:flex; align-items:center; gap:1.45rem; }
+    .nav-links a{
+      color:rgba(255,255,255,.76); text-decoration:none; font-size:.88rem; font-weight:500;
+    }
+    .nav-links a:hover{ color:white; }
 
-/* Gold stripe */
-.gold-stripe { height: 3px; background: linear-gradient(90deg, var(--gold), var(--green-light), var(--gold)); }
+    .hero{
+      background:var(--pine); color:white; padding:9rem 0 5rem; position:relative; overflow:hidden;
+    }
+    .hero::before,.hero::after{
+      content:""; position:absolute; border-radius:50%; pointer-events:none;
+    }
+    .hero::before{
+      width:720px; height:720px; right:-220px; top:-260px;
+      border:1px solid rgba(173,183,109,.12);
+    }
+    .hero::after{
+      width:860px; height:860px; left:-320px; bottom:-480px;
+      border:1px solid rgba(201,168,76,.10);
+    }
+    .hero-grid{
+      display:grid; grid-template-columns:1.1fr .9fr; gap:3rem; align-items:center; position:relative; z-index:1;
+    }
+    .hero-copy h1{
+      color:white; font-size:clamp(2.6rem, 5vw, 4.2rem); margin-bottom:1.25rem; max-width:12ch;
+    }
+    .hero-copy h1 em{ color:var(--gold); font-style:italic; }
+    .hero-copy p{
+      color:rgba(255,255,255,.74); font-size:1.08rem; line-height:1.8; max-width:620px;
+    }
+    .hero-actions{ margin-top:2rem; display:flex; gap:.9rem; flex-wrap:wrap; }
+    .hero-proof{ margin-top:1rem; color:rgba(255,255,255,.42); font-size:.8rem; }
 
-/* ── SECTIONS ── */
-section { padding: 5rem 2rem; }
-.section-inner { max-width: 1100px; margin: 0 auto; }
-.section-eyebrow {
-  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--green-light);
-  margin-bottom: 0.75rem;
-  display: flex; align-items: center; gap: 0.6rem;
-}
-.section-eyebrow::before { content: ''; display: block; width: 24px; height: 2px; background: var(--green-light); }
-.section-title {
-  font-family: 'Lora', serif;
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-  font-weight: 700; color: var(--green-deep);
-  line-height: 1.2; margin-bottom: 1rem;
-}
-.section-title em { font-style: italic; color: var(--green-mid); }
-.section-sub {
-  font-size: 1rem; color: var(--muted); line-height: 1.7;
-  max-width: 580px; margin-bottom: 3rem;
-}
+    .hero-panel{
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+      border-radius:18px; box-shadow:0 28px 80px rgba(0,0,0,.3); overflow:hidden;
+    }
+    .panel-top{
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+      padding:1rem 1.1rem; border-bottom:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.04);
+    }
+    .panel-title{ color:white; font-size:.92rem; font-weight:600; }
+    .panel-badge{
+      background:rgba(173,183,109,.18); color:var(--grass); border:1px solid rgba(173,183,109,.25);
+      padding:.28rem .55rem; border-radius:999px; font-size:.65rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    }
+    .panel-body{ padding:1.1rem; display:grid; gap:.9rem; }
+    .briefing{
+      background:rgba(247,240,224,.08); border:1px solid rgba(255,255,255,.08);
+      border-radius:12px; padding:1rem;
+    }
+    .briefing-label{
+      color:var(--grass); text-transform:uppercase; letter-spacing:.12em; font-size:.65rem; font-weight:700; margin-bottom:.5rem;
+    }
+    .briefing h3{ color:white; font-size:1.32rem; margin-bottom:.4rem; }
+    .briefing p{ color:rgba(255,255,255,.68); font-size:.88rem; line-height:1.65; }
+    .mini-grid{ display:grid; grid-template-columns:1fr 1fr; gap:.85rem; }
+    .mini-card{
+      background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+      border-radius:12px; padding:.95rem;
+    }
+    .mini-kicker{
+      color:rgba(255,255,255,.5); font-size:.68rem; text-transform:uppercase; letter-spacing:.1em; margin-bottom:.35rem;
+    }
+    .mini-value{
+      color:var(--gold); font-family:'Lora', Georgia, serif; font-size:1.8rem; line-height:1; margin-bottom:.2rem;
+    }
+    .mini-copy{ color:rgba(255,255,255,.7); font-size:.78rem; line-height:1.5; }
+    .attention-list{ display:grid; gap:.65rem; }
+    .attention-row{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;
+      padding:.8rem .9rem; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:10px;
+    }
+    .attention-row strong{ color:white; display:block; font-size:.88rem; margin-bottom:.18rem; }
+    .attention-row span{ color:rgba(255,255,255,.62); font-size:.76rem; }
+    .dot{ width:10px; height:10px; border-radius:50%; flex:0 0 auto; margin-top:.35rem; }
+    .dot-red{ background:var(--overdue); }
+    .dot-yellow{ background:var(--due); }
+    .dot-green{ background:var(--paid); }
+    .tag{
+      display:inline-flex; align-items:center; padding:.18rem .42rem; border-radius:999px;
+      font-size:.58rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    }
+    .tag-stepup{ background:var(--stepup-bg); color:var(--stepup-text); }
+    .tag-stripe{ background:var(--stripe-bg); color:var(--stripe-text); }
+    .tag-portal{ background:rgba(173,183,109,.18); color:var(--grass); border:1px solid rgba(173,183,109,.25); }
 
-/* ── PROBLEM ── */
-.problem-section { background: white; }
-.problem-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
-  margin-top: 1rem;
-}
-.problem-card {
-  background: var(--cream);
-  border: 1px solid var(--rule);
-  border-radius: 8px; padding: 1.5rem;
-  position: relative; overflow: hidden;
-}
-.problem-card::before {
-  content: '✗';
-  position: absolute; top: 1.25rem; right: 1.25rem;
-  font-size: 1rem; color: #dc6b6b; font-weight: 700;
-}
-.problem-card-title {
-  font-weight: 600; font-size: 0.95rem; color: var(--green-deep);
-  margin-bottom: 0.5rem;
-}
-.problem-card-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .trust-bar{ background:white; border-bottom:1px solid var(--rock); padding:1.05rem 0; }
+    .trust-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+    .trust-item{ display:flex; gap:.8rem; align-items:flex-start; padding:.45rem .3rem; }
+    .trust-icon{ font-size:1.1rem; line-height:1; margin-top:.15rem; }
+    .trust-item strong{ display:block; font-size:.92rem; color:var(--pine); margin-bottom:.12rem; }
+    .trust-item span{ display:block; font-size:.82rem; color:var(--muted); line-height:1.45; }
 
-/* ── STEPUP ── */
-.stepup-section {
-  background: var(--green-deep);
-  position: relative; overflow: hidden;
-}
-.stepup-section::before {
-  content: ''; position: absolute;
-  top: -200px; right: -200px;
-  width: 600px; height: 600px; border-radius: 50%;
-  background: rgba(82,183,136,0.06);
-  pointer-events: none;
-}
-.stepup-inner {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
-  position: relative; z-index: 1;
-}
-.stepup-label {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: rgba(82,183,136,0.15); border: 1px solid rgba(82,183,136,0.3);
-  color: var(--green-light); font-size: 0.7rem; font-weight: 600;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 1.5rem;
-}
-.stepup-title {
-  font-family: 'Lora', serif;
-  font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700;
-  color: white; line-height: 1.2; margin-bottom: 1.25rem;
-}
-.stepup-title em { font-style: italic; color: var(--gold); }
-.stepup-desc { font-size: 0.95rem; color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: 2rem; }
-.stepup-steps { list-style: none; }
-.stepup-steps li {
-  display: flex; gap: 1rem; align-items: flex-start;
-  padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.07);
-  font-size: 0.88rem; color: rgba(255,255,255,0.8); line-height: 1.5;
-}
-.stepup-steps li:last-child { border-bottom: none; }
-.step-num {
-  flex-shrink: 0; width: 24px; height: 24px;
-  background: var(--gold); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.7rem; font-weight: 700; color: var(--green-deep);
-  margin-top: 1px;
-}
+    .problem{ background:white; }
+    .problem-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.15rem; margin-top:2rem; }
+    .problem-card{
+      background:var(--sand); border:1px solid var(--rock); border-radius:14px; padding:1.35rem; min-height:180px; position:relative;
+    }
+    .problem-card::after{
+      content:"✕"; position:absolute; right:1rem; top:1rem; color:#d16c6c; font-weight:700; opacity:.9;
+    }
+    .problem-card h3{ font-size:1.05rem; margin-bottom:.55rem; }
+    .problem-card p{ color:var(--muted); font-size:.94rem; line-height:1.7; max-width:42ch; }
 
-/* Portal mockup */
-.portal-mockup {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 10px; overflow: hidden;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.4);
-}
-.portal-bar {
-  background: rgba(255,255,255,0.06);
-  padding: 0.75rem 1rem;
-  display: flex; align-items: center; gap: 0.5rem;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.portal-dot { width: 10px; height: 10px; border-radius: 50%; }
-.portal-body { padding: 1.25rem; }
-.portal-row {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 0.55rem 0.75rem; border-radius: 5px; margin-bottom: 0.4rem;
-  font-size: 0.78rem;
-}
-.portal-row-header {
-  background: rgba(82,183,136,0.15);
-  color: var(--green-light); font-weight: 600; font-size: 0.65rem;
-  letter-spacing: 0.1em; text-transform: uppercase;
-}
-.portal-row-data { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.8); }
-.portal-row-data:nth-child(odd) { background: rgba(255,255,255,0.02); }
-.badge-ema {
-  background: #1a4a7a; color: #7ec8ff;
-  font-size: 0.58rem; font-weight: 700; padding: 0.1rem 0.4rem;
-  border-radius: 3px; letter-spacing: 0.06em; text-transform: uppercase;
-}
-.badge-matched {
-  background: rgba(82,183,136,0.2); color: var(--green-light);
-  font-size: 0.58rem; font-weight: 700; padding: 0.1rem 0.4rem;
-  border-radius: 3px; letter-spacing: 0.06em; text-transform: uppercase;
-}
-.portal-total {
-  margin-top: 0.75rem; padding: 0.65rem 0.75rem;
-  background: rgba(201,168,76,0.12); border-radius: 5px;
-  display: flex; justify-content: space-between;
-  font-size: 0.8rem; color: var(--gold); font-weight: 600;
-}
+    .stepup{
+      background:var(--pine); color:white; position:relative; overflow:hidden;
+    }
+    .stepup::before{
+      content:""; position:absolute; right:-180px; top:-120px; width:520px; height:520px; border-radius:50%;
+      background:rgba(173,183,109,.06); pointer-events:none;
+    }
+    .stepup-grid{
+      display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; position:relative; z-index:1;
+    }
+    .stepup h2{ color:white; font-size:clamp(2rem, 4vw, 3rem); margin-bottom:1rem; }
+    .stepup h2 em{ color:var(--gold); font-style:italic; }
+    .stepup p.lead{ color:rgba(255,255,255,.72); }
+    .steps{ list-style:none; margin-top:1.6rem; display:grid; gap:.85rem; }
+    .steps li{
+      display:flex; gap:.85rem; align-items:flex-start; padding:.9rem 0; border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .steps li:last-child{ border-bottom:none; }
+    .step-num{
+      width:28px; height:28px; border-radius:50%; background:var(--gold); color:var(--pine);
+      font-size:.75rem; font-weight:700; display:flex; align-items:center; justify-content:center; flex:0 0 auto; margin-top:.05rem;
+    }
+    .steps strong{ color:white; display:block; margin-bottom:.18rem; font-size:.92rem; }
+    .steps span{ color:rgba(255,255,255,.68); font-size:.88rem; line-height:1.6; }
 
-/* ── HOW IT WORKS ── */
-.hiw-section { background: var(--cream); }
-.hiw-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-  margin-top: 1rem;
-}
-.hiw-card {
-  background: white; border: 1px solid var(--rule);
-  border-radius: 10px; padding: 1.75rem 1.5rem;
-  position: relative; transition: box-shadow 0.2s, transform 0.2s;
-}
-.hiw-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-2px); }
-.hiw-number {
-  font-family: 'Lora', serif;
-  font-size: 3rem; font-weight: 700; color: var(--green-pale);
-  line-height: 1; margin-bottom: 0.75rem;
-}
-.hiw-icon { font-size: 1.6rem; margin-bottom: 0.75rem; display: block; }
-.hiw-title { font-weight: 600; font-size: 1rem; color: var(--green-deep); margin-bottom: 0.5rem; }
-.hiw-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
-.hiw-features { list-style: none; margin-top: 1rem; }
-.hiw-features li {
-  font-size: 0.8rem; color: var(--muted); padding: 0.3rem 0 0.3rem 1.1rem;
-  border-bottom: 1px solid var(--rule); position: relative;
-}
-.hiw-features li:last-child { border-bottom: none; }
-.hiw-features li::before {
-  content: '✓'; position: absolute; left: 0; color: var(--green-light);
-  font-size: 0.7rem; font-weight: 700; top: 0.38rem;
-}
+    .statement{
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+      border-radius:16px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.24);
+    }
+    .statement-head{
+      display:grid; grid-template-columns:1.1fr .9fr; gap:1rem; align-items:start;
+      background:rgba(255,255,255,.04); padding:1rem 1.1rem; border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .statement-head h4{ color:white; font-size:.98rem; margin-bottom:.22rem; }
+    .statement-head p{ color:rgba(255,255,255,.62); font-size:.74rem; line-height:1.55; }
+    .statement-metrics{ display:grid; grid-template-columns:repeat(3,1fr); gap:.7rem; text-align:center; }
+    .statement-metrics div{
+      background:rgba(255,255,255,.04); border-radius:10px; padding:.7rem .45rem;
+    }
+    .statement-metrics strong{
+      display:block; font-family:'Lora', Georgia, serif; color:var(--gold); font-size:1rem; margin-bottom:.08rem;
+    }
+    .statement-metrics span{
+      font-size:.62rem; color:rgba(255,255,255,.52); text-transform:uppercase; letter-spacing:.08em;
+    }
+    .statement-body{ padding:1rem 1.1rem 1.15rem; display:grid; gap:.6rem; }
+    .statement-row{
+      display:grid; grid-template-columns:1.15fr .75fr .55fr .6fr; gap:.7rem; align-items:center; padding:.65rem .7rem;
+      border-radius:10px; background:rgba(255,255,255,.035); color:rgba(255,255,255,.8); font-size:.77rem;
+    }
+    .statement-row.header{
+      background:rgba(173,183,109,.14); color:var(--grass); font-weight:700; letter-spacing:.08em; text-transform:uppercase; font-size:.62rem;
+    }
 
-/* ── RESOURCES ── */
-.resources-section { background: var(--green-deep); }
-.resources-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
-  margin-top: 0.5rem;
-}
-.resource-card {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 10px; padding: 2rem;
-  display: flex; flex-direction: column; gap: 0.9rem;
-  transition: background 0.2s, border-color 0.2s;
-}
-.resource-card:hover { background: rgba(255,255,255,0.09); border-color: rgba(201,168,76,0.4); }
-.resource-type {
-  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--green-light);
-}
-.resource-title {
-  font-family: 'Lora', serif; font-size: 1.3rem; font-weight: 700;
-  color: white; line-height: 1.25;
-}
-.resource-desc { font-size: 0.85rem; color: rgba(255,255,255,0.62); line-height: 1.7; flex: 1; }
-.resource-meta { font-size: 0.76rem; color: rgba(255,255,255,0.35); }
-.resource-download {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: var(--gold); color: var(--green-deep);
-  padding: 0.72rem 1.4rem; border-radius: 4px;
-  font-weight: 600; font-size: 0.87rem;
-  text-decoration: none; transition: background 0.2s;
-  align-self: flex-start; margin-top: 0.4rem;
-}
-.resource-download:hover { background: #d4a84c; }
+    .clarity{ background:var(--sand); }
+    .clarity-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:2rem; }
+    .clarity-card{
+      background:white; border:1px solid var(--rock); border-radius:16px; padding:1.45rem; box-shadow:var(--shadow);
+    }
+    .clarity-card h3{ font-size:1.18rem; margin-bottom:.55rem; }
+    .clarity-card p{ color:var(--muted); font-size:.95rem; line-height:1.7; margin-bottom:1rem; }
+    .clarity-points{ list-style:none; display:grid; gap:.6rem; }
+    .clarity-points li{
+      display:flex; align-items:flex-start; gap:.7rem; color:var(--pine); font-size:.9rem; line-height:1.55;
+    }
+    .clarity-points li::before{ content:"✓"; color:var(--grass); font-weight:700; margin-top:.05rem; }
 
-/* New feature badge */
-.hiw-new {
-  display: inline-block; font-size: 0.55rem; font-weight: 700;
-  background: var(--gold-light); color: #9a7320;
-  border: 1px solid #e8d498;
-  padding: 0.06rem 0.3rem; border-radius: 3px;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  vertical-align: middle; margin-left: 3px;
-}
+    .portal-section{ background:white; border-top:1px solid var(--rock); border-bottom:1px solid var(--rock); }
+    .portal-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; align-items:start; }
+    .portal-copy, .portal-mock-card{
+      background:var(--offwhite); border:1px solid var(--rock); border-radius:18px; padding:1.5rem;
+    }
+    .portal-copy h2{ font-size:clamp(1.9rem,3vw,2.5rem); margin-bottom:.9rem; }
+    .portal-copy p{ color:var(--muted); font-size:.98rem; line-height:1.8; margin-bottom:1rem; max-width:62ch; }
+    .portal-quote{
+      background:white; border-left:4px solid var(--gold); border-radius:0 12px 12px 0; padding:1rem 1rem 1rem 1.1rem;
+      color:var(--pine); font-size:.95rem; line-height:1.7; margin-top:.6rem;
+    }
+    .portal-quote strong{ display:block; margin-top:.45rem; font-size:.84rem; color:var(--muted); }
 
-/* ── PRICING ── */
-.pricing-section { background: white; }
-.pricing-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-  margin-top: 1rem; align-items: start;
-}
-.pricing-card {
-  border: 1px solid var(--rule); border-radius: 10px; overflow: hidden;
-  transition: box-shadow 0.2s;
-}
-.pricing-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
-.pricing-card.featured {
-  border-color: var(--gold);
-  box-shadow: 0 4px 32px rgba(201,168,76,0.2);
-  transform: scale(1.02);
-}
-.pricing-badge {
-  background: var(--gold); color: var(--green-deep);
-  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em;
-  text-transform: uppercase; text-align: center; padding: 0.3rem;
-}
-.pricing-head {
-  background: var(--green-deep); padding: 1.75rem 1.5rem 1.5rem;
-}
-.pricing-card:not(.featured) .pricing-head { background: #2d3528; }
-.pricing-tier-name {
-  font-family: 'Lora', serif; font-size: 1.4rem; font-weight: 700;
-  color: white; margin-bottom: 0.25rem;
-}
-.pricing-tagline { font-size: 0.75rem; color: rgba(255,255,255,0.55); font-style: italic; margin-bottom: 1rem; }
-.pricing-price { display: flex; align-items: baseline; gap: 0.3rem; }
-.pricing-amount {
-  font-family: 'Lora', serif; font-size: 2.4rem; font-weight: 700; color: var(--gold);
-}
-.pricing-per { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
-.pricing-limit { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem; }
-.pricing-body { padding: 1.25rem 1.5rem; background: white; }
-.pricing-features { list-style: none; }
-.pricing-features li {
-  font-size: 0.83rem; color: #333; padding: 0.35rem 0 0.35rem 1.3rem;
-  border-bottom: 1px solid #f5f5f5; position: relative; line-height: 1.45;
-}
-.pricing-features li:last-child { border-bottom: none; }
-.pricing-features li::before {
-  content: '✓'; position: absolute; left: 0; top: 0.38rem;
-  color: var(--green-light); font-size: 0.68rem; font-weight: 700;
-}
-.pricing-features li.add::before { content: '＋'; color: var(--gold); }
-.pricing-features li.dim { color: #bbb; }
-.pricing-features li.dim::before { color: #ddd; content: '·'; }
-.pricing-cta {
-  display: block; text-align: center;
-  background: var(--green-deep); color: white;
-  padding: 0.85rem; font-weight: 600; font-size: 0.88rem;
-  text-decoration: none; margin-top: 1.25rem; border-radius: 5px;
-  transition: background 0.2s;
-}
-.pricing-cta:hover { background: var(--green-mid); }
-.pricing-card.featured .pricing-cta { background: var(--gold); color: var(--green-deep); }
-.pricing-card.featured .pricing-cta:hover { background: #d4a84c; }
+    .portal-mock{
+      border:1px solid #dcd5c9; border-radius:14px; overflow:hidden; background:#efe6d7; box-shadow:0 8px 24px rgba(0,0,0,.06);
+    }
+    .portal-top{
+      background:var(--pine); color:#fff; padding:16px 20px; display:flex; justify-content:space-between; gap:16px; align-items:center;
+    }
+    .portal-brand{ font-family:'Lora', Georgia, serif; font-size:19px; font-weight:700; line-height:1.1; }
+    .portal-brand small{
+      display:block; font-family:'DM Sans', Arial, sans-serif; font-size:12px; font-weight:500; color:rgba(255,255,255,.72); margin-top:4px;
+    }
+    .portal-user{ font-size:13px; color:rgba(255,255,255,.82); white-space:nowrap; }
+    .portal-body{ padding:20px; }
+    .portal-header{
+      display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:18px;
+    }
+    .portal-header h3{
+      margin:0; font-family:'Lora', Georgia, serif; font-size:34px; line-height:1.05; color:#243044;
+    }
+    .portal-header .meta{ margin-top:6px; color:#6f7482; font-size:15px; }
+    .invoice-btn{
+      background:var(--pine); color:#fff; border-radius:12px; padding:14px 18px; font-weight:700; font-size:14px; white-space:nowrap;
+    }
+    .summary-card{
+      background:#fff; border:1px solid #ddd6c9; border-radius:18px; padding:18px; box-shadow:0 2px 6px rgba(0,0,0,.04); margin-bottom:18px;
+    }
+    .summary-title{
+      color:#8a8f97; text-transform:uppercase; letter-spacing:.04em; font-size:12px; font-weight:700; margin-bottom:14px;
+    }
+    .summary-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:18px; }
+    .summary-box{
+      border-radius:14px; padding:18px 14px; text-align:center; background:#f7f7f7;
+    }
+    .summary-box.green{ background:#e7f3ea; }
+    .summary-box.red{ background:#f8e7e7; }
+    .summary-value{
+      font-family:'Lora', Georgia, serif; font-size:30px; line-height:1; font-weight:700; color:#243044; margin-bottom:6px;
+    }
+    .summary-box.green .summary-value{ color:#1f8d45; }
+    .summary-box.red .summary-value{ color:#d43b2f; }
+    .summary-label{ color:#6f7482; font-size:13px; }
+    .progress{ height:14px; background:#e6e6e6; border-radius:999px; overflow:hidden; margin-bottom:8px; }
+    .progress-fill{
+      width:58%; height:100%; background:linear-gradient(90deg,#2f8d49,#66b96b); border-radius:999px;
+    }
+    .progress-meta{ text-align:right; color:#8b9098; font-size:13px; font-weight:600; }
+    .tabs{
+      display:grid; grid-template-columns:repeat(3,1fr); border:1px solid #ddd6c9; border-radius:16px 16px 0 0; overflow:hidden;
+    }
+    .tab{
+      background:#fff; padding:16px; text-align:center; color:#5f6570; font-size:16px; border-right:1px solid #ddd6c9;
+    }
+    .tab:last-child{ border-right:none; }
+    .tab.active{ background:var(--pine); color:#fff; font-weight:700; }
+    .detail{
+      background:#fff; border:1px solid #ddd6c9; border-top:none; border-radius:0 0 16px 16px; padding:18px; box-shadow:0 2px 6px rgba(0,0,0,.04);
+    }
+    .student-card{
+      border:1px solid #ddd6c9; border-radius:14px; padding:16px; background:#fff;
+    }
+    .student-head{ display:flex; align-items:center; gap:10px; margin-bottom:14px; color:#243044; font-weight:800; font-size:18px; }
+    .line{
+      display:flex; justify-content:space-between; gap:16px; padding:10px 0; border-top:1px solid #e7e3db; color:#3f4552; font-size:15px;
+    }
+    .portal-caption{ margin-top:1rem; color:var(--muted); font-size:.84rem; line-height:1.6; }
 
-.pricing-note {
-  text-align: center; margin-top: 2.5rem;
-  font-size: 0.85rem; color: var(--muted); line-height: 1.6;
-}
-.pricing-note strong { color: var(--green-deep); }
+    .features{ background:white; }
+    .feature-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem; }
+    .feature-card{
+      border:1px solid var(--rock); background:var(--offwhite); border-radius:16px; padding:1.35rem;
+    }
+    .feature-icon{ font-size:1.45rem; margin-bottom:.75rem; }
+    .feature-card h3{ font-size:1.06rem; margin-bottom:.45rem; }
+    .feature-card p{ color:var(--muted); font-size:.9rem; line-height:1.65; margin-bottom:.85rem; }
+    .feature-list{ list-style:none; display:grid; gap:.42rem; }
+    .feature-list li{
+      position:relative; padding-left:1rem; font-size:.84rem; color:var(--pine); line-height:1.5;
+    }
+    .feature-list li::before{ content:"•"; position:absolute; left:0; color:var(--grass); }
 
-/* ── CREDIBILITY ── */
-.cred-section { background: var(--green-faint); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-.cred-inner {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
-}
-.cred-quote {
-  font-family: 'Lora', serif;
-  font-size: 1.5rem; font-weight: 400; font-style: italic;
-  color: var(--green-deep); line-height: 1.5; margin-bottom: 1.5rem;
-  position: relative; padding-left: 1.5rem;
-}
-.cred-quote::before {
-  content: '"';
-  position: absolute; left: 0; top: -0.2rem;
-  font-size: 3rem; color: var(--green-light); opacity: 0.5; line-height: 1;
-}
-.cred-attr { font-size: 0.85rem; color: var(--muted); }
-.cred-attr strong { color: var(--green-deep); font-weight: 600; }
-.cred-stats {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-  background: var(--rule); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden;
-}
-.cred-stat {
-  background: white; padding: 1.5rem;
-}
-.cred-stat-num {
-  font-family: 'Lora', serif; font-size: 2.2rem; font-weight: 700;
-  color: var(--green-mid); line-height: 1; margin-bottom: 0.3rem;
-}
-.cred-stat-label { font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
+    .pricing{ background:var(--pine); color:white; }
+    .pricing h2{ color:white; }
+    .pricing p.lead{ color:rgba(255,255,255,.7); }
+    .pricing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem; align-items:start; }
+    .price-card{
+      background:white; color:var(--ink); border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.15); box-shadow:0 18px 40px rgba(0,0,0,.18);
+    }
+    .price-card.featured{ transform:translateY(-6px); border-color:var(--gold); }
+    .price-badge{
+      background:var(--gold); color:var(--pine); text-align:center; padding:.36rem .5rem; text-transform:uppercase; font-size:.64rem; font-weight:700; letter-spacing:.1em;
+    }
+    .price-head{ background:var(--pine-dark); padding:1.45rem 1.25rem 1.25rem; color:white; }
+    .price-card.featured .price-head{ background:var(--pine); }
+    .price-head h3{ color:white; font-size:1.4rem; margin-bottom:.2rem; }
+    .price-head p{ color:rgba(255,255,255,.58); font-size:.76rem; font-style:italic; margin-bottom:1rem; }
+    .amount{ display:flex; align-items:baseline; gap:.25rem; }
+    .amount strong{
+      font-family:'Lora', Georgia, serif; font-size:2.5rem; line-height:1; color:var(--gold);
+    }
+    .amount span{ font-size:.82rem; color:rgba(255,255,255,.5); }
+    .price-body{ padding:1.2rem 1.25rem 1.3rem; }
+    .price-list{ list-style:none; display:grid; gap:.55rem; }
+    .price-list li{
+      position:relative; padding-left:1.1rem; font-size:.88rem; line-height:1.55; color:#2d2d2d;
+    }
+    .price-list li::before{ content:"✓"; position:absolute; left:0; color:var(--grass); font-weight:700; }
+    .price-note{
+      margin-top:2rem; color:rgba(255,255,255,.68); font-size:.9rem; line-height:1.7; max-width:800px;
+    }
 
-/* ── HERO WAITLIST ── */
-.hero-waitlist { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-.hero-email-input { flex: 1; min-width: 220px; padding: 0.82rem 1rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.09); color: white; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none; }
-.hero-email-input::placeholder { color: rgba(255,255,255,0.35); }
-.hero-email-input:focus { border-color: var(--gold); background: rgba(255,255,255,0.12); }
-.hero-waitlist-note { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-top: 0.6rem; }
+    .resources{ background:var(--sand); }
+    .resource-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem; }
+    .resource-card{
+      background:white; border:1px solid var(--rock); border-radius:16px; padding:1.4rem; display:flex; flex-direction:column; gap:.75rem;
+    }
+    .resource-type{
+      color:var(--grass); text-transform:uppercase; font-size:.67rem; font-weight:700; letter-spacing:.14em;
+    }
+    .resource-card h3{ font-size:1.08rem; }
+    .resource-card p{ color:var(--muted); font-size:.9rem; line-height:1.65; flex:1; }
 
-/* ── INLINE CTA STRIP ── */
-.cta-strip { background: var(--green-faint); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 1.5rem 2rem; }
-.cta-strip-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
-.cta-strip-text { font-size: 0.95rem; color: var(--green-deep); font-weight: 500; }
-.cta-strip-text span { color: var(--muted); font-weight: 400; font-size: 0.85rem; display: block; margin-top: 0.15rem; }
-.cta-strip-form { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-.cta-strip-input { padding: 0.65rem 0.9rem; border-radius: 4px; border: 1px solid var(--rule); background: white; color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 0.87rem; outline: none; min-width: 200px; }
-.cta-strip-input:focus { border-color: var(--green-mid); }
-.cta-strip-btn { background: var(--green-deep); color: white; padding: 0.65rem 1.25rem; border-radius: 4px; border: none; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.87rem; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
-.cta-strip-btn:hover { background: var(--green-mid); }
-.cta-strip-success { font-size: 0.83rem; color: var(--green-mid); font-weight: 500; display: none; }
+    .cta{ background:var(--offwhite); border-top:1px solid var(--rock); border-bottom:1px solid var(--rock); }
+    .cta-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; align-items:stretch; }
+    .cta-copy, .cta-form{
+      background:white; border:1px solid var(--rock); border-radius:18px; padding:1.5rem; box-shadow:var(--shadow);
+    }
+    .cta-copy h2, .cta-form h3{ margin-bottom:.7rem; }
+    .cta-copy p, .cta-form p{ color:var(--muted); line-height:1.75; margin-bottom:1rem; }
+    .cta-list{ list-style:none; display:grid; gap:.65rem; margin-top:.6rem; }
+    .cta-list li{
+      display:flex; gap:.7rem; align-items:flex-start; color:var(--pine); font-size:.92rem; line-height:1.55;
+    }
+    .cta-list li::before{
+      content:"•"; color:var(--gold); font-size:1.1rem; line-height:1; margin-top:.12rem;
+    }
+    .stack{ display:grid; gap:.75rem; }
+    .field{
+      width:100%; min-height:46px; padding:.85rem .95rem; border-radius:10px; border:1px solid var(--rock);
+      background:var(--sand); color:var(--ink); font:inherit;
+    }
+    .field:focus{ outline:none; border-color:var(--pine); background:white; }
+    .small{ font-size:.8rem; color:var(--muted); line-height:1.55; }
 
-/* ── CTA ── */
-.cta-section { background: var(--green-deep); text-align: center; position: relative; overflow: hidden; }
-.cta-section::before { content: ''; position: absolute; top: -150px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; border-radius: 50%; background: rgba(82,183,136,0.06); pointer-events: none; }
-.cta-inner { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
-.cta-eyebrow { font-size: 0.67rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green-light); margin-bottom: 1rem; display: block; }
-.cta-title { font-family: 'Lora', serif; font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 700; color: white; line-height: 1.2; margin-bottom: 0.9rem; }
-.cta-sub { font-size: 0.98rem; color: rgba(255,255,255,0.58); line-height: 1.75; margin-bottom: 2.5rem; }
-.cta-cards { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 1.25rem; text-align: left; }
-.cta-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.11); border-radius: 12px; padding: 1.75rem 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; transition: background 0.2s, border-color 0.2s; }
-.cta-card:hover { background: rgba(255,255,255,0.09); }
-.cta-card-featured { background: rgba(255,255,255,0.09); border-color: rgba(201,168,76,0.4); box-shadow: 0 4px 32px rgba(201,168,76,0.12); }
-.cta-card-icon { font-size: 1.4rem; }
-.cta-card-label { font-size: 0.63rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-light); }
-.cta-card-title { font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 700; color: white; }
-.cta-card-desc { font-size: 0.83rem; color: rgba(255,255,255,0.58); line-height: 1.65; flex: 1; margin-bottom: 0.5rem; }
-.cta-card-btn { display: inline-block; padding: 0.72rem 1.3rem; border-radius: 5px; font-weight: 600; font-size: 0.87rem; text-decoration: none; text-align: center; transition: background 0.2s, opacity 0.2s; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; }
-.cta-card-btn-gold { background: var(--gold); color: var(--green-deep); }
-.cta-card-btn-gold:hover { background: #d4a84c; }
-.cta-card-btn-outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.28); }
-.cta-card-btn-outline:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
-.cta-card-note { font-size: 0.75rem; color: rgba(255,255,255,0.32); line-height: 1.5; margin-top: 0.5rem; }
-.cta-card-note a { color: var(--gold); text-decoration: none; }
-.cta-card-note a:hover { text-decoration: underline; }
-.cta-form-fields { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.25rem; }
-.cta-field { padding: 0.68rem 0.9rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.07); color: white; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; outline: none; }
-.cta-field::placeholder { color: rgba(255,255,255,0.3); }
-.cta-field:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); }
+    footer{ background:var(--pine-dark); color:rgba(255,255,255,.72); padding:2rem 0; }
+    .footer-wrap{
+      display:flex; justify-content:space-between; gap:1rem; align-items:center; flex-wrap:wrap;
+    }
+    .footer-brand{
+      display:flex; align-items:center; gap:.75rem; color:white; text-decoration:none; font-family:'Lora', Georgia, serif; font-weight:700;
+    }
+    .footer-meta{ font-size:.82rem; color:rgba(255,255,255,.58); line-height:1.65; }
 
-/* ── FOOTER ── */
-footer {
-  background: #2d3528;
-  padding: 2.5rem 2rem;
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-.footer-inner {
-  max-width: 1100px; margin: 0 auto;
-  display: flex; justify-content: space-between; align-items: center; gap: 2rem;
-  flex-wrap: wrap;
-}
-.footer-logo {
-  font-family: 'Lora', serif; font-size: 1rem; font-weight: 700;
-  color: rgba(255,255,255,0.6); text-decoration: none;
-}
-.footer-meta { font-size: 0.78rem; color: rgba(255,255,255,0.3); line-height: 1.6; }
-.footer-meta a { color: var(--gold); text-decoration: none; }
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.fade-up { animation: fadeUp 0.7s ease both; }
-.fade-up-1 { animation-delay: 0.1s; }
-.fade-up-2 { animation-delay: 0.25s; }
-.fade-up-3 { animation-delay: 0.4s; }
-.fade-up-4 { animation-delay: 0.55s; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  .hero-inner, .problem-grid, .stepup-inner, .hiw-grid,
-  .pricing-grid, .cred-inner { grid-template-columns: 1fr; gap: 2rem; }
-  .nav-links { display: none; }
-  .hero { padding: 7rem 1.5rem 4rem; }
-  section { padding: 3.5rem 1.5rem; }
-  .pricing-card.featured { transform: none; }
-  .cta-cards { grid-template-columns: 1fr; }
-}
-</style>
+    @media (max-width: 1024px){
+      .hero-grid, .stepup-grid, .clarity-grid, .portal-wrap, .cta-wrap{ grid-template-columns:1fr; }
+      .feature-grid, .pricing-grid, .resource-grid, .trust-grid{ grid-template-columns:repeat(2,1fr); }
+      .hero-copy h1{ max-width:14ch; }
+    }
+    @media (max-width: 760px){
+      nav{ height:64px; }
+      .nav-links a:not(.nav-cta-link){ display:none; }
+      .hero{ padding:7.5rem 0 4rem; }
+      .section{ padding:4.25rem 0; }
+      .feature-grid, .pricing-grid, .resource-grid, .problem-grid, .trust-grid, .mini-grid, .summary-grid{ grid-template-columns:1fr; }
+      .statement-head, .portal-header{ grid-template-columns:1fr; }
+      .statement-row, .statement-row.header{ grid-template-columns:1.1fr .7fr .55fr .55fr; font-size:.68rem; }
+      .price-card.featured{ transform:none; }
+      .footer-wrap{ align-items:flex-start; }
+      .hero-copy h1{ max-width:none; }
+      .tabs{ grid-template-columns:1fr; }
+      .line{ flex-direction:column; gap:4px; }
+      .portal-top{ flex-direction:column; align-items:flex-start; }
+    }
+  </style>
 </head>
 <body>
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Microschool Ledger home">
+        <svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+          <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.3" opacity="0.9"/>
+          <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
+        </svg>
+        <span>Microschool Ledger</span>
+      </a>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">
-    <svg width="28" height="28" viewBox="0 0 40 40" style="flex-shrink:0;">
-      <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
-      <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2" opacity="0.9"/>
-      <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.6" opacity="0.2"/>
-      <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.6" opacity="0.2"/>
-      <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.6" opacity="0.2"/>
-      <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
-    </svg>
-    Microschool Ledger
-  </a>
-  <div class="nav-links">
-    <a href="#problem">The Problem</a>
-    <a href="#stepup">Step-Up</a>
-    <a href="#how-it-works">Features</a>
-    <a href="#resources">Resources</a>
-    <a href="https://app.microschoolledger.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.55);">Log In</a>
-    <a href="#contact" class="nav-cta">Join Waitlist</a>
-  </div>
-</nav>
+      <div class="nav-links">
+        <a href="#problem">The problem</a>
+        <a href="#stepup">Step-Up</a>
+        <a href="#clarity">Financial clarity</a>
+        <a href="#portal">Family portal</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#resources">Resources</a>
+        <a href="https://app.microschoolledger.com" target="_blank" rel="noopener">Log in</a>
+        <a href="#contact" class="btn btn-primary nav-cta-link" style="min-height:40px;padding:.6rem 1rem;font-size:.84rem;">Request a demo</a>
+      </div>
+    </div>
+  </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg-rings">
-    <div class="hero-ring hero-ring-1"></div>
-    <div class="hero-ring hero-ring-2"></div>
-    <div class="hero-ring hero-ring-3"></div>
-    <div class="hero-grain"></div>
-  </div>
-  <div class="hero-inner">
-    <div>
-      <div class="hero-eyebrow fade-up fade-up-1">For Microschools & Homeschool Co-ops</div>
-      <h1 class="fade-up fade-up-2">Your school deserves better than <em>spreadsheets.</em></h1>
-      <p class="hero-sub fade-up fade-up-3">Microschool Ledger handles tuition billing, sibling discounts, Florida Step-Up reconciliation, and family collections — so you can spend your time teaching, not chasing invoices.</p>
-      <div class="hero-actions fade-up fade-up-4">
-        <div class="hero-waitlist">
-          <input type="email" id="hero-email" class="hero-email-input" placeholder="Your email address" autocomplete="email">
-          <button class="btn-primary" id="hero-btn">Join Waitlist</button>
+  <header class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">For microschools & homeschool co-ops</div>
+        <h1>Know where your school stands — <em>without spreadsheets.</em></h1>
+        <p>
+          Microschool Ledger handles tuition billing, sibling discounts, Florida Step-Up scholarship credits,
+          family collections, and parent account access in one warm, purpose-built system — so you can spend
+          your time teaching, not chasing invoices.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Request a demo</a>
+          <a class="btn btn-secondary" href="#pricing">See pricing</a>
         </div>
-        <p class="hero-waitlist-note">No pressure. We'll reach out to learn about your co-op.</p>
+        <div class="hero-proof">Built by The Grow Co-op in Boca Raton, Florida. In active production since 2024.</div>
       </div>
-    </div>
-    <div class="hero-stats fade-up fade-up-3">
-      <div class="hero-stat">
-        <div class="hero-stat-num">10+</div>
-        <div class="hero-stat-label">Admin hours saved<br>every month</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">$300+</div>
-        <div class="hero-stat-label">In software replaced<br>per month</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">2</div>
-        <div class="hero-stat-label">Payment streams<br>reconciled in one view</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">0</div>
-        <div class="hero-stat-label">Servers, installs,<br>or IT required</div>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="gold-stripe"></div>
 
-<!-- THE PROBLEM -->
-<section class="problem-section" id="problem">
-  <div class="section-inner">
-    <div class="section-eyebrow">The Problem</div>
-    <h2 class="section-title">Generic tools weren't built<br>for <em>how you operate.</em></h2>
-    <p class="section-sub">Microschools and homeschool co-ops have a financial structure unlike any other organization. Off-the-shelf tools handle none of it well.</p>
-    <div class="problem-grid">
-      <div class="problem-card">
-        <div class="problem-card-title">You bill families, not students</div>
-        <div class="problem-card-desc">Tuition is a family relationship with sibling discount tiers that vary by program. Most billing tools don't understand this — they invoice per person and leave you to do the math.</div>
-      </div>
-      <div class="problem-card">
-        <div class="problem-card-title">Two payment streams, one balance</div>
-        <div class="problem-card-desc">Family checks and Florida Step-Up scholarship disbursements arrive separately, on different schedules, and need to be reconciled against the same tuition balance. Manually.</div>
-      </div>
-      <div class="problem-card">
-        <div class="problem-card-title">Multiple programs, multiple rates</div>
-        <div class="problem-card-desc">A family might have one child in the Core Program and another in a Film Workshop — each with its own pricing, schedule, and payment plan. Spreadsheets can't keep up.</div>
-      </div>
-      <div class="problem-card">
-        <div class="problem-card-title">Your admin is also your teacher</div>
-        <div class="problem-card-desc">There's no billing department. The person chasing overdue invoices is the same person teaching a class in an hour. Every minute spent on admin is a minute taken from students.</div>
-      </div>
-      <div class="problem-card">
-        <div class="problem-card-title">Collections are always reactive</div>
-        <div class="problem-card-desc">You find out a family is two months behind when you happen to check the spreadsheet. There's no dashboard, no flag, no way to see who owes what at a glance.</div>
-      </div>
-      <div class="problem-card">
-        <div class="problem-card-title">Scholarship compliance is manual</div>
-        <div class="problem-card-desc">Step-Up invoices need specific compliance language. Families need documentation for reimbursement. Building those statements by hand, every billing cycle, is hours of work that adds no value.</div>
-      </div>
-    </div>
-  </div>
-</section>
+      <div class="hero-panel" aria-label="Microschool Ledger preview">
+        <div class="panel-top">
+          <div class="panel-title">Morning briefing</div>
+          <div class="panel-badge">On track</div>
+        </div>
 
-<div class="cta-strip" id="strip-1">
-  <div class="cta-strip-inner">
-    <div class="cta-strip-text">Sound familiar? Join the waitlist.<span>We'll reach out personally to learn about your co-op.</span></div>
-    <div class="cta-strip-form">
-      <input type="email" class="cta-strip-input strip-email" placeholder="Your email" data-strip="1">
-      <button class="cta-strip-btn strip-btn" data-strip="1">Join Waitlist</button>
-      <span class="cta-strip-success" id="strip-success-1">✓ You're on the list!</span>
-    </div>
-  </div>
-</div>
-
-<!-- STEP-UP -->
-<section class="stepup-section" id="stepup">
-  <div class="section-inner">
-    <div class="stepup-inner">
-      <div>
-        <div class="stepup-label">🎓 Florida Step-Up for Students</div>
-        <h2 class="stepup-title">The killer feature for <em>Florida co-ops.</em></h2>
-        <p class="stepup-desc">For Florida microschools, Step-Up scholarship payments represent a significant portion of tuition revenue. Manually entering disbursements from the state portal — matching them to students, reconciling against invoices, attributing to the right program — can take hours every billing cycle. Microschool Ledger eliminates that entirely.</p>
-        <ul class="stepup-steps">
-          <li><div class="step-num">1</div><span>Export payment history from the Step-Up portal as a tab-delimited file</span></li>
-          <li><div class="step-num">2</div><span>Paste directly into Microschool Ledger — no file conversion or column mapping</span></li>
-          <li><div class="step-num">3</div><span>Payments are automatically matched to students using their sequence number</span></li>
-          <li><div class="step-num">4</div><span>Program attribution is automatic — Film Workshop vs. Core Program handled by category</span></li>
-          <li><div class="step-num">5</div><span>Re-imports are safe — existing records are deduplicated, missing fields backfilled</span></li>
-        </ul>
-      </div>
-      <div>
-        <div class="portal-mockup">
-          <div class="portal-bar">
-            <div class="portal-dot" style="background:#ff5f57"></div>
-            <div class="portal-dot" style="background:#febc2e"></div>
-            <div class="portal-dot" style="background:#28c840"></div>
-            <span style="font-size:0.7rem; color:rgba(255,255,255,0.3); margin-left:0.5rem;">Step-Up Import — 5 records matched</span>
+        <div class="panel-body">
+          <div class="briefing">
+            <div class="briefing-label">Financial health</div>
+            <h3>You're on track for a $4,200 surplus this year.</h3>
+            <p>
+              Collections are steady, Step-Up credits are posting cleanly, and only two families
+              need a follow-up this week.
+            </p>
           </div>
+
+          <div class="mini-grid">
+            <div class="mini-card">
+              <div class="mini-kicker">Collected so far</div>
+              <div class="mini-value">$84,320</div>
+              <div class="mini-copy">78% of projected tuition collected across direct payments and Step-Up.</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-kicker">Parent portal</div>
+              <div class="mini-value">24</div>
+              <div class="mini-copy">Families can check balances and print invoices without emailing your admin.</div>
+            </div>
+          </div>
+
+          <div class="attention-list">
+            <div class="attention-row">
+              <div style="display:flex;gap:.7rem;align-items:flex-start;">
+                <span class="dot dot-red"></span>
+                <div>
+                  <strong>Rivera family</strong>
+                  <span>Balance due $620 • Last payment 18 days ago</span>
+                </div>
+              </div>
+              <span class="tag tag-portal">Portal active</span>
+            </div>
+
+            <div class="attention-row">
+              <div style="display:flex;gap:.7rem;align-items:flex-start;">
+                <span class="dot dot-yellow"></span>
+                <div>
+                  <strong>Morris family</strong>
+                  <span>Awaiting Step-Up credit for Film Workshop invoice</span>
+                </div>
+              </div>
+              <span class="tag tag-stepup">Step-Up</span>
+            </div>
+
+            <div class="attention-row">
+              <div style="display:flex;gap:.7rem;align-items:flex-start;">
+                <span class="dot dot-green"></span>
+                <div>
+                  <strong>Patel family</strong>
+                  <span>Paid in full this month with direct payment + scholarship credit</span>
+                </div>
+              </div>
+              <span class="tag tag-stripe">Stripe</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="gold-stripe"></div>
+
+  <section class="trust-bar">
+    <div class="container trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon">⏳</div>
+        <div><strong>10+ hours back</strong><span>Reduce monthly admin work and stop rebuilding the same invoices by hand.</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🧾</div>
+        <div><strong>Two payment streams, one balance</strong><span>Direct payments and Step-Up credits reconcile in the same family ledger.</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🌐</div>
+        <div><strong>Parent self-service</strong><span>Families can check balances, payment history, and invoices on their own.</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">☁️</div>
+        <div><strong>No servers. No installs. No IT.</strong><span>Runs in a browser and is ready for the way small schools actually operate.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section problem" id="problem">
+    <div class="container">
+      <div class="eyebrow">Why generic tools fail</div>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;">Your school doesn't operate like a dentist's office or a tutoring business.</h2>
+      <p class="lead">
+        Most billing tools assume one customer, one invoice, one payment stream. Microschools and co-ops are messier —
+        and much more human.
+      </p>
+
+      <div class="problem-grid">
+        <article class="problem-card">
+          <h3>You bill families, not students</h3>
+          <p>
+            The paying relationship is with the family, but the services are delivered to individual students across
+            different programs with sibling discount rules.
+          </p>
+        </article>
+
+        <article class="problem-card">
+          <h3>Direct payments and scholarships collide</h3>
+          <p>
+            A family might pay by check while Florida Step-Up sends a separate disbursement days later. Both need to
+            land against the same balance without manual guesswork.
+          </p>
+        </article>
+
+        <article class="problem-card">
+          <h3>Your school year doesn't match the calendar year</h3>
+          <p>
+            Deposits for next year can arrive while you're still collecting this year’s monthly tuition. General-purpose
+            accounting tools don’t understand that overlap.
+          </p>
+        </article>
+
+        <article class="problem-card">
+          <h3>Your administrator is also your teacher</h3>
+          <p>
+            You don’t have a billing department. You need a system that feels calm, clear, and usable between classes —
+            not enterprise software that adds more cognitive load.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section stepup" id="stepup">
+    <div class="container stepup-grid">
+      <div>
+        <div class="eyebrow">Florida Step-Up</div>
+        <h2>What used to take hours now takes <em>minutes.</em></h2>
+        <p class="lead">
+          Paste the provider portal export directly into Microschool Ledger. Payments match by student sequence number,
+          scholarship credits land on the right family, and re-imports stay clean.
+        </p>
+
+        <ol class="steps">
+          <li>
+            <div class="step-num">1</div>
+            <div><strong>Export payment history from the Step-Up portal</strong><span>No column mapping, no file conversion, no cleanup project first.</span></div>
+          </li>
+          <li>
+            <div class="step-num">2</div>
+            <div><strong>Paste it into Microschool Ledger</strong><span>The import flow reads the tab-delimited export directly and filters to paid records.</span></div>
+          </li>
+          <li>
+            <div class="step-num">3</div>
+            <div><strong>Match payments by student sequence number</strong><span>Not by fragile name matching — by the actual field that matters.</span></div>
+          </li>
+          <li>
+            <div class="step-num">4</div>
+            <div><strong>Auto-attribute by program and deduplicate on re-import</strong><span>So the same disbursement doesn’t get counted twice and missing program data can be backfilled.</span></div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="statement" aria-label="Statement and payment preview">
+        <div class="statement-head">
+          <div>
+            <h4>Family statement preview</h4>
+            <p>Itemized charges, direct payments, scholarship credits, and a clear balance — all in one printable view.</p>
+          </div>
+          <div class="statement-metrics">
+            <div><strong>$9,600</strong><span>Total charged</span></div>
+            <div><strong>$7,980</strong><span>Total paid</span></div>
+            <div><strong>$1,620</strong><span>Balance due</span></div>
+          </div>
+        </div>
+
+        <div class="statement-body">
+          <div class="statement-row header">
+            <div>Description</div>
+            <div>Method</div>
+            <div>Date</div>
+            <div>Amount</div>
+          </div>
+          <div class="statement-row">
+            <div>Core Program — Maya Rivera</div>
+            <div><span class="tag tag-stepup">Step-Up</span></div>
+            <div>Mar 12</div>
+            <div>$533</div>
+          </div>
+          <div class="statement-row">
+            <div>Film Workshop — Maya Rivera</div>
+            <div><span class="tag tag-stepup">Step-Up</span></div>
+            <div>Mar 12</div>
+            <div>$125</div>
+          </div>
+          <div class="statement-row">
+            <div>Monthly tuition payment</div>
+            <div><span class="tag tag-stripe">Stripe</span></div>
+            <div>Mar 05</div>
+            <div>$400</div>
+          </div>
+          <div class="statement-row">
+            <div>Family portal invoice access</div>
+            <div><span class="tag tag-portal">Portal</span></div>
+            <div>Anytime</div>
+            <div>Self-serve</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section clarity" id="clarity">
+    <div class="container">
+      <div class="eyebrow">Financial clarity</div>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;">This isn't just billing software. It helps you know where your school stands.</h2>
+      <p class="lead">
+        Microschool Ledger replaces spreadsheets, yes — but the bigger win is confidence. You can see what families owe,
+        what’s been collected, how scholarship credits are affecting the year, and whether your school is on track.
+      </p>
+
+      <div class="clarity-grid">
+        <article class="clarity-card">
+          <h3>For the school</h3>
+          <p>See the whole billing lifecycle in one place, from enrollment and charge generation to collections and year-end reporting.</p>
+          <ul class="clarity-points">
+            <li>Action-oriented home dashboard with overdue follow-up built in</li>
+            <li>Automatic monthly charge schedules based on enrollment and payment plan</li>
+            <li>Collections sorted by balance, with statement and payment shortcuts</li>
+            <li>Full P&amp;L and expense tracking as your school grows</li>
+          </ul>
+        </article>
+
+        <article class="clarity-card">
+          <h3>For families</h3>
+          <p>Parents stop emailing “What do I owe?” because they can check their own balances, payments, and invoices whenever they need to.</p>
+          <ul class="clarity-points">
+            <li>Passwordless family portal access</li>
+            <li>Self-serve invoice and payment history by school year</li>
+            <li>Clear visibility into direct payments and scholarship credits</li>
+            <li>A calmer relationship between admin work and family communication</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section portal-section" id="portal">
+    <div class="container portal-wrap">
+      <div class="portal-copy">
+        <div class="eyebrow">Family portal</div>
+        <h2>Give families clarity without creating more admin work.</h2>
+        <p>
+          The Microschool Ledger Family Portal gives parents a calm, self-service view of tuition,
+          payments, invoices, and enrollments. It removes a whole category of repetitive admin emails
+          and helps families feel informed instead of uncertain.
+        </p>
+        <p>
+          Parents can check their balance, review what each student is enrolled in, and pull up an invoice
+          on their own — without creating data-entry risk or forcing your staff into the middle of every question.
+        </p>
+
+        <div class="portal-quote">
+          “The portal eliminates the category of emails that ask, ‘What do I owe?’ or ‘Can you resend our invoice?’ Parents can check for themselves.”
+          <strong>Read-only by design. Clear for families. Safer for your school.</strong>
+        </div>
+      </div>
+
+      <div class="portal-mock-card">
+        <div class="portal-mock">
+          <div class="portal-top">
+            <div class="portal-brand">The Grow Co-op <small>Family Portal</small></div>
+            <div class="portal-user">family@example.com</div>
+          </div>
+
           <div class="portal-body">
-            <div class="portal-row portal-row-header">
-              <span>Student</span><span>Program</span><span>Amount</span><span>Status</span>
+            <div class="portal-header">
+              <div>
+                <h3>Rivera Family</h3>
+                <div class="meta">2 students • 2025–2026</div>
+              </div>
+              <div class="invoice-btn">Invoice</div>
             </div>
-            <div class="portal-row portal-row-data">
-              <span>Sofia D.</span>
-              <span><span class="badge-ema">EMA</span> Core</span>
-              <span>$533.33</span>
-              <span><span class="badge-matched">Matched</span></span>
+
+            <div class="summary-card">
+              <div class="summary-title">Account summary • 2025–2026</div>
+
+              <div class="summary-grid">
+                <div class="summary-box">
+                  <div class="summary-value">$12,400</div>
+                  <div class="summary-label">Total Tuition</div>
+                </div>
+                <div class="summary-box green">
+                  <div class="summary-value">$7,180</div>
+                  <div class="summary-label">Paid</div>
+                </div>
+                <div class="summary-box red">
+                  <div class="summary-value">$5,220</div>
+                  <div class="summary-label">Balance Due</div>
+                </div>
+              </div>
+
+              <div class="progress"><div class="progress-fill"></div></div>
+              <div class="progress-meta">58% paid</div>
             </div>
-            <div class="portal-row portal-row-data">
-              <span>Marco D.</span>
-              <span><span class="badge-ema">EMA</span> Core</span>
-              <span>$533.33</span>
-              <span><span class="badge-matched">Matched</span></span>
+
+            <div class="tabs">
+              <div class="tab active">Overview</div>
+              <div class="tab">Enrollments</div>
+              <div class="tab">Payment History</div>
             </div>
-            <div class="portal-row portal-row-data">
-              <span>Marco D.</span>
-              <span><span class="badge-ema">EMA</span> Film</span>
-              <span>$400.00</span>
-              <span><span class="badge-matched">Matched</span></span>
-            </div>
-            <div class="portal-row portal-row-data">
-              <span>Lucia D.</span>
-              <span><span class="badge-ema">EMA</span> Core</span>
-              <span>$506.67</span>
-              <span><span class="badge-matched">Matched</span></span>
-            </div>
-            <div class="portal-row portal-row-data">
-              <span>Lucia D.</span>
-              <span><span class="badge-ema">EMA</span> Core</span>
-              <span>$506.67</span>
-              <span><span class="badge-matched">Matched</span></span>
-            </div>
-            <div class="portal-total">
-              <span>Total imported</span>
-              <span>$2,480.00</span>
+
+            <div class="detail">
+              <div class="student-card">
+                <div class="student-head">🎓 Maya Rivera • Grade 4</div>
+                <div class="line">
+                  <div>Tue/Wed Program</div>
+                  <div>$8,000 / year</div>
+                </div>
+                <div class="line">
+                  <div>Film Workshop</div>
+                  <div>$1,200 / year</div>
+                </div>
+              </div>
+
+              <div class="student-card" style="margin-top:14px;">
+                <div class="student-head">🎓 Lucas Rivera • Grade 2</div>
+                <div class="line">
+                  <div>Tue/Wed Program</div>
+                  <div>$3,200 / year</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <p style="font-size:0.75rem; color:rgba(255,255,255,0.3); text-align:center; margin-top:1rem; font-style:italic;">What used to take hours now takes minutes.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="gold-stripe"></div>
 
-<div class="cta-strip">
-  <div class="cta-strip-inner">
-    <div class="cta-strip-text">Want Step-Up reconciliation to take minutes, not hours?<span>Join the waitlist and we'll walk you through a live setup.</span></div>
-    <div class="cta-strip-form">
-      <input type="email" class="cta-strip-input strip-email" placeholder="Your email" data-strip="2">
-      <button class="cta-strip-btn strip-btn" data-strip="2">Join Waitlist</button>
-      <span class="cta-strip-success" id="strip-success-2">✓ You're on the list!</span>
-    </div>
-  </div>
-</div>
-
-<!-- HOW IT WORKS -->
-<section class="hiw-section" id="how-it-works">
-  <div class="section-inner">
-    <div class="section-eyebrow">How It Works</div>
-    <h2 class="section-title">Everything your co-op needs,<br><em>nothing it doesn't.</em></h2>
-    <p class="section-sub">Microschool Ledger covers the full financial lifecycle — from enrollment through monthly billing, scholarship reconciliation, and year-end reporting.</p>
-    <div class="hiw-grid">
-      <div class="hiw-card">
-        <span class="hiw-icon">🏠</span>
-        <div class="hiw-title">Action-Oriented Dashboard</div>
-        <div class="hiw-desc">Log in to an instant summary of what needs attention — overdue families surfaced at the top, a season progress bar showing % of revenue collected, and one-click shortcuts to every common workflow.</div>
-        <ul class="hiw-features">
-          <li>Season progress bar</li>
-          <li>"Needs Attention" overdue panel</li>
-          <li>Year-at-a-glance revenue stats</li>
-          <li>Quick-action shortcuts</li>
-        </ul>
-      </div>
-      <div class="hiw-card">
-        <span class="hiw-icon">👨‍👩‍👧‍👦</span>
-        <div class="hiw-title">Family-Based Billing</div>
-        <div class="hiw-desc">Four family type tiers with automatic sibling discounts per program. Health indicator dots (green/yellow/red) on every card. Globe badge shows which families have portal access enabled.</div>
-        <ul class="hiw-features">
-          <li>4 family type pricing tiers</li>
-          <li>Health indicator dots</li>
-          <li>Sibling discounts per program</li>
-          <li>10-month & 12-month payment plans</li>
-        </ul>
-      </div>
-      <div class="hiw-card">
-        <span class="hiw-icon">🌐</span>
-        <div class="hiw-title">Family Portal <span class="hiw-new">New</span></div>
-        <div class="hiw-desc">Parents get their own read-only view of their account — balance, payment history, enrollment detail, and a printable invoice — without ever contacting the school. Passwordless sign-in via email link.</div>
-        <ul class="hiw-features">
-          <li>Passwordless email-link sign-in</li>
-          <li>Self-serve balance & invoice</li>
-          <li>Full payment history incl. Step-Up</li>
-          <li>Read-only at the database level</li>
-        </ul>
-      </div>
-      <div class="hiw-card">
-        <span class="hiw-icon">🧙</span>
-        <div class="hiw-title">Setup & Year Wizards</div>
-        <div class="hiw-desc">Guided full-screen wizards for first-run setup and annual year rollover. Configure programs, pricing, and payment plans — then re-enroll returning families in bulk in one structured flow.</div>
-        <ul class="hiw-features">
-          <li>Onboarding wizard (first-run)</li>
-          <li>Next Year wizard (annual rollover)</li>
-          <li>Bulk family re-enrollment</li>
-          <li>Year-over-year rate comparison</li>
-        </ul>
-      </div>
-      <div class="hiw-card">
-        <span class="hiw-icon">💳</span>
-        <div class="hiw-title">Payments & Receipts</div>
-        <div class="hiw-desc">Record checks, Stripe, and Step-Up disbursements. One-click receipt email on every payment row. Explicit year tagging handles the March–May overlap. Confetti when a family pays in full.</div>
-        <ul class="hiw-features">
-          <li>Receipt emails on every payment</li>
-          <li>Paid-in-full confetti</li>
-          <li>Month-level payment allocation</li>
-          <li>Stripe & bank CSV import</li>
-        </ul>
-      </div>
-      <div class="hiw-card">
-        <span class="hiw-icon">📬</span>
-        <div class="hiw-title">Collections Dashboard</div>
-        <div class="hiw-desc">Every family sorted by balance in real time. Health dots scannable at a glance. One-click collections email, pre-filled and ready to send. Add a payment without leaving the screen.</div>
-        <ul class="hiw-features">
-          <li>Sorted by balance, overdue flagged</li>
-          <li>One-click statement generation</li>
-          <li>Pre-filled collections email</li>
-          <li>Inline payment entry</li>
-        </ul>
-      </div>
-      <div class="hiw-card">
-        <span class="hiw-icon">📊</span>
-        <div class="hiw-title">Finances & Budget</div>
-        <div class="hiw-desc">Bank transactions, configurable expense categories, per-category budgets, and a matrix view (categories × months). Student-month tracking adjusts projections for mid-year withdrawals.</div>
-        <ul class="hiw-features">
-          <li>Budget matrix view</li>
-          <li>Student-month budget tracking</li>
-          <li>Withdrawal-adjusted projections</li>
-          <li>P&L: projected vs. collected</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="cta-strip">
-  <div class="cta-strip-inner">
-    <div class="cta-strip-text">Ready to replace the spreadsheets?<span>Join the waitlist — we onboard new schools personally.</span></div>
-    <div class="cta-strip-form">
-      <input type="email" class="cta-strip-input strip-email" placeholder="Your email" data-strip="3">
-      <button class="cta-strip-btn strip-btn" data-strip="3">Join Waitlist</button>
-      <span class="cta-strip-success" id="strip-success-3">✓ You're on the list!</span>
-    </div>
-  </div>
-</div>
-
-<!-- RESOURCES -->
-<section class="resources-section" id="resources">
-  <div class="section-inner">
-    <div class="section-eyebrow" style="color:var(--green-light);">Resources</div>
-    <h2 class="section-title" style="color:white; margin-bottom:0.75rem;">Learn more before you reach out.</h2>
-    <p class="section-sub" style="color:rgba(255,255,255,0.58); margin-bottom:2.5rem;">Download our product brochure for a quick visual overview, or read the full feature whitepaper to see everything Microschool Ledger can do for your co-op.</p>
-    <div class="resources-grid">
-      <div class="resource-card">
-        <div class="resource-type">📄 Product Brochure</div>
-        <div class="resource-title">Two-Page Visual Overview</div>
-        <div class="resource-desc">A print-ready two-page overview of Microschool Ledger — features, all three pricing tiers, and a sample family statement showing exactly what the system produces. Print it, share it, or bring it to a board meeting.</div>
-        <div class="resource-meta">HTML · 2 pages · Print-ready</div>
-        <a href="microschoolledger-brochure.html" download="microschoolledger-brochure.html" class="resource-download">⬇ Download Brochure</a>
-      </div>
-      <div class="resource-card">
-        <div class="resource-type">📘 Feature Whitepaper</div>
-        <div class="resource-title">Complete Feature Guide</div>
-        <div class="resource-desc">An eight-section Word document covering every feature in depth — the annual workflow, Florida Step-Up reconciliation deep dive, onboarding and year-rollover wizards, pricing and ROI, and the product roadmap. For operators who want the full picture before deciding.</div>
-        <div class="resource-meta">Word (.docx) · 8 sections · ~15 pages</div>
-        <a href="microschoolledger-whitepaper.docx" download="microschoolledger-whitepaper.docx" class="resource-download">⬇ Download Whitepaper</a>
-      </div>
-    </div>
-    <div class="resources-grid" style="margin-top:1.25rem;">
-      <div class="resource-card">
-        <div class="resource-type">📋 Guide · Florida Step-Up</div>
-        <div class="resource-title">How Step-Up for Students Actually Works for Co-ops</div>
-        <div class="resource-desc">A plain-language breakdown of the payment flow, portal export columns, program attribution, invoice compliance requirements, and how to build a clean reconciliation process. Written by an operator, not a consultant.</div>
-        <div class="resource-meta">8 min read</div>
-        <a href="step-up-guide.html" class="resource-download" style="background:rgba(82,183,136,0.18); color:var(--green-light);">Read Article →</a>
-      </div>
-      <div class="resource-card">
-        <div class="resource-type">🧾 Guide · Operations</div>
-        <div class="resource-title">What to Look for in Billing Software for Your Co-op</div>
-        <div class="resource-desc">Most billing tools weren't built for homeschool co-ops. Here's what actually matters — family billing, sibling discounts, scholarship reconciliation — and an honest look at how common options stack up.</div>
-        <div class="resource-meta">7 min read</div>
-        <a href="choosing-billing-software.html" class="resource-download" style="background:rgba(82,183,136,0.18); color:var(--green-light);">Read Article →</a>
-      </div>
-    </div>
-    <div class="resources-grid" style="margin-top:1.25rem;">
-      <div class="resource-card" style="border-color:rgba(201,168,76,0.35);">
-        <div class="resource-type" style="color:var(--gold);">🔍 Live Demo</div>
-        <div class="resource-title">Explore the app yourself</div>
-        <div class="resource-desc">A live instance pre-loaded with sample families, Step-Up payments, enrollments across 3 programs, and a family portal. No login required — poke around as long as you like.</div>
-        <div class="resource-meta">Opens in a new tab · No account needed</div>
-        <a href="https://msledger-a2525.web.app?org=demo" target="_blank" rel="noopener" class="resource-download" style="background:rgba(201,168,76,0.18); color:var(--gold);">Open Demo →</a>
-      </div>
-      <div class="resource-card" style="border-color:rgba(255,255,255,0.06); background:rgba(255,255,255,0.03);">
-        <div class="resource-type">🔑 Already set up?</div>
-        <div class="resource-title">Log in to your school</div>
-        <div class="resource-desc">Your school has its own dedicated URL — check your welcome email. Or reach out and we'll point you in the right direction.</div>
-        <div class="resource-meta">Existing schools only</div>
-        <a href="https://app.microschoolledger.com" target="_blank" rel="noopener" class="resource-download" style="background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.7);">Go to App →</a>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- CREDIBILITY -->
-<section class="cred-section" id="about">
-  <div class="section-inner">
-    <div class="cred-inner">
-      <div>
-        <div class="section-eyebrow">Built by Operators</div>
-        <h2 class="section-title" style="margin-bottom:1.5rem;">We run a microschool.<br><em>We built this for us.</em></h2>
-        <p class="cred-quote">Every feature was driven by a real pain point — the collections dashboard because overdue balances were being caught too late, the Step-Up import because manually entering scholarship payments was error-prone, the family portal because parents kept emailing to ask "what do I owe?" Now they can check for themselves.</p>
-        <p class="cred-attr"><strong>Rajeev, Founder</strong><br>The Grow Co-op · Boca Raton, FL · Operating since 2024</p>
-        <p style="font-size:0.85rem; color:var(--muted); line-height:1.7; margin-top:1.25rem;">Microschool Ledger isn't a product built by a startup that interviewed some microschool founders. It's the system we built for ourselves, battle-tested on real revenue, and now making available to other operators who are tired of the spreadsheet chaos.</p>
-      </div>
-      <div class="cred-stats">
-        <div class="cred-stat">
-          <div class="cred-stat-num">2025</div>
-          <div class="cred-stat-label">Live in production at The Grow Co-op</div>
-        </div>
-        <div class="cred-stat">
-          <div class="cred-stat-num">37</div>
-          <div class="cred-stat-label">Families served</div>
-        </div>
-        <div class="cred-stat">
-          <div class="cred-stat-num">78</div>
-          <div class="cred-stat-label">Enrollments across 3 programs</div>
-        </div>
-        <div class="cred-stat">
-          <div class="cred-stat-num">Day 1</div>
-          <div class="cred-stat-label">Profitable since launch — no VC, no runway</div>
+        <div class="portal-caption">
+          Families can see total tuition, what they’ve paid, what’s still due, and what each student is enrolled in —
+          without needing a custom email from your school every time they have a question.
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="cta-strip">
-  <div class="cta-strip-inner">
-    <div class="cta-strip-text">Built by operators. For operators.<span>Join the waitlist and get early access.</span></div>
-    <div class="cta-strip-form">
-      <input type="email" class="cta-strip-input strip-email" placeholder="Your email" data-strip="4">
-      <button class="cta-strip-btn strip-btn" data-strip="4">Join Waitlist</button>
-      <span class="cta-strip-success" id="strip-success-4">✓ You're on the list!</span>
-    </div>
-  </div>
-</div>
+  <section class="section features" id="features">
+    <div class="container">
+      <div class="eyebrow">What’s inside</div>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;">Built around the actual workflow of a small school.</h2>
+      <p class="lead">
+        Every part of Microschool Ledger is designed for the annual rhythm of a microschool or homeschool co-op —
+        not bolted on from software made for a completely different business.
+      </p>
 
-<!-- CTA -->
-<section class="cta-section" id="contact">
-  <div class="section-inner">
-    <div class="cta-inner" style="max-width:600px;">
-      <span class="cta-eyebrow">Early Access</span>
-      <h2 class="cta-title">Join the waitlist.</h2>
-      <p class="cta-sub">We're onboarding Florida microschools now. Add your email and we'll reach out personally — no forms, no sales funnel, just a real conversation about your co-op's setup.</p>
-      <div style="display:flex; gap:0.75rem; max-width:440px; margin:0 auto 0.85rem; flex-wrap:wrap;">
-        <input type="email" id="cta-email" class="hero-email-input" placeholder="Your email address" autocomplete="email" style="flex:1; min-width:200px;">
-        <button class="btn-primary" id="cta-btn">Join Waitlist</button>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon">👨‍👩‍👧‍👦</div>
+          <h3>Families & students</h3>
+          <p>Health indicators, smart status badges, sibling order, student sequence numbers, and family-level billing relationships.</p>
+          <ul class="feature-list">
+            <li>Searchable family directory</li>
+            <li>Sibling discount rules by program</li>
+            <li>Portal access indicator on family cards</li>
+          </ul>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🎓</div>
+          <h3>Enrollment & tuition</h3>
+          <p>Guided enrollment flow with automatic charge generation, deposits, payment plans, and support for overlapping school years.</p>
+          <ul class="feature-list">
+            <li>Family → student → program → year workflow</li>
+            <li>Configurable payment plans and deposits</li>
+            <li>Applied-year handling during the spring overlap</li>
+          </ul>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">💳</div>
+          <h3>Payments & imports</h3>
+          <p>Manual payment entry, Stripe imports, Step-Up scholarship credits, and bank transaction imports that don’t require cleanup marathons.</p>
+          <ul class="feature-list">
+            <li>Gross and net tracking for Stripe</li>
+            <li>Safe re-import behavior for Step-Up</li>
+            <li>Month-level allocation when needed</li>
+          </ul>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">📬</div>
+          <h3>Collections & statements</h3>
+          <p>One-click family statements, warm collection follow-ups, and a clearer view of who needs attention this month.</p>
+          <ul class="feature-list">
+            <li>Highest-balance-first collections view</li>
+            <li>Printable, compliant family statements</li>
+            <li>Admin shortcuts right from the collections tab</li>
+          </ul>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <h3>Family portal</h3>
+          <p>A read-only self-service portal that lets parents see balances, enrollments, payment history, and invoices on their own.</p>
+          <ul class="feature-list">
+            <li>Passwordless sign-in flow</li>
+            <li>Multi-year account view</li>
+            <li>Invoice access without admin intervention</li>
+          </ul>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Reporting & financial health</h3>
+          <p>Revenue, expenses, and year-to-date context that help you move from reactive bookkeeping to confident decisions.</p>
+          <ul class="feature-list">
+            <li>P&amp;L and budget tracking</li>
+            <li>Program and school-year filters</li>
+            <li>Financial health tools on the roadmap</li>
+          </ul>
+        </article>
       </div>
-      <p style="font-size:0.77rem; color:rgba(255,255,255,0.32);">No pressure. We onboard schools personally — white-glove setup included.</p>
-      <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-top:1.5rem;">Already have an account? <a href="https://app.microschoolledger.com" target="_blank" rel="noopener" style="color:var(--gold); text-decoration:none;">Log in →</a></p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <a href="#" class="footer-logo" style="display:flex; align-items:center; gap:0.5rem;">
-      <svg width="22" height="22" viewBox="0 0 40 40" style="flex-shrink:0; opacity:0.6;">
-        <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
-        <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.5" opacity="0.9"/>
-        <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.7" opacity="0.2"/>
-        <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.7" opacity="0.2"/>
-        <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.7" opacity="0.2"/>
-        <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
-      </svg>
-      Microschool Ledger
-    </a>
-    <div class="footer-meta">
-      Built by <a href="#">The Grow Co-op</a> · Boca Raton, FL<br>
-      <a href="/cdn-cgi/l/email-protection#660f080009260b0f05140915050e09090a0a03020103144805090b"><span class="__cf_email__" data-cfemail="95fcfbf3fad5f8fcf6e7fae6f6fdfafaf9f9f0f1f2f0e7bbf6faf8">[email&#160;protected]</span></a>
+  <section class="section pricing" id="pricing">
+    <div class="container">
+      <div class="eyebrow">Pricing</div>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;">Start where you are. Add more as your school grows.</h2>
+      <p class="lead">
+        Every plan includes the core billing engine: family records, enrollments, manual payments, collections,
+        statements, Step-Up import, and the home dashboard.
+      </p>
+
+      <div class="pricing-grid">
+        <article class="price-card">
+          <div class="price-head">
+            <h3>Essentials</h3>
+            <p>Replace the spreadsheet</p>
+            <div class="amount"><strong>$49</strong><span>/ month</span></div>
+          </div>
+          <div class="price-body">
+            <ul class="price-list">
+              <li>Families, students, and enrollments</li>
+              <li>Manual payments and imports</li>
+              <li>Collections dashboard and statements</li>
+              <li>Florida Step-Up import included</li>
+              <li>Home dashboard and audit log</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="price-card featured">
+          <div class="price-badge">Most popular</div>
+          <div class="price-head">
+            <h3>Standard</h3>
+            <p>Add the family-facing layer</p>
+            <div class="amount"><strong>$99</strong><span>/ month</span></div>
+          </div>
+          <div class="price-body">
+            <ul class="price-list">
+              <li>Everything in Essentials</li>
+              <li>Family portal access</li>
+              <li>Portal invite flow</li>
+              <li>Automated reminders</li>
+              <li>Revenue totals and “Are you on track?” summary</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="price-card">
+          <div class="price-head">
+            <h3>Pro</h3>
+            <p>Full financial intelligence</p>
+            <div class="amount"><strong>$199</strong><span>/ month</span></div>
+          </div>
+          <div class="price-body">
+            <ul class="price-list">
+              <li>Everything in Standard</li>
+              <li>Full P&amp;L and expense tracking</li>
+              <li>Budget vs. actual reporting</li>
+              <li>Program attribution audit tools</li>
+              <li>Financial health dashboard</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <p class="price-note">
+        Most schools replace a stack of tools and manual admin time that easily adds up to hundreds of dollars a month.
+        For Florida schools, Step-Up reconciliation alone can save hours every billing cycle.
+      </p>
     </div>
-    <div class="footer-meta" style="text-align:right;">
-      © 2026 Microschool Ledger<br>
-      Purpose-built for microschools & homeschool co-ops
+  </section>
+
+  <section class="section resources" id="resources">
+    <div class="container">
+      <div class="eyebrow">Resources</div>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;">Helpful reads for operators doing this work in real life.</h2>
+      <p class="lead">
+        Educational, practical resources that reflect how microschools and co-ops actually manage tuition, scholarship payments, family communication, and parent visibility.
+      </p>
+
+      <div class="resource-grid">
+        <article class="resource-card">
+          <div class="resource-type">Guide</div>
+          <h3>How Florida Step-Up actually works for co-ops</h3>
+          <p>A plain-language guide to the administrative side of Step-Up: payment flow, exports, invoice timing, and the common places things get messy.</p>
+          <a class="btn btn-dark" href="/resources/step-up-guide.html">Read the guide</a>
+        </article>
+
+        <article class="resource-card">
+          <div class="resource-type">Article</div>
+          <h3>What to look for in billing software for your co-op</h3>
+          <p>An honest breakdown of the must-haves, the nice-to-haves, and the red flags when you’re evaluating tools for a family-based program.</p>
+          <a class="btn btn-dark" href="/resources/choosing-billing-software.html">Read the article</a>
+        </article>
+
+        <article class="resource-card">
+          <div class="resource-type">Brochure</div>
+          <h3>See the full product overview</h3>
+          <p>A concise look at the platform, pricing tiers, family portal, and the workflow Microschool Ledger supports throughout the year.</p>
+          <a class="btn btn-dark" href="/resources/microschoolledger-brochure.html">View brochure</a>
+        </article>
+
+        <article class="resource-card">
+          <div class="resource-type">One-pager</div>
+          <h3>Platform overview</h3>
+          <p>A fast, visual summary of what Microschool Ledger does, who it’s for, and why it feels different from generic billing tools.</p>
+          <a class="btn btn-dark" href="/resources/onepager-platform.html">View one-pager</a>
+        </article>
+
+        <article class="resource-card">
+          <div class="resource-type">One-pager</div>
+          <h3>Family portal overview</h3>
+          <p>A simple visual explainer for the parent portal and how it reduces repetitive questions while improving trust and clarity.</p>
+          <a class="btn btn-dark" href="/resources/onepager-parent-portal.html">View one-pager</a>
+        </article>
+
+        <article class="resource-card">
+          <div class="resource-type">Story</div>
+          <h3>Built in a real microschool</h3>
+          <p>Microschool Ledger was developed at The Grow Co-op and shaped by real families, real payments, and real operational constraints.</p>
+          <a class="btn btn-dark" href="#portal">See how it works</a>
+        </article>
+      </div>
     </div>
-  </div>
-</footer>
+  </section>
 
-<script>
-  // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    });
-  });
+  <section class="section cta" id="contact">
+    <div class="container cta-wrap">
+      <div class="cta-copy">
+        <div class="eyebrow">Get started</div>
+        <h2 style="font-size:clamp(1.8rem,3vw,2.5rem);">Ready to replace the spreadsheet — and feel more in control of your year?</h2>
+        <p>
+          We’ll start with a short conversation about your school, your programs, and how you’re handling tuition today.
+          Then we can show you exactly how Microschool Ledger would fit.
+        </p>
+        <ul class="cta-list">
+          <li>Built by a real microschool operator, not a generic software team</li>
+          <li>Best fit for microschools, homeschool co-ops, and hybrid programs</li>
+          <li>Especially strong for Florida schools using Step-Up scholarships</li>
+        </ul>
+      </div>
 
-  // Nav highlight on scroll
-  const nav = document.querySelector('nav');
-  window.addEventListener('scroll', () => {
-    nav.style.borderBottomColor = window.scrollY > 60 ? 'rgba(82,183,136,0.35)' : 'rgba(82,183,136,0.2)';
-  });
+      <div class="cta-form">
+        <h3 style="font-size:1.45rem;">Request a demo</h3>
+        <p>Tell us a little about your school and we’ll follow up personally.</p>
 
-  function submitWaitlist(email, btn, successEl) {
-    if (!email || !email.includes('@')) {
-      btn.previousElementSibling && (btn.previousElementSibling.style.borderColor = '#e05c5c');
-      setTimeout(() => { btn.previousElementSibling && (btn.previousElementSibling.style.borderColor = ''); }, 2500);
-      return;
+        <form class="stack" id="demo-form">
+          <input class="field" type="text" id="name" placeholder="Your name" required>
+          <input class="field" type="email" id="email" placeholder="Your email" required>
+          <input class="field" type="text" id="school" placeholder="School or co-op name">
+          <textarea class="field" id="notes" rows="4" placeholder="What are you using now for tuition, billing, or Step-Up tracking?"></textarea>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Email demo request</button>
+        </form>
+
+        <p class="small" style="margin-top:.85rem;">
+          Prefer email? Reach us directly at <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-wrap">
+      <a class="footer-brand" href="#top">
+        <svg width="28" height="28" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+          <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.2" opacity="0.9"/>
+          <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
+        </svg>
+        <span>Microschool Ledger</span>
+      </a>
+
+      <div class="footer-meta">
+        Financial clarity for microschools & homeschool co-ops — not spreadsheets.<br>
+        Built by The Grow Co-op • Boca Raton, Florida • <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function makeMailto(subject, body) {
+      return "mailto:info@microschoolledger.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     }
-    btn.textContent = 'Joining…';
-    btn.disabled = true;
-    fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ school: '(waitlist)', name: '(waitlist)', email, phone: '' })
-    }).then(r => {
-      if (r.ok) {
-        btn.style.display = 'none';
-        if (successEl) { successEl.style.display = 'inline'; }
-      } else { btn.textContent = 'Try again'; btn.disabled = false; }
-    }).catch(() => { btn.textContent = 'Try again'; btn.disabled = false; });
-  }
 
-  // Hero waitlist
-  document.getElementById('hero-btn').addEventListener('click', () => {
-    const input = document.getElementById('hero-email');
-    submitWaitlist(input.value.trim(), document.getElementById('hero-btn'), null);
-    if (input.value.includes('@')) {
-      input.value = '';
-      input.placeholder = '✓ You\'re on the list!';
-    }
-  });
-  document.getElementById('hero-email').addEventListener('keydown', e => {
-    if (e.key === 'Enter') document.getElementById('hero-btn').click();
-  });
+    document.getElementById("demo-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const school = document.getElementById("school").value.trim();
+      const notes = document.getElementById("notes").value.trim();
 
-  // Bottom CTA
-  document.getElementById('cta-btn').addEventListener('click', () => {
-    const input = document.getElementById('cta-email');
-    submitWaitlist(input.value.trim(), document.getElementById('cta-btn'), null);
-    if (input.value.includes('@')) {
-      input.value = '';
-      input.placeholder = '✓ You\'re on the list!';
-    }
-  });
-  document.getElementById('cta-email').addEventListener('keydown', e => {
-    if (e.key === 'Enter') document.getElementById('cta-btn').click();
-  });
+      const subject = "Demo request — " + (school || "Microschool Ledger");
+      const body =
+        "Name: " + name + "\n" +
+        "Email: " + email + "\n" +
+        "School/Co-op: " + (school || "[not provided]") + "\n\n" +
+        "Current setup / notes:\n" + (notes || "[not provided]") + "\n";
 
-  // All inline strip buttons
-  document.querySelectorAll('.strip-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const strip = btn.dataset.strip;
-      const input = document.querySelector(`.strip-email[data-strip="${strip}"]`);
-      const success = document.getElementById(`strip-success-${strip}`);
-      submitWaitlist(input.value.trim(), btn, success);
+      window.location.href = makeMailto(subject, body);
     });
-  });
-  document.querySelectorAll('.strip-email').forEach(input => {
-    input.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        document.querySelector(`.strip-btn[data-strip="${input.dataset.strip}"]`).click();
-      }
-    });
-  });
-</script>
+  </script>
 </body>
 </html>

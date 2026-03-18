@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Florida Step-Up for Students Actually Works for Homeschool Co-ops — Microschool Ledger</title>
+  <meta name="description" content="A plain-language guide to how Florida Step-Up for Students works for homeschool co-ops and microschools: payment flow, provider exports, invoice timing, and the messy parts nobody explains." />
+  <link rel="canonical" href="https://microschoolledger.com/resources/step-up-guide.html" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pine:#3C4535;
+      --pine-dark:#2d3528;
+      --sand:#F8EDDD;
+      --offwhite:#F0EDE8;
+      --rock:#DDDFDE;
+      --grass:#ADB76D;
+      --gold:#c9a84c;
+      --gold-light:#f7f0e0;
+      --ink:#1a1a1a;
+      --muted:#6b7066;
+      --warn-bg:#fff8f0;
+      --warn-border:#e08030;
+      --warn-text:#5a2a05;
+      --stepup-bg:#dbeeff;
+      --stepup-text:#1a6aad;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family:'DM Sans', Arial, Helvetica, sans-serif;
+      background:var(--sand);
+      color:var(--ink);
+      line-height:1.75;
+    }
+
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      background:rgba(60,69,53,.96);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      height:64px;
+      display:flex; align-items:center;
+    }
+    .nav-inner {
+      width:min(calc(100% - 2rem), 1100px);
+      margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    }
+    .brand {
+      display:flex; align-items:center; gap:.7rem;
+      text-decoration:none; color:white;
+      font-family:'Lora', Georgia, serif; font-weight:700; font-size:1.08rem;
+    }
+    .nav-back {
+      text-decoration:none;
+      color:rgba(255,255,255,.68);
+      font-size:.84rem;
+      font-weight:500;
+    }
+    .nav-back:hover { color:white; }
+
+    .hero {
+      background:var(--pine);
+      color:white;
+      padding:8rem 0 4rem;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before {
+      content:"";
+      position:absolute;
+      right:-120px; top:-110px;
+      width:420px; height:420px;
+      border-radius:50%;
+      background:rgba(173,183,109,.07);
+    }
+    .container {
+      width:min(calc(100% - 2rem), 760px);
+      margin:0 auto;
+      position:relative;
+      z-index:1;
+    }
+    .eyebrow {
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      background:rgba(173,183,109,.16);
+      border:1px solid rgba(173,183,109,.24);
+      color:var(--grass);
+      padding:.34rem .8rem;
+      border-radius:999px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:.67rem;
+      font-weight:700;
+      margin-bottom:1.35rem;
+    }
+    h1, h2, h3 {
+      font-family:'Lora', Georgia, serif;
+      line-height:1.22;
+      color:var(--pine);
+    }
+    .hero h1 {
+      color:white;
+      font-size:clamp(2rem, 4vw, 3rem);
+      margin-bottom:1rem;
+    }
+    .hero h1 em { color:var(--gold); font-style:italic; }
+    .hero-meta {
+      display:flex; gap:1.4rem; flex-wrap:wrap;
+      color:rgba(255,255,255,.55);
+      font-size:.8rem;
+    }
+    .gold-stripe {
+      height:3px;
+      background:linear-gradient(90deg, var(--gold), var(--grass), var(--gold));
+    }
+
+    .article {
+      padding:3.25rem 0 5rem;
+    }
+    .article p {
+      color:#2a2a2a;
+      font-size:1rem;
+      line-height:1.85;
+      margin-bottom:1.2rem;
+    }
+    .article p.lead {
+      color:var(--pine);
+      font-size:1.08rem;
+      line-height:1.82;
+    }
+    .article h2 {
+      font-size:1.6rem;
+      margin:2.6rem 0 .9rem;
+      padding-bottom:.45rem;
+      border-bottom:2px solid var(--offwhite);
+    }
+    .article h3 {
+      font-size:1.13rem;
+      color:#4a5c3f;
+      margin:1.65rem 0 .55rem;
+    }
+    .article ul, .article ol {
+      margin:0.5rem 0 1.25rem 1.35rem;
+    }
+    .article li {
+      color:#2a2a2a;
+      font-size:.97rem;
+      line-height:1.8;
+      margin-bottom:.45rem;
+    }
+    .article strong { color:var(--pine); }
+    .article a {
+      color:#4a5c3f;
+      text-decoration:underline;
+      text-underline-offset:3px;
+      text-decoration-color:var(--offwhite);
+    }
+
+    .callout {
+      background:var(--offwhite);
+      border-left:3px solid var(--grass);
+      border-radius:0 8px 8px 0;
+      padding:1rem 1.2rem;
+      margin:1.45rem 0;
+    }
+    .callout.gold {
+      background:var(--gold-light);
+      border-left-color:var(--gold);
+    }
+    .callout.warn {
+      background:var(--warn-bg);
+      border-left-color:var(--warn-border);
+    }
+    .callout-label {
+      font-size:.63rem;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#4a5c3f;
+      margin-bottom:.35rem;
+    }
+    .callout.gold .callout-label { color:#8f6d1c; }
+    .callout.warn .callout-label { color:#a55512; }
+    .callout p {
+      margin:0;
+      font-size:.93rem;
+      line-height:1.65;
+      color:var(--pine);
+    }
+    .callout.warn p { color:var(--warn-text); }
+
+    .step-list {
+      list-style:none;
+      margin:1rem 0 1.5rem;
+      padding:0;
+      display:grid;
+      gap:.75rem;
+    }
+    .step-list li {
+      display:flex;
+      gap:1rem;
+      align-items:flex-start;
+      padding:.85rem 0;
+      border-bottom:1px solid var(--rock);
+    }
+    .step-list li:last-child { border-bottom:none; }
+    .step-num {
+      width:28px; height:28px;
+      border-radius:50%;
+      background:var(--pine);
+      color:white;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.72rem; font-weight:700;
+      flex:0 0 auto;
+      margin-top:.1rem;
+    }
+    .step-copy strong {
+      display:block;
+      margin-bottom:.15rem;
+      font-size:.95rem;
+      color:var(--pine);
+    }
+    .step-copy span {
+      color:#2a2a2a;
+      font-size:.97rem;
+      line-height:1.72;
+    }
+
+    table {
+      width:100%;
+      border-collapse:collapse;
+      margin:1.2rem 0 1.8rem;
+      font-size:.87rem;
+    }
+    th {
+      background:var(--pine);
+      color:white;
+      text-align:left;
+      font-size:.73rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      padding:.68rem .9rem;
+    }
+    td {
+      padding:.7rem .9rem;
+      border-bottom:1px solid var(--rock);
+      vertical-align:top;
+      line-height:1.55;
+      color:#333;
+    }
+    tr:nth-child(even) td { background:#fafcfa; }
+
+    .mini-card {
+      background:white;
+      border:1px solid var(--rock);
+      border-radius:10px;
+      padding:1rem 1.1rem;
+      margin:1.25rem 0;
+    }
+    .mini-card h3 {
+      font-size:1rem;
+      margin-bottom:.4rem;
+    }
+    .mini-card p {
+      margin:0;
+      color:var(--muted);
+      font-size:.9rem;
+      line-height:1.65;
+    }
+
+    .cta {
+      margin-top:3rem;
+      background:var(--pine);
+      color:white;
+      border-radius:12px;
+      padding:2rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1.5rem;
+      flex-wrap:wrap;
+    }
+    .cta h3 {
+      color:white;
+      font-size:1.2rem;
+      margin-bottom:.35rem;
+    }
+    .cta p {
+      color:rgba(255,255,255,.62);
+      font-size:.87rem;
+      line-height:1.6;
+      margin:0;
+      max-width:520px;
+    }
+    .cta a {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      background:var(--gold);
+      color:var(--pine);
+      min-height:44px;
+      padding:.8rem 1.3rem;
+      border-radius:8px;
+      font-weight:700;
+    }
+
+    footer {
+      background:var(--pine-dark);
+      border-top:1px solid rgba(255,255,255,.06);
+      padding:2.3rem 1rem;
+    }
+    .footer-inner {
+      width:min(calc(100% - 2rem), 1100px);
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+    .footer-logo {
+      color:rgba(255,255,255,.72);
+      text-decoration:none;
+      font-family:'Lora', Georgia, serif;
+      font-weight:700;
+    }
+    .footer-copy {
+      font-size:.78rem;
+      color:rgba(255,255,255,.42);
+      line-height:1.6;
+      text-align:right;
+    }
+
+    @media (max-width: 720px) {
+      .cta { flex-direction:column; align-items:flex-start; }
+      .footer-copy { text-align:left; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="brand">
+        <svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+          <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.3" opacity="0.9"/>
+          <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
+        </svg>
+        Microschool Ledger
+      </a>
+      <a href="/#resources" class="nav-back">← Back to resources</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="eyebrow">Florida Step-Up guide</div>
+      <h1>How Florida Step-Up for Students <em>actually works</em> for homeschool co-ops</h1>
+      <div class="hero-meta">
+        <span>By Rajeev, The Grow Co-op</span>
+        <span>March 2026</span>
+        <span>8 min read</span>
+      </div>
+    </div>
+  </header>
+  <div class="gold-stripe"></div>
+
+  <main class="article">
+    <div class="container">
+      <p class="lead">
+        If you run a Florida homeschool co-op or microschool, you’ve probably spent too many hours trying to make Step-Up payments make sense after they land. This guide is about the administrative reality: how the money moves, what the provider export actually tells you, and where the process gets messy.
+      </p>
+
+      <div class="callout">
+        <div class="callout-label">Who this is for</div>
+        <p>
+          This is for co-op administrators and microschool operators who accept Florida Step-Up scholarships. It’s about the school side of the process — not the family application side.
+        </p>
+      </div>
+
+      <h2>What Step-Up is, in practical terms</h2>
+
+      <p>
+        For many Florida schools, Step-Up is not just a scholarship program “out there in the background.” It’s a major part of tuition cash flow. Families rely on it, schools invoice through it, parents approve through it, and payments eventually land in your bank through the provider system.
+      </p>
+
+      <p>
+        In practical terms, that means your school ends up living with two realities at once:
+      </p>
+
+      <ul>
+        <li>families still need a clear tuition balance</li>
+        <li>but some of that balance is paid through a separate scholarship workflow</li>
+      </ul>
+
+      <p>
+        That’s why Step-Up often feels confusing in small-school operations. The money is real, but the context arrives in pieces.
+      </p>
+
+      <div class="callout gold">
+        <div class="callout-label">Important distinction</div>
+        <p>
+          Step-Up pays the school, not the family. Parents approve invoices in the portal, but the actual disbursement comes to you through the provider payment process.
+        </p>
+      </div>
+
+      <h2>The payment flow, step by step</h2>
+
+      <ol class="step-list">
+        <li>
+          <div class="step-num">1</div>
+          <div class="step-copy">
+            <strong>You submit the invoice through the provider portal</strong>
+            <span>The invoice is tied to a specific student and scholarship record, not just to the family in a general sense.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div class="step-copy">
+            <strong>The parent approves it</strong>
+            <span>Until the parent acts in the portal, nothing moves. This is one of the most common causes of delay.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div class="step-copy">
+            <strong>The provider processes the payment</strong>
+            <span>Once approved, the disbursement moves through the payment processor and eventually reaches your bank.</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">4</div>
+          <div class="step-copy">
+            <strong>The disbursement hits your account</strong>
+            <span>At this point, the money has arrived — but the administrative question is still: which student, which program, which family balance?</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">5</div>
+          <div class="step-copy">
+            <strong>You reconcile it against your tuition ledger</strong>
+            <span>This is the part many schools still do manually, and it’s where most of the admin pain lives.</span>
+          </div>
+        </li>
+      </ol>
+
+      <div class="mini-card">
+        <h3>The real challenge</h3>
+        <p>
+          Step-Up itself is not the hard part. The hard part is preserving enough context after the payment lands so that the family ledger still feels accurate and understandable.
+        </p>
+      </div>
+
+      <h2>What the provider export is actually telling you</h2>
+
+      <p>
+        The export is the closest thing you get to a reconciliation map. If you’re posting scholarship credits into your own records, these are the fields that matter most:
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Why it matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Student sequence number</strong></td>
+            <td>This is the most reliable link back to the correct student record. Names can vary. Sequence numbers matter.</td>
+          </tr>
+          <tr>
+            <td><strong>Category detail</strong></td>
+            <td>This often tells you whether the payment belongs to core tuition or something like enrichment / other fees.</td>
+          </tr>
+          <tr>
+            <td><strong>Purchase amount</strong></td>
+            <td>This is the actual disbursement amount to reconcile, which may not always match what you hoped to invoice.</td>
+          </tr>
+          <tr>
+            <td><strong>Status</strong></td>
+            <td>Only paid records belong in your active reconciliation. Pending or cancelled items create confusion if imported too soon.</td>
+          </tr>
+          <tr>
+            <td><strong>Date paid</strong></td>
+            <td>This is usually the most useful date for posting the payment into your internal records.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Where schools usually get tripped up</h2>
+
+      <ul>
+        <li><strong>Matching by name instead of by sequence number.</strong> This creates errors fast, especially with siblings or inconsistent naming.</li>
+        <li><strong>Treating portal exports as one-time clean imports.</strong> In reality, schools often need to re-export and refresh.</li>
+        <li><strong>Mixing scholarship status with family payment status.</strong> A family can still show a balance due while waiting on a scholarship credit to post.</li>
+        <li><strong>Losing track of which program a payment belongs to.</strong> This matters more as schools offer enrichment, workshops, or multiple tuition paths.</li>
+        <li><strong>Forgetting the emotional side.</strong> Parents don’t care about portal field names — they care whether their family statement makes sense.</li>
+      </ul>
+
+      <div class="callout warn">
+        <div class="callout-label">A small-school reality</div>
+        <p>
+          The same person posting scholarship credits is often also teaching, answering family emails, and handling enrollment. A “technically correct” workflow that’s too fragile still fails in practice.
+        </p>
+      </div>
+
+      <h2>What good reconciliation should feel like</h2>
+
+      <p>
+        A good Step-Up process should leave your school with three things:
+      </p>
+
+      <ul>
+        <li>a family balance that still feels understandable</li>
+        <li>payments matched to the right student and program</li>
+        <li>less admin time spent rebuilding context every month</li>
+      </ul>
+
+      <p>
+        In other words, the goal is not just to get the money into your books. The goal is to preserve clarity for the school and for the family.
+      </p>
+
+      <h2>Why this matters more than people think</h2>
+
+      <p>
+        For a small school, Step-Up handling affects more than bookkeeping. It affects:
+      </p>
+
+      <ul>
+        <li>how confidently you can follow up on balances</li>
+        <li>whether parents trust the statements they receive</li>
+        <li>how much staff time disappears into monthly cleanup</li>
+        <li>how clearly you understand your actual cash flow during the year</li>
+      </ul>
+
+      <p>
+        When the process is working, it creates calm. When it isn’t, it creates a steady drip of uncertainty.
+      </p>
+
+      <div class="cta">
+        <div>
+          <h3>Need a cleaner way to handle Step-Up?</h3>
+          <p>
+            Microschool Ledger was built to give small schools financial clarity around family billing, scholarship credits, and collections — without turning the whole process into another spreadsheet project.
+          </p>
+        </div>
+        <a href="/#contact">Request a demo</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="/" class="footer-logo">Microschool Ledger</a>
+      <div class="footer-copy">
+        Financial clarity for microschools & homeschool co-ops — not spreadsheets.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
