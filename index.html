@@ -1072,7 +1072,7 @@
           <input class="field" type="email" id="email" placeholder="Your email" required>
           <input class="field" type="text" id="school" placeholder="School or co-op name">
           <textarea class="field" id="notes" rows="4" placeholder="What are you using now for tuition, billing, or Step-Up tracking?"></textarea>
-          <button type="submit" class="btn btn-primary" style="width:100%;">Email demo request</button>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Send demo request</button>
         </form>
 
         <p class="small" style="margin-top:.85rem;">
@@ -1104,25 +1104,61 @@
   </footer>
 
   <script>
-    function makeMailto(subject, body) {
-      return "mailto:info@microschoolledger.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-    }
+    const form = document.getElementById("demo-form");
+    const formButton = form.querySelector('button[type="submit"]');
+    const statusEl = document.createElement("p");
+    statusEl.className = "small";
+    statusEl.style.marginTop = ".85rem";
+    statusEl.setAttribute("aria-live", "polite");
+    form.after(statusEl);
 
-    document.getElementById("demo-form").addEventListener("submit", function (e) {
+    form.addEventListener("submit", async function (e) {
       e.preventDefault();
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const school = document.getElementById("school").value.trim();
-      const notes = document.getElementById("notes").value.trim();
 
-      const subject = "Demo request — " + (school || "Microschool Ledger");
-      const body =
-        "Name: " + name + "\n" +
-        "Email: " + email + "\n" +
-        "School/Co-op: " + (school || "[not provided]") + "\n\n" +
-        "Current setup / notes:\n" + (notes || "[not provided]") + "\n";
+      const payload = {
+        school: document.getElementById("school").value.trim(),
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        phone: "",
+        notes: document.getElementById("notes").value.trim(),
+      };
 
-      window.location.href = makeMailto(subject, body);
+      if (!payload.school || !payload.name || !payload.email) {
+        statusEl.textContent = "Please fill in your name, email, and school or co-op name.";
+        statusEl.style.color = "#b03a2e";
+        return;
+      }
+
+      formButton.disabled = true;
+      formButton.textContent = "Sending…";
+      statusEl.textContent = "";
+      statusEl.style.color = "#6b7066";
+
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          throw new Error(data.error || "Something went wrong.");
+        }
+
+        form.reset();
+        statusEl.textContent = "Thanks — your request was sent. We'll follow up personally.";
+        statusEl.style.color = "#1f8d45";
+      } catch (error) {
+        statusEl.textContent = error.message || "We couldn't send your request right now. Please email info@microschoolledger.com.";
+        statusEl.style.color = "#b03a2e";
+      } finally {
+        formButton.disabled = false;
+        formButton.textContent = "Send demo request";
+      }
     });
   </script>
 </body>
