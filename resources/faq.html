@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>FAQ — Microschool Ledger</title>
+    <meta name="description" content="Frequently asked questions about Microschool Ledger, including Step-Up handling, onboarding, parent portal, QuickBooks exports, and data security."/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+    <style>
+    :root {
+        --pine: #3C4535;
+        --pine-dark: #2d3528;
+        --sand: #F8EDDD;
+        --offwhite: #F0EDE8;
+        --rock: #DDDFDE;
+        --grass: #ADB76D;
+        --gold: #c9a84c;
+        --ink: #1a1a1a;
+        --muted: #6b7066;
+        --max: 920px;
+    }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: 'DM Sans', Arial, sans-serif;
+        background: var(--sand);
+        color: var(--ink);
+        line-height: 1.7;
+    }
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        height: 68px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, .08);
+        background: rgba(60, 69, 53, .94);
+        backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+        width: min(calc(100% - 2rem), 1140px);
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: .8rem;
+        text-decoration: none;
+        color: white;
+        font-family: 'Lora', Georgia, serif;
+        font-size: 1.12rem;
+        font-weight: 700;
+    }
+    .back {
+        color: rgba(255, 255, 255, .78);
+        text-decoration: none;
+        font-size: .9rem;
+        font-weight: 500;
+    }
+    .hero {
+        background: var(--pine);
+        color: white;
+        padding: 8.5rem 0 4rem;
+        position: relative;
+        overflow: hidden;
+    }
+    .hero::before {
+        content: "";
+        position: absolute;
+        right: -140px;
+        top: -120px;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        background: rgba(173, 183, 109, .08);
+    }
+    .container {
+        width: min(calc(100% - 2rem), var(--max));
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+    }
+    .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: .65rem;
+        font-size: .72rem;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        color: var(--grass);
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    .eyebrow::before {
+        content: "";
+        width: 28px;
+        height: 2px;
+        background: var(--grass);
+        display: block;
+    }
+    h1, h2, h3 {
+        font-family: 'Lora', Georgia, serif;
+        line-height: 1.18;
+        color: var(--pine);
+    }
+    .hero h1 {
+        color: white;
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        margin-bottom: 1rem;
+        max-width: 12ch;
+    }
+    .hero p {
+        color: rgba(255, 255, 255, .76);
+        font-size: 1.05rem;
+        max-width: 680px;
+        line-height: 1.8;
+    }
+    .gold-stripe {
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold), var(--grass), var(--gold));
+    }
+    .content {
+        padding: 4rem 0 5rem;
+    }
+    .faq-list {
+        display: grid;
+        gap: 1rem;
+    }
+    .faq {
+        background: white;
+        border: 1px solid var(--rock);
+        border-radius: 16px;
+        padding: 1.35rem 1.4rem;
+        box-shadow: 0 12px 30px rgba(26, 26, 26, .05);
+    }
+    .faq h2 {
+        font-size: 1.18rem;
+        margin-bottom: .55rem;
+    }
+    .faq p, .faq li {
+        color: var(--muted);
+        font-size: .97rem;
+        line-height: 1.8;
+    }
+    .faq ul {
+        margin-left: 1.15rem;
+        margin-top: .35rem;
+    }
+    .cta-block {
+        margin-top: 2rem;
+        background: var(--offwhite);
+        border: 1px solid var(--rock);
+        border-radius: 18px;
+        padding: 1.5rem;
+    }
+    .cta-block h3 {
+        margin-bottom: .6rem;
+        font-size: 1.45rem;
+    }
+    .cta-block p {
+        color: var(--muted);
+        margin-bottom: 1rem;
+    }
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: .85rem 1.35rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: .95rem;
+        background: var(--gold);
+        color: var(--pine);
+        transition: .18s ease;
+    }
+    .btn:hover {
+        transform: translateY(-1px);
+        background: #d7b45d;
+    }
+    footer {
+        background: var(--pine-dark);
+        color: rgba(255, 255, 255, .72);
+        padding: 2rem 0;
+    }
+    .footer-wrap {
+        width: min(calc(100% - 2rem), 1140px);
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+        color: white;
+        text-decoration: none;
+        font-family: 'Lora', Georgia, serif;
+        font-weight: 700;
+    }
+    .footer-meta {
+        font-size: .82rem;
+        color: rgba(255, 255, 255, .58);
+        line-height: 1.65;
+    }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a class="brand" href="/" aria-label="Microschool Ledger home">
+                <svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true">
+                    <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+                    <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.3" opacity="0.9"/>
+                    <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.6" opacity="0.2"/>
+                    <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.6" opacity="0.2"/>
+                    <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.6" opacity="0.2"/>
+                    <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
+                </svg>
+                <span>Microschool Ledger</span>
+            </a>
+            <a class="back" href="/">← Back to homepage</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="eyebrow">Frequently asked questions</div>
+            <h1>Simple answers for a focused financial system.</h1>
+            <p>Microschool Ledger is designed to handle the financial side of a microschool clearly and simply — tuition, payments, scholarships, family balances, and parent visibility.</p>
+        </div>
+    </header>
+
+    <div class="gold-stripe"></div>
+
+    <main class="content">
+        <div class="container">
+            <div class="faq-list">
+                <section class="faq">
+                    <h2>1. What problem does Microschool Ledger solve?</h2>
+                    <p>It replaces spreadsheets and manual tracking for tuition, payments, scholarships, and family balances so microschools can see where things stand clearly.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>2. How is this different from other school management tools?</h2>
+                    <p>Most school management systems try to do everything — curriculum tracking, attendance, communication, and billing all at once. Microschool Ledger focuses only on financial clarity:</p>
+                    <ul>
+                        <li>tuition</li>
+                        <li>payments</li>
+                        <li>scholarships</li>
+                        <li>balances</li>
+                    </ul>
+                    <p>That makes it simpler, easier to use, and better aligned to what many microschools actually need.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>3. How do Florida Step-Up payments work?</h2>
+                    <p>Florida Step-Up for Students payments can be imported directly from the provider portal export, matched to students by sequence number, and tracked alongside direct family payments — so you see one clear balance instead of managing separate records.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>4. Does it handle academic years vs. calendar years?</h2>
+                    <p>Microschool Ledger is built around academic years and supports overlap periods — such as deposits for the next school year arriving while the current one is still active.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>5. Can I use custom pricing or discounts?</h2>
+                    <p>Yes. Tuition can be overridden per student as needed, which makes it possible to handle custom pricing, sibling discounts, or special cases without workarounds.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>6. Is there a parent portal?</h2>
+                    <p>Yes. Parents can see their balance, review what each student is enrolled in, view payment history, and access invoices — all on their own, without emailing your admin.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>7. Do parents need passwords?</h2>
+                    <p>No. The family portal uses passwordless sign-in via secure email links. Parents click a link, they're in.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>8. How is data secured?</h2>
+                    <p>Data is stored in Google Cloud with strict access controls. The system is designed to store only what's needed to run the financial workflow clearly and safely.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>9. Who owns the data?</h2>
+                    <p>Your school owns its data. You can export it at any time.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>10. Can I still use QuickBooks?</h2>
+                    <p>Yes. Data can be exported if you want Microschool Ledger to handle day-to-day financial clarity while QuickBooks handles formal accounting.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>11. How does onboarding work?</h2>
+                    <p>We do hands-on setup with each school — initial configuration, importing key data, and a guided walkthrough so the system is ready to use from day one.</p>
+                </section>
+            </div>
+
+            <div class="cta-block">
+                <h3>Want to see how it would work for your school?</h3>
+                <p>We can walk through your current setup and show you exactly how Microschool Ledger would fit.</p>
+                <a class="btn" href="/#contact">Request a demo</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-wrap">
+            <a class="footer-brand" href="/">
+                <svg width="28" height="28" viewBox="0 0 40 40" aria-hidden="true">
+                    <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+                    <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.2" opacity="0.9"/>
+                    <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.6" opacity="0.2"/>
+                    <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.6" opacity="0.2"/>
+                    <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.6" opacity="0.2"/>
+                    <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
+                </svg>
+                <span>Microschool Ledger</span>
+            </a>
+            <div class="footer-meta">
+                Financial clarity for microschools & homeschool co-ops — not spreadsheets.<br>
+                Built by The Grow Co-op · Boca Raton, Florida · <a href="mailto:info@microschoolledger.com" style="color:#c9a84c;text-decoration:none;">info@microschoolledger.com</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

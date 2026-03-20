@@ -388,7 +388,7 @@
     }
 
     .resources{ background:var(--sand); }
-    .resource-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem; }
+    .resource-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1rem; margin-top:2rem; }
     .resource-card{
       background:white; border:1px solid var(--rock); border-radius:16px; padding:1.4rem; display:flex; flex-direction:column; gap:.75rem;
     }
@@ -1042,6 +1042,13 @@
           <h3>Built in a real microschool</h3>
           <p>Microschool Ledger was developed at The Grow Co-op and shaped by real families, real payments, and real operational constraints.</p>
           <a class="btn btn-dark" href="#portal">See how it works</a>
+        </article>
+
+        <article class="resource-card">
+          <div class="resource-type">FAQ</div>
+          <h3>Common questions, answered</h3>
+          <p>Step-Up handling, parent portal access, data ownership, QuickBooks exports, onboarding — the things schools ask before they get started.</p>
+          <a class="btn btn-dark" href="/resources/faq.html">Read the FAQ</a>
         </article>
       </div>
     </div>
