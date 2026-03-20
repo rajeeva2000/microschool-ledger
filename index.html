@@ -386,9 +386,23 @@
     .price-note{
       margin-top:2rem; color:rgba(255,255,255,.68); font-size:.9rem; line-height:1.7; max-width:800px;
     }
+    .founding-block{
+      margin-top:2.5rem; border:1px solid rgba(201,168,76,.3); border-radius:18px;
+      background:rgba(201,168,76,.08); padding:1.75rem 2rem;
+      display:grid; grid-template-columns:1fr auto; gap:1.5rem; align-items:center;
+    }
+    .founding-block .founding-label{
+      font-size:.68rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:.5rem;
+    }
+    .founding-block h3{ color:white; font-size:1.35rem; margin-bottom:.55rem; }
+    .founding-block p{ color:rgba(255,255,255,.72); font-size:.94rem; line-height:1.75; }
+    @media(max-width:760px){
+      .founding-block{ grid-template-columns:1fr; }
+    }
 
     .resources{ background:var(--sand); }
-    .resource-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem; }
+    .resource-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1rem; margin-top:2rem; }
     .resource-card{
       background:white; border:1px solid var(--rock); border-radius:16px; padding:1.4rem; display:flex; flex-direction:column; gap:.75rem;
     }
@@ -990,6 +1004,19 @@
         Most schools replace a stack of tools and manual admin time that easily adds up to hundreds of dollars a month.
         For Florida schools, Step-Up reconciliation alone can save hours every billing cycle.
       </p>
+
+      <div class="founding-block">
+        <div>
+          <div class="founding-label">Founding Partner Program · 5 spots available</div>
+          <h3>Your first 90 days are free.</h3>
+          <p>
+            The first five schools to get started pay nothing for 90 days — no monthly fee, no onboarding fee.
+            After that, choose the plan that fits, starting at $49/month.
+            What we ask in return: a few honest feedback calls as we build together.
+          </p>
+        </div>
+        <a class="btn btn-primary" href="#contact" style="white-space:nowrap;">Request a demo</a>
+      </div>
     </div>
   </section>
 
@@ -1042,6 +1069,13 @@
           <h3>Built in a real microschool</h3>
           <p>Microschool Ledger was developed at The Grow Co-op and shaped by real families, real payments, and real operational constraints.</p>
           <a class="btn btn-dark" href="#portal">See how it works</a>
+        </article>
+
+        <article class="resource-card">
+          <div class="resource-type">FAQ</div>
+          <h3>Common questions, answered</h3>
+          <p>Step-Up handling, parent portal access, passwordless login, data ownership, onboarding — the things schools ask before they get started.</p>
+          <a class="btn btn-dark" href="/resources/faq.html">Read the FAQ</a>
         </article>
       </div>
     </div>
