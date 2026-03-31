@@ -443,16 +443,40 @@
     }
     .footer-meta{ font-size:.82rem; color:rgba(255,255,255,.58); line-height:1.65; }
 
+    .feature-highlight{
+      margin-top:1.5rem; background:var(--gold-light); border:1px solid rgba(201,168,76,.3);
+      border-radius:18px; padding:1.75rem 2rem;
+      display:grid; grid-template-columns:auto 1fr auto; gap:1.5rem; align-items:start;
+    }
+    .feature-highlight-icon{ font-size:2.2rem; padding-top:.25rem; }
+    .feature-highlight-body h3{ font-size:1.2rem; margin-bottom:.5rem; }
+    .feature-highlight-body p{ color:var(--muted); font-size:.94rem; line-height:1.7; margin-bottom:.75rem; }
+    .feature-highlight-stat{
+      background:white; border:1px solid rgba(201,168,76,.25);
+      border-radius:14px; padding:1.2rem 1.35rem; text-align:center; min-width:180px;
+    }
+    .feature-highlight-stat strong{
+      display:block; font-family:'Lora', Georgia, serif;
+      font-size:2.8rem; color:var(--pine); line-height:1; margin-bottom:.35rem;
+    }
+    .feature-highlight-stat span{ font-size:.78rem; color:var(--muted); line-height:1.55; display:block; }
+
     @media (max-width: 1024px){
       .hero-grid, .stepup-grid, .clarity-grid, .portal-wrap, .cta-wrap{ grid-template-columns:1fr; }
       .feature-grid, .pricing-grid, .resource-grid, .trust-grid{ grid-template-columns:repeat(2,1fr); }
       .hero-copy h1{ max-width:14ch; }
+      .feature-highlight{ grid-template-columns:auto 1fr; }
+      .feature-highlight-stat{ grid-column:1/-1; text-align:left; display:flex; gap:1rem; align-items:center; }
+      .feature-highlight-stat strong{ font-size:2rem; flex-shrink:0; margin-bottom:0; }
     }
     @media (max-width: 760px){
       nav{ height:64px; }
       .nav-links a:not(.nav-cta-link){ display:none; }
       .hero{ padding:7.5rem 0 4rem; }
       .section{ padding:4.25rem 0; }
+      .feature-highlight{ grid-template-columns:1fr; }
+      .feature-highlight-icon{ display:none; }
+      .feature-highlight-stat{ flex-direction:column; align-items:flex-start; gap:.4rem; }
       .feature-grid, .pricing-grid, .resource-grid, .problem-grid, .trust-grid, .mini-grid, .summary-grid{ grid-template-columns:1fr; }
       .statement-head, .portal-header{ grid-template-columns:1fr; }
       .statement-row, .statement-row.header{ grid-template-columns:1.1fr .7fr .55fr .55fr; font-size:.68rem; }
@@ -487,6 +511,7 @@
         <a href="#portal">Family portal</a>
         <a href="#pricing">Pricing</a>
         <a href="#resources">Resources</a>
+        <a href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener">Try demo</a>
         <a href="https://app.microschoolledger.com" target="_blank" rel="noopener">Log in</a>
         <a href="#contact" class="btn btn-primary nav-cta-link" style="min-height:40px;padding:.6rem 1rem;font-size:.84rem;">Request a demo</a>
       </div>
@@ -506,9 +531,9 @@
 
         <div class="hero-actions">
           <a class="btn btn-primary" href="#contact">Request a demo</a>
-          <a class="btn btn-secondary" href="#pricing">See pricing</a>
+          <a class="btn btn-secondary" href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener">Try it live — no account needed</a>
         </div>
-        <div class="hero-proof">Built by The Grow Co-op in Boca Raton, Florida. In active production since 2024.</div>
+        <div class="hero-proof">Built by The Grow Co-op in Boca Raton, Florida. In active production since 2024. &nbsp;·&nbsp; <a href="#pricing" style="color:rgba(255,255,255,.42);text-decoration:underline;text-underline-offset:3px;">See pricing</a></div>
       </div>
 
       <div class="hero-panel" aria-label="Microschool Ledger preview">
@@ -597,7 +622,7 @@
       </div>
       <div class="trust-item">
         <div class="trust-icon">☁️</div>
-        <div><strong>No servers. No installs. No IT.</strong><span>Runs in a browser and is ready for the way small schools actually operate.</span></div>
+        <div><strong>No servers. Nightly backups.</strong><span>Runs in a browser with automatic nightly backups and one-click restore — no IT required.</span></div>
       </div>
     </div>
   </section>
@@ -904,11 +929,11 @@
         <article class="feature-card">
           <div class="feature-icon">📬</div>
           <h3>Collections & statements</h3>
-          <p>One-click family statements, warm collection follow-ups, and a clearer view of who needs attention this month.</p>
+          <p>One-click family statements, automated overdue reminders with an admin-review queue, and a clear view of who needs attention this month.</p>
           <ul class="feature-list">
             <li>Highest-balance-first collections view</li>
-            <li>Printable, compliant family statements</li>
-            <li>Admin shortcuts right from the collections tab</li>
+            <li>Automated reminders — admin approves before any email sends</li>
+            <li>Printable statements with per-charge invoice numbers</li>
           </ul>
         </article>
 
@@ -930,9 +955,31 @@
           <ul class="feature-list">
             <li>P&amp;L and budget tracking</li>
             <li>Program and school-year filters</li>
-            <li>Financial health tools on the roadmap</li>
+            <li>Cash flow view: expected vs. collected by month</li>
           </ul>
         </article>
+      </div>
+
+      <div class="feature-highlight">
+        <div class="feature-highlight-icon">🧾</div>
+        <div class="feature-highlight-body">
+          <div class="eyebrow" style="margin-bottom:.65rem;">Flat charges &amp; elective fees</div>
+          <h3>Semester fees, workshop charges, and materials fees — alongside tuition, in the same invoice.</h3>
+          <p>
+            Not every school runs on annual tuition. Add a $300 Writing Workshop fee, a $50 registration charge,
+            or a $150 materials bill for any student. Flat charges and enrollment-based tuition both appear on
+            the same family statement, reconcile to the same balance, and show up in the family portal.
+          </p>
+          <ul class="feature-list">
+            <li>Per-student or family-level charges with due dates and categories</li>
+            <li>Flat charges and annual tuition coexist — no separate reconciliation needed</li>
+            <li>Built for enrichment providers, elective instructors, and hybrid programs</li>
+          </ul>
+        </div>
+        <div class="feature-highlight-stat">
+          <strong>54%</strong>
+          <span>of Florida's 2,921 Step-Up providers charge flat semester fees. Microschool Ledger handles both billing models simultaneously.</span>
+        </div>
       </div>
     </div>
   </section>
