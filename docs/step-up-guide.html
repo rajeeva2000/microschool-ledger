@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Florida Step-Up for Students Actually Works for Homeschool Co-ops — Microschool Ledger</title>
+<meta name="description" content="A plain-language guide to how Florida's Step-Up for Students EMA scholarship works in practice for homeschool co-ops — payment flow, invoice requirements, portal exports, and common gotchas.">
+<link rel="canonical" href="https://microschoolledger.com/resources/step-up-guide.html">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --green-deep:  #1a3a2a;
+  --green-mid:   #2d6a4f;
+  --green-light: #52b788;
+  --green-pale:  #d8f3dc;
+  --green-faint: #f0faf3;
+  --gold:        #c9a84c;
+  --gold-light:  #f7f0e0;
+  --cream:       #faf8f3;
+  --ink:         #1a1a1a;
+  --muted:       #5a6b5a;
+  --rule:        #dde8df;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.7; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(26,58,42,0.97); backdrop-filter: blur(12px); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; border-bottom: 1px solid rgba(82,183,136,0.2); }
+.nav-logo { font-family: 'Lora', serif; font-size: 1.15rem; font-weight: 700; color: white; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+.nav-logo-leaf { width: 26px; height: 26px; background: var(--gold); border-radius: 50% 0 50% 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+.nav-back { font-size: 0.82rem; color: rgba(255,255,255,0.6); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+.nav-back:hover { color: white; }
+
+/* HERO */
+.article-hero { background: var(--green-deep); padding: 8rem 2rem 4rem; position: relative; overflow: hidden; }
+.article-hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; border-radius: 50%; background: rgba(82,183,136,0.07); pointer-events: none; }
+.article-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+.article-category { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(82,183,136,0.15); border: 1px solid rgba(82,183,136,0.3); color: var(--green-light); font-size: 0.67rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 100px; margin-bottom: 1.5rem; }
+.article-hero h1 { font-family: 'Lora', serif; font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 700; color: white; line-height: 1.2; margin-bottom: 1.25rem; }
+.article-hero h1 em { font-style: italic; color: var(--gold); }
+.article-meta { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+.article-meta-item { font-size: 0.78rem; color: rgba(255,255,255,0.45); display: flex; align-items: center; gap: 0.35rem; }
+.article-byline { font-size: 0.82rem; color: rgba(255,255,255,0.62); }
+.article-byline strong { color: white; }
+.gold-stripe { height: 3px; background: linear-gradient(90deg, var(--gold), var(--green-light), var(--gold)); }
+
+/* LAYOUT */
+.article-layout { max-width: 760px; margin: 0 auto; padding: 3.5rem 2rem 5rem; display: grid; grid-template-columns: 1fr; gap: 0; }
+
+/* PROSE */
+.prose h2 { font-family: 'Lora', serif; font-size: 1.55rem; font-weight: 700; color: var(--green-deep); margin: 2.5rem 0 0.9rem; line-height: 1.25; padding-bottom: 0.5rem; border-bottom: 2px solid var(--green-pale); }
+.prose h3 { font-family: 'Lora', serif; font-size: 1.15rem; font-weight: 600; color: var(--green-mid); margin: 1.75rem 0 0.6rem; }
+.prose p { font-size: 1rem; color: #2a2a2a; line-height: 1.8; margin-bottom: 1.2rem; }
+.prose p:first-child { font-size: 1.08rem; color: var(--green-deep); font-weight: 400; line-height: 1.75; }
+.prose ul, .prose ol { margin: 0.5rem 0 1.2rem 1.4rem; }
+.prose li { font-size: 0.97rem; color: #2a2a2a; line-height: 1.75; margin-bottom: 0.45rem; }
+.prose strong { font-weight: 600; color: var(--green-deep); }
+.prose a { color: var(--green-mid); text-decoration: underline; text-decoration-color: var(--green-pale); text-underline-offset: 3px; transition: color 0.2s; }
+.prose a:hover { color: var(--green-deep); }
+
+/* CALLOUTS */
+.callout { background: var(--green-faint); border-left: 3px solid var(--green-light); border-radius: 0 6px 6px 0; padding: 1.1rem 1.3rem; margin: 1.5rem 0; }
+.callout-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 0.4rem; }
+.callout p { font-size: 0.92rem; color: var(--green-deep); margin: 0; line-height: 1.65; }
+.callout p strong { color: var(--green-deep); }
+
+.callout-gold { background: var(--gold-light); border-left-color: var(--gold); }
+.callout-gold .callout-label { color: #9a7320; }
+.callout-gold p { color: #5a4010; }
+
+.callout-warn { background: #fff8f0; border-left-color: #e08030; }
+.callout-warn .callout-label { color: #b05a10; }
+.callout-warn p { color: #5a2a05; }
+
+/* STEP LIST */
+.step-list { list-style: none; margin: 1rem 0 1.5rem; padding: 0; }
+.step-list li { display: flex; gap: 1rem; align-items: flex-start; padding: 0.85rem 0; border-bottom: 1px solid var(--rule); font-size: 0.97rem; color: #2a2a2a; line-height: 1.65; }
+.step-list li:last-child { border-bottom: none; }
+.step-num { flex-shrink: 0; width: 26px; height: 26px; background: var(--green-deep); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 700; color: white; margin-top: 2px; }
+
+/* DATA TABLE */
+.data-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0 1.75rem; font-size: 0.88rem; }
+.data-table th { background: var(--green-deep); color: white; font-weight: 600; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.65rem 1rem; text-align: left; }
+.data-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--rule); color: #333; vertical-align: top; line-height: 1.55; }
+.data-table tr:nth-child(even) td { background: var(--green-faint); }
+.data-table tr:last-child td { border-bottom: none; }
+
+/* CTA BOX */
+.article-cta { background: var(--green-deep); border-radius: 10px; padding: 2rem; margin-top: 3rem; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.article-cta-text h3 { font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 700; color: white; margin-bottom: 0.4rem; }
+.article-cta-text p { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin: 0; line-height: 1.55; }
+.article-cta-btn { background: var(--gold); color: var(--green-deep); padding: 0.75rem 1.5rem; border-radius: 5px; font-weight: 600; font-size: 0.88rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
+.article-cta-btn:hover { background: #d4b35c; }
+
+/* FOOTER */
+footer { background: #111f16; padding: 2.5rem 2rem; border-top: 1px solid rgba(255,255,255,0.06); }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.footer-logo { font-family: 'Lora', serif; font-size: 1rem; font-weight: 700; color: rgba(255,255,255,0.5); text-decoration: none; }
+.footer-meta { font-size: 0.77rem; color: rgba(255,255,255,0.28); line-height: 1.6; }
+.footer-meta a { color: var(--gold); text-decoration: none; }
+
+@media (max-width: 680px) {
+  .article-hero { padding: 6.5rem 1.5rem 3rem; }
+  .article-layout { padding: 2.5rem 1.5rem 4rem; }
+  .article-cta { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-leaf">🌿</div>
+    Microschool Ledger
+  </a>
+  <a href="/#resources" class="nav-back">← Resources</a>
+</nav>
+
+<div class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-category">📋 Florida Step-Up</div>
+    <h1>How Florida Step-Up for Students <em>actually works</em> for homeschool co-ops</h1>
+    <div class="article-meta">
+      <span class="article-byline">By <strong>Rajeev, The Grow Co-op</strong></span>
+      <span class="article-meta-item">📅 March 2026</span>
+      <span class="article-meta-item">⏱ 8 min read</span>
+    </div>
+  </div>
+</div>
+<div class="gold-stripe"></div>
+
+<div class="article-layout">
+<div class="prose">
+
+<p>If you run a Florida homeschool co-op, you've almost certainly dealt with Step-Up for Students — probably by spending hours every billing cycle downloading portal exports, manually entering payment amounts, and hoping you haven't missed a disbursement. This guide explains how the program actually works from an administrator's perspective, what the payment flow looks like in practice, and what you need to get right to stay compliant.</p>
+
+<div class="callout">
+  <div class="callout-label">Who this is for</div>
+  <p>Co-op administrators and microschool operators who accept Step-Up EMA (Educational Multipurpose Account) scholarships. This covers the administrative side — not the parent application process.</p>
+</div>
+
+<h2>What Step-Up for Students actually is</h2>
+
+<p>Step-Up for Students is a Florida nonprofit that administers several scholarship programs on behalf of the state. For homeschool co-ops and microschools, the relevant program is the <strong>Family Empowerment Scholarship for Educational Options (FES-EO)</strong>, which funds an Educational Multipurpose Account — the "EMA" you'll see in your portal exports.</p>
+
+<p>The EMA works like a spending account: parents are awarded a dollar amount each year that they can use for qualifying educational expenses. Your co-op submits invoices through the Step-Up portal, parents approve them, and Step-Up disburses payment to you directly — typically via ACH to your bank account.</p>
+
+<div class="callout callout-gold">
+  <div class="callout-label">Important distinction</div>
+  <p>Step-Up pays <strong>you</strong>, not the family. The disbursement comes from Step-Up's payment processor (Tipalti) to your bank. The family never touches the money — they just approve the invoice in their portal.</p>
+</div>
+
+<h2>The payment flow, step by step</h2>
+
+<ol class="step-list">
+  <li><div class="step-num">1</div><span><strong>You create an invoice in the Step-Up provider portal</strong> for each student's tuition or fees. Invoices are tied to specific students by their EMA account number — the same number you'll see as the "student sequence number" in portal exports.</span></li>
+  <li><div class="step-num">2</div><span><strong>The parent approves the invoice</strong> in their Step-Up family portal. Until they approve it, nothing happens. This is the most common source of payment delays — parents who haven't logged in to approve outstanding invoices.</span></li>
+  <li><div class="step-num">3</div><span><strong>Step-Up processes the payment</strong> through Tipalti, their payment processor. Processing typically takes 5–10 business days after parent approval.</span></li>
+  <li><div class="step-num">4</div><span><strong>The disbursement hits your bank account</strong> as an ACH transfer. Each disbursement corresponds to a specific line item in the portal, tied to a specific student and invoice.</span></li>
+  <li><div class="step-num">5</div><span><strong>You reconcile the payment</strong> against your family's tuition balance — crediting the right student's account, attributed to the right program.</span></li>
+</ol>
+
+<p>Steps 1–4 are handled through the Step-Up portal. Step 5 is where most co-ops struggle, because by the time disbursements arrive in your bank account, you've lost the context of which student they were for.</p>
+
+<h2>Understanding your portal export</h2>
+
+<p>The Step-Up provider portal lets you export a tab-delimited file of all your payment history. This is the key file for reconciliation. Here are the columns you actually need to understand:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Column</th><th>What it means</th><th>Why it matters</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>StudentSequenceNumber</strong></td><td>The student's unique identifier in the Step-Up system</td><td>This is how you match a disbursement to the right student in your records. Don't rely on names — they can have typos.</td></tr>
+    <tr><td><strong>CategoryDetailName</strong></td><td>The type of expense the invoice was filed under</td><td>"Tuition" maps to your main academic program. "Other Fees" typically covers enrichment fees like workshops or electives.</td></tr>
+    <tr><td><strong>PurchaseAmount</strong></td><td>The amount disbursed</td><td>May differ from your invoice amount if the student's EMA balance was insufficient.</td></tr>
+    <tr><td><strong>Status</strong></td><td>"Paid", "Pending", "Cancelled"</td><td>Only "Paid" records have actually landed in your bank. Filter everything else out before reconciling.</td></tr>
+    <tr><td><strong>DatePaid</strong></td><td>When the disbursement was made</td><td>Use this as the payment date when posting to your records — not the invoice date.</td></tr>
+    <tr><td><strong>TipaltiPaymentNumber</strong> + <strong>LineItemNumber</strong> + <strong>BusinessInvoiceNumber</strong></td><td>Composite key uniquely identifying each line item</td><td>Critical for deduplication — use all three together to avoid double-counting when you re-export.</td></tr>
+  </tbody>
+</table>
+
+<div class="callout callout-warn">
+  <div class="callout-label">Common gotcha</div>
+  <p>The portal export includes <strong>all statuses</strong> by default — Pending, Cancelled, and Paid. If you import everything without filtering by Status = "Paid", you'll overstate your revenue. Always filter to Paid-only before reconciling.</p>
+</div>
+
+<h2>How program attribution works</h2>
+
+<p>If your co-op runs multiple programs — a core academic program and enrichment classes, for example — you need to know which Step-Up payment belongs to which program. The <strong>CategoryDetailName</strong> column is your signal:</p>
+
+<ul>
+  <li><strong>"Tuition"</strong> — this maps to your main academic tuition. Post to your core program.</li>
+  <li><strong>"Other Fees"</strong> — this maps to enrichment fees, workshops, or elective programs billed as additional charges.</li>
+  <li>Other values (Materials, Technology, etc.) — depends on what your families are claiming. If you only bill tuition and program fees, you generally won't see these.</li>
+</ul>
+
+<p>The attribution isn't perfect — Step-Up doesn't know which specific class a "Tuition" payment is for, only that it's academic tuition. If a student is enrolled in multiple programs, you'll need to decide internally how to allocate it. Most co-ops attribute "Tuition" to the core program and "Other Fees" to enrichment, which works well in practice.</p>
+
+<h2>Invoicing requirements and compliance</h2>
+
+<p>Step-Up has specific requirements for what your invoices must contain to be reimbursable. The details can shift as the program evolves, so always check the current provider agreement — but the consistent requirements are:</p>
+
+<ul>
+  <li>The invoice must be on your organization's letterhead with your EIN and contact information</li>
+  <li>The service period must be specified (e.g., "August 2025 – May 2026")</li>
+  <li>Line items must be described as educational services (not "tuition invoice #1052")</li>
+  <li>The invoice must not include non-educational costs — field trips, fundraising, optional donations, or anything that isn't a direct educational service</li>
+  <li>The student's name must appear on the invoice</li>
+</ul>
+
+<p>Family statements you generate for Step-Up documentation purposes should include a compliance note — something like: <em>"All services listed are educational in nature and comply with Step Up For Students' eligibility guidelines. No portion of this fee includes fundraising, optional donations, or non-educational costs."</em> Having this language on every statement saves time if a family is ever audited.</p>
+
+<div class="callout">
+  <div class="callout-label">Practical tip</div>
+  <p>Keep a copy of every invoice you submit to the portal, and a record of every Step-Up payment you receive, tied to the specific student and invoice. Step-Up providers are subject to audits, and having clean records is your protection.</p>
+</div>
+
+<h2>The reconciliation problem</h2>
+
+<p>Here's where most co-ops get bogged down. By the time a Step-Up disbursement arrives in your bank account, it's a line item that says something like "Tipalti Inc" with an amount. You have to match it back to a specific student, a specific invoice, and a specific program — and post it against that family's outstanding balance.</p>
+
+<p>If you're doing this manually, the workflow looks like:</p>
+
+<ol>
+  <li>Export the payment history from the Step-Up portal</li>
+  <li>Cross-reference each paid item against your family records by student name or sequence number</li>
+  <li>Post each payment to the correct family's ledger in whatever system you're using</li>
+  <li>Mark the corresponding invoice as paid</li>
+  <li>Repeat when new disbursements arrive (usually 1–2 times per month during the school year)</li>
+</ol>
+
+<p>For a co-op with 10 families and 15 students, this takes 1–2 hours per reconciliation cycle. With 25+ families across multiple programs, it can eat half a day — and errors are easy to make when you're manually matching names and amounts.</p>
+
+<h2>What a clean reconciliation process looks like</h2>
+
+<p>The cleanest approach is to match by <strong>student sequence number</strong> rather than name. Names have typos and formatting differences ("María" vs "Maria", "Jr." vs no suffix). Sequence numbers are consistent.</p>
+
+<p>For each billing cycle:</p>
+
+<ol>
+  <li>Export from the Step-Up portal — all history, not just the current period</li>
+  <li>Filter to Status = "Paid" only</li>
+  <li>Match each record to your student roster by sequence number</li>
+  <li>Check CategoryDetailName to attribute to the right program</li>
+  <li>Use the composite key (TipaltiPaymentNumber + LineItemNumber + BusinessInvoiceNumber) to deduplicate against records you've already posted — re-exporting is safe if you do this</li>
+  <li>Post matched payments to family balances</li>
+  <li>Flag any unmatched records for manual review</li>
+</ol>
+
+<p>Doing this in a spreadsheet is workable at small scale. Once you have more than 15–20 families with multiple Step-Up students, the manual process becomes error-prone enough to warrant a dedicated tool.</p>
+
+<div class="article-cta">
+  <div class="article-cta-text">
+    <h3>This is exactly what Microschool Ledger automates</h3>
+    <p>Paste your portal export and every step above happens automatically — matched by sequence number, attributed by category, deduplicated on re-import.</p>
+  </div>
+  <a href="https://msledger-a2525.web.app?org=demo" target="_blank" rel="noopener" class="article-cta-btn">See it in action →</a>
+</div>
+
+</div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="footer-logo">Microschool Ledger</a>
+    <div class="footer-meta">Built by The Grow Co-op · Boca Raton, FL · <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
