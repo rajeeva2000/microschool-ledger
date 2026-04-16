@@ -302,6 +302,37 @@
                     <h2>9. How does onboarding work?</h2>
                     <p>We do hands-on setup with each school — initial configuration, importing key data, and a guided walkthrough so the system is ready to use from day one.</p>
                 </section>
+
+                <section class="faq">
+                    <h2>10. Does it work for enrichment programs and elective providers — not just annual tuition schools?</h2>
+                    <p>Yes. Microschool Ledger supports two billing models that can coexist in the same school:</p>
+                    <ul>
+                        <li><strong>Flat charges</strong> — a $300 Writing Workshop fee, a $50 registration charge, a $150 materials bill. These flow into the family balance automatically and appear on invoices alongside any enrollment-based tuition.</li>
+                        <li><strong>Short-term / semester courses</strong> — programs that run by term (Fall 2026, Spring 2027) with a flat fee per term instead of a full school year payment grid. Includes a roster view showing enrolled vs. paid per term.</li>
+                    </ul>
+                    <p>Over 54% of Florida's Step-Up providers are enrichment or elective programs. Both models are built specifically for that majority.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>11. Can I run semester-based classes — not just year-long programs?</h2>
+                    <p>Yes. Programs can be flagged as short-term, which switches them from the annual school year model to a term-based model. Each term (e.g. "Fall 2026") has a label and a flat fee. Students enroll per term, and a class roster view shows enrolled vs. paid count for each term at a glance.</p>
+                    <p>Short-term programs also support adult/family enrollment for parent workshops or community classes — charges flow into the family balance without needing a separate student record.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>12. Can I customize what my invoices look like?</h2>
+                    <p>Yes. Each school can configure its own invoice title ("Tuition Invoice", "Statement of Account"), a payment instructions block (Venmo handle, check payable-to name, bank info), and a reply-to email address so family replies reach your inbox directly. All set in Setup → School Info — no code changes required.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>13. How do automated payment reminders work?</h2>
+                    <p>Each night, Microschool Ledger queues overdue families for reminder emails. As the admin, you review the queue first — you see the recipient, their current balance, and the email text before anything sends. Once you approve, the email goes out with your school's reply-to address so families can respond directly to you, not to a no-reply system address. A 28-day cooldown prevents the same family from being reminded too frequently.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>14. Is my school's data kept separate from other schools on the platform?</h2>
+                    <p>Yes. Data isolation is enforced at the database level, not just the user interface. Each school gets its own isolated data partition. Admin access requires a server-side grant that can't be bypassed through the app. Family portal users get a separate read-only grant scoped only to their own family's records — they can't see other families' data even if they tried.</p>
+                </section>
             </div>
 
             <div class="cta-block">

@@ -344,7 +344,7 @@
     .portal-caption{ margin-top:1rem; color:var(--muted); font-size:.84rem; line-height:1.6; }
 
     .features{ background:white; }
-    .feature-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem; }
+    .feature-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1rem; margin-top:2rem; }
     .feature-card{
       border:1px solid var(--rock); background:var(--offwhite); border-radius:16px; padding:1.35rem;
     }
@@ -524,9 +524,9 @@
         <div class="eyebrow">For microschools & homeschool co-ops</div>
         <h1>Know where your school stands — <em>without spreadsheets.</em></h1>
         <p>
-          Microschool Ledger handles tuition billing, sibling discounts, Florida Step-Up scholarship credits,
-          family collections, and parent account access in one warm, purpose-built system — so you can spend
-          your time teaching, not chasing invoices.
+          Microschool Ledger handles annual tuition, flat semester fees, sibling discounts, Florida Step-Up
+          scholarship credits, family collections, and parent account access in one warm, purpose-built system
+          — so you can spend your time teaching, not chasing invoices.
         </p>
 
         <div class="hero-actions">
@@ -767,8 +767,8 @@
           <ul class="clarity-points">
             <li>Action-oriented home dashboard with overdue follow-up built in</li>
             <li>Automatic monthly charge schedules based on enrollment and payment plan</li>
-            <li>Collections sorted by balance, with statement and payment shortcuts</li>
-            <li>Full P&amp;L and expense tracking as your school grows</li>
+            <li>Collections sorted by balance — with a celebration when every family is current</li>
+            <li>Your invoice, your branding: custom title, payment instructions, and reply-to per school</li>
           </ul>
         </article>
 
@@ -927,13 +927,24 @@
         </article>
 
         <article class="feature-card">
+          <div class="feature-icon">📅</div>
+          <h3>Short-term & semester courses</h3>
+          <p>For enrichment programs, elective classes, and workshops that don't run on an annual tuition model — terms instead of school years.</p>
+          <ul class="feature-list">
+            <li>Term-based enrollment (Fall 2026, Spring 2027) with flat fee per term</li>
+            <li>Student or adult/family participant types — no "parent as student" clutter</li>
+            <li>Roster view: enrolled vs. paid count per class term at a glance</li>
+          </ul>
+        </article>
+
+        <article class="feature-card">
           <div class="feature-icon">📬</div>
           <h3>Collections & statements</h3>
-          <p>One-click family statements, automated overdue reminders with an admin-review queue, and a clear view of who needs attention this month.</p>
+          <p>One-click family statements, automated reminders with a preview-before-send queue, and a clear view of who needs follow-up this month.</p>
           <ul class="feature-list">
             <li>Highest-balance-first collections view</li>
-            <li>Automated reminders — admin approves before any email sends</li>
-            <li>Printable statements with per-charge invoice numbers</li>
+            <li>Preview each reminder — recipient, balance, and email text — before it sends</li>
+            <li>Replies go to your school's inbox, not a no-reply address</li>
           </ul>
         </article>
 
@@ -945,6 +956,17 @@
             <li>Passwordless sign-in flow</li>
             <li>Multi-year account view</li>
             <li>Invoice access without admin intervention</li>
+          </ul>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Invoices & school branding</h3>
+          <p>Your invoice looks like it came from your school — custom title, payment instructions, and reply-to email. No code changes required.</p>
+          <ul class="feature-list">
+            <li>Custom invoice title (e.g. "Tuition Invoice", "Statement of Account")</li>
+            <li>Payment instructions block: Venmo handle, check payable-to, bank info</li>
+            <li>Per-charge invoice numbers for Step-Up documentation (2026–27+)</li>
           </ul>
         </article>
 
@@ -963,22 +985,23 @@
       <div class="feature-highlight">
         <div class="feature-highlight-icon">🧾</div>
         <div class="feature-highlight-body">
-          <div class="eyebrow" style="margin-bottom:.65rem;">Flat charges &amp; elective fees</div>
-          <h3>Semester fees, workshop charges, and materials fees — alongside tuition, in the same invoice.</h3>
+          <div class="eyebrow" style="margin-bottom:.65rem;">Built for enrichment providers &amp; elective programs</div>
+          <h3>Flat fees, semester terms, and workshop charges — alongside annual tuition, in the same system.</h3>
           <p>
-            Not every school runs on annual tuition. Add a $300 Writing Workshop fee, a $50 registration charge,
-            or a $150 materials bill for any student. Flat charges and enrollment-based tuition both appear on
-            the same family statement, reconcile to the same balance, and show up in the family portal.
+            Not every school runs on annual tuition. Add a $300 Writing Workshop fee or a $50 materials charge
+            as a flat charge alongside any enrollment. Or flag a program as short-term and run it by term
+            (Fall 2026, Spring 2027) with a flat fee per session — complete with a roster view showing
+            enrolled vs. paid per term.
           </p>
           <ul class="feature-list">
-            <li>Per-student or family-level charges with due dates and categories</li>
-            <li>Flat charges and annual tuition coexist — no separate reconciliation needed</li>
-            <li>Built for enrichment providers, elective instructors, and hybrid programs</li>
+            <li>Flat charges: per-student or family-level fees with due dates — no separate reconciliation</li>
+            <li>Short-term programs: term-based enrollment with flat fees, not annual payment grids</li>
+            <li>Both models coexist in one school — annual tuition families and semester-fee students on the same platform</li>
           </ul>
         </div>
         <div class="feature-highlight-stat">
           <strong>54%</strong>
-          <span>of Florida's 2,921 Step-Up providers charge flat semester fees. Microschool Ledger handles both billing models simultaneously.</span>
+          <span>of Florida's 2,921 Step-Up providers are enrichment or elective programs. Microschool Ledger now handles both flat fees and semester courses for that majority.</span>
         </div>
       </div>
     </div>
