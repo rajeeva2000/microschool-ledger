@@ -1,6 +1,6 @@
 # Grow ERP — Data Model
 
-**Last updated:** March 2026 (flat charges)
+**Last updated:** April 2026 (Feature 2: short-term / adult programs)
 
 All data lives in a single shared Firestore collection called **`appdata`**. Each logical entity type is stored as a JSON-serialized string in a named field on a shared document (not as individual Firestore documents). The `storage` adapter handles the get/set against this structure.
 
@@ -81,39 +81,44 @@ Stored in a compacted format in Firestore (field names shortened, `monthlyCharge
 ```js
 {
   id: string,                     // e.g. 'enr-abc123'
-  studentId: string,              // FK → Student.id
+  studentId: string,              // FK → Student.id; absent for adult-type program enrollments
+  familyId: string,               // FK → Family.id; present instead of studentId for adult programs
   programId: string,              // FK → Program.id
-  schoolYear: string,             // e.g. '2026-2027'
+  schoolYear: string,             // e.g. '2026-2027'; matches term.schoolYear for short-term programs
+  term: string,                   // term ID (e.g. 'fall-2026'); only present for short-term programs
   status: 'active' | 'inactive',
   startDate: string,              // 'YYYY-MM-DD', optional
   endDate: string,                // 'YYYY-MM-DD', set when status = 'inactive'
   endType: 'withdrawn' | 'graduated' | string,   // reason for deactivation
-  planId: string,                 // e.g. 'pplan-tuewed-2026-12mo'
+  planId: string,                 // e.g. 'pplan-tuewed-2026-12mo'; absent for short-term enrollments
   annualTuition: number,          // total annual charge (snapshot from pricing rules)
-  depositAmount: number,          // deposit portion = annualTuition × depositPct/100
+  depositAmount: number,          // deposit portion = annualTuition × depositPct/100; 0 for short-term
   monthlyCharges: {               // keyed object; values are dollar amounts
-    'enrollment-reserve': number, // upfront deposit, NOT a calendar month
-    june: number,
-    july: number,
-    august: number,
-    september: number,
-    october: number,
-    november: number,
-    december: number,
-    january: number,
-    february: number,
-    march: number,
-    april: number,
+    'enrollment-reserve': number, // upfront deposit, NOT a calendar month (annual programs only)
+    june: number,                 // present for annual programs
+    // ... july through may ...
     may: number,
+    // OR for short-term programs, a single term-ID key:
+    'fall-2026': number,          // flat fee for this term; key is the term's id from program.termsByYear
   }
 }
 ```
 
-**monthlyCharges invariants:**
+**monthlyCharges invariants — annual programs:**
 - `enrollment-reserve + sum(all month values) === annualTuition` must always hold
 - `enrollment-reserve` is the deposit, due in `plan.depositMonth` (currently March for 2026-2027)
 - Regular month slots that are outside the payment window are `0`, not omitted
 - Last payment month absorbs any rounding remainder so the sum is exact
+
+**monthlyCharges for short-term programs:**
+- Contains a single key equal to the term's `id` (e.g. `{ 'fall-2026': 200 }`)
+- Keys that are not `enrollment-reserve` or a calendar month name are treated as **flat term charges** — always counted as current regardless of date
+- `computeFamilyBalances` sums all unknown keys as immediately current
+
+**Enrollment identity rules:**
+- Annual / student programs: `studentId` is required; `familyId` is absent or derived from the student
+- Short-term / adult programs: `familyId` is present; `studentId` is absent (`!e.studentId`)
+- An enrollment with both `studentId` and `familyId` is treated as a student enrollment (studentId takes precedence)
 
 **Firestore compacted format** (what's actually stored):
 ```js
@@ -179,6 +184,11 @@ Imported from the Florida EMA/StepUp scholarship portal (tab-delimited CSV paste
 {
   id: string,                     // e.g. 'prog-tuewed'
   name: string,                   // default display name
+  color: string,                  // hex color for UI display, e.g. '#4F46E5'
+
+  // ── Annual programs (shortTerm: false or absent) ─────────────────────────
+  shortTerm: false,               // absent or false → annual program with pricingRules + payment plans
+  participantType: 'student',     // default; annual programs always enroll students
   paymentPlansByYear: {
     '2025-2026': [
       {
@@ -193,6 +203,25 @@ Imported from the Florida EMA/StepUp scholarship portal (tab-delimited CSV paste
     ],
     '2026-2027': [ /* ... */ ],
   },
+
+  // ── Short-term programs (shortTerm: true) ─────────────────────────────────
+  shortTerm: true,                // true → term-based; no pricingRules lookup, no payment plans
+  participantType: 'student' | 'adult',
+  //   'student' → enrollment stores studentId; shows in student-type roster
+  //   'adult'   → enrollment stores familyId (no studentId); excluded from student headcount in Reports
+  termsByYear: {
+    '2025-2026': [
+      {
+        id: string,               // e.g. 'fall-2025'; used as the key in enrollment.monthlyCharges
+        label: string,            // e.g. 'Fall 2025'
+        amount: number,           // flat fee for this term, e.g. 200
+        schoolYear: string,       // '2025-2026' (mirrors the outer key; stored for convenience)
+      },
+    ],
+    '2026-2027': [ /* ... */ ],
+  },
+
+  // ── Shared ────────────────────────────────────────────────────────────────
   scheduleByYear: {
     '2025-2026': {
       days: string[],             // e.g. ['Tuesday', 'Wednesday']
@@ -204,6 +233,18 @@ Imported from the Florida EMA/StepUp scholarship portal (tab-delimited CSV paste
   },
 }
 ```
+
+**Short-term vs annual — key differences:**
+
+| | Annual | Short-term |
+|---|---|---|
+| `shortTerm` field | `false` / absent | `true` |
+| Tuition source | `pricingRules` lookup | `program.termsByYear[year][term].amount` |
+| Payment structure | `paymentPlansByYear` | flat fee per term, no deposit |
+| Enrollment key | `studentId` (student-type) | `studentId` or `familyId` (adult-type) |
+| `monthlyCharges` shape | `{ 'enrollment-reserve', june … may }` | `{ [termId]: amount }` |
+| Appears in Reports headcount | always | only when `participantType: 'student'` |
+| Appears in Roster view | no | yes |
 
 **Year-specific display names** are NOT stored on the program record. They come from the `PROGRAM_NAMES_BY_YEAR` constant in `index.html`:
 

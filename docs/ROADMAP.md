@@ -17,8 +17,9 @@ We have one paying customer (Grow). Before building for a new segment or adding 
 
 - ~~**Parent portal blank page fix**~~ — **done**: `needsEmail` inline email form replaces `window.prompt`; isolated-localStorage in-app browsers now show a confirm-email form instead of failing silently
 - ~~**Node.js 22 upgrade**~~ — **done**: `functions/package.json` updated to `"node": "22"`
+- ~~**"Are you on track?" Home card**~~ — **done**: Collection Progress card on Home; green/amber/red progress bar comparing total received vs. past-due expected; links to Finances → Cash Flow
+- ~~**Home "needs attention" list**~~ — **done**: Action Items section on Home; overdue families sorted by balance with inline "Record Payment" (Quick Pay) and "View Details" buttons
 - **Pricing tier system** — gate features by Essentials / Standard / Pro / Network subscription tier
-- **"Are you on track?" Home card** — Standard-tier summary card: season progress bar, % of projected revenue collected
 - **Financial health / break-even dashboard** — Pro-tier view in FinancesTab
 - **Tenant onboarding wizard** — guided first-login flow for new schools; sequences existing OnboardingWizard + StepUpImportModal + RosterImportModal as post-setup steps; sets `onboardingComplete: true`
   > Brand decisions needed first — see `docs/BRAND.md` → Open Roadmap Items
@@ -48,16 +49,15 @@ New sub-view in FinancesTab (alongside P&L, Budget, Expenses, Categories).
 
 - ~~**Season progress bar**~~ — **done**: Collection Progress card on Home with green/amber/red progress bar
 - ~~**Family health indicator dots**~~ — **done**: FamilyCardV2 shows color-coded status badge (Paid in Full / Overdue / Balance Due) + matching card border color
+- ~~**Quick Pay from Home**~~ — **done**: "Record Payment" button on each overdue family row in Action Items opens the payment modal pre-filled for that family
 - **Enrollment countdown chip** — badge on Home counting down days until the deposit month opens (reads from payment plan config)
-- **Quick Pay from Home** — clicking a family in the overdue list opens the payment modal pre-filled for that family
+  > Verified not yet built (2026-04-12)
 
 ---
 
 ## Medium features
 
-- **Home "needs attention" list** — prioritized: overdue families, students without upcoming-year enrollments, enrollments missing a payment plan
-- **Payment receipt email** — after recording a payment, "Send receipt" button generates a pre-filled email via Resend
-  > Email template spec in `docs/BRAND.md`; must use MSLMark, not GrowLogo
+- ~~**Payment receipt email**~~ — **done**: receipt email auto-sends via `sendPaymentReceipt` Cloud Function whenever a payment is recorded for a family with a `portalEmail`; includes amount, date, method, and remaining balance.
 - **Payment plan automation** — generate a full expected schedule on enrollment creation; flag missed payments automatically
 - **Accounting export** — QuickBooks-compatible CSV or IIF from Finances tab
 - **Accounting integrity / double-entry journal** — immutable payments (void instead of delete/edit), parallel journal layer, Verify Books tool, optional period closing. Full spec: `docs/ACCOUNTING-SPEC.md`. Build in phases — Phase 1 (immutable payments) is safe to start any time.
@@ -94,14 +94,102 @@ Grow's live data uses the annual tuition model. **All new enrollment types must 
 
 ### Feature 2: Semester / short-term courses *(unlocks structured class providers)*
 
-Introduce "term" as a first-class concept (e.g. `fall-2026`, `spring-2027`, `6wk-oct-2026`) alongside `schoolYear`.
+> **Grow use case:** parent workshop class, $200/trimester, "pay as you're able." Needs enrolled-vs-paid roster per term. This is the same feature that 55% of the StepUp provider market (enrichment/electives) needs.
 
-**Implementation approach (additive, safe for Grow):**
-- `term` field on enrollment records is optional; if absent, existing annual behavior is unchanged
-- `buildMonthlyCharges` already handles `paymentMonths=1` with `depositPct=0` for a flat single-payment term — no changes to the function needed
-- EnrollmentWizard: new optional "Term" picker shown only when program is flagged as short-term
-- Enrollments and Reports: filter by term in addition to year
-- Grow's programs have no `term` flag set; they see zero UI change
+> **Status: SHIPPED** in `claude/firebase-email-notification-P2p9N`. All 5 phases complete: ProgramModal config, Add Enrollment modal, balance calculations, Roster view, Reports headcount filter. Enrollment compaction (`xmc`, `fi`, `tm` fields) preserves short-term data across auto-saves.
+
+#### Core design decisions
+
+**1. Class-level participant type, not person-level**
+
+Programs are flagged as `participantType: 'student' | 'adult'` rather than tagging individual people records. This means:
+- No "parent as student" pollution of the student list
+- Student-type programs: enroll a student → enrollment has `studentId`
+- Adult-type programs: enroll a family → enrollment has `familyId` (no `studentId`)
+- Enrollment dropdown for student programs shows only student records
+- Enrollment dropdown for adult programs shows family contacts (already in the system)
+- Student headcount in Reports only counts `student`-type program enrollments
+
+**2. Term replaces school year for short-term programs**
+
+Programs flagged `shortTerm: true` use terms (e.g. "Fall 2026", "Spring 2027") instead of a school year. Terms are defined per program, stored in `program.termsByYear`, mirroring the existing `paymentPlansByYear` pattern. Annual programs (Grow's Core, Enrichment) are completely unaffected — they have no `shortTerm` flag and never see term UI.
+
+**3. Flat fee billing via existing `buildMonthlyCharges`**
+
+`buildMonthlyCharges(amount, 0, 1, startMonth)` already produces a single-charge month entry with no deposit — no changes to the calculation function needed. For "pay as you're able," the full suggested amount is stored as a charge; partial payments reduce the balance naturally.
+
+---
+
+#### Data model changes
+
+**Programs — new fields (all optional, default to existing behavior):**
+```js
+{
+  shortTerm: false,               // true → term-based instead of school-year-based
+  participantType: 'student',     // 'student' | 'adult'
+  termsByYear: {
+    '2026-2027': [
+      { id: 'fall-2026',   label: 'Fall 2026',   amount: 200 },
+      { id: 'spring-2027', label: 'Spring 2027', amount: 200 },
+    ]
+  }
+}
+```
+
+**Enrollment records — new optional fields:**
+```js
+{
+  // Existing fields unchanged for annual enrollments
+  studentId: 'stu-123',    // present for student-type programs
+  familyId:  'fam-456',    // present instead of studentId for adult-type programs
+  term: 'fall-2026',       // present for short-term enrollments; absent for annual
+  // monthlyCharges, annualTuition, depositAmount, planId — same shape as today
+}
+```
+
+Grow's existing enrollment records have none of the new fields and are never touched.
+
+---
+
+#### Build phases
+
+**Phase 1 — Program configuration**
+- Add `shortTerm`, `participantType`, `termsByYear` to program schema
+- Update `ProgramModal` to configure these fields:
+  - "Short-term program" toggle
+  - When enabled: participant type selector (Students / Adults/Families)
+  - Term management table: add/remove terms with label and flat amount per school year
+
+**Phase 2 — Enrollment creation**
+- Update "Add Enrollment" modal:
+  - If program is `shortTerm`: show term picker instead of payment plan picker; amount comes from term definition
+  - If program is `participantType: 'adult'`: show family picker instead of student picker; enrollment record stores `familyId`
+  - Preview shows: term label, flat amount, single payment
+- `buildMonthlyCharges(amount, 0, 1, firstMonthOfTerm)` — no changes to the function itself
+- Enrollment record stores `term` field; `studentId` is null for adult programs
+
+**Phase 3 — Balance calculations**
+- `computeFamilyBalances` currently resolves family via `enrollment.studentId → student.familyId`
+- Add fallback: if `enrollment.familyId` is set directly, use it — one extra check, no restructuring
+
+**Phase 4 — Roster view**
+- New view in Enrollments tab (or accessible from a program card in Setup): "Class Roster"
+- Grouped by program + term: shows each enrolled family/student, amount charged, amount paid, outstanding
+- This is the enrolled-vs-paid view Grow needs for the parent class
+
+**Phase 5 — Reports / headcount**
+- Student count in Reports filters to `participantType: 'student'` programs only
+- Short-term program revenue appears in P&L and cash flow under its own program name
+
+---
+
+#### Grow safety constraints (must hold across all phases)
+
+- `shortTerm` defaults to absent/false — Grow's programs never show term UI
+- Annual `buildMonthlyCharges` logic is completely untouched
+- `studentId` remains required for student-type programs; only adult-type programs omit it
+- No migrations touch existing enrollment records
+- Batch enrollment wizard (used for annual re-enrollment) ignores short-term programs entirely
 
 ### Feature 3: Session log for drop-in billing *(smaller slice — 4% of market, build last)*
 
@@ -114,6 +202,30 @@ A `{slug}-sessions` document records attendance per student per date. A "generat
 - **Year-over-year comparison in Reports** — side-by-side: this year vs. last year, enrollment counts and revenue by program
 - **Program capacity tracking** — seat limit per program/year; available vs. enrolled in Enrollments and Home
 - **Per-tenant branding** — tenant logo alongside MSL mark; GrowLogo is The Grow Co-op's placeholder only
+
+---
+
+## Security & Data Privacy
+
+### Completed (this session)
+
+| Item | Fix | Notes |
+|------|-----|-------|
+| Superuser identity via email string | Custom claim `{ superuser: true }` set by `grantTenantAccess` via Admin SDK; `isSuperUser()` in rules checks claim (email as fallback during transition) | Custom claims can only be set server-side; email could theoretically be changed |
+| `ownerEmail` in public `tenants` collection | Moved to private `tenantSecrets/{slug}`; functions read secrets-first with legacy fallback | `tenants` is publicly readable for SchoolFinder; `ownerEmail` is PII |
+| `sendSignInLink` spam relay | Email pre-validated against `{slug}-families` before link is generated; unregistered emails silently succeed | Prevents using the function to send emails to arbitrary addresses |
+| `sendSignInLink` rate limiting | 5-minute per-address cooldown keyed by SHA-256(email) in `signInRateLimit` collection (Admin SDK only) | Prevents flooding a registered family's inbox |
+| Hardcoded `OWNER_EMAIL` in client bundle | Replaced with `ownerEmail` state loaded from `tenantSecrets` / legacy `tenantConfig` fallback | Removed PII from the compiled JS bundle |
+
+### Remaining — prioritized
+
+| Priority | Item | When to do it |
+|----------|------|---------------|
+| ~~**High**~~ | ~~**Portal PII: all-families doc readable by portal users**~~ — **done**: `getPortalFamilyData` Cloud Function returns only the caller's own family record (Admin SDK read, server-side filter). `{slug}-families` removed from `isPortalReadableDoc` in firestore.rules — portal users can no longer read the full families blob directly. | Shipped `claude/review-validation-rules-KSwXJ` |
+| **Medium** | **App Check / reCAPTCHA enforcement** — `sendSignInLink` and `requestPortalAccess` have no attestation requirement; a bot could call them programmatically. Rate limiting mitigates `sendSignInLink`, but `requestPortalAccess` is still open. | When portal usage grows and you want automated abuse protection. Requires enabling reCAPTCHA Enterprise in Firebase Console + 3–4 lines in `src/firebase.js`. |
+| **Medium** | **Audit logging for super-user operations** — tenant creates, deletes, `bootstrapTenantAccess` runs, and super-user logins to tenant apps are not written to any audit trail. | When you have 3+ paying customers and need accountability for platform-level actions. |
+| **Low** | **`signInRateLimit` TTL / cleanup** — rate limit docs never expire; Firestore accumulates one doc per unique email hash indefinitely. | Add a Firestore TTL policy on the collection (1-day TTL) once the collection has been live for a few months. No code change needed — set via Firebase Console → Firestore → TTL policies. |
+| **Low** | **Existing `ownerEmail` in `tenants/grow`** — the Grow tenant's `ownerEmail` still lives in the public `tenants` doc (written before the `tenantSecrets` migration). Functions read `tenantSecrets` first so the behavior is correct; the legacy field is just residual PII. | Clean up manually in Firebase Console: delete the `ownerEmail` field from `tenants/grow` after confirming `tenantSecrets/grow.ownerEmail` is populated. 2-minute task. |
 
 ---
 
@@ -196,6 +308,13 @@ See the "Larger features" section for the implementation items derived from this
 
 | Session / Branch | What shipped |
 |------------------|-------------|
+| `claude/customizable-invoice-templates-Bk7V6` | **Collections UX** — $0-balance families auto-purged from reminder queue (useEffect with `.length` deps + display-level safety filter); "Review & Send" preview modal before firing email; "All families are current! 🌟" celebration card when all balances are paid; thin green progress bar in Current stat card showing fraction of families paid through this month |
+| `claude/customizable-invoice-templates-Bk7V6` | **Security audit — 5 items closed** (see Security section below for details): superuser custom claim; `ownerEmail` moved to private `tenantSecrets` collection; `sendSignInLink` email pre-validation; `sendSignInLink` per-address rate limiting (5 min / SHA-256 keyed); hardcoded `OWNER_EMAIL` replaced with tenant-config-driven state |
+| `claude/customizable-invoice-templates-Bk7V6` | **Firestore rules hardening** — `isPortalReadableDoc` rewritten from `split/slice/join` to `key.matches()` (emulator `list.join()` unreliable); `tenantSecrets/{slug}` collection (admin-read-only, superuser-write-only); `signInRateLimit/{hash}` collection (deny all client access) |
+| `claude/customizable-invoice-templates-Bk7V6` | **`handleApproveReminder` fixed** — now computes live balance via `getFamilyBalances` and passes `clientBalance` + `schoolYear` to `sendPaymentReminderManual`; previously sent frozen queue balance |
+| `claude/customizable-invoice-templates-Bk7V6` | **Unit tests 86 → 100** — 14 new tests for `isValidSlug` (slug validation invariants); portal grant security spec (7 tests); viewer grant enforcement (2 tests) |
+| `claude/customizable-invoice-templates-Bk7V6` | **Customizable invoice templates** — `invoiceTitle`, `paymentInstructions`, `replyToEmail` fields in Setup → School Info; invoice title replaces hardcoded "INVOICE"; payment instructions block rendered on invoice before footer; `reply_to` header added to all parent-facing Resend sends (portal invite, sign-in link, payment reminders) |
+| `claude/customizable-invoice-templates-Bk7V6` | **Onboarding wizard fix** — `completeOnboarding` now writes `orgName` to `tenants/{slug}.name` so school name flows into invoices and emails immediately; "What's next" card on review step points to School Info branding fields |
 | `claude/build-flat-charge-feature-twGjS` | **Data integrity & backup** — two-layer auto-save guard (length > 0 + `_loadErrorKeys` null-return fix) prevents silent data wipe across all 5 collections; clear buttons use explicit `storage.set`; nightly GCS backup (`scheduledDailyBackup`) + `listBackups` + `restoreBackup` callables; one-click restore in Setup → Data Tools |
 | `claude/build-flat-charge-feature-twGjS` | **Reminder diagnostics** — `buildReminderQueueNow` returns full skip-reason breakdown (`familiesChecked`, `skippedZeroBal`, `skippedInQueue`, `skippedCooldown`, `skippedPaused`, `skippedNoPortal`); alert shows reason count per category; reminder helpers extracted to `calculations.js` (ESM) + `functions/reminderHelpers.js` (CJS) |
 | `claude/build-flat-charge-feature-twGjS` | **Email branding** — tenant logo in all parent-facing emails (sign-in link, payment reminders); BCC `info@microschoolledger.com` on all outbound; CC `info@microschoollearning.com` removed |
