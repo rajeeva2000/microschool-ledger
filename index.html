@@ -117,7 +117,7 @@
       display:grid; grid-template-columns:1.1fr .9fr; gap:3rem; align-items:center; position:relative; z-index:1;
     }
     .hero-copy h1{
-      color:white; font-size:clamp(2.6rem, 5vw, 4.2rem); margin-bottom:1.25rem; max-width:12ch;
+      color:white; font-size:clamp(2.6rem, 5vw, 4.2rem); margin-bottom:1.25rem;
     }
     .hero-copy h1 em{ color:var(--gold); font-style:italic; }
     .hero-copy p{
@@ -434,6 +434,59 @@
     .field:focus{ outline:none; border-color:var(--pine); background:white; }
     .small{ font-size:.8rem; color:var(--muted); line-height:1.55; }
 
+    .dashboard-preview{
+      background:var(--pine-dark);
+    }
+    .dashboard-preview .eyebrow{ color:var(--grass); }
+    .dashboard-preview h2{ color:white; margin-bottom:2rem; }
+    .dashboard-preview .hero-panel{ max-width:680px; margin:0 auto; }
+
+    /* ── MOBILE MENU ── */
+    .ham-bars{ display:none; }
+    #mobile-menu{
+      display:none;
+      position:fixed; top:68px; left:0; right:0; z-index:999;
+      background:rgba(45,53,40,.97); backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.1);
+      padding:1.25rem; gap:.4rem;
+      transform:translateY(-110%);
+      transition:transform .25s ease;
+      pointer-events:none;
+    }
+    @media (max-width:760px){
+      .ham-bars{
+        display:flex; flex-direction:column; justify-content:center; gap:5px;
+        width:22px; height:22px; margin-left:.6rem; flex-shrink:0;
+      }
+      .ham-bars span{
+        display:block; width:22px; height:2px; background:white; border-radius:2px;
+        transition:transform .22s ease, opacity .18s ease;
+        transform-origin:center;
+      }
+      .brand-toggle[aria-expanded="true"] .ham-bars span:nth-child(1){
+        transform:translateY(7px) rotate(45deg);
+      }
+      .brand-toggle[aria-expanded="true"] .ham-bars span:nth-child(2){
+        opacity:0; transform:scaleX(0);
+      }
+      .brand-toggle[aria-expanded="true"] .ham-bars span:nth-child(3){
+        transform:translateY(-7px) rotate(-45deg);
+      }
+      #mobile-menu{
+        display:grid;
+      }
+      #mobile-menu.open{
+        transform:translateY(0);
+        pointer-events:auto;
+      }
+      #mobile-menu a{
+        display:block; padding:.75rem 1rem; color:rgba(255,255,255,.82);
+        border-radius:8px; text-decoration:none; font-size:.94rem; font-weight:500;
+      }
+      #mobile-menu a:hover{ background:rgba(255,255,255,.07); color:white; }
+      #mobile-menu .btn-primary{ text-align:center; margin-top:.5rem; display:block; }
+    }
+
     footer{ background:var(--pine-dark); color:rgba(255,255,255,.72); padding:2rem 0; }
     .footer-wrap{
       display:flex; justify-content:space-between; gap:1rem; align-items:center; flex-wrap:wrap;
@@ -492,7 +545,7 @@
 <body>
   <nav>
     <div class="nav-inner">
-      <a class="brand" href="#top" aria-label="Microschool Ledger home">
+      <a class="brand brand-toggle" href="#top" id="brand-toggle" aria-label="Microschool Ledger home" aria-expanded="false">
         <svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true">
           <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
           <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.3" opacity="0.9"/>
@@ -502,6 +555,7 @@
           <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
         </svg>
         <span>Microschool Ledger</span>
+        <span class="ham-bars" aria-hidden="true"><span></span><span></span><span></span></span>
       </a>
 
       <div class="nav-links">
@@ -518,8 +572,20 @@
     </div>
   </nav>
 
+  <div id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+    <a href="#problem">The problem</a>
+    <a href="#stepup">Step-Up</a>
+    <a href="#clarity">Financial clarity</a>
+    <a href="#portal">Family portal</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#resources">Resources</a>
+    <a href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener">Try demo ↗</a>
+    <a href="https://app.microschoolledger.com" target="_blank" rel="noopener">Log in ↗</a>
+    <a href="#contact" class="btn btn-primary">Request a demo</a>
+  </div>
+
   <header class="hero" id="top">
-    <div class="container hero-grid">
+    <div class="container">
       <div class="hero-copy">
         <div class="eyebrow">For microschools & homeschool co-ops</div>
         <h1>Know where your school stands — <em>without spreadsheets.</em></h1>
@@ -536,96 +602,10 @@
         <div class="hero-proof">Built by The Grow Co-op in Boca Raton, Florida. In active production since 2024. &nbsp;·&nbsp; <a href="#pricing" style="color:rgba(255,255,255,.42);text-decoration:underline;text-underline-offset:3px;">See pricing</a></div>
       </div>
 
-      <div class="hero-panel" aria-label="Microschool Ledger preview">
-        <div class="panel-top">
-          <div class="panel-title">Morning briefing</div>
-          <div class="panel-badge">On track</div>
-        </div>
-
-        <div class="panel-body">
-          <div class="briefing">
-            <div class="briefing-label">Financial health</div>
-            <h3>You're on track for a $4,200 surplus this year.</h3>
-            <p>
-              Collections are steady, Step-Up credits are posting cleanly, and only two families
-              need a follow-up this week.
-            </p>
-          </div>
-
-          <div class="mini-grid">
-            <div class="mini-card">
-              <div class="mini-kicker">Collected so far</div>
-              <div class="mini-value">$84,320</div>
-              <div class="mini-copy">78% of projected tuition collected across direct payments and Step-Up.</div>
-            </div>
-            <div class="mini-card">
-              <div class="mini-kicker">Parent portal</div>
-              <div class="mini-value">24</div>
-              <div class="mini-copy">Families can check balances and print invoices without emailing your admin.</div>
-            </div>
-          </div>
-
-          <div class="attention-list">
-            <div class="attention-row">
-              <div style="display:flex;gap:.7rem;align-items:flex-start;">
-                <span class="dot dot-red"></span>
-                <div>
-                  <strong>Rivera family</strong>
-                  <span>Balance due $620 • Last payment 18 days ago</span>
-                </div>
-              </div>
-              <span class="tag tag-portal">Portal active</span>
-            </div>
-
-            <div class="attention-row">
-              <div style="display:flex;gap:.7rem;align-items:flex-start;">
-                <span class="dot dot-yellow"></span>
-                <div>
-                  <strong>Morris family</strong>
-                  <span>Awaiting Step-Up credit for Film Workshop invoice</span>
-                </div>
-              </div>
-              <span class="tag tag-stepup">Step-Up</span>
-            </div>
-
-            <div class="attention-row">
-              <div style="display:flex;gap:.7rem;align-items:flex-start;">
-                <span class="dot dot-green"></span>
-                <div>
-                  <strong>Patel family</strong>
-                  <span>Paid in full this month with direct payment + scholarship credit</span>
-                </div>
-              </div>
-              <span class="tag tag-stripe">Stripe</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </header>
 
   <div class="gold-stripe"></div>
-
-  <section class="trust-bar">
-    <div class="container trust-grid">
-      <div class="trust-item">
-        <div class="trust-icon">⏳</div>
-        <div><strong>10+ hours back</strong><span>Reduce monthly admin work and stop rebuilding the same invoices by hand.</span></div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">🧾</div>
-        <div><strong>Two payment streams, one balance</strong><span>Direct payments and Step-Up credits reconcile in the same family ledger.</span></div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">🌐</div>
-        <div><strong>Parent self-service</strong><span>Families can check balances, payment history, and invoices on their own.</span></div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">☁️</div>
-        <div><strong>No servers. Nightly backups.</strong><span>Runs in a browser with automatic nightly backups and one-click restore — no IT required.</span></div>
-      </div>
-    </div>
-  </section>
 
   <section class="section problem" id="problem">
     <div class="container">
@@ -668,6 +648,94 @@
             not enterprise software that adds more cognitive load.
           </p>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dashboard-preview">
+    <div class="container">
+      <div class="eyebrow">See it in action</div>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);">What it looks like from the inside.</h2>
+      <div class="hero-panel" aria-label="Microschool Ledger preview">
+        <div class="panel-top">
+          <div class="panel-title">Morning briefing</div>
+          <div class="panel-badge">On track</div>
+        </div>
+        <div class="panel-body">
+          <div class="briefing">
+            <div class="briefing-label">Financial health</div>
+            <h3>You're on track for a $4,200 surplus this year.</h3>
+            <p>
+              Collections are steady, Step-Up credits are posting cleanly, and only two families
+              need a follow-up this week.
+            </p>
+          </div>
+          <div class="mini-grid">
+            <div class="mini-card">
+              <div class="mini-kicker">Collected so far</div>
+              <div class="mini-value">$84,320</div>
+              <div class="mini-copy">78% of projected tuition collected across direct payments and Step-Up.</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-kicker">Parent portal</div>
+              <div class="mini-value">24</div>
+              <div class="mini-copy">Families can check balances and print invoices without emailing your admin.</div>
+            </div>
+          </div>
+          <div class="attention-list">
+            <div class="attention-row">
+              <div style="display:flex;gap:.7rem;align-items:flex-start;">
+                <span class="dot dot-red"></span>
+                <div>
+                  <strong>Rivera family</strong>
+                  <span>Balance due $620 • Last payment 18 days ago</span>
+                </div>
+              </div>
+              <span class="tag tag-portal">Portal active</span>
+            </div>
+            <div class="attention-row">
+              <div style="display:flex;gap:.7rem;align-items:flex-start;">
+                <span class="dot dot-yellow"></span>
+                <div>
+                  <strong>Morris family</strong>
+                  <span>Awaiting Step-Up credit for Film Workshop invoice</span>
+                </div>
+              </div>
+              <span class="tag tag-stepup">Step-Up</span>
+            </div>
+            <div class="attention-row">
+              <div style="display:flex;gap:.7rem;align-items:flex-start;">
+                <span class="dot dot-green"></span>
+                <div>
+                  <strong>Patel family</strong>
+                  <span>Paid in full this month with direct payment + scholarship credit</span>
+                </div>
+              </div>
+              <span class="tag tag-stripe">Stripe</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-bar">
+    <div class="container trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon">⏳</div>
+        <div><strong>10+ hours back</strong><span>Reduce monthly admin work and stop rebuilding the same invoices by hand.</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🧾</div>
+        <div><strong>Two payment streams, one balance</strong><span>Direct payments and Step-Up credits reconcile in the same family ledger.</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🌐</div>
+        <div><strong>Parent self-service</strong><span>Families can check balances, payment history, and invoices on their own.</span></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">☁️</div>
+        <div><strong>No servers. Nightly backups.</strong><span>Runs in a browser with automatic nightly backups and one-click restore — no IT required.</span></div>
       </div>
     </div>
   </section>
@@ -1209,6 +1277,35 @@
   </footer>
 
   <script>
+    // Mobile menu — logo acts as hamburger toggle
+    (function () {
+      const toggle = document.getElementById('brand-toggle');
+      const menu   = document.getElementById('mobile-menu');
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', function (e) {
+        if (window.innerWidth > 760) return;
+        e.preventDefault();
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        menu.classList.toggle('open', !open);
+      });
+
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          toggle.setAttribute('aria-expanded', 'false');
+          menu.classList.remove('open');
+        });
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 760) {
+          toggle.setAttribute('aria-expanded', 'false');
+          menu.classList.remove('open');
+        }
+      });
+    }());
+
     const form = document.getElementById("demo-form");
     const formButton = form.querySelector('button[type="submit"]');
     const statusEl = document.createElement("p");
