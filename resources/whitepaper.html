@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Microschool Ledger — White Paper</title>
+  <meta name="description" content="The complete Microschool Ledger white paper: financial management for homeschool co-ops and microschools. Features, workflow, Step-Up reconciliation, AUP compliance, and pricing." />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pine: #3C4535;
+      --pine-dark: #2d3528;
+      --sand: #F8EDDD;
+      --offwhite: #F5F2ED;
+      --rock: #DDDFDE;
+      --grass: #ADB76D;
+      --gold: #c9a84c;
+      --ink: #1a1a1a;
+      --muted: #6b7066;
+      --shadow: 0 8px 40px rgba(0,0,0,.12);
+    }
+
+    body {
+      font-family: 'DM Sans', Arial, sans-serif;
+      background: #d9d4ca;
+      color: var(--ink);
+      padding: 2rem 1rem 4rem;
+      line-height: 1.7;
+    }
+
+    .doc {
+      max-width: 860px;
+      margin: 0 auto;
+      background: white;
+      box-shadow: var(--shadow);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .doc { box-shadow: none; border-radius: 0; }
+      .back-bar { display: none; }
+    }
+
+    /* Back bar */
+    .back-bar {
+      background: var(--offwhite);
+      border-bottom: 1px solid var(--rock);
+      padding: .65rem 3rem;
+      font-size: .82rem;
+      color: var(--muted);
+    }
+    .back-bar a { color: var(--pine); text-decoration: none; font-weight: 500; }
+    .back-bar a:hover { text-decoration: underline; }
+
+    /* Cover */
+    .cover {
+      background: var(--pine);
+      color: white;
+      padding: 3.5rem 3rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: "";
+      position: absolute;
+      right: -100px; top: -100px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(173,183,109,.07);
+    }
+    .cover-inner { position: relative; z-index: 1; }
+
+    .cover-logo {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 2.5rem;
+    }
+    .cover-logo svg { flex-shrink: 0; }
+    .cover-logo-name {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -.01em;
+    }
+
+    .cover-label {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      color: var(--grass);
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: .9rem;
+    }
+    .cover-label::before {
+      content: "";
+      width: 24px; height: 2px;
+      background: var(--grass);
+      display: block;
+    }
+
+    .cover h1 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: .6rem;
+      color: white;
+    }
+    .cover-sub {
+      color: rgba(255,255,255,.72);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin-bottom: 1.8rem;
+    }
+    .cover-meta {
+      font-size: .8rem;
+      color: rgba(255,255,255,.5);
+      border-top: 1px solid rgba(255,255,255,.12);
+      padding-top: 1.2rem;
+    }
+
+    /* Body */
+    .body { padding: 3rem; }
+
+    /* TOC */
+    .toc {
+      background: var(--offwhite);
+      border: 1px solid var(--rock);
+      border-radius: 6px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 3rem;
+    }
+    .toc-title {
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .85rem;
+    }
+    .toc ol {
+      list-style: none;
+      padding: 0;
+      columns: 2;
+      column-gap: 2rem;
+    }
+    .toc li {
+      padding: .2rem 0;
+      font-size: .88rem;
+      break-inside: avoid;
+    }
+    .toc a { color: var(--pine); text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+
+    /* Sections */
+    .wp-section { margin-bottom: 3.5rem; }
+    .wp-section:last-child { margin-bottom: 0; }
+
+    h2 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--pine);
+      margin-bottom: 1rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--grass);
+      line-height: 1.25;
+    }
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--pine-dark);
+      margin: 1.5rem 0 .5rem;
+    }
+    h4 {
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 1.2rem 0 .4rem;
+    }
+
+    p { margin-bottom: 1rem; font-size: .97rem; }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      padding-left: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    li {
+      font-size: .97rem;
+      margin-bottom: .35rem;
+      line-height: 1.6;
+    }
+
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+
+    /* Blockquote */
+    blockquote {
+      border-left: 3px solid var(--grass);
+      padding: .85rem 1.2rem;
+      margin: 1.5rem 0;
+      background: var(--offwhite);
+      border-radius: 0 6px 6px 0;
+      font-style: italic;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    /* Tables */
+    .table-wrap { overflow-x: auto; margin: 1.2rem 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .88rem;
+    }
+    th {
+      background: var(--pine);
+      color: white;
+      padding: .65rem .9rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: .8rem;
+      letter-spacing: .03em;
+    }
+    td {
+      padding: .6rem .9rem;
+      border-bottom: 1px solid var(--rock);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: var(--offwhite); }
+
+    /* Pricing cards */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .price-card {
+      border: 1px solid var(--rock);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .price-card.featured {
+      border-color: var(--grass);
+      border-width: 2px;
+    }
+    .price-head {
+      background: var(--pine);
+      color: white;
+      padding: 1.1rem 1.2rem .9rem;
+    }
+    .price-card.featured .price-head { background: var(--grass); }
+    .price-name {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: .2rem;
+    }
+    .price-sub { font-size: .78rem; opacity: .8; margin-bottom: .5rem; }
+    .price-amount { font-size: 1.5rem; font-weight: 700; }
+    .price-amount span { font-size: .78rem; font-weight: 400; opacity: .8; }
+    .price-body { padding: 1rem 1.2rem; }
+    .price-body ul { padding-left: 1.2rem; margin: 0; }
+    .price-body li { font-size: .84rem; margin-bottom: .3rem; }
+
+    /* Call-out box */
+    .callout {
+      background: var(--sand);
+      border: 1px solid rgba(201,168,76,.3);
+      border-radius: 8px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .callout strong { color: var(--pine); }
+
+    /* Pipeline stages */
+    .pipeline {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin: .8rem 0 1rem;
+    }
+    .stage {
+      background: var(--offwhite);
+      border: 1px solid var(--rock);
+      border-radius: 20px;
+      padding: .3rem .9rem;
+      font-size: .8rem;
+      color: var(--pine);
+      font-weight: 500;
+    }
+    .stage-arrow { color: var(--muted); align-self: center; font-size: .8rem; }
+
+    /* Divider */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--rock);
+      margin: 3rem 0;
+    }
+
+    /* Footer */
+    .doc-footer {
+      background: var(--pine);
+      color: rgba(255,255,255,.7);
+      padding: 1.8rem 3rem;
+      font-size: .82rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .doc-footer a { color: var(--grass); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .back-bar { padding: .65rem 1.2rem; }
+      .cover { padding: 2.5rem 1.5rem 2rem; }
+      .body { padding: 1.8rem 1.5rem; }
+      .toc ol { columns: 1; }
+      .doc-footer { padding: 1.5rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="doc">
+
+  <div class="back-bar">
+    <a href="/">← Microschool Ledger</a> &nbsp;/&nbsp; Resources &nbsp;/&nbsp; White Paper
+  </div>
+
+  <div class="cover">
+    <div class="cover-inner">
+      <div class="cover-logo">
+        <svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x=".5" y=".5" width="39" height="39" rx="6" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.25)" stroke-width=".75"/>
+          <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.2" opacity=".9"/>
+          <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width=".6" opacity=".2"/>
+          <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width=".6" opacity=".2"/>
+          <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width=".6" opacity=".2"/>
+          <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
+        </svg>
+        <span class="cover-logo-name">Microschool Ledger</span>
+      </div>
+
+      <div class="cover-label">White Paper</div>
+      <h1>Financial Management for Homeschool &amp; Microschool Co-ops</h1>
+      <p class="cover-sub">Purpose-built billing, enrollment, admissions, and Florida Step-Up reconciliation — for the way your co-op actually runs.</p>
+      <div class="cover-meta">Contact: <a href="mailto:rajeev@thegrowcoop.org" style="color:var(--grass);">rajeev@thegrowcoop.org</a> &nbsp;·&nbsp; The Grow Co-op LLC &nbsp;·&nbsp; Highland Beach, FL</div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#exec-summary">Executive Summary</a></li>
+        <li><a href="#problem">The Problem With Generic Tools</a></li>
+        <li><a href="#what-it-is">What Microschool Ledger Is</a></li>
+        <li><a href="#features">Features in Detail</a></li>
+        <li><a href="#workflow">The Annual Workflow</a></li>
+        <li><a href="#stepup">Florida Step-Up — Deep Dive</a></li>
+        <li><a href="#aup">AUP Compliance</a></li>
+        <li><a href="#pricing">Pricing Plans</a></li>
+        <li><a href="#whats-next">What's Next</a></li>
+        <li><a href="#getting-started">Getting Started</a></li>
+      </ol>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="wp-section" id="exec-summary">
+      <h2>Executive Summary</h2>
+      <p>Most homeschool co-ops and microschools manage finances with tools that were never built for them — and it shows. Tuition is tracked in spreadsheets. Step-Up scholarship disbursements are reconciled by hand. Invoices are built one at a time. Collections are reactive. Admissions and billing live in separate systems with no connection between them.</p>
+
+      <h3>The problem, in three points:</h3>
+      <ul>
+        <li>Families pay differently than businesses do — per-family sibling discounts, two separate payment streams (checks and state scholarships), and multiple programs with different schedules — none of which generic billing tools support natively</li>
+        <li>The administrative team is tiny: the person doing billing is also the teacher, the event coordinator, and often a parent; there's no margin for a steep learning curve or a tool that requires a manual</li>
+        <li>Florida's Step-Up for Students scholarship program creates a compliance obligation for every participating school — an adequate accounting system, proper fund classification, and expenditure documentation — that spreadsheets cannot satisfy</li>
+      </ul>
+
+      <h3>What Microschool Ledger does, in three points:</h3>
+      <ul>
+        <li>Handles the full family lifecycle end-to-end: public inquiry → admissions pipeline → enrolled family → tuition charges → Step-Up reconciliation → family portal → year-end audit — in one place, with no installation and no IT department</li>
+        <li>Eliminates the Step-Up reconciliation bottleneck: paste the EMA portal export and the system matches every disbursement to the right student and program automatically; re-imports are safe and deduplicated</li>
+        <li>Produces the accounting records a CPA needs for the AUP audit — P&amp;L, expense detail by category, scholarship funds received — with a one-click Export for CPA workbook</li>
+      </ul>
+
+      <blockquote>"Before Microschool Ledger, managing tuition required cross-referencing spreadsheets, manually reconciling StepUp portal exports, and building invoices by hand. Collections were reactive — overdue balances were discovered late."</blockquote>
+
+      <p>Microschool Ledger has been running at The Grow Co-op in South Florida since 2024, managing six-figure annual revenue across multiple programs, two payment sources, and 20–30 families. It is available now for homeschool cooperatives and microschools. To schedule a demo: <strong>rajeev@thegrowcoop.org</strong></p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Problem -->
+    <div class="wp-section" id="problem">
+      <h2>1. The Problem With Generic Tools</h2>
+      <p>Most homeschool co-ops and microschools start managing finances the same way: a Google Sheet for tuition tracking, a separate spreadsheet for expenses, an accounting app that was designed for a dental office, and a lot of manual work in between. For a small organization run by parents and teachers, this works — until it doesn't.</p>
+      <p>As enrollment grows and the Florida Step-Up for Students scholarship program adds a second payment stream to reconcile, the spreadsheet approach starts to crack.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>The problem</th><th>Why generic tools can't solve it</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Families, not individuals</strong></td><td>Most billing tools charge per student. Co-ops charge per family, with sibling discount tiers that vary by program — a structure no off-the-shelf tool supports natively.</td></tr>
+            <tr><td><strong>Two payment streams</strong></td><td>Family payments (check, Stripe) and Florida Step-Up scholarship disbursements arrive separately, on different schedules, and must be reconciled against the same tuition balance.</td></tr>
+            <tr><td><strong>Multiple programs</strong></td><td>A family might have one child in the Core Program and another in Film Workshop, each with its own pricing, schedule, and payment plan.</td></tr>
+            <tr><td><strong>Admissions to billing disconnect</strong></td><td>Families are tracked in one system during admissions, then re-entered in the billing system after enrollment — double data entry and mismatched records.</td></tr>
+            <tr><td><strong>Small administrative team</strong></td><td>The administrator billing families is also the teacher, the event coordinator, and often a parent. There's no time for a steep learning curve or a tool that requires a manual.</td></tr>
+            <tr><td><strong>No IT department</strong></td><td>Hosting, maintenance, backups, and software updates can't require a developer. The tool has to run without infrastructure.</td></tr>
+            <tr><td><strong>State scholarship compliance</strong></td><td>Step-Up for Students disbursements require specific documentation, invoice compliance language, and accurate attribution of payments to individual students by sequence number.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- What it is -->
+    <div class="wp-section" id="what-it-is">
+      <h2>2. What Microschool Ledger Is</h2>
+      <p>Microschool Ledger is a purpose-built financial management system for homeschool cooperatives and microschools. It handles the <strong>full family lifecycle</strong> — from the first public inquiry through the admissions pipeline, enrollment, monthly charge generation, payment reconciliation, collections, family self-service, and year-end reporting — in a single tool that understands how co-ops actually operate.</p>
+      <p>It was built from scratch at The Grow Co-op in South Florida and has been in active use since 2024, managing six-figure annual revenue across multiple programs, two payment sources, and 20–30 families.</p>
+
+      <h3>What makes it different:</h3>
+      <ul>
+        <li>Built specifically for co-ops — not adapted from a tool designed for businesses or schools</li>
+        <li>Family-based billing with sibling discount tiers, not per-student invoicing</li>
+        <li>Native Florida Step-Up for Students integration — no manual data entry from the portal</li>
+        <li>Full admissions pipeline from public inquiry to enrolled student, with one-click Convert-to-Family</li>
+        <li>No installation, no servers, no IT required — runs entirely in a web browser</li>
+        <li>No per-seat licensing — a flat monthly fee regardless of how many admins use it</li>
+        <li>Full audit log of every data change, with before/after state and user email</li>
+      </ul>
+
+      <p><strong>Technology:</strong> Microschool Ledger runs in any modern web browser, hosted on Firebase (Google's cloud infrastructure) with real-time data sync. All data is backed by Firestore, Google's managed database — no server to provision, no backups to configure, no maintenance windows. There is no installation. There is no app to download.</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Features -->
+    <div class="wp-section" id="features">
+      <h2>3. Features in Detail</h2>
+
+      <h3>3.1 Home Dashboard</h3>
+      <p>The home dashboard is action-oriented — it surfaces what needs attention immediately, rather than presenting a wall of charts.</p>
+      <ul>
+        <li><strong>Collection Progress card</strong> — inline progress bar (green/amber/red) showing the percentage of past-due expected revenue that has been collected</li>
+        <li><strong>StepUp import reminder</strong> — amber action card appears when no StepUp import has run in 7 or more days; shows pending count and prompts a re-import when payments clear</li>
+        <li>Overdue families flagged at the top with balance amounts</li>
+        <li>Enrollment counts by program and school year</li>
+        <li>Quick-action shortcuts to the most common workflows</li>
+        <li>Session tracking and login/logout audit trail</li>
+      </ul>
+
+      <h3>3.2 Admissions Pipeline</h3>
+      <p>The family relationship starts before enrollment. Microschool Ledger includes a full admissions system that takes a prospective family from first contact to enrolled student — with no re-keying of data between admissions and billing.</p>
+
+      <h4>Public forms — no login required:</h4>
+      <ul>
+        <li>A lightweight <strong>interest form</strong> captures contact info and custom questions, dropping submissions straight into the leads pipeline automatically</li>
+        <li>A full <strong>application form</strong> supports multiple students per family, multiple guardians, essay prompts, a required-document checklist, scholarship interest per student, and an <strong>electronic signature</strong> on submission</li>
+      </ul>
+
+      <h4>Two-stage pipeline:</h4>
+      <div class="pipeline">
+        <span class="stage">New</span><span class="stage-arrow">→</span>
+        <span class="stage">Contacted</span><span class="stage-arrow">→</span>
+        <span class="stage">Touring</span><span class="stage-arrow">→</span>
+        <span class="stage">Converted</span>
+      </div>
+      <div class="pipeline">
+        <span class="stage">Submitted</span><span class="stage-arrow">→</span>
+        <span class="stage">Reviewing</span><span class="stage-arrow">→</span>
+        <span class="stage">Interview</span><span class="stage-arrow">→</span>
+        <span class="stage">Accepted</span><span class="stage-arrow">→</span>
+        <span class="stage">Enrolled</span>
+      </div>
+
+      <p><strong>Convert to Family in one click</strong> — when an applicant is accepted and enrolled, their complete record (guardians, students, funding details) converts to a live family in the billing system. No duplicate data entry. No mismatched records.</p>
+      <p><strong>Pipeline reporting</strong> — live funnel counts by stage, plus a projected-revenue table that applies the school's own conversion-rate assumptions to forecast expected enrollment and tuition revenue.</p>
+      <p><strong>Configurable admissions</strong> (Setup → Admissions) — entry terms, grade range, essay prompts, required checklist items, optional application fee, and interest-form questions — all editable per school with no code changes.</p>
+
+      <h3>3.3 Families &amp; Students</h3>
+      <p>Microschool Ledger is organized around families, not individual students. Every record flows from a family, which carries the billing relationship, contact information, and family type.</p>
+      <ul>
+        <li>Primary parent name, family type, email, phone, and address</li>
+        <li>Smart status badges: Paid in Full, Balance Due, Payment Overdue</li>
+        <li>Auto-sorted by balance (highest owed first) for easy prioritization</li>
+        <li>Search and filter by name, status, or balance</li>
+        <li>Globe badge indicates which families have portal access enabled</li>
+      </ul>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Family type</th><th>Tuition structure</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Founding</strong></td><td>Lower tuition tier for founding members; sibling discounts apply</td></tr>
+            <tr><td><strong>Non-Founding (Standard)</strong></td><td>Standard tuition; sibling discounts apply</td></tr>
+            <tr><td><strong>Teacher</strong></td><td>Fixed rate per student; sibling discounts also apply</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>All family types and rates are configurable in Setup. Nothing is hardcoded.</p>
+
+      <h3>3.4 Catalog — Programs &amp; Fee Items</h3>
+      <p>The Catalog tab is the single place to define everything that generates a charge:</p>
+      <ul>
+        <li><strong>Programs sub-tab</strong> — define programs with payment plan schedules: deposit percentage, deposit month, number of payment months, start month, and frequency (monthly or quarterly). Year-specific plans allow different pricing and schedules each academic year.</li>
+        <li><strong>Fee Catalog sub-tab</strong> — a library of reusable fee items: registration fees, materials charges, technology fees, field trip costs — each with a unit price, unit label, and expense category.</li>
+        <li><strong>Auto-apply on enrollment</strong> — tag a catalog item to one or more programs. When a student enrolls in a tagged program, a flat charge is automatically generated — no manual step required.</li>
+      </ul>
+
+      <h3>3.5 Enrollment &amp; Tuition</h3>
+      <p>Enrollment is the core of Microschool Ledger's billing logic. When a student is enrolled in a program for a school year, the system generates a complete schedule of charges automatically — no manual calculation required.</p>
+      <p>The guided enrollment wizard lets the administrator select family → student → program → school year. Annual tuition is looked up automatically from pricing rules based on family type and sibling position. The system previews the full charge schedule before saving.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Billing model</th><th>How it works</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Monthly</strong></td><td>Consecutive-month payment plans (e.g. June through May with a March deposit)</td></tr>
+            <tr><td><strong>Quarterly</strong></td><td>4 installments every 3 months, aligned with StepUp disbursement cycles</td></tr>
+            <tr><td><strong>Flat / semester</strong></td><td>One-time or per-term charges for short-term programs and workshops</td></tr>
+            <tr><td><strong>Mid-year join</strong></td><td>Specify a start month and optional custom annual tuition for students joining partway through the year</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Sibling discounts are calculated per program. Discount percentages are configurable per program in Setup. Teacher families also receive sibling discounts at the applicable rates.</p>
+      <p>Microschool Ledger supports multiple simultaneous school years — useful during March–May when next year's deposits are being collected alongside the current year's monthly payments.</p>
+
+      <h3>3.6 Flat Charges</h3>
+      <p>Add a charge that isn't tied to a tuition enrollment — a $300 Writing Workshop semester fee, a $50 registration fee, a $150 materials charge. Each flat charge has: description, amount, due date, school year, category (Tuition / Registration / Materials / Other), and an optional student link. Flat charges flow into the family balance automatically and appear as "Other Charges" on invoices.</p>
+
+      <h3>3.7 Field Trips</h3>
+      <p>Create field trips with date, location, status (draft / open / confirmed / cancelled), capacity, and a cost structure (per student / per adult / per sibling). Families RSVP through the parent portal. The server validates capacity atomically — a database transaction prevents overbooking even if multiple families submit RSVPs simultaneously. Overflow goes to a managed waitlist. One click generates flat charges for all confirmed RSVPs based on the trip's cost structure.</p>
+
+      <h3>3.8 Payments &amp; Reconciliation</h3>
+      <p>Microschool Ledger manages two completely different payment streams — direct family payments and Florida Step-Up scholarship disbursements — and reconciles them against the same family balance.</p>
+      <ul>
+        <li><strong>Manual payments</strong> — record payments by check, Stripe, or other method; appliedYear field explicitly tags each payment to a school year</li>
+        <li><strong>Florida Step-Up CSV import</strong> — paste the EMA portal export directly; payments are matched by student sequence number; deduplication on re-import; program attribution is automatic</li>
+        <li><strong>Fill StepUp Invoice CSV</strong> — paste an EMA Service Orders export to auto-populate the Business Invoice # column for each row; saves hours of manual lookup work per billing cycle</li>
+        <li><strong>Bulk payment import</strong> — Stripe CSV exports imported in bulk with fuzzy family name matching; bank transaction CSV import with automatic income/expense detection</li>
+      </ul>
+
+      <h3>3.9 Invoicing &amp; Collections</h3>
+      <p>The collections dashboard sorts all families by current balance — highest owed at the top — with overdue status flagged prominently. A direct "Add Payment" shortcut is available from the collections row.</p>
+      <p>Starting in 2026–2027, every family has a 4-character invoice prefix automatically derived from their last name (e.g. <code>SMIT</code>). Each charge on an invoice carries a formatted invoice number — <code>SMIT-2627-DEP</code> for the deposit, <code>SMIT-2627-JUN</code> for June, and so on.</p>
+      <p>Each school sets its own invoice title, payment instructions block (Venmo handle, check payable-to, bank account details), header note, and footer note — all in Setup → School Info with no code changes required.</p>
+
+      <h4>Automated payment reminders:</h4>
+      <ul>
+        <li>A nightly job reviews every family with an outstanding balance and a portal email address on file</li>
+        <li>Families outside a 28-day cooldown window are queued for admin review — no emails fire automatically</li>
+        <li>The administrator previews each pending reminder (To, Subject, balance amount) and approves before it sends</li>
+        <li>Replies from families go directly to the school's inbox, not to the platform</li>
+      </ul>
+
+      <h3>3.10 Family Portal</h3>
+      <p>Families access their own account at the school's portal link with no admin login required. Sign-in is passwordless — the admin sends an email link, the parent clicks, and is signed in instantly.</p>
+      <p><strong>What families can do:</strong></p>
+      <ul>
+        <li>View current balance with status badge (Paid in Full / Balance Due / Payment Overdue)</li>
+        <li>Review full enrollment detail for the current year</li>
+        <li>Access complete payment history and printable invoices</li>
+        <li>RSVP to upcoming field trips (waitlist handled automatically)</li>
+        <li><strong>Pay online</strong> — credit card, ACH bank transfer, Apple Pay, or Google Pay via Stripe; autopay enrollment available for automatic monthly settlement</li>
+      </ul>
+      <p>Access is enforced at the database layer — not just in the UI. A portal family cannot access another family's records or any financial data that isn't their own, regardless of what the browser requests.</p>
+
+      <h3>3.11 Financial Reporting &amp; P&amp;L</h3>
+      <ul>
+        <li><strong>P&amp;L Overview</strong> — Revenue (Projected vs. Collected vs. Variance), Expenses (Budget vs. Actual vs. Variance), and Net Income in one unified table; filterable by school year and program</li>
+        <li><strong>Cash Flow view</strong> — month-by-month table of expected income vs. actual received, with variance and cumulative columns; know exactly which months you're behind on collections and by how much</li>
+        <li><strong>Financial Health view</strong> — break-even analysis, revenue per student, year-over-year trends, revenue forecast through end of year</li>
+        <li><strong>Expense tracking</strong> — date, amount, description, category, subcategory, program attribution, vendor; configurable categories with per-year budget targets; CSV import and category manager</li>
+        <li><strong>AUP Compliance tab</strong> — auto-computed readiness checklist; total StepUp funds received with amber warning at the $250,000 threshold; one-click Export for CPA workbook</li>
+      </ul>
+
+      <h3>3.12 Administration &amp; Security</h3>
+      <p><strong>Role-based access:</strong> multiple roles (Admin, Viewer, and others) enforced at the database layer — not just the UI. Admin users require a server-side grant after verifying access-list membership. Logging into Google is not enough on its own.</p>
+      <p><strong>Full audit log:</strong> every create, update, and delete action is logged with the action type, entity changed, full before and after state, user email, and timestamp. Filterable by action type and entity topic.</p>
+      <p><strong>Automated nightly backups:</strong> data is backed up to Google Cloud Storage every night at 2 AM. Up to 30 days of backups are available in Setup → Data Tools with one-click restore. Selective restore shows backup vs. live record counts and restores only the collections you select — the recovery path for a single wiped collection without rolling back everything else.</p>
+
+      <h3>3.13 QuickBooks Online Integration</h3>
+      <p>For schools whose accountant or bookkeeper works in QuickBooks Online, Microschool Ledger connects directly via the official Intuit OAuth flow — no manual data export required.</p>
+      <ul>
+        <li><strong>OAuth connection</strong> — an admin connects the school's QBO account in Setup with one click; Microschool Ledger handles the token exchange and refresh automatically</li>
+        <li><strong>Customer reconciliation</strong> — QBO customers (parents and student sub-customers) are pulled and matched against Microschool Ledger's family and student records; unmatched records on either side are flagged for review</li>
+        <li><strong>StepUp Allocation Report</strong> — generates a QBO-ready summary of Step-Up scholarship disbursements by student, program, and funding source; designed to map cleanly to QBO's class/customer structure</li>
+        <li><strong>Payment pull and matching</strong> — QBO payments can be pulled and matched against Microschool Ledger ledger entries with a side-by-side reconciliation view; admin reviews before any ledger write</li>
+      </ul>
+      <p>The integration is read-and-reconcile, not write-and-sync — which avoids the common failure mode where a two-way sync creates duplicate or misattributed entries in both systems. Tokens are stored server-side only and never exposed to the browser.</p>
+
+      <h3>3.14 Campaigns</h3>
+      <p>Send targeted announcements to the right families — returning vs. new, enrolled in a specific program, or the full roster — without a separate email tool. Audience segments are built from live enrollment and family data. Preview recipients and message before sending. Send history and unsubscribe management are built in.</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Annual Workflow -->
+    <div class="wp-section" id="workflow">
+      <h2>4. The Annual Workflow</h2>
+      <p>Microschool Ledger is designed around the homeschool co-op school year calendar. Understanding the annual workflow shows how all the features work together.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Period</th><th>What happens in Microschool Ledger</th></tr></thead>
+          <tbody>
+            <tr><td><strong>September–January</strong></td><td>Admissions open: public interest and application forms active; admissions staff manage the leads and applicants pipeline</td></tr>
+            <tr><td><strong>January–February</strong></td><td>Configure next year's programs and pricing rules in Setup. Add payment plans. Verify deposit percentages and due dates.</td></tr>
+            <tr><td><strong>February–March</strong></td><td>Accept applicants; Convert to Family for accepted families — creates billing records with no re-entry</td></tr>
+            <tr><td><strong>March</strong></td><td>Enrollment opens: use the Enrollment Wizard to re-enroll returning students in the new year. Generate deposit invoices. Begin collecting 20% deposits.</td></tr>
+            <tr><td><strong>March–May (overlap)</strong></td><td>Record next-year deposit payments with appliedYear set to the upcoming year. Continue recording current-year monthly payments. Both years are active simultaneously.</td></tr>
+            <tr><td><strong>June</strong></td><td>New year begins. Monthly tuition starts for 12-month plan families. StepUp scholarship payments begin arriving.</td></tr>
+            <tr><td><strong>August</strong></td><td>Monthly tuition starts for 10-month plan families.</td></tr>
+            <tr><td><strong>Monthly (all year)</strong></td><td>Record payments as they arrive. Import StepUp CSV from the state portal. Review Collections dashboard for overdue families. Send payment reminders. Generate statements as needed.</td></tr>
+            <tr><td><strong>April–May</strong></td><td>Final StepUp reconciliation. Fill StepUp Invoice CSV for EMA submission. Collections push for remaining balances. Run year-end P&amp;L. Export data backup.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>The March–May Overlap:</strong> During this period, the co-op is simultaneously collecting monthly payments for the current school year and collecting deposit payments for the upcoming year. Microschool Ledger handles this through the <code>appliedYear</code> field on payment records — when recording a deposit for next year, the administrator sets <code>appliedYear</code> to the upcoming year. This ensures the payment appears in next year's P&amp;L and collections view, not the current year's, regardless of the payment date.
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Step-Up -->
+    <div class="wp-section" id="stepup">
+      <h2>5. Florida Step-Up for Students — Deep Dive</h2>
+      <p>For Florida co-ops, the Step-Up for Students scholarship program represents a significant portion of revenue. Many families rely on it to offset tuition. Managing it manually — entering disbursements from the portal one by one, checking them against student records, reconciling against invoices — can take hours per billing cycle.</p>
+      <p>Microschool Ledger eliminates that entirely.</p>
+
+      <h3>How the import works:</h3>
+      <ol>
+        <li>Export from the Step-Up portal</li>
+        <li>Navigate to Payments → Import Step-Up in Microschool Ledger</li>
+        <li>Paste the tab-delimited data</li>
+        <li>Review matched and unmatched records</li>
+        <li>Import</li>
+      </ol>
+      <p>Each record in the portal export contains a student sequence number. Microschool Ledger matches this to the corresponding student record in the system — so every disbursement is automatically attributed to the right student and reflected in that family's balance.</p>
+
+      <h3>Program attribution:</h3>
+      <p>The Step-Up portal uses a "Category Detail Name" field to indicate what the payment covers. Microschool Ledger uses this to automatically attribute payments to the correct program — no manual re-tagging required.</p>
+
+      <h3>Deduplication &amp; re-import:</h3>
+      <p>Re-exports from the Step-Up portal are handled safely: existing records are identified by a composite key and not duplicated. If a previous import was missing program attribution data, a fresh import backfills that field on the existing record.</p>
+
+      <h3>Fill StepUp Invoice CSV:</h3>
+      <p>Before each scholarship submission cycle, schools must populate the Business Invoice # column in the EMA Service Orders export. Microschool Ledger automates this entirely — paste the EMA export, and the system derives the correct invoice number for each row from enrollment data. What used to require a manual lookup table is now a single paste operation.</p>
+
+      <h3>Compliance documentation:</h3>
+      <p>The family statement generated by Microschool Ledger includes Step-Up compliance language required for reimbursement documentation — automatically, on every statement, with no manual editing required.</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- AUP -->
+    <div class="wp-section" id="aup">
+      <h2>6. AUP Compliance — A Statutory Requirement</h2>
+      <p><em>Validated against the 2025-2026 Step Up Private School Handbook, Florida Statute 1002.421(1)(q).</em></p>
+      <p>The Step Up Private School Handbook establishes that AUP requirements apply uniformly to all private schools that receive scholarship funds — not just large ones. Every participating school must demonstrate:</p>
+      <ol>
+        <li>An adequate accounting system and system of financial controls</li>
+        <li>A process for deposit and classification of scholarship funds</li>
+        <li>Proper expenditure of scholarship funds for education-related expenses</li>
+      </ol>
+      <p>Schools receiving <strong>more than $250,000 in aggregate scholarship dollars</strong> in a school year must additionally contract with a licensed CPA to formally conduct an AUP engagement.</p>
+
+      <div class="callout">
+        <strong>What this means:</strong> The P&amp;L view, expense tracking with categories, StepUp payment reconciliation, cash flow view, and audit log in Microschool Ledger collectively satisfy all three AUP criteria. The one-click <strong>Export for CPA</strong> workbook — AUP Summary, Scholarship Funds Received, and Expense Detail by Category — gives your auditor a clean, complete record to work from.
+      </div>
+
+      <p>For private school prospects: <em>"Microschool Ledger gives you the accounting system, financial controls, and expenditure records the StepUp AUP requires — out of the box."</em></p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Pricing -->
+    <div class="wp-section" id="pricing">
+      <h2>7. Pricing Plans</h2>
+      <p>Microschool Ledger is offered in three tiers, designed to let co-ops start with what they need and add capability as they grow. Every tier includes the core billing workflow — enrollment, tuition tracking, collections, and family statements.</p>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-head">
+            <div class="price-name">Essentials</div>
+            <div class="price-sub">Replace the spreadsheet</div>
+            <div class="price-amount">$49 <span>/ month</span></div>
+          </div>
+          <div class="price-body">
+            <ul>
+              <li>Families, students, and enrollments</li>
+              <li>Manual payments and imports</li>
+              <li>Collections dashboard and statements</li>
+              <li>Florida Step-Up import included</li>
+              <li>Home dashboard and audit log</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="price-card featured">
+          <div class="price-head">
+            <div class="price-name">Standard ⭐</div>
+            <div class="price-sub">Add the family-facing layer</div>
+            <div class="price-amount">$99 <span>/ month</span></div>
+          </div>
+          <div class="price-body">
+            <ul>
+              <li>Everything in Essentials</li>
+              <li>Family portal with Stripe online payments</li>
+              <li>Autopay enrollment</li>
+              <li>Automated reminders</li>
+              <li>Campaigns tab</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="price-card">
+          <div class="price-head">
+            <div class="price-name">Pro</div>
+            <div class="price-sub">Full financial intelligence</div>
+            <div class="price-amount">$199 <span>/ month</span></div>
+          </div>
+          <div class="price-body">
+            <ul>
+              <li>Everything in Standard</li>
+              <li>Full P&amp;L and expense tracking</li>
+              <li>Financial health dashboard</li>
+              <li>AUP Compliance export</li>
+              <li>QuickBooks Online integration</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h3>Why it pays for itself:</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>What Microschool Ledger replaces</th><th>Typical cost (estimated)</th></tr></thead>
+          <tbody>
+            <tr><td>QuickBooks (or similar accounting tool)</td><td>$50–$80/month</td></tr>
+            <tr><td>Invoicing software</td><td>$25–$50/month</td></tr>
+            <tr><td>Manual reconciliation labor (10+ hrs/month)</td><td>$250–$500/month in staff time</td></tr>
+            <tr><td>Custom spreadsheet maintenance</td><td>Ongoing (untracked)</td></tr>
+            <tr><td><strong>Total replaced</strong></td><td><strong>$325–$630+/month</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>At the Standard tier ($99/month), Microschool Ledger typically pays for itself before the first Step-Up reconciliation of the month is run.</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- What's Next -->
+    <div class="wp-section" id="whats-next">
+      <h2>8. What's Next</h2>
+      <p>Microschool Ledger is under active development, with a roadmap focused on deeper automation and tighter integration with the tools schools already use.</p>
+      <ul>
+        <li><strong>Batch invoice generation</strong> — generate statements for all families at once as a ZIP of PDFs or a combined document, rather than one at a time</li>
+        <li><strong>Next Year Setup Wizard</strong> — an annual guided workflow that walks the administrator through: carrying over or updating programs, adjusting tuition rates with last year's rates shown for comparison, configuring payment plans, setting the expense budget, and re-enrolling returning students in bulk</li>
+        <li><strong>Pricing tier enforcement</strong> — in-app gating of Pro features by subscription tier, with upgrade prompts and trial access for new tenants</li>
+        <li><strong>Expanded QBO sync</strong> — automatic push of new MSLedger payments into QBO, reducing the reconciliation step to a confirmation rather than a manual match</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Getting Started -->
+    <div class="wp-section" id="getting-started">
+      <h2>9. Getting Started</h2>
+      <p>Microschool Ledger is available now for homeschool cooperatives and microschools. Onboarding on the Standard and Pro tiers includes a hands-on setup session — we configure your programs, pricing rules, payment plans, and import your existing family data together.</p>
+
+      <p><strong>To schedule a demo or start onboarding, reach out directly: <a href="mailto:rajeev@thegrowcoop.org">rajeev@thegrowcoop.org</a></strong></p>
+
+      <h3>What onboarding looks like:</h3>
+      <ol>
+        <li>Initial call to understand your co-op's programs, pricing structure, and current workflow</li>
+        <li>Setup session: programs, payment plans, pricing rules, and family types configured in Microschool Ledger</li>
+        <li>Data import: existing family and student records imported from your current spreadsheets</li>
+        <li>Walkthrough of the admissions pipeline, collections dashboard, statement generation, and Step-Up import workflow</li>
+        <li>Ongoing: priority support (Standard and Pro tiers)</li>
+      </ol>
+
+      <h3>What you'll need:</h3>
+      <ul>
+        <li>A list of your active families and students (spreadsheet is fine)</li>
+        <li>Your current tuition rates by family type and program</li>
+        <li>Your payment plan structure (deposit amount, monthly schedule)</li>
+        <li>Student sequence numbers from the Step-Up portal (for scholarship reconciliation)</li>
+      </ul>
+
+      <p>Microschool Ledger has been running at The Grow Co-op since 2024. It currently manages 20–30 families, 40–60 students, and multiple programs across two school years simultaneously. It is actively maintained and expanded based on real administrator feedback.</p>
+
+      <div class="callout" style="margin-top:1.5rem;">
+        <strong>Try the live demo</strong> — no account needed: <a href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener">app.microschoolledger.com?org=demo</a>
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <div class="doc-footer">
+    <div>
+      <strong style="color:white;">Microschool Ledger</strong><br>
+      Financial clarity for microschools &amp; homeschool co-ops — not spreadsheets.
+    </div>
+    <div>
+      Built by The Grow Co-op · Boca Raton, Florida<br>
+      <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a> &nbsp;·&nbsp; <a href="/">microschoolledger.com</a>
+    </div>
+  </div>
+
+</div><!-- /doc -->
+
+</body>
+</html>
