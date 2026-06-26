@@ -258,14 +258,14 @@
 
                 <section class="faq">
                     <h2>2. How is this different from other school management tools?</h2>
-                    <p>Most school management systems try to do everything — curriculum tracking, attendance, communication, and billing all at once. Microschool Ledger focuses only on financial clarity:</p>
+                    <p>Most school management systems try to do everything — curriculum tracking, attendance, grade books, and billing all at once. Microschool Ledger focuses on the financial and administrative workflow that microschools actually care about:</p>
                     <ul>
-                        <li>tuition</li>
-                        <li>payments</li>
-                        <li>scholarships</li>
-                        <li>balances</li>
+                        <li>tuition, payments, and Step-Up scholarships</li>
+                        <li>family balances, invoicing, and payment reminders</li>
+                        <li>admissions pipeline and family communications</li>
+                        <li>expense tracking and profit &amp; loss</li>
                     </ul>
-                    <p>That makes it simpler, easier to use, and better aligned to what many microschools actually need.</p>
+                    <p>No attendance modules, no grade books, no lesson planning tools — just the parts your admin actually uses every day, built to be clear and fast for a small team.</p>
                 </section>
 
                 <section class="faq">
@@ -280,7 +280,7 @@
 
                 <section class="faq">
                     <h2>5. Is there a parent portal?</h2>
-                    <p>Yes. Parents can see their balance, review what each student is enrolled in, view payment history, and access invoices — all on their own, without emailing your admin.</p>
+                    <p>Yes. The family portal gives parents a self-service account view: their current balance, enrolled programs, payment history, and printable invoices. They can also pay online directly — card, ACH, Apple Pay, or Google Pay via Stripe — and set up autopay so monthly charges settle automatically. No logins or passwords needed (see question 6).</p>
                 </section>
 
                 <section class="faq">
@@ -332,6 +332,71 @@
                 <section class="faq">
                     <h2>14. Is my school's data kept separate from other schools on the platform?</h2>
                     <p>Yes. Data isolation is enforced at the database level, not just the user interface. Each school gets its own isolated data partition. Admin access requires a server-side grant that can't be bypassed through the app. Family portal users get a separate read-only grant scoped only to their own family's records — they can't see other families' data even if they tried.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>15. Can families pay online and set up autopay?</h2>
+                    <p>Yes. The family portal includes Stripe-powered online payments. Parents can pay by card, ACH bank transfer, Apple Pay, or Google Pay directly from their portal account — no check to mail, no Venmo to remember. Autopay is also available: once a family enables it, monthly charges settle automatically on the due date with no admin follow-up required.</p>
+                    <p>For families who prefer to pay by check or Venmo, manual payment recording by your admin works alongside online payments — both flow into the same family balance.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>16. How is Microschool Ledger priced?</h2>
+                    <p>There are three plans:</p>
+                    <ul>
+                        <li><strong>Essentials — $49/month:</strong> Core financial workflow: families, students, enrollments, manual payments, Step-Up reconciliation, invoicing, and reporting.</li>
+                        <li><strong>Standard — $99/month (most popular):</strong> Everything in Essentials, plus the family portal with Stripe online payments and autopay, automated payment reminders, campaigns, and the admissions pipeline.</li>
+                        <li><strong>Pro — $199/month:</strong> Everything in Standard, plus QuickBooks Online sync, the Financial Health dashboard, AUP compliance export, and priority support.</li>
+                    </ul>
+                    <p>All plans include hands-on onboarding and your data is always exportable. Email <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a> to request a demo.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>17. Is there an admissions pipeline for prospective families?</h2>
+                    <p>Yes. Prospective families fill out a public interest form (no login required), which creates a Lead record in the system. From there, you can send them an application form, track their progress through Leads and Applicants stages, add internal notes, and convert approved applicants directly into active family accounts — no re-entry of information. The whole flow from first inquiry to enrolled family happens in one place.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>18. Can I send emails or communications to families from within the system?</h2>
+                    <p>Yes. The Campaigns feature lets you compose and send emails to custom audience segments — filter by enrollment status, program, outstanding balance, or other criteria. You preview before anything sends, and the system keeps a full send history so you know who received what and when.</p>
+                    <p>Automated payment reminders are a separate system: overdue families are queued nightly, and you review the queue before any reminder goes out — with a 28-day cooldown so no family is over-contacted.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>19. Does it track expenses and generate a profit &amp; loss view?</h2>
+                    <p>Yes. The Finances tab tracks all school expenses with categories you define. The P&amp;L overview shows revenue (tuition, fees, Step-Up scholarships) vs. expenses by category for any school year, alongside a cash flow view by month.</p>
+                    <p>The Financial Health view goes further: it shows your break-even enrollment count, revenue per student, and year-over-year trend comparisons. This is the data your CPA or board asks for at year-end — available in a few clicks instead of a weekend of spreadsheet work.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>20. What is the fee catalog?</h2>
+                    <p>The fee catalog is a library of reusable charge items — each with a name, unit price, and category. When you need to add a charge to a family (a materials fee, a field trip cost, a registration charge), you pick from the catalog instead of typing it from scratch. Items can also be marked to auto-apply when a student enrolls in a specific program, so required fees are added automatically without extra steps.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>21. Can I manage field trips and track family RSVPs?</h2>
+                    <p>Yes. The Field Trips tab lets you create trip records with capacity limits, cost structure, RSVP windows, and logistics details. Families RSVP directly through the family portal — the system automatically waitlists anyone over capacity and can promote waitlisted families when a spot opens. Once RSVPs are confirmed, Microschool Ledger can generate charges for the trip cost and add them to family balances automatically.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>22. Does Microschool Ledger connect to QuickBooks Online?</h2>
+                    <p>Yes. You connect your QBO account directly in Setup — it's an OAuth connection, so no manual API keys. Once connected, Microschool Ledger pulls your existing QBO customer list and reconciles it with your family and student records. You can also import payment records from QuickBooks and review them before they're written into the ledger. The integration is designed for schools that use QuickBooks as their primary accounting system alongside Microschool Ledger for enrollment and Step-Up management.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>23. Does it support private schools and AUP compliance reporting?</h2>
+                    <p>Yes. Microschool Ledger supports a hybrid operating model for schools that mix private-school tuition students with homeschool or scholarship students in the same system. Each student has a year-scoped funding profile tracking billing lane, scholarship program (FES-EO, FES-UA, PEP, AAA, etc.), and parent payment responsibility.</p>
+                    <p>For Step-Up providers over the $250,000 AUP threshold, the system generates a pre-formatted AUP allocation report you can hand directly to your CPA for the required agreed-upon procedures audit. QuickBooks class codes from your QBO export are recognized and normalized automatically to populate funding profiles.</p>
+                </section>
+
+                <section class="faq">
+                    <h2>24. What data export options are available?</h2>
+                    <p>Two formats:</p>
+                    <ul>
+                        <li><strong>Excel workbook</strong> — 7 sheets covering the full financial picture: family ledger, enrollment detail, manual payments, Step-Up payments, students, families, and expenses. Designed for accountant review or year-end records.</li>
+                        <li><strong>JSON backup</strong> — a complete snapshot of all data including programs, pricing rules, flat charges, and invoices. Can be used to fully restore the system from any point in time.</li>
+                    </ul>
+                    <p>Nightly automated backups also run to Google Cloud Storage, with one-click restore available in Setup → Data Tools. You own your data and can export it at any time.</p>
                 </section>
             </div>
 
