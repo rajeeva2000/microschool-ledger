@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Features — Microschool Ledger</title>
+  <meta
+    name="description"
+    content="Every tool your school actually uses: billing, enrollment, Step-Up scholarships, family portal, field trips, collections, admissions, reporting, and AUP compliance — all in Microschool Ledger."
+  />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root{
+      --pine:#3C4535;
+      --pine-dark:#2d3528;
+      --sand:#F8EDDD;
+      --offwhite:#F0EDE8;
+      --rock:#DDDFDE;
+      --grass:#ADB76D;
+      --gold:#c9a84c;
+      --gold-light:#f7f0e0;
+      --sky:#6E9CDA;
+      --ink:#1a1a1a;
+      --muted:#6b7066;
+      --paid:#52b788;
+      --due:#f4b942;
+      --overdue:#e05c5c;
+      --stepup-bg:#dbeeff;
+      --stepup-text:#1a6aad;
+      --stripe-bg:#e8e4ff;
+      --stripe-text:#5a3fcf;
+      --shadow:0 20px 60px rgba(26,26,26,.08);
+      --max:1140px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body{
+      font-family:'DM Sans', Arial, Helvetica, sans-serif;
+      background:var(--sand);
+      color:var(--ink);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    a { color: inherit; }
+    .container{ width:min(calc(100% - 2rem), var(--max)); margin:0 auto; }
+    .section{ padding:5.5rem 0; }
+    .gold-stripe{ height:3px; background:linear-gradient(90deg, var(--gold), var(--grass), var(--gold)); }
+
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:.65rem;
+      font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
+      color:var(--grass); font-weight:600; margin-bottom:1rem;
+    }
+    .eyebrow::before{
+      content:""; width:28px; height:2px; background:var(--grass); display:block;
+    }
+
+    h1,h2,h3,h4{
+      font-family:'Lora', Georgia, 'Times New Roman', serif;
+      line-height:1.18; color:var(--pine);
+    }
+
+    p.lead{
+      color:var(--muted); font-size:1.05rem; line-height:1.8; max-width:680px;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:.55rem;
+      min-height:46px; padding:.85rem 1.35rem; border-radius:8px;
+      text-decoration:none; font-weight:600; font-size:.95rem;
+      border:1px solid transparent; cursor:pointer; transition:.18s ease;
+    }
+    .btn:hover{ transform:translateY(-1px); }
+    .btn-primary{ background:var(--gold); color:var(--pine); }
+    .btn-primary:hover{ background:#d7b45d; }
+    .btn-secondary{ background:transparent; border-color:rgba(255,255,255,.26); color:white; }
+    .btn-secondary:hover{ border-color:rgba(255,255,255,.55); background:rgba(255,255,255,.05); }
+    .btn-dark{ background:var(--pine); color:white; }
+    .btn-dark:hover{ background:var(--pine-dark); }
+
+    nav{
+      position:fixed; top:0; left:0; right:0; z-index:1000; height:68px;
+      display:flex; align-items:center; border-bottom:1px solid rgba(255,255,255,.08);
+      background:rgba(60,69,53,.94); backdrop-filter: blur(12px);
+    }
+    .nav-inner{
+      width:min(calc(100% - 2rem), var(--max)); margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    }
+    .brand{
+      display:flex; align-items:center; gap:.8rem; text-decoration:none; color:white;
+      font-family:'Lora', Georgia, serif; font-size:1.12rem; font-weight:700; white-space:nowrap;
+    }
+    .nav-links{ display:flex; align-items:center; gap:1.45rem; }
+    .nav-links a{
+      color:rgba(255,255,255,.76); text-decoration:none; font-size:.88rem; font-weight:500;
+    }
+    .nav-links a:hover{ color:white; }
+    .nav-links a.active{ color:white; }
+
+    .hero{
+      background:var(--pine); color:white; padding:9rem 0 5.5rem; position:relative; overflow:hidden;
+    }
+    .hero::before,.hero::after{
+      content:""; position:absolute; border-radius:50%; pointer-events:none;
+    }
+    .hero::before{
+      width:720px; height:720px; right:-220px; top:-260px;
+      border:1px solid rgba(173,183,109,.12);
+    }
+    .hero::after{
+      width:860px; height:860px; left:-320px; bottom:-480px;
+      border:1px solid rgba(201,168,76,.10);
+    }
+    .hero-center{
+      max-width:760px; margin:0 auto; text-align:center; position:relative; z-index:1;
+    }
+    .hero-copy h1{
+      color:white; font-size:clamp(2.4rem, 5vw, 3.8rem); margin-bottom:1.25rem;
+    }
+    .hero-copy h1 em{ color:var(--gold); font-style:italic; }
+    .hero-copy p{
+      color:rgba(255,255,255,.74); font-size:1.08rem; line-height:1.8;
+    }
+    .hero-actions{ margin-top:2rem; display:flex; gap:.9rem; flex-wrap:wrap; justify-content:center; }
+
+    /* Dashboard preview */
+    .dashboard-preview{ background:var(--pine-dark); }
+    .dashboard-preview .eyebrow{ color:var(--grass); }
+    .dashboard-preview h2{ color:white; margin-bottom:2rem; }
+    .hero-panel{
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+      border-radius:18px; box-shadow:0 28px 80px rgba(0,0,0,.3); overflow:hidden;
+      max-width:720px; margin:0 auto;
+    }
+    .panel-top{
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+      padding:1rem 1.1rem; border-bottom:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.04);
+    }
+    .panel-title{ color:white; font-size:.92rem; font-weight:600; }
+    .panel-badge{
+      background:rgba(173,183,109,.18); color:var(--grass); border:1px solid rgba(173,183,109,.25);
+      padding:.28rem .55rem; border-radius:999px; font-size:.65rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    }
+    .panel-body{ padding:1.1rem; display:grid; gap:.9rem; }
+    .briefing{
+      background:rgba(247,240,224,.08); border:1px solid rgba(255,255,255,.08);
+      border-radius:12px; padding:1rem;
+    }
+    .briefing-label{
+      color:var(--grass); text-transform:uppercase; letter-spacing:.12em; font-size:.65rem; font-weight:700; margin-bottom:.5rem;
+    }
+    .briefing h3{ color:white; font-size:1.32rem; margin-bottom:.4rem; }
+    .briefing p{ color:rgba(255,255,255,.68); font-size:.88rem; line-height:1.65; }
+    .mini-grid{ display:grid; grid-template-columns:1fr 1fr; gap:.85rem; }
+    .mini-card{
+      background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+      border-radius:12px; padding:.95rem;
+    }
+    .mini-kicker{
+      color:rgba(255,255,255,.5); font-size:.68rem; text-transform:uppercase; letter-spacing:.1em; margin-bottom:.35rem;
+    }
+    .mini-value{
+      color:var(--gold); font-family:'Lora', Georgia, serif; font-size:1.8rem; line-height:1; margin-bottom:.2rem;
+    }
+    .mini-copy{ color:rgba(255,255,255,.7); font-size:.78rem; line-height:1.5; }
+    .attention-list{ display:grid; gap:.65rem; }
+    .attention-row{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;
+      padding:.8rem .9rem; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:10px;
+    }
+    .attention-row strong{ color:white; display:block; font-size:.88rem; margin-bottom:.18rem; }
+    .attention-row span{ color:rgba(255,255,255,.62); font-size:.76rem; }
+    .dot{ width:10px; height:10px; border-radius:50%; flex:0 0 auto; margin-top:.35rem; }
+    .dot-red{ background:var(--overdue); }
+    .dot-yellow{ background:var(--due); }
+    .dot-green{ background:var(--paid); }
+    .tag{
+      display:inline-flex; align-items:center; padding:.18rem .42rem; border-radius:999px;
+      font-size:.58rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    }
+    .tag-stepup{ background:var(--stepup-bg); color:var(--stepup-text); }
+    .tag-stripe{ background:var(--stripe-bg); color:var(--stripe-text); }
+    .tag-portal{ background:rgba(173,183,109,.18); color:var(--grass); border:1px solid rgba(173,183,109,.25); }
+
+    /* Financial clarity */
+    .clarity{ background:var(--sand); }
+    .clarity-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:2rem; }
+    .clarity-card{
+      background:white; border:1px solid var(--rock); border-radius:16px; padding:1.45rem; box-shadow:var(--shadow);
+    }
+    .clarity-card h3{ font-size:1.18rem; margin-bottom:.55rem; }
+    .clarity-card p{ color:var(--muted); font-size:.95rem; line-height:1.7; margin-bottom:1rem; }
+    .clarity-points{ list-style:none; display:grid; gap:.6rem; }
+    .clarity-points li{
+      display:flex; align-items:flex-start; gap:.7rem; color:var(--pine); font-size:.9rem; line-height:1.55;
+    }
+    .clarity-points li::before{ content:"✓"; color:var(--grass); font-weight:700; margin-top:.05rem; }
+
+    /* Portal section */
+    .portal-section{ background:white; border-top:1px solid var(--rock); border-bottom:1px solid var(--rock); }
+    .portal-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; align-items:start; }
+    .portal-copy, .portal-mock-card{
+      background:var(--offwhite); border:1px solid var(--rock); border-radius:18px; padding:1.5rem;
+    }
+    .portal-copy h2{ font-size:clamp(1.9rem,3vw,2.5rem); margin-bottom:.9rem; }
+    .portal-copy p{ color:var(--muted); font-size:.98rem; line-height:1.8; margin-bottom:1rem; max-width:62ch; }
+    .portal-quote{
+      background:white; border-left:4px solid var(--gold); border-radius:0 12px 12px 0; padding:1rem 1rem 1rem 1.1rem;
+      color:var(--pine); font-size:.95rem; line-height:1.7; margin-top:.6rem;
+    }
+    .portal-quote strong{ display:block; margin-top:.45rem; font-size:.84rem; color:var(--muted); }
+
+    .portal-mock{
+      border:1px solid #dcd5c9; border-radius:14px; overflow:hidden; background:#efe6d7; box-shadow:0 8px 24px rgba(0,0,0,.06);
+    }
+    .portal-top{
+      background:var(--pine); color:#fff; padding:16px 20px; display:flex; justify-content:space-between; gap:16px; align-items:center;
+    }
+    .portal-brand{ font-family:'Lora', Georgia, serif; font-size:19px; font-weight:700; line-height:1.1; }
+    .portal-brand small{
+      display:block; font-family:'DM Sans', Arial, sans-serif; font-size:12px; font-weight:500; color:rgba(255,255,255,.72); margin-top:4px;
+    }
+    .portal-user{ font-size:13px; color:rgba(255,255,255,.82); white-space:nowrap; }
+    .portal-body{ padding:20px; }
+    .portal-header{
+      display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:18px;
+    }
+    .portal-header h3{
+      margin:0; font-family:'Lora', Georgia, serif; font-size:34px; line-height:1.05; color:#243044;
+    }
+    .portal-header .meta{ margin-top:6px; color:#6f7482; font-size:15px; }
+    .invoice-btn{
+      background:var(--pine); color:#fff; border-radius:12px; padding:14px 18px; font-weight:700; font-size:14px; white-space:nowrap;
+    }
+    .summary-card{
+      background:#fff; border:1px solid #ddd6c9; border-radius:18px; padding:18px; box-shadow:0 2px 6px rgba(0,0,0,.04); margin-bottom:18px;
+    }
+    .summary-title{
+      color:#8a8f97; text-transform:uppercase; letter-spacing:.04em; font-size:12px; font-weight:700; margin-bottom:14px;
+    }
+    .summary-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:18px; }
+    .summary-box{
+      border-radius:14px; padding:18px 14px; text-align:center; background:#f7f7f7;
+    }
+    .summary-box.green{ background:#e7f3ea; }
+    .summary-box.red{ background:#f8e7e7; }
+    .summary-value{
+      font-family:'Lora', Georgia, serif; font-size:30px; line-height:1; font-weight:700; color:#243044; margin-bottom:6px;
+    }
+    .summary-box.green .summary-value{ color:#1f8d45; }
+    .summary-box.red .summary-value{ color:#d43b2f; }
+    .summary-label{ color:#6f7482; font-size:13px; }
+    .progress{ height:14px; background:#e6e6e6; border-radius:999px; overflow:hidden; margin-bottom:8px; }
+    .progress-fill{
+      width:58%; height:100%; background:linear-gradient(90deg,#2f8d49,#66b96b); border-radius:999px;
+    }
+    .progress-meta{ text-align:right; color:#8b9098; font-size:13px; font-weight:600; }
+    .tabs{
+      display:grid; grid-template-columns:repeat(3,1fr); border:1px solid #ddd6c9; border-radius:16px 16px 0 0; overflow:hidden;
+    }
+    .tab{
+      background:#fff; padding:16px; text-align:center; color:#5f6570; font-size:16px; border-right:1px solid #ddd6c9;
+    }
+    .tab:last-child{ border-right:none; }
+    .tab.active{ background:var(--pine); color:#fff; font-weight:700; }
+    .detail{
+      background:#fff; border:1px solid #ddd6c9; border-top:none; border-radius:0 0 16px 16px; padding:18px; box-shadow:0 2px 6px rgba(0,0,0,.04);
+    }
+    .student-card{
+      border:1px solid #ddd6c9; border-radius:14px; padding:16px; background:#fff;
+    }
+    .student-head{ display:flex; align-items:center; gap:10px; margin-bottom:14px; color:#243044; font-weight:800; font-size:18px; }
+    .line{
+      display:flex; justify-content:space-between; gap:16px; padding:10px 0; border-top:1px solid #e7e3db; color:#3f4552; font-size:15px;
+    }
+    .portal-caption{ margin-top:1rem; color:var(--muted); font-size:.84rem; line-height:1.6; }
+
+    /* Feature cards */
+    .features{ background:white; }
+    .feature-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1rem; margin-top:1rem; }
+    .feature-card{
+      border:1px solid var(--rock); background:var(--offwhite); border-radius:16px; padding:1.35rem;
+    }
+    .feature-icon{ font-size:1.45rem; margin-bottom:.75rem; }
+    .feature-card h3{ font-size:1.06rem; margin-bottom:.45rem; }
+    .feature-card p{ color:var(--muted); font-size:.9rem; line-height:1.65; margin-bottom:.85rem; }
+    .feature-list{ list-style:none; display:grid; gap:.42rem; }
+    .feature-list li{
+      position:relative; padding-left:1rem; font-size:.84rem; color:var(--pine); line-height:1.5;
+    }
+    .feature-list li::before{ content:"•"; position:absolute; left:0; color:var(--grass); }
+
+    /* Feature group label */
+    .fg-label{
+      display:flex; align-items:center; gap:1rem; margin:2.75rem 0 1.1rem;
+      font-size:.72rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--pine);
+    }
+    .fg-label::after{ content:""; flex:1; height:1px; background:var(--rock); }
+
+    /* Feature highlights */
+    .feature-highlight{
+      margin-top:1.5rem; background:var(--gold-light); border:1px solid rgba(201,168,76,.3);
+      border-radius:18px; padding:1.75rem 2rem;
+      display:grid; grid-template-columns:auto 1fr 240px; gap:1.5rem; align-items:start;
+    }
+    .feature-highlight-icon{ font-size:2.2rem; padding-top:.25rem; }
+    .feature-highlight-body h3{ font-size:1.2rem; margin-bottom:.5rem; }
+    .feature-highlight-body p{ color:var(--muted); font-size:.94rem; line-height:1.7; margin-bottom:.75rem; }
+    .feature-highlight-stat{
+      background:white; border:1px solid rgba(201,168,76,.25);
+      border-radius:14px; padding:1.2rem 1.35rem; text-align:center;
+    }
+    .feature-highlight-stat strong{
+      display:block; font-family:'Lora', Georgia, serif;
+      font-size:2.8rem; color:var(--pine); line-height:1; margin-bottom:.35rem;
+    }
+    .feature-highlight-stat span{ font-size:.78rem; color:var(--muted); line-height:1.55; display:block; }
+
+    /* ── MOBILE MENU ── */
+    .ham-bars{ display:none; }
+    #mobile-menu{
+      display:none;
+      position:fixed; top:68px; left:0; right:0; z-index:999;
+      background:rgba(45,53,40,.97); backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.1);
+      padding:1.25rem; gap:.4rem;
+      transform:translateY(-110%);
+      transition:transform .25s ease;
+      pointer-events:none;
+    }
+    @media (max-width:760px){
+      .ham-bars{
+        display:flex; flex-direction:column; justify-content:center; gap:5px;
+        width:22px; height:22px; margin-left:.6rem; flex-shrink:0;
+      }
+      .ham-bars span{
+        display:block; width:22px; height:2px; background:white; border-radius:2px;
+        transition:transform .22s ease, opacity .18s ease;
+        transform-origin:center;
+      }
+      .brand-toggle[aria-expanded="true"] .ham-bars span:nth-child(1){
+        transform:translateY(7px) rotate(45deg);
+      }
+      .brand-toggle[aria-expanded="true"] .ham-bars span:nth-child(2){
+        opacity:0; transform:scaleX(0);
+      }
+      .brand-toggle[aria-expanded="true"] .ham-bars span:nth-child(3){
+        transform:translateY(-7px) rotate(-45deg);
+      }
+      #mobile-menu{ display:grid; }
+      #mobile-menu.open{ transform:translateY(0); pointer-events:auto; }
+      #mobile-menu a{
+        display:block; padding:.75rem 1rem; color:rgba(255,255,255,.82);
+        border-radius:8px; text-decoration:none; font-size:.94rem; font-weight:500;
+      }
+      #mobile-menu a:hover{ background:rgba(255,255,255,.07); color:white; }
+      #mobile-menu .btn-primary{ text-align:center; margin-top:.5rem; display:block; }
+    }
+
+    footer{ background:var(--pine-dark); color:rgba(255,255,255,.72); padding:2rem 0; }
+    .footer-wrap{
+      display:flex; justify-content:space-between; gap:1rem; align-items:center; flex-wrap:wrap;
+    }
+    .footer-brand{
+      display:flex; align-items:center; gap:.75rem; color:white; text-decoration:none; font-family:'Lora', Georgia, serif; font-weight:700;
+    }
+    .footer-meta{ font-size:.82rem; color:rgba(255,255,255,.58); line-height:1.65; }
+
+    @media (max-width: 1024px){
+      .clarity-grid, .portal-wrap{ grid-template-columns:1fr; }
+      .feature-highlight{ grid-template-columns:auto 1fr; }
+      .feature-highlight-stat{ grid-column:1/-1; text-align:left; display:flex; gap:1rem; align-items:center; }
+      .feature-highlight-stat strong{ font-size:2rem; flex-shrink:0; margin-bottom:0; }
+    }
+    @media (max-width: 760px){
+      nav{ height:64px; }
+      .nav-links a:not(.nav-cta-link){ display:none; }
+      .hero{ padding:7.5rem 0 4rem; }
+      .section{ padding:4.25rem 0; }
+      .feature-highlight{ grid-template-columns:1fr; }
+      .feature-highlight-icon{ display:none; }
+      .feature-highlight-stat{ flex-direction:column; align-items:flex-start; gap:.4rem; }
+      .summary-grid{ grid-template-columns:1fr; }
+      .statement-head, .portal-header{ grid-template-columns:1fr; }
+      .footer-wrap{ align-items:flex-start; }
+      .tabs{ grid-template-columns:1fr; }
+      .line{ flex-direction:column; gap:4px; }
+      .portal-top{ flex-direction:column; align-items:flex-start; }
+      .mini-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a class="brand brand-toggle" href="/" id="brand-toggle" aria-label="Microschool Ledger home" aria-expanded="false">
+        <svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+          <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.3" opacity="0.9"/>
+          <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
+        </svg>
+        <span>Microschool Ledger</span>
+        <span class="ham-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      </a>
+
+      <div class="nav-links">
+        <a href="/features.html" class="active">Features</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#resources">Resources</a>
+        <a href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener">Try demo</a>
+        <a href="https://app.microschoolledger.com" target="_blank" rel="noopener">Log in</a>
+        <a href="/#contact" class="btn btn-primary nav-cta-link" style="min-height:40px;padding:.6rem 1rem;font-size:.84rem;">Request a demo</a>
+      </div>
+    </div>
+  </nav>
+
+  <div id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+    <a href="/features.html">Features</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/#resources">Resources</a>
+    <a href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener">Try demo ↗</a>
+    <a href="https://app.microschoolledger.com" target="_blank" rel="noopener">Log in ↗</a>
+    <a href="/#contact" class="btn btn-primary">Request a demo</a>
+  </div>
+
+  <header class="hero" id="top">
+    <div class="container">
+      <div class="hero-center">
+        <div class="hero-copy">
+          <div class="eyebrow" style="justify-content:center;">Full feature reference</div>
+          <h1>Every tool your school actually uses — <em>in one place.</em></h1>
+          <p>
+            Billing, enrollment, Step-Up scholarships, family portal, field trips, admissions, reporting, and
+            AUP compliance — all connected in one purpose-built system. No duct tape, no spreadsheet bridges.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="/#contact">Request a demo</a>
+            <a class="btn btn-secondary" href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener">Try it live — no account needed</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="gold-stripe"></div>
+
+  <section class="section dashboard-preview" id="stepup-feature">
+    <div class="container">
+      <div class="eyebrow">See it in action</div>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);">What it looks like from the inside.</h2>
+      <div class="hero-panel" aria-label="Microschool Ledger preview">
+        <div class="panel-top">
+          <div class="panel-title">Morning briefing</div>
+          <div class="panel-badge">On track</div>
+        </div>
+        <div class="panel-body">
+          <div class="briefing">
+            <div class="briefing-label">Financial health</div>
+            <h3>You're on track for a $4,200 surplus this year.</h3>
+            <p>
+              Collections are steady, Step-Up credits are posting cleanly, and only two families
+              need a follow-up this week.
+            </p>
+          </div>
+          <div class="mini-grid">
+            <div class="mini-card">
+              <div class="mini-kicker">Collected so far</div>
+              <div class="mini-value">$84,320</div>
+              <div class="mini-copy">78% of projected tuition collected across direct payments and Step-Up.</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-kicker">Parent portal</div>
+              <div class="mini-value">24</div>
+              <div class="mini-copy">Families can check balances and print invoices without emailing your admin.</div>
+            </div>
+          </div>
+          <div class="attention-list">
+            <div class="attention-row">
+              <div style="display:flex;gap:.7rem;align-items:flex-start;">
+                <span class="dot dot-red"></span>
+                <div>
+                  <strong>Rivera family</strong>
+                  <span>Balance due $620 • Last payment 18 days ago</span>
+                </div>
+              </div>
+              <span class="tag tag-portal">Portal active</span>
+            </div>
+            <div class="attention-row">
+              <div style="display:flex;gap:.7rem;align-items:flex-start;">
+                <span class="dot dot-yellow"></span>
+                <div>
+                  <strong>Morris family</strong>
+                  <span>Awaiting Step-Up credit for Film Workshop invoice</span>
+                </div>
+              </div>
+              <span class="tag tag-stepup">Step-Up</span>
+            </div>
+            <div class="attention-row">
+              <div style="display:flex;gap:.7rem;align-items:flex-start;">
+                <span class="dot dot-green"></span>
+                <div>
+                  <strong>Patel family</strong>
+                  <span>Paid in full this month with direct payment + scholarship credit</span>
+                </div>
+              </div>
+              <span class="tag tag-stripe">Stripe</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section clarity" id="billing">
+    <div class="container">
+      <div class="eyebrow">Financial clarity</div>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;">This isn't just billing software. It helps you know where your school stands.</h2>
+      <p class="lead">
+        Microschool Ledger replaces spreadsheets, yes — but the bigger win is confidence. You can see what families owe,
+        what's been collected, how scholarship credits are affecting the year, and whether your school is on track.
+      </p>
+
+      <div class="clarity-grid">
+        <article class="clarity-card">
+          <h3>For the school</h3>
+          <p>See the whole billing lifecycle in one place, from enrollment and charge generation to collections and year-end reporting.</p>
+          <ul class="clarity-points">
+            <li>Action-oriented home dashboard with overdue follow-up built in</li>
+            <li>Automatic monthly charge schedules based on enrollment and payment plan</li>
+            <li>Collections sorted by balance — with a celebration when every family is current</li>
+            <li>Your invoice, your branding: custom title, payment instructions, and reply-to per school</li>
+          </ul>
+        </article>
+
+        <article class="clarity-card">
+          <h3>For families</h3>
+          <p>Parents stop emailing "What do I owe?" because they can check their own balances, payments, and invoices whenever they need to.</p>
+          <ul class="clarity-points">
+            <li>Passwordless family portal access</li>
+            <li>Self-serve invoice and payment history by school year</li>
+            <li>RSVP to field trips — with automatic waitlist when a trip is full</li>
+            <li>Clear visibility into direct payments and scholarship credits</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section portal-section" id="portal">
+    <div class="container portal-wrap">
+      <div class="portal-copy">
+        <div class="eyebrow">Family portal</div>
+        <h2>Give families clarity without creating more admin work.</h2>
+        <p>
+          The Microschool Ledger Family Portal gives parents a calm, self-service view of tuition,
+          payments, invoices, and enrollments. It removes a whole category of repetitive admin emails
+          and helps families feel informed instead of uncertain.
+        </p>
+        <p>
+          Parents can check their balance, review what each student is enrolled in, pull up an invoice on their own,
+          and RSVP to upcoming field trips — without creating data-entry risk or forcing your staff into the middle
+          of every question.
+        </p>
+        <p>
+          Families can also <strong>pay online directly through the portal</strong> — credit card, ACH bank transfer,
+          Apple Pay, or Google Pay via Stripe. Autopay enrollment is available so monthly tuition charges settle
+          automatically, with a dunning sequence that handles failed payments before they become a collections issue.
+        </p>
+
+        <div class="portal-quote">
+          "The portal eliminates the category of emails that ask, 'What do I owe?' or 'Can you resend our invoice?' Parents can check for themselves — and pay."
+          <strong>Self-service by design. Clear for families. Less work for your staff.</strong>
+        </div>
+      </div>
+
+      <div class="portal-mock-card">
+        <div class="portal-mock">
+          <div class="portal-top">
+            <div class="portal-brand">The Grow Co-op <small>Family Portal</small></div>
+            <div class="portal-user">family@example.com</div>
+          </div>
+
+          <div class="portal-body">
+            <div class="portal-header">
+              <div>
+                <h3>Rivera Family</h3>
+                <div class="meta">2 students • 2025–2026</div>
+              </div>
+              <div class="invoice-btn">Invoice</div>
+            </div>
+
+            <div class="summary-card">
+              <div class="summary-title">Account summary • 2025–2026</div>
+
+              <div class="summary-grid">
+                <div class="summary-box">
+                  <div class="summary-value">$12,400</div>
+                  <div class="summary-label">Total Tuition</div>
+                </div>
+                <div class="summary-box green">
+                  <div class="summary-value">$7,180</div>
+                  <div class="summary-label">Paid</div>
+                </div>
+                <div class="summary-box red">
+                  <div class="summary-value">$5,220</div>
+                  <div class="summary-label">Balance Due</div>
+                </div>
+              </div>
+
+              <div class="progress"><div class="progress-fill"></div></div>
+              <div class="progress-meta">58% paid</div>
+            </div>
+
+            <div class="tabs">
+              <div class="tab active">Overview</div>
+              <div class="tab">Enrollments</div>
+              <div class="tab">Payment History</div>
+            </div>
+
+            <div class="detail">
+              <div class="student-card">
+                <div class="student-head">🎓 Maya Rivera • Grade 4</div>
+                <div class="line">
+                  <div>Tue/Wed Program</div>
+                  <div>$8,000 / year</div>
+                </div>
+                <div class="line">
+                  <div>Film Workshop</div>
+                  <div>$1,200 / year</div>
+                </div>
+              </div>
+
+              <div class="student-card" style="margin-top:14px;">
+                <div class="student-head">🎓 Lucas Rivera • Grade 2</div>
+                <div class="line">
+                  <div>Tue/Wed Program</div>
+                  <div>$3,200 / year</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="portal-caption">
+          Families see total tuition, what they've paid, what's still due, and what each student is enrolled in —
+          without needing a custom email from your school every time they have a question.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section features" id="all-features">
+    <div class="container">
+      <div class="eyebrow">What's inside</div>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;">Built around the actual workflow of a small school.</h2>
+      <p class="lead">
+        Every part of Microschool Ledger is designed for the annual rhythm of a microschool or homeschool co-op —
+        not bolted on from software made for a completely different business.
+      </p>
+
+      <!-- GROUP 1 -->
+      <div class="fg-label" id="billing-group">Billing &amp; Enrollment</div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon">👨‍👩‍👧‍👦</div>
+          <h3>Families &amp; students</h3>
+          <p>Health indicators, smart status badges, sibling order, student sequence numbers, and family-level billing relationships.</p>
+          <ul class="feature-list">
+            <li>Searchable family directory</li>
+            <li>Sibling discount rules by program</li>
+            <li>Portal access indicator on family cards</li>
+          </ul>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🎓</div>
+          <h3>Enrollment &amp; tuition</h3>
+          <p>Guided enrollment flow with automatic charge generation, deposits, monthly or quarterly payment plans, and support for overlapping school years.</p>
+          <ul class="feature-list">
+            <li>Monthly or quarterly billing — align payment schedules with Step-Up disbursement dates</li>
+            <li>Reusable fee catalog: define fees once, auto-apply on enrollment</li>
+            <li>Applied-year handling during the spring overlap</li>
+          </ul>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">💳</div>
+          <h3>Payments &amp; imports</h3>
+          <p>Manual payment entry, Stripe imports, Step-Up scholarship credits, and bank transaction imports that don't require cleanup marathons.</p>
+          <ul class="feature-list">
+            <li>Gross and net tracking for Stripe</li>
+            <li>Safe re-import behavior for Step-Up</li>
+            <li>Month-level allocation when needed</li>
+          </ul>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">📅</div>
+          <h3>Short-term &amp; semester courses</h3>
+          <p>For enrichment programs, elective classes, and workshops that don't run on an annual tuition model — terms instead of school years.</p>
+          <ul class="feature-list">
+            <li>Term-based enrollment (Fall 2026, Spring 2027) with flat fee per term</li>
+            <li>Student or adult/family participant types — no "parent as student" clutter</li>
+            <li>Roster view: enrolled vs. paid count per class term at a glance</li>
+          </ul>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Invoices &amp; school branding</h3>
+          <p>Your invoice looks like it came from your school — custom title, payment instructions, and reply-to email. No code changes required.</p>
+          <ul class="feature-list">
+            <li>Custom invoice title (e.g. "Tuition Invoice", "Statement of Account")</li>
+            <li>Payment instructions block: Venmo handle, check payable-to, bank info</li>
+            <li>Per-charge invoice numbers for Step-Up documentation (2026–27+)</li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- GROUP 2 -->
+      <div class="fg-label" id="fieldtrips">Family Engagement</div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <h3>Family portal</h3>
+          <p>A self-service portal that lets parents see balances, pay online, view invoices, and RSVP to field trips — without any admin involvement.</p>
+          <ul class="feature-list">
+            <li>Online payments via Stripe: card, ACH, Apple Pay, Google Pay, and autopay</li>
+            <li>RSVP for field trips — waitlist handled automatically when capacity is full</li>
+            <li>Invoice access and multi-year account view</li>
+          </ul>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🚌</div>
+          <h3>Field trips &amp; events</h3>
+          <p>Plan trips, manage RSVPs through the family portal, enforce capacity limits, and generate charges for confirmed attendees in one click.</p>
+          <ul class="feature-list">
+            <li>Families RSVP through the portal — overflow goes to a waitlist automatically</li>
+            <li>One-click charge generation for all confirmed attendees based on the trip's cost structure</li>
+            <li>Copy-paste message templates ready for email or group chat</li>
+          </ul>
+        </article>
+
+        <article class="feature-card" id="collections">
+          <div class="feature-icon">📬</div>
+          <h3>Collections &amp; statements</h3>
+          <p>One-click family statements, automated reminders with a preview-before-send queue, and a clear view of who needs follow-up this month.</p>
+          <ul class="feature-list">
+            <li>Highest-balance-first collections view</li>
+            <li>Preview each reminder — recipient, balance, and email text — before it sends</li>
+            <li>Replies go to your school's inbox, not a no-reply address</li>
+          </ul>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">📣</div>
+          <h3>Campaigns</h3>
+          <p>Send targeted announcements to the right families — returning vs. new, enrolled in a specific program, or the full roster — without a separate email tool.</p>
+          <ul class="feature-list">
+            <li>Audience segments built from live enrollment and family data</li>
+            <li>Preview recipients and message before sending</li>
+            <li>Send history and unsubscribe management built in</li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- GROUP 3 -->
+      <div class="fg-label" id="reporting">Reporting &amp; Integrations</div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Reporting &amp; financial health</h3>
+          <p>Revenue, expenses, and year-to-date context that help you move from reactive bookkeeping to confident decisions — and satisfy Step-Up AUP compliance requirements.</p>
+          <ul class="feature-list">
+            <li>P&amp;L, budget tracking, and cash flow by month</li>
+            <li>Financial health view: break-even analysis, revenue per student, year-over-year trends</li>
+            <li>AUP Compliance tab with Export for CPA — one-click audit workbook for private schools</li>
+          </ul>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🔗</div>
+          <h3>QuickBooks Online</h3>
+          <p>Connect your QBO account and reconcile families, students, and payments without manual exports or duplicate data entry.</p>
+          <ul class="feature-list">
+            <li>OAuth connection — no API keys to manage</li>
+            <li>Customer reconciliation: match QBO parents and student sub-customers to MSLedger records</li>
+            <li>StepUp Allocation Report ready to import into QBO classes</li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- FEATURE HIGHLIGHTS -->
+      <div class="feature-highlight" style="margin-top:2.5rem;">
+        <div class="feature-highlight-icon">🧾</div>
+        <div class="feature-highlight-body">
+          <div class="eyebrow" style="margin-bottom:.65rem;">Built for enrichment providers &amp; elective programs</div>
+          <h3>Flat fees, semester terms, and workshop charges — alongside annual tuition, in the same system.</h3>
+          <p>
+            Not every school runs on annual tuition. Add a $300 Writing Workshop fee or a $50 materials charge
+            as a flat charge alongside any enrollment. Or flag a program as short-term and run it by term
+            (Fall 2026, Spring 2027) with a flat fee per session — complete with a roster view showing
+            enrolled vs. paid per term.
+          </p>
+          <ul class="feature-list">
+            <li>Flat charges: per-student or family-level fees with due dates — no separate reconciliation</li>
+            <li>Short-term programs: term-based enrollment with flat fees, not annual payment grids</li>
+            <li>Both models coexist in one school — annual tuition families and semester-fee students on the same platform</li>
+          </ul>
+        </div>
+        <div class="feature-highlight-stat">
+          <strong>54%</strong>
+          <span>of Florida's 2,921 Step-Up providers are enrichment or elective programs. Microschool Ledger handles both flat fees and semester courses for that majority.</span>
+        </div>
+      </div>
+
+      <div class="feature-highlight" id="private-schools" style="margin-top:1rem;">
+        <div class="feature-highlight-icon">🏛️</div>
+        <div class="feature-highlight-body">
+          <div class="eyebrow" style="margin-bottom:.65rem;">Built for private schools using Step-Up</div>
+          <h3>The accounting records your Step-Up AUP requires — ready before the auditor asks.</h3>
+          <p>
+            Florida statute requires every private school receiving Step-Up scholarship funds to demonstrate
+            an adequate accounting system, proper classification of scholarship deposits, and documented
+            educational expenditures. Schools receiving more than $250,000 must contract a licensed CPA for a
+            formal AUP engagement under Florida Statute 1002.421(1)(q). Microschool Ledger's P&amp;L,
+            expense tracking, Step-Up reconciliation, and audit log satisfy all three criteria — and the
+            Export for CPA button generates the exact workbook your auditor needs.
+          </p>
+          <ul class="feature-list">
+            <li>AUP Compliance tab: auto-checks whether school info, expenses, and scholarship records are complete</li>
+            <li>Export for CPA: one-click Excel workbook (AUP Summary, Scholarship Funds, Expense Detail by Category)</li>
+            <li>Amber threshold warning when your Step-Up total approaches the $250,000 CPA-required level</li>
+          </ul>
+        </div>
+        <div class="feature-highlight-stat">
+          <strong>$250K</strong>
+          <span>The Step-Up threshold that triggers a mandatory CPA audit under Florida Statute 1002.421(1)(q). MSLedger gives your auditor a clean, complete record to work from.</span>
+        </div>
+      </div>
+
+      <div class="feature-highlight" id="admissions" style="margin-top:1rem;">
+        <div class="feature-highlight-icon">🎯</div>
+        <div class="feature-highlight-body">
+          <div class="eyebrow" style="margin-bottom:.65rem;">From first inquiry to enrolled family — in one system</div>
+          <h3>A full admissions pipeline that hands off directly to billing.</h3>
+          <p>
+            Most schools run admissions in a spreadsheet and billing in another tool — which means every new
+            family requires double data entry and a manual handoff. Microschool Ledger's admissions pipeline
+            connects inquiry to enrollment with no re-keying: a public interest form captures leads, a
+            six-step application workflow moves applicants through the funnel, and a single "Convert to Family"
+            action creates the family record, assigns sibling order, and opens the enrollment wizard.
+          </p>
+          <ul class="feature-list">
+            <li>Public interest form with configurable questions — families self-serve into your pipeline</li>
+            <li>Two-stage funnel: Leads (interest submitted) → Applicants (application in progress) → Enrolled</li>
+            <li>Convert to Family: one click turns an accepted applicant into a billable family record</li>
+          </ul>
+        </div>
+        <div class="feature-highlight-stat">
+          <strong>0</strong>
+          <span>Times you re-enter a family's information — from first inquiry through enrollment, one record follows the family all the way through.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--pine);text-align:center;">
+    <div class="container" style="max-width:700px;">
+      <div class="eyebrow" style="color:var(--grass);justify-content:center;">Get started</div>
+      <h2 style="color:white;font-size:clamp(1.8rem,3vw,2.5rem);margin-bottom:1rem;">Ready to try Microschool Ledger?</h2>
+      <p style="color:rgba(255,255,255,.72);font-size:1.05rem;line-height:1.8;margin-bottom:2rem;">
+        See how it fits your school in a short 20-minute demo. No commitment, no sales pitch —
+        just an honest look at whether it solves your problem.
+      </p>
+      <div style="display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;">
+        <a class="btn btn-primary" href="/#contact">Request a demo</a>
+        <a class="btn btn-secondary" href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener">Try it live — no account needed</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-wrap">
+      <a class="footer-brand" href="/">
+        <svg width="28" height="28" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+          <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.2" opacity="0.9"/>
+          <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <text x="26" y="25" font-family="Georgia, serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
+        </svg>
+        <span>Microschool Ledger</span>
+      </a>
+
+      <div class="footer-meta">
+        Financial clarity for microschools &amp; homeschool co-ops — not spreadsheets.<br>
+        Built by The Grow Co-op • Boca Raton, Florida • <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const toggle = document.getElementById('brand-toggle');
+      const menu   = document.getElementById('mobile-menu');
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', function (e) {
+        if (window.innerWidth > 760) return;
+        e.preventDefault();
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        menu.classList.toggle('open', !open);
+      });
+
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          toggle.setAttribute('aria-expanded', 'false');
+          menu.classList.remove('open');
+        });
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 760) {
+          toggle.setAttribute('aria-expanded', 'false');
+          menu.classList.remove('open');
+        }
+      });
+    }());
+  </script>
+</body>
+</html>
