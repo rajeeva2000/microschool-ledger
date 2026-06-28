@@ -584,6 +584,8 @@
         <li>RSVP to upcoming field trips (waitlist handled automatically)</li>
         <li><strong>Pay online</strong> — credit card, ACH bank transfer, Apple Pay, or Google Pay via Stripe; autopay enrollment available for automatic monthly settlement</li>
       </ul>
+      <p><strong>Multi-parent access:</strong> a family can authorize more than one parent email (e.g. two households); each parent gets their own passwordless sign-in to the same account.</p>
+      <p><strong>No-login payment links:</strong> for families who would rather not sign in, the school can send a secure payment link that opens a public payment page showing the family's live balance. Reminder and invoice emails embed it automatically. The amount, family, and target are derived server-side from the stored link and capped to the outstanding balance, so a link cannot be tampered with to misapply or overcharge a payment.</p>
       <p>Access is enforced at the database layer — not just in the UI. A portal family cannot access another family's records or any financial data that isn't their own, regardless of what the browser requests.</p>
 
       <h3>3.11 Financial Reporting &amp; P&amp;L</h3>
