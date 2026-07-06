@@ -568,14 +568,14 @@
 
       <h4>Automated payment reminders:</h4>
       <ul>
-        <li>A nightly job reviews every family with an outstanding balance and a portal email address on file</li>
+        <li>A nightly job reviews every family with an outstanding balance and an email address on file</li>
         <li>Families outside a 28-day cooldown window are queued for admin review — no emails fire automatically</li>
         <li>The administrator previews each pending reminder (To, Subject, balance amount) and approves before it sends</li>
         <li>Replies from families go directly to the school's inbox, not to the platform</li>
       </ul>
 
       <h3>3.10 Family Portal</h3>
-      <p>Families access their own account at the school's portal link with no admin login required. Sign-in is passwordless — the admin sends an email link, the parent clicks, and is signed in instantly.</p>
+      <p>Families access their own account at the school's portal link with no admin login required. Sign-in is passwordless — the parent enters an email address, clicks the link that arrives, and is signed in instantly. A parent can sign in with <strong>any email the school already has on file</strong> for their family, so there is no separate invitation to send and track first — a school can switch the portal on for every family at once. (An optional branded invite email is still available as a nudge.)</p>
       <p><strong>What families can do:</strong></p>
       <ul>
         <li>View current balance with status badge (Paid in Full / Balance Due / Payment Overdue)</li>
@@ -583,8 +583,10 @@
         <li>Access complete payment history and printable invoices</li>
         <li>RSVP to upcoming field trips (waitlist handled automatically)</li>
         <li><strong>Pay online</strong> — credit card, ACH bank transfer, Apple Pay, or Google Pay via Stripe; autopay enrollment available for automatic monthly settlement</li>
+        <li><strong>Update their own contact information</strong> — parent names, email, phone, mailing address, a second guardian, and how they'd like to hear from the school — from a self-service <em>My&nbsp;Info</em> tab; corrections flow straight back into the school's records</li>
       </ul>
       <p><strong>Multi-parent access:</strong> a family can authorize more than one parent email (e.g. two households); each parent gets their own passwordless sign-in to the same account.</p>
+      <p><strong>"Confirm your family info" campaign:</strong> to refresh contact data — for example at the start of a new year — the school can email every family a private, no-login link to a pre-filled form where parents confirm their details and opt in to email and text updates. Answers merge back into the record automatically. The school can target the whole family list or just the families enrolled for the coming year, and can send a test to one family before the full send.</p>
       <p><strong>No-login payment links:</strong> for families who would rather not sign in, the school can send a secure payment link that opens a public payment page showing the family's live balance. Reminder and invoice emails embed it automatically. The amount, family, and target are derived server-side from the stored link and capped to the outstanding balance, so a link cannot be tampered with to misapply or overcharge a payment.</p>
       <p>Access is enforced at the database layer — not just in the UI. A portal family cannot access another family's records or any financial data that isn't their own, regardless of what the browser requests.</p>
 
