@@ -256,12 +256,23 @@
       border-color: var(--grass);
       border-width: 2px;
     }
+    .price-card.soon { opacity: .7; }
     .price-head {
       background: var(--pine);
       color: white;
       padding: 1.1rem 1.2rem .9rem;
     }
     .price-card.featured .price-head { background: var(--grass); }
+    .price-badge {
+      text-align: center; font-size: .62rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; padding: .3rem; background: var(--grass); color: white;
+    }
+    .price-badge.soon { background: #e4e4e4; color: #666; }
+    .price-cta {
+      display: block; text-align: center; margin-top: .8rem; padding: .5rem .8rem;
+      background: var(--gold); color: var(--pine); border-radius: 6px; font-weight: 700;
+      font-size: .8rem; text-decoration: none;
+    }
     .price-name {
       font-family: 'Lora', Georgia, serif;
       font-size: 1.15rem;
@@ -707,7 +718,8 @@
       <p>Microschool Ledger is offered in three tiers, designed to let co-ops start with what they need and add capability as they grow. Every tier includes the core billing workflow — enrollment, tuition tracking, collections, and family statements.</p>
 
       <div class="pricing-grid">
-        <div class="price-card">
+        <div class="price-card soon">
+          <div class="price-badge soon">Coming soon</div>
           <div class="price-head">
             <div class="price-name">Essentials</div>
             <div class="price-sub">Replace the spreadsheet</div>
@@ -724,9 +736,10 @@
           </div>
         </div>
 
-        <div class="price-card featured">
+        <div class="price-card soon">
+          <div class="price-badge soon">Coming soon</div>
           <div class="price-head">
-            <div class="price-name">Standard ⭐</div>
+            <div class="price-name">Standard</div>
             <div class="price-sub">Add the family-facing layer</div>
             <div class="price-amount">$99 <span>/ month</span></div>
           </div>
@@ -741,20 +754,22 @@
           </div>
         </div>
 
-        <div class="price-card">
+        <div class="price-card featured">
+          <div class="price-badge">Available now</div>
           <div class="price-head">
-            <div class="price-name">Pro</div>
+            <div class="price-name">Pro ⭐</div>
             <div class="price-sub">Full financial intelligence</div>
             <div class="price-amount">$199 <span>/ month</span></div>
           </div>
           <div class="price-body">
             <ul>
-              <li>Everything in Standard</li>
+              <li>Everything Microschool Ledger offers today</li>
               <li>Full P&amp;L and expense tracking</li>
               <li>Financial health dashboard</li>
               <li>AUP Compliance export</li>
               <li>QuickBooks Online integration</li>
             </ul>
+            <a class="price-cta" href="https://app.microschoolledger.com/?view=signup" target="_blank" rel="noopener">Start your subscription →</a>
           </div>
         </div>
       </div>
@@ -772,7 +787,7 @@
           </tbody>
         </table>
       </div>
-      <p>At the Standard tier ($99/month), Microschool Ledger typically pays for itself before the first Step-Up reconciliation of the month is run.</p>
+      <p>Even at $199/month, Microschool Ledger typically pays for itself before the first Step-Up reconciliation of the month is run.</p>
     </div>
 
     <hr class="divider">
@@ -794,7 +809,7 @@
     <!-- Getting Started -->
     <div class="wp-section" id="getting-started">
       <h2>9. Getting Started</h2>
-      <p>Microschool Ledger is available now for homeschool cooperatives and microschools. Onboarding on the Standard and Pro tiers includes a hands-on setup session — we configure your programs, pricing rules, payment plans, and import your existing family data together.</p>
+      <p>Microschool Ledger is available now for homeschool cooperatives and microschools on the Pro plan (Essentials and Standard are coming soon). Onboarding includes a hands-on setup session — we configure your programs, pricing rules, payment plans, and import your existing family data together.</p>
 
       <p><strong>To schedule a demo or start onboarding, reach out directly: <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a></strong></p>
 
@@ -804,7 +819,7 @@
         <li>Setup session: programs, payment plans, pricing rules, and family types configured in Microschool Ledger</li>
         <li>Data import: existing family and student records imported from your current spreadsheets</li>
         <li>Walkthrough of the admissions pipeline, collections dashboard, statement generation, and Step-Up import workflow</li>
-        <li>Ongoing: priority support (Standard and Pro tiers)</li>
+        <li>Ongoing: priority support</li>
       </ol>
 
       <h3>What you'll need:</h3>

@@ -334,6 +334,7 @@
       border-color:var(--gold);
       box-shadow:0 2px 16px rgba(201,168,76,.14);
     }
+    .tier.soon{ opacity:.72; }
     .tier-badge{
       background:var(--gold);
       color:var(--pine);
@@ -343,6 +344,12 @@
       letter-spacing:.1em;
       text-transform:uppercase;
       padding:.26rem;
+    }
+    .tier-badge.soon{ background:#e4e4e4; color:#666; }
+    .tier-cta{
+      display:block; text-align:center; margin-top:.85rem; padding:.55rem .8rem;
+      background:var(--gold); color:var(--pine); border-radius:8px; font-weight:700;
+      font-size:.82rem; text-decoration:none;
     }
     .tier-head{
       background:var(--pine);
@@ -626,7 +633,8 @@
       </div>
 
       <div class="tier-grid">
-        <div class="tier">
+        <div class="tier soon">
+          <div class="tier-badge soon">Coming soon</div>
           <div class="tier-head">
             <div class="tier-name">Essentials</div>
             <div class="tier-tag">Replace the spreadsheet</div>
@@ -642,8 +650,8 @@
           </div>
         </div>
 
-        <div class="tier featured">
-          <div class="tier-badge">Most popular</div>
+        <div class="tier soon">
+          <div class="tier-badge soon">Coming soon</div>
           <div class="tier-head">
             <div class="tier-name">Standard</div>
             <div class="tier-tag">Add the family-facing layer</div>
@@ -660,7 +668,8 @@
           </div>
         </div>
 
-        <div class="tier">
+        <div class="tier featured">
+          <div class="tier-badge">Available now</div>
           <div class="tier-head">
             <div class="tier-name">Pro</div>
             <div class="tier-tag">Full financial intelligence</div>
@@ -668,12 +677,13 @@
           </div>
           <div class="tier-body">
             <ul>
-              <li>Everything in Standard</li>
+              <li>Everything Microschool Ledger offers today</li>
               <li>Full P&amp;L and expense tracking</li>
               <li>Budget vs. actual reporting</li>
               <li>Program attribution audit tools</li>
               <li>Financial health dashboard</li>
             </ul>
+            <a class="tier-cta" href="https://app.microschoolledger.com/?view=signup" target="_blank" rel="noopener">Start your subscription →</a>
           </div>
         </div>
       </div>
