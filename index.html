@@ -236,8 +236,13 @@
       background:white; color:var(--ink); border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.15); box-shadow:0 18px 40px rgba(0,0,0,.18);
     }
     .price-card.featured{ transform:translateY(-6px); border-color:var(--gold); }
+    .price-card.soon{ opacity:.72; }
     .price-badge{
       background:var(--gold); color:var(--pine); text-align:center; padding:.36rem .5rem; text-transform:uppercase; font-size:.64rem; font-weight:700; letter-spacing:.1em;
+    }
+    .price-badge.soon{ background:#e4e4e4; color:#666; }
+    .price-cta{
+      display:block; width:100%; text-align:center; margin-top:1rem; box-sizing:border-box;
     }
     .price-head{ background:var(--pine-dark); padding:1.45rem 1.25rem 1.25rem; color:white; }
     .price-card.featured .price-head{ background:var(--pine); }
@@ -657,7 +662,8 @@
       </p>
 
       <div class="pricing-grid">
-        <article class="price-card">
+        <article class="price-card soon">
+          <div class="price-badge soon">Coming soon</div>
           <div class="price-head">
             <h3>Essentials</h3>
             <p>Replace the spreadsheet</p>
@@ -674,8 +680,8 @@
           </div>
         </article>
 
-        <article class="price-card featured">
-          <div class="price-badge">Most popular</div>
+        <article class="price-card soon">
+          <div class="price-badge soon">Coming soon</div>
           <div class="price-head">
             <h3>Standard</h3>
             <p>Add the family-facing layer</p>
@@ -692,7 +698,8 @@
           </div>
         </article>
 
-        <article class="price-card">
+        <article class="price-card featured">
+          <div class="price-badge">Available now</div>
           <div class="price-head">
             <h3>Pro</h3>
             <p>Full financial intelligence</p>
@@ -700,12 +707,13 @@
           </div>
           <div class="price-body">
             <ul class="price-list">
-              <li>Everything in Standard</li>
+              <li>Everything Microschool Ledger offers today</li>
               <li>Full P&amp;L and expense tracking</li>
               <li>Budget vs. actual reporting</li>
               <li>Program attribution audit tools</li>
               <li>Financial health dashboard</li>
             </ul>
+            <a class="btn btn-primary price-cta" href="https://app.microschoolledger.com/?view=signup" target="_blank" rel="noopener">Start your subscription →</a>
           </div>
         </article>
       </div>
@@ -721,7 +729,7 @@
           <h3>Your first 90 days are free.</h3>
           <p>
             The first five schools to get started pay nothing for 90 days — no monthly fee, no onboarding fee.
-            After that, choose the plan that fits, starting at $49/month.
+            After that, the Pro plan is $199/month (Essentials and Standard are coming soon).
             What we ask in return: a few honest feedback calls as we build together.
           </p>
         </div>
