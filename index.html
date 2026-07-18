@@ -926,10 +926,16 @@
           throw new Error(data.error || "Something went wrong.");
         }
 
-        form.reset();
         statusEl.textContent = "Thanks — your request was sent. We'll follow up personally.";
         statusEl.style.color = "#1f8d45";
-        if (window.posthog) { posthog.capture("demo_requested"); }
+        if (window.posthog) {
+          // Identify by the email they just gave us for follow-up, so this lead's
+          // prior anonymous browsing (and any later app login using the same email)
+          // links to one person regardless of device/browser continuity.
+          posthog.identify(payload.email, { source: "demo_request" });
+          posthog.capture("demo_requested");
+        }
+        form.reset();
       } catch (error) {
         statusEl.textContent = error.message || "We couldn't send your request right now. Please email info@microschoolledger.com.";
         statusEl.style.color = "#b03a2e";
