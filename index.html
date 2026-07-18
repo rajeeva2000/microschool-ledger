@@ -388,6 +388,24 @@
       .founding-block{ grid-template-columns:1fr; }
     }
   </style>
+  <!-- PostHog analytics (marketing site) — autocapture on, no PII collected explicitly.
+       cross_subdomain_cookie shares this visitor's identity with app.microschoolledger.com
+       so a demo-request/signup can be joined to later app logins for funnel analysis. -->
+  <script defer src="https://us-assets.i.posthog.com/static/array.js"></script>
+  <script defer>
+    posthog.init('phc_B349p68WcgUkeakKmWyyUap4iiHPYN3v7aNfVUyCKax6', {
+      api_host: 'https://us.i.posthog.com',
+      person_profiles: 'identified_only',
+      cross_subdomain_cookie: true
+    });
+    // Explicit funnel-step event for "Try demo" / "Try it live" links, rather than
+    // relying on autocapture's element-text matching (which breaks silently if the
+    // button copy ever changes).
+    document.addEventListener('click', function (e) {
+      var demoLink = e.target.closest('a[href*="org=demo"]');
+      if (demoLink) { posthog.capture('demo_link_clicked'); }
+    });
+  </script>
 </head>
 <body>
   <nav>
@@ -908,9 +926,16 @@
           throw new Error(data.error || "Something went wrong.");
         }
 
-        form.reset();
         statusEl.textContent = "Thanks — your request was sent. We'll follow up personally.";
         statusEl.style.color = "#1f8d45";
+        if (window.posthog) {
+          // Identify by the email they just gave us for follow-up, so this lead's
+          // prior anonymous browsing (and any later app login using the same email)
+          // links to one person regardless of device/browser continuity.
+          posthog.identify(payload.email, { source: "demo_request" });
+          posthog.capture("demo_requested");
+        }
+        form.reset();
       } catch (error) {
         statusEl.textContent = error.message || "We couldn't send your request right now. Please email info@microschoolledger.com.";
         statusEl.style.color = "#b03a2e";
