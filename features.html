@@ -402,6 +402,13 @@
       person_profiles: 'identified_only',
       cross_subdomain_cookie: true
     });
+    // Explicit funnel-step event for "Try demo" / "Try it live" links, rather than
+    // relying on autocapture's element-text matching (which breaks silently if the
+    // button copy ever changes).
+    document.addEventListener('click', function (e) {
+      var demoLink = e.target.closest('a[href*="org=demo"]');
+      if (demoLink) { posthog.capture('demo_link_clicked'); }
+    });
   </script>
 </head>
 <body>
