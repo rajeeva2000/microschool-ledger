@@ -436,8 +436,8 @@
   <!-- PostHog analytics (marketing site) — autocapture on, no PII collected explicitly.
        cross_subdomain_cookie shares this visitor's identity with app.microschoolledger.com
        so a demo-request/signup can be joined to later app logins for funnel analysis. -->
-  <script defer src="/posthog-array.js"></script>
-  <script defer>
+  <script src="/posthog-array.js"></script>
+  <script>
     posthog.init('phc_B349p68WcgUkeakKmWyyUap4iiHPYN3v7aNfVUyCKax6', {
       api_host: 'https://us.i.posthog.com',
       person_profiles: 'identified_only',
