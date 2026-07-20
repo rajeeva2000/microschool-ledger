@@ -267,7 +267,22 @@
     .pricing{ background:var(--pine); color:white; }
     .pricing h2{ color:white; }
     .pricing p.lead{ color:rgba(255,255,255,.7); }
-    .pricing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem; align-items:start; }
+    .pricing-duo{ display:grid; grid-template-columns:1fr 1.15fr; gap:1.25rem; margin-top:2rem; align-items:stretch; }
+    .replace-card{
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius:18px;
+      padding:1.5rem 1.6rem; color:rgba(255,255,255,.85);
+    }
+    .replace-card h3{ color:white; font-size:1.15rem; margin-bottom:.35rem; }
+    .replace-card .replace-sub{ color:rgba(255,255,255,.6); font-size:.86rem; margin-bottom:1.1rem; }
+    .replace-list{ list-style:none; display:grid; gap:.8rem; }
+    .replace-list li{
+      display:flex; justify-content:space-between; gap:1rem; align-items:baseline;
+      border-bottom:1px solid rgba(255,255,255,.1); padding-bottom:.8rem; font-size:.92rem; line-height:1.5;
+    }
+    .replace-list li:last-child{ border-bottom:none; }
+    .replace-list .cost{ color:var(--gold); font-weight:700; white-space:nowrap; font-family:'Lora', Georgia, serif; }
+    .replace-note{ margin-top:.9rem; font-size:.82rem; color:rgba(255,255,255,.55); line-height:1.6; }
+    .coming-soon-line{ margin-top:1.1rem; color:rgba(255,255,255,.55); font-size:.86rem; }
     .price-card{
       background:white; color:var(--ink); border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.15); box-shadow:0 18px 40px rgba(0,0,0,.18);
     }
@@ -404,7 +419,8 @@
 
     @media (max-width: 1024px){
       .stepup-grid, .cta-wrap{ grid-template-columns:1fr; }
-      .pricing-grid, .trust-grid{ grid-template-columns:repeat(2,1fr); }
+      .trust-grid{ grid-template-columns:repeat(2,1fr); }
+      .pricing-duo{ grid-template-columns:1fr; }
       .cap-grid{ grid-template-columns:repeat(2,1fr); }
       .rs-grid{ grid-template-columns:repeat(2,1fr); }
       .founding-block{ grid-template-columns:1fr; }
@@ -414,7 +430,7 @@
       .nav-links a:not(.nav-cta-link){ display:none; }
       .hero{ padding:7.5rem 0 4rem; }
       .section{ padding:4.25rem 0; }
-      .pricing-grid, .problem-grid, .trust-grid, .statement-metrics{ grid-template-columns:1fr; }
+      .pricing-duo, .problem-grid, .trust-grid, .statement-metrics{ grid-template-columns:1fr; }
       .statement-head{ grid-template-columns:1fr; }
       .statement-row, .statement-row.header{ grid-template-columns:1.1fr .7fr .55fr .55fr; font-size:.68rem; }
       .price-card.featured{ transform:none; }
@@ -747,82 +763,58 @@
   <section class="section pricing" id="pricing">
     <div class="container">
       <div class="eyebrow">Pricing</div>
-      <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;">Start where you are. Add more as your school grows.</h2>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;">One plan. Everything included.</h2>
       <p class="lead">
-        Every plan includes the core billing engine: family records, enrollments, manual payments, collections,
-        statements, Step-Up import, and the home dashboard.
+        No per-student fees, no feature tiers to decode. Every school gets the whole system —
+        billing, scholarship reconciliation, family portal and payments, admissions, communications, and reporting.
       </p>
 
-      <div class="pricing-grid">
-        <article class="price-card soon">
-          <div class="price-badge soon">Coming soon</div>
-          <div class="price-head">
-            <h3>Essentials</h3>
-            <p>Replace the spreadsheet</p>
-            <div class="amount"><strong>$49</strong><span>/ month</span></div>
-          </div>
-          <div class="price-body">
-            <ul class="price-list">
-              <li>Families, students, and enrollments</li>
-              <li>Manual payments and imports</li>
-              <li>Collections dashboard and statements</li>
-              <li>Florida Step-Up import included</li>
-              <li>Home dashboard and audit log</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="price-card soon">
-          <div class="price-badge soon">Coming soon</div>
-          <div class="price-head">
-            <h3>Standard</h3>
-            <p>Add the family-facing layer</p>
-            <div class="amount"><strong>$99</strong><span>/ month</span></div>
-          </div>
-          <div class="price-body">
-            <ul class="price-list">
-              <li>Everything in Essentials</li>
-              <li>Family portal access</li>
-              <li>One-click sign-in + self-service contact info</li>
-              <li>Automated reminders</li>
-              <li>Revenue totals and "Are you on track?" summary</li>
-            </ul>
-          </div>
-        </article>
-
+      <div class="pricing-duo">
         <article class="price-card featured">
           <div class="price-badge">Available now</div>
           <div class="price-head">
             <h3>Pro</h3>
-            <p>Full financial intelligence</p>
-            <div class="amount"><strong>$199</strong><span>/ month</span></div>
+            <p>The complete financial operating system</p>
+            <div class="amount"><strong>$199</strong><span>/ month, flat</span></div>
           </div>
           <div class="price-body">
             <ul class="price-list">
-              <li>Everything Microschool Ledger offers today</li>
-              <li>Full P&amp;L and expense tracking</li>
-              <li>Budget vs. actual reporting</li>
-              <li>Program attribution audit tools</li>
-              <li>Financial health dashboard</li>
+              <li>Family billing, enrollments, and automatic charge schedules</li>
+              <li>Florida Step-Up import and scholarship reconciliation</li>
+              <li>Family portal with online payments, ACH, and autopay</li>
+              <li>Collections with automated reminders</li>
+              <li>Admissions pipeline, e-sign, and communications</li>
+              <li>Full P&amp;L, budget vs. actual, and financial health dashboard</li>
+              <li>QuickBooks Online integration, nightly backups, audit log</li>
             </ul>
             <a class="btn btn-primary price-cta" href="https://app.microschoolledger.com/?view=signup" target="_blank" rel="noopener">Start your subscription →</a>
           </div>
         </article>
-      </div>
 
-      <p class="price-note">
-        Most schools replace a stack of tools and manual admin time that easily adds up to hundreds of dollars a month.
-        For Florida schools, Step-Up reconciliation alone can save hours every billing cycle.
-      </p>
+        <div class="replace-card">
+          <h3>What $199 replaces</h3>
+          <p class="replace-sub">Typical monthly cost of running billing by hand at a 20&ndash;40 student school:</p>
+          <ul class="replace-list">
+            <li><span>Admin or bookkeeper time on invoicing, reconciliation, and follow-up (10+ hrs/mo at typical rates)</span><span class="cost">$250&ndash;500</span></li>
+            <li><span>Separate invoicing / payment-collection tool</span><span class="cost">$30&ndash;100</span></li>
+            <li><span>The expensive part: revenue leakage &mdash; one lapsed scholarship or a balance nobody chased can exceed a year of Microschool Ledger</span><span class="cost">$1,000+</span></li>
+          </ul>
+          <p class="replace-note">
+            The Grow Co-op runs a 99% collection rate on Microschool Ledger. That's the number this
+            price is really buying — money that arrives instead of slipping through.
+          </p>
+          <p class="coming-soon-line">Smaller plans for schools that only need billing are coming — for now, every school gets everything.</p>
+        </div>
+      </div>
 
       <div class="founding-block">
         <div>
-          <div class="founding-label">Founding Partner Program · 5 spots available</div>
+          <div class="founding-label">Founding Partner Program · Limited founding cohort</div>
           <h3>Your first 90 days are free.</h3>
           <p>
-            The first five schools to get started pay nothing for 90 days — no monthly fee, no onboarding fee.
-            After that, the Pro plan is $199/month (Essentials and Standard are coming soon).
-            What we ask in return: a few honest feedback calls as we build together.
+            Founding schools pay nothing for their first 90 days — no monthly fee, no onboarding fee,
+            hands-on setup included. After that, Pro is $199/month.
+            What we ask in return: honest feedback calls as we build together.
           </p>
         </div>
         <a class="btn btn-primary" href="#contact" style="white-space:nowrap;">Request a demo</a>
