@@ -8,18 +8,18 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Microschool Ledger" />
   <meta property="og:title" content="Microschool Ledger — Financial clarity for microschools & homeschool co-ops" />
-  <meta property="og:description" content="Know where your school stands without spreadsheets. Manage tuition, field trips, Florida Step-Up scholarships, family billing, collections, and AUP compliance in one purpose-built system for microschools, co-ops, and private schools." />
+  <meta property="og:description" content="Know where your school stands without spreadsheets. Tuition, ESA &amp; scholarship reconciliation, family billing, collections, and a parent portal in one purpose-built system for microschools, co-ops, and private schools — built in Florida on Step-Up, ready for the school-choice era." />
   <meta property="og:url" content="https://www.microschoolledger.com/" />
   <meta property="og:image" content="https://www.microschoolledger.com/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Microschool Ledger — Financial clarity for microschools & homeschool co-ops" />
-  <meta name="twitter:description" content="Know where your school stands without spreadsheets. Manage tuition, field trips, Florida Step-Up scholarships, family billing, collections, and AUP compliance in one purpose-built system for microschools, co-ops, and private schools." />
+  <meta name="twitter:description" content="Know where your school stands without spreadsheets. Tuition, ESA &amp; scholarship reconciliation, family billing, collections, and a parent portal in one purpose-built system for microschools, co-ops, and private schools — built in Florida on Step-Up, ready for the school-choice era." />
   <meta name="twitter:image" content="https://www.microschoolledger.com/og-image.png" />
   <meta
     name="description"
-    content="Know where your school stands without spreadsheets. Manage tuition, field trips, Florida Step-Up scholarships, family billing, collections, and AUP compliance in one purpose-built system for microschools, co-ops, and private schools."
+    content="Know where your school stands without spreadsheets. Tuition, ESA &amp; scholarship reconciliation, family billing, collections, and a parent portal in one purpose-built system for microschools, co-ops, and private schools — built in Florida on Step-Up, ready for the school-choice era."
   />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
@@ -447,7 +447,10 @@
        for funnel analysis. Keep the privacy policy's analytics disclosure in sync. -->
   <script src="/posthog-array.js"></script>
   <script>
-    posthog.init('phc_B349p68WcgUkeakKmWyyUap4iiHPYN3v7aNfVUyCKax6', {
+    // Guard: if /posthog-array.js was blocked (adblockers commonly block it),
+    // don't let a ReferenceError kill this whole script block — the demo-link
+    // click listener below must still register.
+    if (window.posthog) posthog.init('phc_B349p68WcgUkeakKmWyyUap4iiHPYN3v7aNfVUyCKax6', {
       api_host: 'https://us.i.posthog.com',
       person_profiles: 'identified_only',
       cross_subdomain_cookie: true
@@ -457,7 +460,7 @@
     // button copy ever changes).
     document.addEventListener('click', function (e) {
       var demoLink = e.target.closest('a[href*="org=demo"]');
-      if (demoLink) { posthog.capture('demo_link_clicked'); }
+      if (demoLink && window.posthog) { posthog.capture('demo_link_clicked'); }
     });
   </script>
 </head>
@@ -504,9 +507,10 @@
           <div class="eyebrow" style="justify-content:center;">For microschools, co-ops &amp; private schools</div>
           <h1>Know where your school stands — <em>without spreadsheets.</em></h1>
           <p>
-            Microschool Ledger handles tuition, sibling discounts, field trips, Florida Step-Up scholarship
+            Microschool Ledger handles tuition, sibling discounts, field trips, ESA &amp; scholarship
             credits, family collections, and parent account access — in one warm, purpose-built system.
-            For private schools, it also delivers the AUP compliance export your Step-Up auditor needs.
+            Built in Florida on Step-Up — including the AUP compliance export your auditor needs —
+            and ready for the school-choice era arriving in Texas, Arizona, and beyond.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#contact">Request a demo</a>
@@ -871,7 +875,7 @@
         <ul class="cta-list">
           <li>Built by a real microschool operator, not a generic software team</li>
           <li>Fits microschools, homeschool co-ops, hybrid programs, and private schools</li>
-          <li>Especially strong for Florida schools using Step-Up — including AUP compliance for private schools</li>
+          <li>Deepest for Florida Step-Up — including AUP compliance for private schools. In another ESA state? Talk to us — that's exactly where we're headed next.</li>
         </ul>
       </div>
 
