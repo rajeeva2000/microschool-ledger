@@ -4,9 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Microschool Ledger — Financial clarity for microschools & homeschool co-ops</title>
+  <link rel="canonical" href="https://www.microschoolledger.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Microschool Ledger" />
+  <meta property="og:title" content="Microschool Ledger — Financial clarity for microschools & homeschool co-ops" />
+  <meta property="og:description" content="Know where your school stands without spreadsheets. Tuition, ESA &amp; scholarship reconciliation, family billing, collections, and a parent portal in one purpose-built system for microschools, co-ops, and private schools — built in Florida on Step-Up, ready for the school-choice era." />
+  <meta property="og:url" content="https://www.microschoolledger.com/" />
+  <meta property="og:image" content="https://www.microschoolledger.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Microschool Ledger — Financial clarity for microschools & homeschool co-ops" />
+  <meta name="twitter:description" content="Know where your school stands without spreadsheets. Tuition, ESA &amp; scholarship reconciliation, family billing, collections, and a parent portal in one purpose-built system for microschools, co-ops, and private schools — built in Florida on Step-Up, ready for the school-choice era." />
+  <meta name="twitter:image" content="https://www.microschoolledger.com/og-image.png" />
   <meta
     name="description"
-    content="Know where your school stands without spreadsheets. Manage tuition, field trips, Florida Step-Up scholarships, family billing, collections, and AUP compliance in one purpose-built system for microschools, co-ops, and private schools."
+    content="Know where your school stands without spreadsheets. Tuition, ESA &amp; scholarship reconciliation, family billing, collections, and a parent portal in one purpose-built system for microschools, co-ops, and private schools — built in Florida on Step-Up, ready for the school-choice era."
   />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
@@ -152,6 +165,29 @@
     .problem-card h3{ font-size:1.05rem; margin-bottom:.55rem; }
     .problem-card p{ color:var(--muted); font-size:.94rem; line-height:1.7; max-width:42ch; }
 
+    /* Proof band — attributed production stats + founder quote */
+    .proof{ background:var(--offwhite); border-top:1px solid var(--rock); }
+    .proof-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem; }
+    .proof-stat{
+      background:white; border:1px solid var(--rock); border-radius:14px; padding:1.35rem 1.25rem;
+    }
+    .proof-stat strong{
+      display:block; font-family:'Lora', Georgia, serif; color:var(--pine); font-size:2rem; line-height:1.1; margin-bottom:.35rem;
+    }
+    .proof-stat span{ color:var(--muted); font-size:.9rem; line-height:1.55; }
+    .proof-attrib{ margin-top:1rem; color:var(--muted); font-size:.85rem; }
+    .proof-quote{
+      margin-top:2rem; background:white; border:1px solid var(--rock); border-left:4px solid var(--gold);
+      border-radius:14px; padding:1.5rem 1.75rem;
+    }
+    .proof-quote blockquote{
+      font-family:'Lora', Georgia, serif; font-size:1.12rem; line-height:1.7; color:var(--pine); font-style:italic;
+    }
+    .proof-quote cite{
+      display:block; margin-top:.85rem; font-style:normal; color:var(--muted); font-size:.9rem;
+    }
+    @media (max-width:760px){ .proof-stats{ grid-template-columns:1fr; } }
+
     .stepup{
       background:var(--pine); color:white; position:relative; overflow:hidden;
     }
@@ -231,7 +267,22 @@
     .pricing{ background:var(--pine); color:white; }
     .pricing h2{ color:white; }
     .pricing p.lead{ color:rgba(255,255,255,.7); }
-    .pricing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2rem; align-items:start; }
+    .pricing-duo{ display:grid; grid-template-columns:1fr 1.15fr; gap:1.25rem; margin-top:2rem; align-items:stretch; }
+    .replace-card{
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); border-radius:18px;
+      padding:1.5rem 1.6rem; color:rgba(255,255,255,.85);
+    }
+    .replace-card h3{ color:white; font-size:1.15rem; margin-bottom:.35rem; }
+    .replace-card .replace-sub{ color:rgba(255,255,255,.6); font-size:.86rem; margin-bottom:1.1rem; }
+    .replace-list{ list-style:none; display:grid; gap:.8rem; }
+    .replace-list li{
+      display:flex; justify-content:space-between; gap:1rem; align-items:baseline;
+      border-bottom:1px solid rgba(255,255,255,.1); padding-bottom:.8rem; font-size:.92rem; line-height:1.5;
+    }
+    .replace-list li:last-child{ border-bottom:none; }
+    .replace-list .cost{ color:var(--gold); font-weight:700; white-space:nowrap; font-family:'Lora', Georgia, serif; }
+    .replace-note{ margin-top:.9rem; font-size:.82rem; color:rgba(255,255,255,.55); line-height:1.6; }
+    .coming-soon-line{ margin-top:1.1rem; color:rgba(255,255,255,.55); font-size:.86rem; }
     .price-card{
       background:white; color:var(--ink); border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.15); box-shadow:0 18px 40px rgba(0,0,0,.18);
     }
@@ -368,7 +419,8 @@
 
     @media (max-width: 1024px){
       .stepup-grid, .cta-wrap{ grid-template-columns:1fr; }
-      .pricing-grid, .trust-grid{ grid-template-columns:repeat(2,1fr); }
+      .trust-grid{ grid-template-columns:repeat(2,1fr); }
+      .pricing-duo{ grid-template-columns:1fr; }
       .cap-grid{ grid-template-columns:repeat(2,1fr); }
       .rs-grid{ grid-template-columns:repeat(2,1fr); }
       .founding-block{ grid-template-columns:1fr; }
@@ -378,7 +430,7 @@
       .nav-links a:not(.nav-cta-link){ display:none; }
       .hero{ padding:7.5rem 0 4rem; }
       .section{ padding:4.25rem 0; }
-      .pricing-grid, .problem-grid, .trust-grid, .statement-metrics{ grid-template-columns:1fr; }
+      .pricing-duo, .problem-grid, .trust-grid, .statement-metrics{ grid-template-columns:1fr; }
       .statement-head{ grid-template-columns:1fr; }
       .statement-row, .statement-row.header{ grid-template-columns:1.1fr .7fr .55fr .55fr; font-size:.68rem; }
       .price-card.featured{ transform:none; }
@@ -388,12 +440,17 @@
       .founding-block{ grid-template-columns:1fr; }
     }
   </style>
-  <!-- PostHog analytics (marketing site) — autocapture on, no PII collected explicitly.
-       cross_subdomain_cookie shares this visitor's identity with app.microschoolledger.com
-       so a demo-request/signup can be joined to later app logins for funnel analysis. -->
+  <!-- PostHog analytics (marketing site). Autocapture on. NOTE: this is NOT PII-free —
+       the demo-request form deliberately calls posthog.identify(email) on submit so a
+       lead's prior anonymous browsing joins to one person, and cross_subdomain_cookie
+       shares that identity with app.microschoolledger.com to connect later app logins
+       for funnel analysis. Keep the privacy policy's analytics disclosure in sync. -->
   <script src="/posthog-array.js"></script>
   <script>
-    posthog.init('phc_B349p68WcgUkeakKmWyyUap4iiHPYN3v7aNfVUyCKax6', {
+    // Guard: if /posthog-array.js was blocked (adblockers commonly block it),
+    // don't let a ReferenceError kill this whole script block — the demo-link
+    // click listener below must still register.
+    if (window.posthog) posthog.init('phc_B349p68WcgUkeakKmWyyUap4iiHPYN3v7aNfVUyCKax6', {
       api_host: 'https://us.i.posthog.com',
       person_profiles: 'identified_only',
       cross_subdomain_cookie: true
@@ -403,7 +460,7 @@
     // button copy ever changes).
     document.addEventListener('click', function (e) {
       var demoLink = e.target.closest('a[href*="org=demo"]');
-      if (demoLink) { posthog.capture('demo_link_clicked'); }
+      if (demoLink && window.posthog) { posthog.capture('demo_link_clicked'); }
     });
   </script>
 </head>
@@ -450,9 +507,10 @@
           <div class="eyebrow" style="justify-content:center;">For microschools, co-ops &amp; private schools</div>
           <h1>Know where your school stands — <em>without spreadsheets.</em></h1>
           <p>
-            Microschool Ledger handles tuition, sibling discounts, field trips, Florida Step-Up scholarship
+            Microschool Ledger handles tuition, sibling discounts, field trips, ESA &amp; scholarship
             credits, family collections, and parent account access — in one warm, purpose-built system.
-            For private schools, it also delivers the AUP compliance export your Step-Up auditor needs.
+            Built in Florida on Step-Up — including the AUP compliance export your auditor needs —
+            and ready for the school-choice era arriving in Texas, Arizona, and beyond.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#contact">Request a demo</a>
@@ -470,7 +528,7 @@
     <div class="container trust-grid">
       <div class="trust-item">
         <div class="trust-icon">⏳</div>
-        <div><strong>10+ hours back per month</strong><span>Reduce billing admin and stop rebuilding invoices by hand every cycle.</span></div>
+        <div><strong>10+ hours back per month</strong><span>Measured at The Grow Co-op — no more hand-built invoices or spreadsheet cross-referencing.</span></div>
       </div>
       <div class="trust-item">
         <div class="trust-icon">🧾</div>
@@ -528,6 +586,42 @@
             not enterprise software that adds more cognitive load.
           </p>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section proof" id="proof">
+    <div class="container">
+      <div class="eyebrow">Proven in production</div>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.5rem);margin-bottom:.75rem;">One school has run its entire financial operation on Microschool Ledger for a full year.</h2>
+      <p class="lead">
+        Microschool Ledger was built inside The Grow Co-op — a real microschool in Boca Raton, Florida —
+        and has managed its full billing year since 2024. These are its actual numbers, not projections.
+      </p>
+
+      <div class="proof-stats">
+        <div class="proof-stat">
+          <strong>99%</strong>
+          <span>collection rate across the full school year — automated reminders and scholarship reconciliation mean almost nothing slips through</span>
+        </div>
+        <div class="proof-stat">
+          <strong>$170K</strong>
+          <span>in annual program revenue managed end-to-end: tuition, Step-Up credits, field trips, and fees in one ledger</span>
+        </div>
+        <div class="proof-stat">
+          <strong>10+ hrs</strong>
+          <span>of admin time back every month — no hand-built invoices, no spreadsheet cross-referencing, no manual follow-up lists</span>
+        </div>
+      </div>
+
+      <div class="proof-quote">
+        <blockquote>
+          &ldquo;Before Microschool Ledger, managing tuition meant cross-referencing spreadsheets, manually
+          reconciling Step-Up portal exports, and building invoices by hand. Collections were reactive &mdash;
+          overdue balances were discovered late. Now the whole year runs in one place, and follow-up
+          happens before money slips through.&rdquo;
+        </blockquote>
+        <cite>Rajeev Arora &middot; Co-founder, The Grow Co-op &mdash; the school Microschool Ledger was built in</cite>
       </div>
     </div>
   </section>
@@ -673,82 +767,58 @@
   <section class="section pricing" id="pricing">
     <div class="container">
       <div class="eyebrow">Pricing</div>
-      <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;">Start where you are. Add more as your school grows.</h2>
+      <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem;">One plan. Everything included.</h2>
       <p class="lead">
-        Every plan includes the core billing engine: family records, enrollments, manual payments, collections,
-        statements, Step-Up import, and the home dashboard.
+        No per-student fees, no feature tiers to decode. Every school gets the whole system —
+        billing, scholarship reconciliation, family portal and payments, admissions, communications, and reporting.
       </p>
 
-      <div class="pricing-grid">
-        <article class="price-card soon">
-          <div class="price-badge soon">Coming soon</div>
-          <div class="price-head">
-            <h3>Essentials</h3>
-            <p>Replace the spreadsheet</p>
-            <div class="amount"><strong>$49</strong><span>/ month</span></div>
-          </div>
-          <div class="price-body">
-            <ul class="price-list">
-              <li>Families, students, and enrollments</li>
-              <li>Manual payments and imports</li>
-              <li>Collections dashboard and statements</li>
-              <li>Florida Step-Up import included</li>
-              <li>Home dashboard and audit log</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="price-card soon">
-          <div class="price-badge soon">Coming soon</div>
-          <div class="price-head">
-            <h3>Standard</h3>
-            <p>Add the family-facing layer</p>
-            <div class="amount"><strong>$99</strong><span>/ month</span></div>
-          </div>
-          <div class="price-body">
-            <ul class="price-list">
-              <li>Everything in Essentials</li>
-              <li>Family portal access</li>
-              <li>One-click sign-in + self-service contact info</li>
-              <li>Automated reminders</li>
-              <li>Revenue totals and "Are you on track?" summary</li>
-            </ul>
-          </div>
-        </article>
-
+      <div class="pricing-duo">
         <article class="price-card featured">
           <div class="price-badge">Available now</div>
           <div class="price-head">
             <h3>Pro</h3>
-            <p>Full financial intelligence</p>
-            <div class="amount"><strong>$199</strong><span>/ month</span></div>
+            <p>The complete financial operating system</p>
+            <div class="amount"><strong>$199</strong><span>/ month, flat</span></div>
           </div>
           <div class="price-body">
             <ul class="price-list">
-              <li>Everything Microschool Ledger offers today</li>
-              <li>Full P&amp;L and expense tracking</li>
-              <li>Budget vs. actual reporting</li>
-              <li>Program attribution audit tools</li>
-              <li>Financial health dashboard</li>
+              <li>Family billing, enrollments, and automatic charge schedules</li>
+              <li>Florida Step-Up import and scholarship reconciliation</li>
+              <li>Family portal with online payments, ACH, and autopay</li>
+              <li>Collections with automated reminders</li>
+              <li>Admissions pipeline, e-sign, and communications</li>
+              <li>Full P&amp;L, budget vs. actual, and financial health dashboard</li>
+              <li>QuickBooks Online integration, nightly backups, audit log</li>
             </ul>
             <a class="btn btn-primary price-cta" href="https://app.microschoolledger.com/?view=signup" target="_blank" rel="noopener">Start your subscription →</a>
           </div>
         </article>
-      </div>
 
-      <p class="price-note">
-        Most schools replace a stack of tools and manual admin time that easily adds up to hundreds of dollars a month.
-        For Florida schools, Step-Up reconciliation alone can save hours every billing cycle.
-      </p>
+        <div class="replace-card">
+          <h3>What $199 replaces</h3>
+          <p class="replace-sub">Typical monthly cost of running billing by hand at a 20&ndash;40 student school:</p>
+          <ul class="replace-list">
+            <li><span>Admin or bookkeeper time on invoicing, reconciliation, and follow-up (10+ hrs/mo at typical rates)</span><span class="cost">$250&ndash;500</span></li>
+            <li><span>Separate invoicing / payment-collection tool</span><span class="cost">$30&ndash;100</span></li>
+            <li><span>The expensive part: revenue leakage &mdash; one lapsed scholarship or a balance nobody chased can exceed a year of Microschool Ledger</span><span class="cost">$1,000+</span></li>
+          </ul>
+          <p class="replace-note">
+            The Grow Co-op runs a 99% collection rate on Microschool Ledger. That's the number this
+            price is really buying — money that arrives instead of slipping through.
+          </p>
+          <p class="coming-soon-line">Smaller plans for schools that only need billing are coming — for now, every school gets everything.</p>
+        </div>
+      </div>
 
       <div class="founding-block">
         <div>
-          <div class="founding-label">Founding Partner Program · 5 spots available</div>
+          <div class="founding-label">Founding Partner Program · Limited founding cohort</div>
           <h3>Your first 90 days are free.</h3>
           <p>
-            The first five schools to get started pay nothing for 90 days — no monthly fee, no onboarding fee.
-            After that, the Pro plan is $199/month (Essentials and Standard are coming soon).
-            What we ask in return: a few honest feedback calls as we build together.
+            Founding schools pay nothing for their first 90 days — no monthly fee, no onboarding fee,
+            hands-on setup included. After that, Pro is $199/month.
+            What we ask in return: honest feedback calls as we build together.
           </p>
         </div>
         <a class="btn btn-primary" href="#contact" style="white-space:nowrap;">Request a demo</a>
@@ -805,7 +875,7 @@
         <ul class="cta-list">
           <li>Built by a real microschool operator, not a generic software team</li>
           <li>Fits microschools, homeschool co-ops, hybrid programs, and private schools</li>
-          <li>Especially strong for Florida schools using Step-Up — including AUP compliance for private schools</li>
+          <li>Deepest for Florida Step-Up — including AUP compliance for private schools. In another ESA state? Talk to us — that's exactly where we're headed next.</li>
         </ul>
       </div>
 
