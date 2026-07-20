@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Opening the Microschool Ledger calendar…</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 1.5rem; background: #3C4535; color: white; font-family: Arial, Helvetica, sans-serif; }
+    main { max-width: 520px; text-align: center; }
+    svg { margin-bottom: 1rem; }
+    h1 { margin: 0 0 .75rem; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.8rem, 5vw, 2.6rem); }
+    p { margin: 0; color: rgba(255,255,255,.7); line-height: 1.7; }
+    a { color: #c9a84c; font-weight: 700; text-underline-offset: 3px; }
+  </style>
+  <script src="/posthog-array.js"></script>
+  <script>
+    if (window.posthog) {
+      posthog.init('phc_B349p68WcgUkeakKmWyyUap4iiHPYN3v7aNfVUyCKax6', {
+        api_host: 'https://us.i.posthog.com',
+        person_profiles: 'identified_only',
+        cross_subdomain_cookie: true
+      });
+    }
+  </script>
+</head>
+<body>
+  <main>
+    <svg width="52" height="52" viewBox="0 0 40 40" aria-hidden="true"><rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)"/><line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.2"/><line x1="0" y1="13" x2="40" y2="13" stroke="white" opacity=".2"/><line x1="0" y1="21" x2="40" y2="21" stroke="white" opacity=".2"/><line x1="0" y1="29" x2="40" y2="29" stroke="white" opacity=".2"/><text x="26" y="25" font-family="Georgia,serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">MSL</text></svg>
+    <h1>Opening Austin's calendar…</h1>
+    <p>If it does not open automatically, <a id="continue-link" href="https://calendly.com/austin-microschoolledger/30min">continue to Calendly</a>.</p>
+  </main>
+  <script>
+    (function () {
+      var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+      var STORAGE_KEY = 'msl_step_up_attribution';
+      var params = new URLSearchParams(window.location.search);
+      var saved = {};
+      var redirected = false;
+
+      try { saved = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}'); } catch (error) { saved = {}; }
+
+      var target = new URL('https://calendly.com/austin-microschoolledger/30min');
+      var properties = {
+        page: 'step_up',
+        cta_location: params.get('cta_location') || 'unknown',
+        pathname: window.location.pathname,
+        landing_pathname: '/step-up',
+        referrer: saved.referrer || document.referrer || ''
+      };
+
+      UTM_KEYS.forEach(function (key) {
+        var value = params.get(key) || saved[key] || '';
+        properties[key] = value;
+        if (value) target.searchParams.set(key, value);
+      });
+
+      var continueLink = document.getElementById('continue-link');
+      continueLink.href = target.toString();
+
+      if (window.posthog) posthog.capture('calendly_started', properties);
+
+      function redirect() {
+        if (redirected) return;
+        redirected = true;
+        window.location.replace(target.toString());
+      }
+
+      window.setTimeout(redirect, window.posthog ? 100 : 0);
+    }());
+  </script>
+</body>
+</html>
