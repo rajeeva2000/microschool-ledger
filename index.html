@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Microschool Ledger — Financial clarity for microschools & homeschool co-ops</title>
+  <title>Billing Software for Microschools | Microschool Ledger</title>
   <link rel="canonical" href="https://www.microschoolledger.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Microschool Ledger" />
-  <meta property="og:title" content="Microschool Ledger — Financial clarity for microschools & homeschool co-ops" />
-  <meta property="og:description" content="Know where your school stands without spreadsheets. Tuition, ESA &amp; scholarship reconciliation, family billing, collections, and a parent portal in one purpose-built system for microschools, co-ops, and private schools — built in Florida on Step-Up, ready for the school-choice era." />
+  <meta property="og:title" content="Billing Software for Microschools | Microschool Ledger" />
+  <meta property="og:description" content="Manage tuition, family billing, Florida Step Up scholarships, collections, payments, and parent accounts in one system built for microschools and co-ops." />
   <meta property="og:url" content="https://www.microschoolledger.com/" />
   <meta property="og:image" content="https://www.microschoolledger.com/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Microschool Ledger — Financial clarity for microschools & homeschool co-ops" />
-  <meta name="twitter:description" content="Know where your school stands without spreadsheets. Tuition, ESA &amp; scholarship reconciliation, family billing, collections, and a parent portal in one purpose-built system for microschools, co-ops, and private schools — built in Florida on Step-Up, ready for the school-choice era." />
+  <meta name="twitter:title" content="Billing Software for Microschools | Microschool Ledger" />
+  <meta name="twitter:description" content="Manage tuition, family billing, Florida Step Up scholarships, collections, payments, and parent accounts in one system built for microschools and co-ops." />
   <meta name="twitter:image" content="https://www.microschoolledger.com/og-image.png" />
   <meta
     name="description"
-    content="Know where your school stands without spreadsheets. Tuition, ESA &amp; scholarship reconciliation, family billing, collections, and a parent portal in one purpose-built system for microschools, co-ops, and private schools — built in Florida on Step-Up, ready for the school-choice era."
+    content="Manage tuition, family billing, Florida Step Up scholarships, collections, payments, and parent accounts in one system built for microschools and co-ops."
   />
   <script type="application/ld+json">
     {
@@ -412,6 +412,10 @@
       content:"•"; color:var(--gold); font-size:1.1rem; line-height:1; margin-top:.12rem;
     }
     .stack{ display:grid; gap:.75rem; }
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
     .field{
       width:100%; min-height:46px; padding:.85rem .95rem; border-radius:10px; border:1px solid var(--rock);
       background:var(--sand); color:var(--ink); font:inherit;
@@ -941,11 +945,16 @@
         <p>Tell us a little about your school and we'll follow up personally.</p>
 
         <form class="stack" id="demo-form">
-          <input class="field" type="text" id="name" placeholder="Your name" required>
-          <input class="field" type="email" id="email" placeholder="Your email" required>
-          <input class="field" type="text" id="school" placeholder="School or co-op name" required>
-          <input class="field" type="tel" id="phone" placeholder="Phone number">
-          <textarea class="field" id="notes" rows="4" placeholder="What are you using now for tuition, billing, or Step-Up tracking?"></textarea>
+          <label class="sr-only" for="name">Your name</label>
+          <input class="field" type="text" id="name" name="name" autocomplete="name" placeholder="Your name" required>
+          <label class="sr-only" for="email">Your email</label>
+          <input class="field" type="email" id="email" name="email" autocomplete="email" placeholder="Your email" required>
+          <label class="sr-only" for="school">School or co-op name</label>
+          <input class="field" type="text" id="school" name="school" autocomplete="organization" placeholder="School or co-op name" required>
+          <label class="sr-only" for="phone">Phone number</label>
+          <input class="field" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Phone number">
+          <label class="sr-only" for="notes">Current tuition, billing, or Step Up workflow</label>
+          <textarea class="field" id="notes" name="notes" rows="4" placeholder="What are you using now for tuition, billing, or Step-Up tracking?"></textarea>
           <button type="submit" class="btn btn-primary" style="width:100%;">Send demo request</button>
         </form>
 
