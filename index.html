@@ -110,6 +110,18 @@
     }
 
     html { scroll-behavior: smooth; }
+    .skip-link {
+      position: fixed;
+      top: -5rem;
+      left: 1rem;
+      z-index: 1000;
+      padding: .75rem 1rem;
+      border-radius: 6px;
+      background: var(--sand);
+      color: var(--pine);
+      font-weight: 700;
+    }
+    .skip-link:focus { top: 1rem; }
     body{
       font-family:'DM Sans', Arial, Helvetica, sans-serif;
       background:var(--sand);
@@ -423,6 +435,10 @@
       position:absolute; width:1px; height:1px; padding:0; margin:-1px;
       overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
     }
+    .honeypot{
+      position:absolute !important; left:-10000px !important; width:1px; height:1px;
+      overflow:hidden; pointer-events:none;
+    }
     .field{
       width:100%; min-height:46px; padding:.85rem .95rem; border-radius:10px; border:1px solid var(--rock);
       background:var(--sand); color:var(--ink); font:inherit;
@@ -534,9 +550,10 @@
   </script>
 </head>
 <body>
-  <nav>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <nav aria-label="Primary navigation">
     <div class="nav-inner">
-      <a class="brand brand-toggle" href="#top" id="brand-toggle" aria-expanded="false">
+      <a class="brand brand-toggle" href="#top" id="brand-toggle" aria-expanded="false" aria-controls="mobile-menu">
         <svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true">
           <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
           <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.3" opacity="0.9"/>
@@ -569,6 +586,7 @@
     <a href="#contact" class="btn btn-primary">Request a demo</a>
   </div>
 
+  <main id="main-content">
   <header class="hero" id="top">
     <div class="container">
       <div class="hero-center">
@@ -944,7 +962,7 @@
         <ul class="cta-list">
           <li>Built by a real microschool operator, not a generic software team</li>
           <li>Fits microschools, homeschool co-ops, hybrid programs, and private schools</li>
-          <li>Deepest for Florida Step-Up — including AUP compliance for private schools. In another ESA state? Talk to us — that's exactly where we're headed next.</li>
+          <li>Deepest integration for Florida Step-Up — including AUP compliance for private schools. In another ESA state? Talk to us — that's exactly where we're headed next.</li>
         </ul>
       </div>
 
@@ -954,15 +972,19 @@
 
         <form class="stack" id="demo-form">
           <label class="sr-only" for="name">Your name</label>
-          <input class="field" type="text" id="name" name="name" autocomplete="name" placeholder="Your name" required>
+          <input class="field" type="text" id="name" name="name" autocomplete="name" maxlength="100" placeholder="Your name" required>
           <label class="sr-only" for="email">Your email</label>
-          <input class="field" type="email" id="email" name="email" autocomplete="email" placeholder="Your email" required>
+          <input class="field" type="email" id="email" name="email" autocomplete="email" maxlength="254" placeholder="Your email" required>
           <label class="sr-only" for="school">School or co-op name</label>
-          <input class="field" type="text" id="school" name="school" autocomplete="organization" placeholder="School or co-op name" required>
+          <input class="field" type="text" id="school" name="school" autocomplete="organization" maxlength="120" placeholder="School or co-op name" required>
           <label class="sr-only" for="phone">Phone number</label>
-          <input class="field" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Phone number">
+          <input class="field" type="tel" id="phone" name="phone" autocomplete="tel" maxlength="40" placeholder="Phone number">
           <label class="sr-only" for="notes">Current tuition, billing, or Step Up workflow</label>
-          <textarea class="field" id="notes" name="notes" rows="4" placeholder="What are you using now for tuition, billing, or Step-Up tracking?"></textarea>
+          <textarea class="field" id="notes" name="notes" rows="4" maxlength="2000" placeholder="What are you using now for tuition, billing, or Step-Up tracking?"></textarea>
+          <div class="honeypot" aria-hidden="true" inert>
+            <label for="website">Leave this field blank</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
           <button type="submit" class="btn btn-primary" style="width:100%;">Send demo request</button>
         </form>
 
@@ -977,6 +999,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
   <footer>
     <div class="container footer-wrap">
@@ -1074,6 +1098,7 @@
         email: document.getElementById("email").value.trim(),
         phone: document.getElementById("phone").value.trim(),
         notes: document.getElementById("notes").value.trim(),
+        website: document.getElementById("website").value.trim(),
       };
 
       if (!payload.school || !payload.name || !payload.email) {
