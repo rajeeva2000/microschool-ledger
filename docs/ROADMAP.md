@@ -19,8 +19,7 @@ We have one paying customer (Grow). Before building for a new segment or adding 
 - ~~**Node.js 22 upgrade**~~ — **done**: `functions/package.json` updated to `"node": "22"`
 - ~~**"Are you on track?" Home card**~~ — **done**: Collection Progress card on Home; green/amber/red progress bar comparing total received vs. past-due expected; links to Finances → Cash Flow
 - ~~**Home "needs attention" list**~~ — **done**: Action Items section on Home; overdue families sorted by balance with inline "Record Payment" (Quick Pay) and "View Details" buttons
-- **Pricing tier system** — gate features by Essentials / Standard / Pro / Network subscription tier
-- **Financial health / break-even dashboard** — Pro-tier view in FinancesTab
+- **Financial health / break-even dashboard** — view in FinancesTab
 - **Tenant onboarding wizard** — guided first-login flow for new schools; sequences existing OnboardingWizard + StepUpImportModal + RosterImportModal as post-setup steps; sets `onboardingComplete: true`
   > Brand decisions needed first — see `docs/BRAND.md` → Open Roadmap Items
 
