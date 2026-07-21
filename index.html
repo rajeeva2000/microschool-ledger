@@ -21,6 +21,63 @@
     name="description"
     content="Know where your school stands without spreadsheets. Tuition, ESA &amp; scholarship reconciliation, family billing, collections, and a parent portal in one purpose-built system for microschools, co-ops, and private schools — built in Florida on Step-Up, ready for the school-choice era."
   />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.microschoolledger.com/#organization",
+          "name": "Microschool Ledger",
+          "url": "https://www.microschoolledger.com/",
+          "logo": "https://www.microschoolledger.com/msl-mark-solid.svg",
+          "image": "https://www.microschoolledger.com/og-image.png",
+          "description": "Purpose-built financial management software for microschools, homeschool co-ops, hybrid programs, and private schools.",
+          "email": "info@microschoolledger.com"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://www.microschoolledger.com/#software",
+          "name": "Microschool Ledger",
+          "url": "https://www.microschoolledger.com/",
+          "image": "https://www.microschoolledger.com/og-image.png",
+          "applicationCategory": "BusinessApplication",
+          "applicationSubCategory": "School financial management software",
+          "operatingSystem": "Web",
+          "description": "Financial management software for tuition, scholarship reconciliation, family billing, collections, payments, reporting, compliance, and parent account access.",
+          "provider": {
+            "@id": "https://www.microschoolledger.com/#organization"
+          },
+          "audience": {
+            "@type": "EducationalAudience",
+            "audienceType": "Microschools, homeschool co-ops, hybrid programs, and private schools"
+          },
+          "featureList": [
+            "Family-level tuition and billing",
+            "Florida Step Up scholarship reconciliation",
+            "Parent portal and online payments",
+            "Collections and automated reminders",
+            "Admissions and field trip management",
+            "Financial reporting and compliance"
+          ],
+          "offers": {
+            "@type": "Offer",
+            "url": "https://app.microschoolledger.com/?view=signup",
+            "price": "199.00",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "199.00",
+              "priceCurrency": "USD",
+              "billingDuration": "P1M",
+              "unitText": "month"
+            }
+          }
+        }
+      ]
+    }
+  </script>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
   <style>
