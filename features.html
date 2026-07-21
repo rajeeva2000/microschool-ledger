@@ -88,7 +88,7 @@
       border:1px solid transparent; cursor:pointer; transition:.18s ease;
     }
     .btn:hover{ transform:translateY(-1px); }
-    .btn-primary{ background:var(--gold); color:var(--pine); }
+    .btn-primary{ background:var(--gold); color:var(--pine-dark); }
     .btn-primary:hover{ background:#d7b45d; }
     .btn-secondary{ background:transparent; border-color:rgba(255,255,255,.26); color:white; }
     .btn-secondary:hover{ border-color:rgba(255,255,255,.55); background:rgba(255,255,255,.05); }
@@ -114,6 +114,7 @@
     }
     .nav-links a:hover{ color:white; }
     .nav-links a.active{ color:white; }
+    .nav-links a.btn-primary, .nav-links a.btn-primary:hover{ color:var(--pine-dark); }
 
     .hero{
       background:var(--pine); color:white; padding:9rem 0 5.5rem; position:relative; overflow:hidden;
@@ -372,7 +373,7 @@
         border-radius:8px; text-decoration:none; font-size:.94rem; font-weight:500;
       }
       #mobile-menu a:hover{ background:rgba(255,255,255,.07); color:white; }
-      #mobile-menu .btn-primary{ text-align:center; margin-top:.5rem; display:block; }
+      #mobile-menu .btn-primary{ text-align:center; margin-top:.5rem; display:block; color:var(--pine-dark); }
     }
 
     footer{ background:var(--pine-dark); color:rgba(255,255,255,.72); padding:2rem 0; }
