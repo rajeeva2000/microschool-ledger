@@ -429,6 +429,12 @@
     }
     .field:focus{ outline:none; border-color:var(--pine); background:white; }
     .small{ font-size:.8rem; color:var(--muted); line-height:1.55; }
+    .confirmation-actions{
+      margin-top:.75rem; padding:.9rem 1rem; border:1px solid rgba(201,168,76,.35);
+      border-radius:10px; background:var(--gold-light);
+    }
+    .confirmation-actions p{ margin:0 0 .35rem; color:var(--pine); font-size:.86rem; line-height:1.55; }
+    .confirmation-actions a{ color:var(--pine-dark); font-size:.86rem; font-weight:700; text-underline-offset:3px; }
 
     /* ── MOBILE MENU ── */
     .ham-bars{ display:none; }
@@ -960,6 +966,11 @@
           <button type="submit" class="btn btn-primary" style="width:100%;">Send demo request</button>
         </form>
 
+        <div class="confirmation-actions" id="demo-success-actions" hidden>
+          <p>Want to choose a time now? You can, but there&rsquo;s no need &mdash; we&rsquo;ll still follow up personally.</p>
+          <a id="post-submit-schedule-link" href="/schedule?cta_location=contact_confirmation">Choose a time now &rarr;</a>
+        </div>
+
         <p class="small" style="margin-top:.85rem;">
           Prefer email? Reach us directly at <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a>.
         </p>
@@ -1021,14 +1032,41 @@
 
     const form = document.getElementById("demo-form");
     const formButton = form.querySelector('button[type="submit"]');
+    const successActions = document.getElementById("demo-success-actions");
+    const postSubmitScheduleLink = document.getElementById("post-submit-schedule-link");
+    const attributionKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
     const statusEl = document.createElement("p");
     statusEl.className = "small";
     statusEl.style.marginTop = ".85rem";
     statusEl.setAttribute("aria-live", "polite");
+    statusEl.setAttribute("aria-atomic", "true");
     form.after(statusEl);
+
+    const currentParams = new URLSearchParams(window.location.search);
+    const scheduleUrl = new URL("/schedule", window.location.origin);
+    scheduleUrl.searchParams.set("cta_location", "contact_confirmation");
+    const attribution = {};
+
+    attributionKeys.forEach(function (key) {
+      const value = currentParams.get(key) || "";
+      attribution[key] = value;
+      if (value) scheduleUrl.searchParams.set(key, value);
+    });
+
+    postSubmitScheduleLink.href = scheduleUrl.pathname + scheduleUrl.search;
+    postSubmitScheduleLink.addEventListener("click", function () {
+      if (window.posthog) {
+        posthog.capture("post_submit_schedule_clicked", {
+          page: "homepage",
+          cta_location: "contact_confirmation",
+          ...attribution
+        });
+      }
+    });
 
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
+      successActions.hidden = true;
 
       const payload = {
         school: document.getElementById("school").value.trim(),
@@ -1064,14 +1102,15 @@
           throw new Error(data.error || "Something went wrong.");
         }
 
-        statusEl.textContent = "Thanks — your request was sent. We'll follow up personally.";
+        statusEl.textContent = "Thanks — your request was sent. A real person from Microschool Ledger will follow up within one business day.";
         statusEl.style.color = "#1f8d45";
+        successActions.hidden = false;
         if (window.posthog) {
           // Identify by the email they just gave us for follow-up, so this lead's
           // prior anonymous browsing (and any later app login using the same email)
           // links to one person regardless of device/browser continuity.
           posthog.identify(payload.email, { source: "demo_request" });
-          posthog.capture("demo_requested");
+          posthog.capture("demo_requested", { optional_scheduling_shown: true });
         }
         form.reset();
       } catch (error) {
