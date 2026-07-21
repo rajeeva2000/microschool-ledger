@@ -21,6 +21,8 @@
   <meta name="twitter:description" content="Connect tuition, family balances, and Florida Step Up scholarship payments in one clear ledger.">
   <meta name="twitter:image" content="https://www.microschoolledger.com/og-image.png">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&amp;display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -305,16 +307,10 @@
       *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
     }
   </style>
-  <script src="/posthog-array.js"></script>
-  <script>
-    if (window.posthog) {
-      posthog.init('phc_B349p68WcgUkeakKmWyyUap4iiHPYN3v7aNfVUyCKax6', {
-        api_host: 'https://us.i.posthog.com',
-        person_profiles: 'identified_only',
-        cross_subdomain_cookie: true
-      });
-    }
-  </script>
+  <link rel="preconnect" href="https://us.i.posthog.com" crossorigin>
+  <link rel="preconnect" href="https://us-assets.i.posthog.com" crossorigin>
+  <script src="/posthog-array.js" defer></script>
+  <script src="/posthog-init.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>

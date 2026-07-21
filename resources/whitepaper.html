@@ -60,6 +60,8 @@
     ]
   }
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -401,19 +403,17 @@
   <!-- PostHog analytics (marketing site) — autocapture on, no PII collected explicitly.
        cross_subdomain_cookie shares this visitor's identity with app.microschoolledger.com
        so a demo-request/signup can be joined to later app logins for funnel analysis. -->
-  <script src="/posthog-array.js"></script>
+  <link rel="preconnect" href="https://us.i.posthog.com" crossorigin>
+  <link rel="preconnect" href="https://us-assets.i.posthog.com" crossorigin>
+  <script src="/posthog-array.js" defer></script>
+  <script src="/posthog-init.js" defer></script>
   <script>
-    posthog.init('phc_B349p68WcgUkeakKmWyyUap4iiHPYN3v7aNfVUyCKax6', {
-      api_host: 'https://us.i.posthog.com',
-      person_profiles: 'identified_only',
-      cross_subdomain_cookie: true
-    });
     // Explicit funnel-step event for "Try demo" / "Try it live" links, rather than
     // relying on autocapture's element-text matching (which breaks silently if the
     // button copy ever changes).
     document.addEventListener('click', function (e) {
       var demoLink = e.target.closest('a[href*="org=demo"]');
-      if (demoLink) { posthog.capture('demo_link_clicked'); }
+      if (demoLink && window.posthog) { posthog.capture('demo_link_clicked'); }
     });
   </script>
 </head>
