@@ -360,7 +360,8 @@
 
     .tier-grid{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
+      grid-template-columns:minmax(0,560px);
+      justify-content:center;
       gap:.9rem;
       margin-top:1rem;
     }
@@ -374,7 +375,6 @@
       border-color:var(--gold);
       box-shadow:0 2px 16px rgba(201,168,76,.14);
     }
-    .tier.soon{ opacity:.72; }
     .tier-badge{
       background:var(--gold);
       color:var(--pine);
@@ -385,7 +385,6 @@
       text-transform:uppercase;
       padding:.26rem;
     }
-    .tier-badge.soon{ background:#e4e4e4; color:#666; }
     .tier-cta{
       display:block; text-align:center; margin-top:.85rem; padding:.55rem .8rem;
       background:var(--gold); color:var(--pine); border-radius:8px; font-weight:700;
@@ -683,63 +682,30 @@
     </div>
 
     <div class="section">
-      <div class="section-title">Pricing that grows with your school</div>
+      <div class="section-title">One plan. Everything included.</div>
       <div class="section-sub">
-        Every plan includes the core billing engine: family records, enrollments, manual payments, collections, statements, Step-Up import, and the home dashboard.
+        Microschool Ledger is $199 per month, flat. Every current feature and hands-on onboarding are included, with no per-student fees or feature tiers.
       </div>
 
       <div class="tier-grid">
-        <div class="tier soon">
-          <div class="tier-badge soon">Coming soon</div>
-          <div class="tier-head">
-            <div class="tier-name">Essentials</div>
-            <div class="tier-tag">Replace the spreadsheet</div>
-            <div class="tier-price">$49 <span>/ month</span></div>
-          </div>
-          <div class="tier-body">
-            <ul>
-              <li>Families, students, and enrollments</li>
-              <li>Manual payments and imports</li>
-              <li>Collections dashboard and statements</li>
-              <li>Florida Step-Up import included</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="tier soon">
-          <div class="tier-badge soon">Coming soon</div>
-          <div class="tier-head">
-            <div class="tier-name">Standard</div>
-            <div class="tier-tag">Add the family-facing layer</div>
-            <div class="tier-price">$99 <span>/ month</span></div>
-          </div>
-          <div class="tier-body">
-            <ul>
-              <li>Everything in Essentials</li>
-              <li>Family portal access</li>
-              <li>One-click sign-in + self-service contact info</li>
-              <li>Automated reminders</li>
-              <li>“Are you on track?” summary card</li>
-            </ul>
-          </div>
-        </div>
-
         <div class="tier featured">
           <div class="tier-badge">Available now</div>
           <div class="tier-head">
-            <div class="tier-name">Pro</div>
-            <div class="tier-tag">Full financial intelligence</div>
+            <div class="tier-name">The complete plan</div>
+            <div class="tier-tag">Everything Microschool Ledger offers</div>
             <div class="tier-price">$199 <span>/ month</span></div>
           </div>
           <div class="tier-body">
             <ul>
-              <li>Everything Microschool Ledger offers today</li>
+              <li>Billing, enrollments, payments, and collections</li>
+              <li>Family portal, online payments, and autopay</li>
+              <li>Florida Step-Up import and AUP compliance export</li>
               <li>Full P&amp;L and expense tracking</li>
               <li>Budget vs. actual reporting</li>
-              <li>Program attribution audit tools</li>
-              <li>Financial health dashboard</li>
+              <li>QuickBooks Online integration</li>
+              <li>Hands-on onboarding and priority support</li>
             </ul>
-            <a class="tier-cta" href="https://app.microschoolledger.com/?view=signup" target="_blank" rel="noopener">Start your subscription →</a>
+            <a class="tier-cta" href="/pricing/">See complete pricing details →</a>
           </div>
         </div>
       </div>

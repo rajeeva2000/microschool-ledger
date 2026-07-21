@@ -300,7 +300,8 @@
     /* Pricing cards */
     .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: minmax(0, 520px);
+      justify-content: center;
       gap: 1.2rem;
       margin: 1.5rem 0;
     }
@@ -313,7 +314,6 @@
       border-color: var(--grass);
       border-width: 2px;
     }
-    .price-card.soon { opacity: .7; }
     .price-head {
       background: var(--pine);
       color: white;
@@ -324,7 +324,6 @@
       text-align: center; font-size: .62rem; font-weight: 700; letter-spacing: .08em;
       text-transform: uppercase; padding: .3rem; background: var(--grass); color: white;
     }
-    .price-badge.soon { background: #e4e4e4; color: #666; }
     .price-cta {
       display: block; text-align: center; margin-top: .8rem; padding: .5rem .8rem;
       background: var(--gold); color: var(--pine); border-radius: 6px; font-weight: 700;
@@ -470,7 +469,7 @@
         <li><a href="#workflow">The Annual Workflow</a></li>
         <li><a href="#stepup">Florida Step-Up — Deep Dive</a></li>
         <li><a href="#aup">AUP Compliance</a></li>
-        <li><a href="#pricing">Pricing Plans</a></li>
+        <li><a href="#pricing">Pricing</a></li>
         <li><a href="#whats-next">What's Next</a></li>
         <li><a href="#getting-started">Getting Started</a></li>
       </ol>
@@ -800,62 +799,28 @@
 
     <!-- Pricing -->
     <div class="wp-section" id="pricing">
-      <h2>7. Pricing Plans</h2>
-      <p>Microschool Ledger is offered in three tiers, designed to let co-ops start with what they need and add capability as they grow. Every tier includes the core billing workflow — enrollment, tuition tracking, collections, and family statements.</p>
+      <h2>7. Pricing</h2>
+      <p>Microschool Ledger is $199 per month as one complete plan. Every current feature is included, with no per-student fees or feature tiers to decode.</p>
 
       <div class="pricing-grid">
-        <div class="price-card soon">
-          <div class="price-badge soon">Coming soon</div>
-          <div class="price-head">
-            <div class="price-name">Essentials</div>
-            <div class="price-sub">Replace the spreadsheet</div>
-            <div class="price-amount">$49 <span>/ month</span></div>
-          </div>
-          <div class="price-body">
-            <ul>
-              <li>Families, students, and enrollments</li>
-              <li>Manual payments and imports</li>
-              <li>Collections dashboard and statements</li>
-              <li>Florida Step-Up import included</li>
-              <li>Home dashboard and audit log</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="price-card soon">
-          <div class="price-badge soon">Coming soon</div>
-          <div class="price-head">
-            <div class="price-name">Standard</div>
-            <div class="price-sub">Add the family-facing layer</div>
-            <div class="price-amount">$99 <span>/ month</span></div>
-          </div>
-          <div class="price-body">
-            <ul>
-              <li>Everything in Essentials</li>
-              <li>Family portal with Stripe online payments</li>
-              <li>Autopay enrollment</li>
-              <li>Automated reminders</li>
-              <li>Communications tab</li>
-            </ul>
-          </div>
-        </div>
-
         <div class="price-card featured">
           <div class="price-badge">Available now</div>
           <div class="price-head">
-            <div class="price-name">Pro ⭐</div>
-            <div class="price-sub">Full financial intelligence</div>
+            <div class="price-name">The complete plan</div>
+            <div class="price-sub">Everything Microschool Ledger offers</div>
             <div class="price-amount">$199 <span>/ month</span></div>
           </div>
           <div class="price-body">
             <ul>
-              <li>Everything Microschool Ledger offers today</li>
+              <li>Billing, enrollments, payments, and collections</li>
+              <li>Family portal, online payments, and autopay</li>
+              <li>Florida Step-Up import and AUP compliance export</li>
               <li>Full P&amp;L and expense tracking</li>
               <li>Financial health dashboard</li>
-              <li>AUP Compliance export</li>
               <li>QuickBooks Online integration</li>
+              <li>Hands-on onboarding and priority support</li>
             </ul>
-            <a class="price-cta" href="https://app.microschoolledger.com/?view=signup" target="_blank" rel="noopener">Start your subscription →</a>
+            <a class="price-cta" href="/pricing/">See complete pricing details →</a>
           </div>
         </div>
       </div>
@@ -885,7 +850,6 @@
       <ul>
         <li><strong>Batch invoice generation</strong> — generate statements for all families at once as a ZIP of PDFs or a combined document, rather than one at a time</li>
         <li><strong>Next Year Setup Wizard</strong> — an annual guided workflow that walks the administrator through: carrying over or updating programs, adjusting tuition rates with last year's rates shown for comparison, configuring payment plans, setting the expense budget, and re-enrolling returning students in bulk</li>
-        <li><strong>Pricing tier enforcement</strong> — in-app gating of Pro features by subscription tier, with upgrade prompts and trial access for new tenants</li>
         <li><strong>Expanded QBO sync</strong> — automatic push of new MSLedger payments into QBO, reducing the reconciliation step to a confirmation rather than a manual match</li>
       </ul>
     </div>
@@ -895,7 +859,7 @@
     <!-- Getting Started -->
     <div class="wp-section" id="getting-started">
       <h2>9. Getting Started</h2>
-      <p>Microschool Ledger is available now for homeschool cooperatives and microschools on the Pro plan (Essentials and Standard are coming soon). Onboarding includes a hands-on setup session — we configure your programs, pricing rules, payment plans, and import your existing family data together.</p>
+      <p>Microschool Ledger is available now for homeschool cooperatives and microschools at $199 per month, with every current feature included. Onboarding includes a hands-on setup session — we configure your programs, pricing rules, payment plans, and import your existing family data together. See the <a href="/pricing/">complete pricing details</a>.</p>
 
       <p><strong>To schedule a demo or start onboarding, reach out directly: <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a></strong></p>
 

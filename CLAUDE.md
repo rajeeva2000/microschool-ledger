@@ -59,6 +59,9 @@ The existing `.skip-link` treatment on the public pages is the reference impleme
 
 ## Conversion rules
 
+- The canonical public offer is one complete plan at **$199 per month**. Do not introduce alternate plan names, lower-priced tiers, feature tiers, or “coming soon” packages on any page or resource.
+- The Founding Partner 90-day free period is an introductory offer attached to the $199 plan, not a separate package.
+- Link detailed pricing questions to `/pricing/`; keep price, included-feature, onboarding, and introductory-offer language consistent with that page.
 - The homepage contact form is the primary demo-request path. Do not replace it with an immediate Calendly redirect.
 - This audience includes teacher-led schools with limited technical confidence. Keep form language warm, concrete, and low-pressure.
 - After successful submission, say that a real person will reply within one business day and offer “Choose a time now” as an optional next step.
