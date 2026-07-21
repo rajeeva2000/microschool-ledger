@@ -51,6 +51,18 @@
     }
 
     html { scroll-behavior: smooth; }
+    .skip-link {
+      position: fixed;
+      top: -5rem;
+      left: 1rem;
+      z-index: 1000;
+      padding: .75rem 1rem;
+      border-radius: 6px;
+      background: var(--sand);
+      color: var(--pine);
+      font-weight: 700;
+    }
+    .skip-link:focus { top: 1rem; }
     body{
       font-family:'DM Sans', Arial, Helvetica, sans-serif;
       background:var(--sand);
@@ -426,9 +438,10 @@
   </script>
 </head>
 <body>
-  <nav>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <nav aria-label="Primary navigation">
     <div class="nav-inner">
-      <a class="brand brand-toggle" href="/" id="brand-toggle" aria-expanded="false">
+      <a class="brand brand-toggle" href="/" id="brand-toggle" aria-expanded="false" aria-controls="mobile-menu">
         <svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true">
           <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
           <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.3" opacity="0.9"/>
@@ -461,6 +474,7 @@
     <a href="/#contact" class="btn btn-primary">Request a demo</a>
   </div>
 
+  <main id="main-content">
   <header class="hero" id="top">
     <div class="container">
       <div class="hero-center">
@@ -937,6 +951,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
   <footer>
     <div class="container footer-wrap">

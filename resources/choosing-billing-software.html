@@ -82,6 +82,18 @@
     }
 
     html { scroll-behavior: smooth; }
+    .skip-link {
+      position: fixed;
+      top: -5rem;
+      left: 1rem;
+      z-index: 1000;
+      padding: .75rem 1rem;
+      border-radius: 6px;
+      background: var(--sand);
+      color: var(--pine);
+      font-weight: 700;
+    }
+    .skip-link:focus { top: 1rem; }
     body {
       font-family:'DM Sans', Arial, Helvetica, sans-serif;
       background:var(--sand);
@@ -398,8 +410,8 @@
   </script>
 </head>
 <body>
-
-  <nav>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <nav aria-label="Primary navigation">
     <div class="nav-inner">
       <a href="/" class="brand">
         <svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true">
@@ -429,7 +441,7 @@
   </header>
   <div class="gold-stripe"></div>
 
-  <main class="article">
+  <main class="article" id="main-content">
     <div class="container">
       <p class="lead">
         Most billing tools weren’t built for the way homeschool co-ops and microschools actually run. The problem usually isn’t that the software is bad — it’s that it assumes a completely different structure than the one your school lives with every month.
