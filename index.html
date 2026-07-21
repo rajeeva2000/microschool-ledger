@@ -91,11 +91,13 @@
       --offwhite:#F0EDE8;
       --rock:#DDDFDE;
       --grass:#ADB76D;
+      --grass-text:#65702f;
       --gold:#c9a84c;
+      --gold-on-dark:#e1c16b;
       --gold-light:#f7f0e0;
       --sky:#6E9CDA;
       --ink:#1a1a1a;
-      --muted:#6b7066;
+      --muted:#62675e;
       --paid:#52b788;
       --due:#f4b942;
       --overdue:#e05c5c;
@@ -123,7 +125,7 @@
     .eyebrow{
       display:inline-flex; align-items:center; gap:.65rem;
       font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
-      color:var(--grass); font-weight:600; margin-bottom:1rem;
+      color:var(--grass-text); font-weight:600; margin-bottom:1rem;
     }
     .eyebrow::before{
       content:""; width:28px; height:2px; background:var(--grass); display:block;
@@ -145,7 +147,7 @@
       border:1px solid transparent; cursor:pointer; transition:.18s ease;
     }
     .btn:hover{ transform:translateY(-1px); }
-    .btn-primary{ background:var(--gold); color:var(--pine); }
+    .btn-primary{ background:var(--gold); color:var(--pine-dark); }
     .btn-primary:hover{ background:#d7b45d; }
     .btn-secondary{ background:transparent; border-color:rgba(255,255,255,.26); color:white; }
     .btn-secondary:hover{ border-color:rgba(255,255,255,.55); background:rgba(255,255,255,.05); }
@@ -196,7 +198,9 @@
       color:rgba(255,255,255,.74); font-size:1.08rem; line-height:1.8;
     }
     .hero-actions{ margin-top:2rem; display:flex; gap:.9rem; flex-wrap:wrap; justify-content:center; }
-    .hero-proof{ margin-top:1rem; color:rgba(255,255,255,.42); font-size:.8rem; }
+    .hero-proof{ margin-top:1rem; color:rgba(255,255,255,.6); font-size:.8rem; }
+    .hero-proof a{ color:inherit; }
+    .hero .eyebrow, .stepup .eyebrow, .pricing .eyebrow{ color:var(--grass); }
 
     .tag{
       display:inline-flex; align-items:center; padding:.18rem .42rem; border-radius:999px;
@@ -280,7 +284,7 @@
       display:grid; grid-template-columns:1.1fr .9fr; gap:1rem; align-items:start;
       background:rgba(255,255,255,.04); padding:1rem 1.1rem; border-bottom:1px solid rgba(255,255,255,.08);
     }
-    .statement-head h4{ color:white; font-size:.98rem; margin-bottom:.22rem; }
+    .statement-head h3{ color:white; font-size:.98rem; margin-bottom:.22rem; }
     .statement-head p{ color:rgba(255,255,255,.62); font-size:.74rem; line-height:1.55; }
     .statement-metrics{ display:grid; grid-template-columns:repeat(3,1fr); gap:.7rem; text-align:center; }
     .statement-metrics div{
@@ -332,23 +336,23 @@
       padding:1.5rem 1.6rem; color:rgba(255,255,255,.85);
     }
     .replace-card h3{ color:white; font-size:1.15rem; margin-bottom:.35rem; }
-    .replace-card .replace-sub{ color:rgba(255,255,255,.6); font-size:.86rem; margin-bottom:1.1rem; }
+    .replace-card .replace-sub{ color:rgba(255,255,255,.7); font-size:.86rem; margin-bottom:1.1rem; }
     .replace-list{ list-style:none; display:grid; gap:.8rem; }
     .replace-list li{
       display:flex; justify-content:space-between; gap:1rem; align-items:baseline;
       border-bottom:1px solid rgba(255,255,255,.1); padding-bottom:.8rem; font-size:.92rem; line-height:1.5;
     }
     .replace-list li:last-child{ border-bottom:none; }
-    .replace-list .cost{ color:var(--gold); font-weight:700; white-space:nowrap; font-family:'Lora', Georgia, serif; }
-    .replace-note{ margin-top:.9rem; font-size:.82rem; color:rgba(255,255,255,.55); line-height:1.6; }
-    .coming-soon-line{ margin-top:1.1rem; color:rgba(255,255,255,.55); font-size:.86rem; }
+    .replace-list .cost{ color:var(--gold-on-dark); font-weight:700; white-space:nowrap; font-family:'Lora', Georgia, serif; }
+    .replace-note{ margin-top:.9rem; font-size:.82rem; color:rgba(255,255,255,.65); line-height:1.6; }
+    .coming-soon-line{ margin-top:1.1rem; color:rgba(255,255,255,.65); font-size:.86rem; }
     .price-card{
       background:white; color:var(--ink); border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.15); box-shadow:0 18px 40px rgba(0,0,0,.18);
     }
     .price-card.featured{ transform:translateY(-6px); border-color:var(--gold); }
     .price-card.soon{ opacity:.72; }
     .price-badge{
-      background:var(--gold); color:var(--pine); text-align:center; padding:.36rem .5rem; text-transform:uppercase; font-size:.64rem; font-weight:700; letter-spacing:.1em;
+      background:var(--gold); color:var(--pine-dark); text-align:center; padding:.36rem .5rem; text-transform:uppercase; font-size:.64rem; font-weight:700; letter-spacing:.1em;
     }
     .price-badge.soon{ background:#e4e4e4; color:#666; }
     .price-cta{
@@ -362,13 +366,13 @@
     .amount strong{
       font-family:'Lora', Georgia, serif; font-size:2.5rem; line-height:1; color:var(--gold);
     }
-    .amount span{ font-size:.82rem; color:rgba(255,255,255,.5); }
+    .amount span{ font-size:.82rem; color:rgba(255,255,255,.62); }
     .price-body{ padding:1.2rem 1.25rem 1.3rem; }
     .price-list{ list-style:none; display:grid; gap:.55rem; }
     .price-list li{
       position:relative; padding-left:1.1rem; font-size:.88rem; line-height:1.55; color:#2d2d2d;
     }
-    .price-list li::before{ content:"✓"; position:absolute; left:0; color:var(--grass); font-weight:700; }
+    .price-list li::before{ content:"✓"; position:absolute; left:0; color:var(--grass-text); font-weight:700; }
     .price-note{
       margin-top:2rem; color:rgba(255,255,255,.68); font-size:.9rem; line-height:1.7; max-width:800px;
     }
@@ -379,7 +383,7 @@
     }
     .founding-block .founding-label{
       font-size:.68rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
-      color:var(--gold); margin-bottom:.5rem;
+      color:var(--gold-on-dark); margin-bottom:.5rem;
     }
     .founding-block h3{ color:white; font-size:1.35rem; margin-bottom:.55rem; }
     .founding-block p{ color:rgba(255,255,255,.72); font-size:.94rem; line-height:1.75; }
@@ -395,7 +399,7 @@
       text-decoration:none; color:inherit; transition:.18s ease;
     }
     .rs-tile:hover{ background:var(--offwhite); border-color:var(--pine); }
-    .rs-type{ color:var(--grass); text-transform:uppercase; font-size:.64rem; font-weight:700; letter-spacing:.14em; }
+    .rs-type{ color:var(--grass-text); text-transform:uppercase; font-size:.64rem; font-weight:700; letter-spacing:.14em; }
     .rs-title{ color:var(--pine); font-family:'Lora', Georgia, serif; font-size:.95rem; font-weight:600; line-height:1.4; flex:1; }
     .rs-arrow{ color:var(--muted); font-size:.8rem; margin-top:.5rem; }
 
@@ -468,7 +472,7 @@
         border-radius:8px; text-decoration:none; font-size:.94rem; font-weight:500;
       }
       #mobile-menu a:hover{ background:rgba(255,255,255,.07); color:white; }
-      #mobile-menu .btn-primary{ text-align:center; margin-top:.5rem; display:block; }
+      #mobile-menu .btn-primary{ text-align:center; margin-top:.5rem; display:block; color:var(--pine-dark); }
     }
 
     footer{ background:var(--pine-dark); color:rgba(255,255,255,.72); padding:2rem 0; }
@@ -525,7 +529,7 @@
 <body>
   <nav>
     <div class="nav-inner">
-      <a class="brand brand-toggle" href="#top" id="brand-toggle" aria-label="Microschool Ledger home" aria-expanded="false">
+      <a class="brand brand-toggle" href="#top" id="brand-toggle" aria-expanded="false">
         <svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true">
           <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
           <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.3" opacity="0.9"/>
@@ -574,7 +578,7 @@
             <a class="btn btn-primary" href="#contact">Request a demo</a>
             <a class="btn btn-secondary" href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener">Try it live — no account needed</a>
           </div>
-          <div class="hero-proof">Built by The Grow Co-op in Boca Raton, Florida. In active production since 2024. &nbsp;·&nbsp; <a href="#pricing" style="color:rgba(255,255,255,.42);text-decoration:underline;text-underline-offset:3px;">See pricing</a></div>
+          <div class="hero-proof">Built by The Grow Co-op in Boca Raton, Florida. In active production since 2024. &nbsp;·&nbsp; <a href="#pricing" style="text-decoration:underline;text-underline-offset:3px;">See pricing</a></div>
         </div>
       </div>
     </div>
@@ -717,7 +721,7 @@
       <div class="statement" aria-label="Statement and payment preview">
         <div class="statement-head">
           <div>
-            <h4>Family statement preview</h4>
+            <h3>Family statement preview</h3>
             <p>Itemized charges, direct payments, scholarship credits, and a clear balance — all in one printable view.</p>
           </div>
           <div class="statement-metrics">
@@ -1042,7 +1046,7 @@
       formButton.disabled = true;
       formButton.textContent = "Sending…";
       statusEl.textContent = "";
-      statusEl.style.color = "#6b7066";
+      statusEl.style.color = "#62675e";
 
       try {
         const response = await fetch("/api/contact", {
