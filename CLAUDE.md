@@ -71,6 +71,18 @@ The existing `.skip-link` treatment on the public pages is the reference impleme
 - Preserve the off-screen `website` honeypot in the form and API. It must stay outside the keyboard and accessibility trees and must not affect legitimate submissions.
 - Never return Resend credentials, configuration details, or raw provider error bodies to visitors. Log delivery diagnostics server-side and return a friendly generic fallback.
 
+## Founding Partner Fit Check
+
+- The Founding Partner qualification page lives at `/founding-partners/`; `docs/founding-partner-sales-kit.md` is the source of truth for fit bands, response templates, pipeline stages, and the post-submission operating process.
+- Treat the Fit Check as a warm diagnostic, not an automated acceptance/rejection form. The server-generated fit band is an internal starting point and must be personally reviewed before replying.
+- Preserve the three-step structure: school basics, billing workflow, and implementation readiness. Keep the form short enough to complete in roughly three minutes.
+- Never request or accept student names, family information, account numbers, rosters, scholarship files, or other sensitive records through the public Fit Check. Arrange a separate secure handoff only after mutual fit is established.
+- Keep the general homepage demo form available. The Fit Check is the richer Founding Partner path, not a replacement for visitors who simply want to contact a real person.
+- Preserve the existing low-pressure success pattern: promise a personal reply within one business day and make `/schedule` optional.
+- Keep Fit Check analytics free of PII and free text. The stable events are `founding_partner_page_viewed`, `founding_partner_cta_clicked`, `fit_check_started`, `fit_check_step_completed`, `fit_check_submitted`, and `fit_check_schedule_clicked`.
+- When changing Fit Check fields, update client validation, `api/contact.js` allowlists/length limits, the structured notification email, the sales kit, and relevant analytics documentation together.
+- Preserve campaign attribution through the homepage/pricing links, Fit Check submission email, and optional `/schedule` handoff.
+
 ## Performance and security
 
 - Keep third-party analytics scripts deferred. Do not move them into the critical rendering path.

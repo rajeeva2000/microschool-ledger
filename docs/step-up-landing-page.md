@@ -34,3 +34,5 @@ Recommended required invitee questions:
 The landing page emits `outbound_landing_viewed`, `primary_cta_clicked`, `secondary_cta_clicked`, `email_clicked`, and `phone_clicked`. The `/schedule` redirect emits `calendly_started`. Each event includes campaign UTMs, page, CTA location, pathname, and the landing-page referrer when available.
 
 Existing site-wide `demo_link_clicked` and `demo_requested` events are unchanged.
+
+The Founding Partner path is documented separately in `docs/founding-partner-sales-kit.md`. Its optional scheduling link also routes through `/schedule`, using `cta_location=founding_partner_confirmation`, so Calendly tracking and campaign attribution remain centralized.

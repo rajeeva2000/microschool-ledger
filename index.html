@@ -907,7 +907,7 @@
             What we ask in return: honest feedback calls as we build together.
           </p>
         </div>
-        <a class="btn btn-primary" href="#contact" style="white-space:nowrap;">Request a demo</a>
+        <a class="btn btn-primary" id="founding-partner-link" href="/founding-partners/" style="white-space:nowrap;">See if your school is a fit</a>
       </div>
     </div>
   </section>
@@ -1057,6 +1057,7 @@
     const formButton = form.querySelector('button[type="submit"]');
     const successActions = document.getElementById("demo-success-actions");
     const postSubmitScheduleLink = document.getElementById("post-submit-schedule-link");
+    const foundingPartnerLink = document.getElementById("founding-partner-link");
     const attributionKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
     const statusEl = document.createElement("p");
     statusEl.className = "small";
@@ -1075,6 +1076,23 @@
       attribution[key] = value;
       if (value) scheduleUrl.searchParams.set(key, value);
     });
+
+    if (foundingPartnerLink) {
+      const foundingUrl = new URL(foundingPartnerLink.href, window.location.href);
+      attributionKeys.forEach(function (key) {
+        if (attribution[key]) foundingUrl.searchParams.set(key, attribution[key]);
+      });
+      foundingPartnerLink.href = foundingUrl.pathname + foundingUrl.search;
+      foundingPartnerLink.addEventListener("click", function () {
+        if (window.posthog) {
+          posthog.capture("founding_partner_cta_clicked", {
+            page: "homepage",
+            cta_location: "founding_partner_offer",
+            ...attribution
+          });
+        }
+      });
+    }
 
     postSubmitScheduleLink.href = scheduleUrl.pathname + scheduleUrl.search;
     postSubmitScheduleLink.addEventListener("click", function () {
