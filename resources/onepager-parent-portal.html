@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Family Portal for Microschools &amp; Co-ops | Microschool Ledger</title>
+  <meta name="description" content="See how families view balances and invoices, pay online, RSVP and pay for field trips, and manage two-parent contact information.">
+  <link rel="canonical" href="https://www.microschoolledger.com/resources/onepager-parent-portal.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Microschool Ledger">
+  <meta property="og:title" content="Family Portal for Microschools &amp; Co-ops | Microschool Ledger">
+  <meta property="og:description" content="Give families one clear place to understand their account, pay invoices, manage field trips, and keep household information current.">
+  <meta property="og:url" content="https://www.microschoolledger.com/resources/onepager-parent-portal.html">
+  <meta property="og:image" content="https://www.microschoolledger.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Family Portal for Microschools &amp; Co-ops | Microschool Ledger">
+  <meta name="twitter:description" content="Give families one clear place to understand their account, pay invoices, manage field trips, and keep household information current.">
+  <meta name="twitter:image" content="https://www.microschoolledger.com/og-image.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": "https://www.microschoolledger.com/resources/onepager-parent-portal.html#article",
+        "headline": "A Family Portal Built for How Microschool Families Actually Participate",
+        "description": "A detailed guide to the Microschool Ledger Family Portal, including invoices, online payments, field-trip RSVPs, and two-parent household information.",
+        "url": "https://www.microschoolledger.com/resources/onepager-parent-portal.html",
+        "mainEntityOfPage": "https://www.microschoolledger.com/resources/onepager-parent-portal.html",
+        "image": "https://www.microschoolledger.com/og-image.png",
+        "dateModified": "2026-07-28",
+        "author": {
+          "@type": "Organization",
+          "@id": "https://www.microschoolledger.com/#organization",
+          "name": "Microschool Ledger",
+          "url": "https://www.microschoolledger.com/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://www.microschoolledger.com/#organization",
+          "name": "Microschool Ledger",
+          "url": "https://www.microschoolledger.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.microschoolledger.com/msl-mark-solid.svg"
+          }
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.microschoolledger.com/resources/onepager-parent-portal.html#breadcrumbs",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.microschoolledger.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Features", "item": "https://www.microschoolledger.com/features.html" },
+          { "@type": "ListItem", "position": 3, "name": "Family Portal Guide", "item": "https://www.microschoolledger.com/resources/onepager-parent-portal.html" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.microschoolledger.com/resources/onepager-parent-portal.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do families need to create a password?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Families use a passwordless sign-in with an email address already connected to their family record."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can more than one parent access the same family account?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. A family can authorize more than one parent email so each parent can use their own sign-in for the same family account."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can families pay through the portal?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Families can pay online by card, ACH bank transfer, Apple Pay, or Google Pay through Stripe. Schools can also offer autopay and secure no-login payment links."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can families manage field trips in the portal?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Families can review upcoming field trips, RSVP, pay when a trip has a charge, and join an automatic waitlist when capacity is full."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/landing.css">
+  <style>
+    .portal-overview {
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 18px;
+      background: white;
+      color: var(--ink);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, .22);
+    }
+
+    .portal-overview-head {
+      padding: 1.25rem 1.4rem;
+      border-bottom: 1px solid var(--rock);
+      background: var(--gold-light);
+    }
+
+    .portal-overview-head strong {
+      display: block;
+      color: var(--pine);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.35rem;
+    }
+
+    .portal-overview-head span { color: var(--muted); font-size: .85rem; }
+    .portal-overview .check-list { padding: 1.4rem; }
+
+    .anchor-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .55rem;
+      padding: 1.1rem 0;
+    }
+
+    .anchor-nav a {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      padding: .55rem .8rem;
+      border: 1px solid var(--rock);
+      border-radius: 999px;
+      background: white;
+      color: var(--pine);
+      font-size: .84rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .anchor-nav a:hover { border-color: var(--grass); background: var(--gold-light); }
+
+    .portal-window {
+      overflow: hidden;
+      border: 1px solid #d6d0c6;
+      border-radius: 18px;
+      background: #eee5d7;
+      box-shadow: var(--shadow);
+    }
+
+    .portal-window-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--pine);
+      color: white;
+    }
+
+    .portal-window-brand {
+      font-family: 'Lora', Georgia, serif;
+      font-weight: 700;
+    }
+
+    .portal-window-brand small {
+      display: block;
+      color: rgba(255, 255, 255, .65);
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: .7rem;
+      font-weight: 500;
+    }
+
+    .portal-window-user { color: rgba(255, 255, 255, .72); font-size: .75rem; }
+    .portal-window-body { padding: 1.15rem; }
+
+    .portal-family {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .portal-family h3 { font-size: 1.65rem; }
+    .portal-family p { color: var(--muted); font-size: .82rem; }
+
+    .portal-invoice {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      padding: .55rem .8rem;
+      border-radius: 8px;
+      background: var(--pine);
+      color: white;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .balance-card {
+      padding: 1rem;
+      border: 1px solid #ddd6ca;
+      border-radius: 14px;
+      background: white;
+    }
+
+    .balance-label {
+      color: var(--muted);
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .balance-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .75rem;
+      margin-top: .75rem;
+    }
+
+    .balance-value strong {
+      display: block;
+      color: var(--pine);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.2rem;
+    }
+
+    .balance-value span { color: var(--muted); font-size: .7rem; }
+
+    .portal-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .4rem;
+      margin-top: .8rem;
+    }
+
+    .portal-tab {
+      padding: .55rem .35rem;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, .6);
+      color: var(--muted);
+      font-size: .7rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .portal-tab.active { background: var(--gold-light); color: var(--pine); }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .detail-card {
+      padding: 1.4rem;
+      border: 1px solid var(--rock);
+      border-radius: 14px;
+      background: white;
+    }
+
+    .detail-card h3 { margin-bottom: .55rem; font-size: 1.2rem; }
+    .detail-card p { color: var(--muted); font-size: .92rem; }
+
+    .detail-card ul {
+      display: grid;
+      gap: .55rem;
+      margin-top: 1rem;
+      list-style: none;
+    }
+
+    .detail-card li {
+      position: relative;
+      padding-left: 1.35rem;
+      color: #40443d;
+      font-size: .88rem;
+    }
+
+    .detail-card li::before {
+      position: absolute;
+      left: 0;
+      color: #65702f;
+      font-weight: 800;
+      content: '✓';
+    }
+
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      counter-reset: journey;
+    }
+
+    .journey-step {
+      position: relative;
+      padding: 3.4rem 1.2rem 1.2rem;
+      border: 1px solid var(--rock);
+      border-radius: 14px;
+      background: white;
+      counter-increment: journey;
+    }
+
+    .journey-step::before {
+      position: absolute;
+      top: 1rem;
+      left: 1.2rem;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--pine);
+      color: white;
+      font-size: .76rem;
+      font-weight: 700;
+      content: counter(journey);
+    }
+
+    .journey-step h3 { font-size: 1rem; }
+    .journey-step p { margin-top: .45rem; color: var(--muted); font-size: .84rem; }
+
+    .callout {
+      padding: 1.4rem;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 14px 14px 0;
+      background: var(--gold-light);
+    }
+
+    .callout h3 { font-size: 1.3rem; }
+    .callout p { margin-top: .45rem; color: var(--muted); }
+
+    @media (max-width: 860px) {
+      .journey { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 620px) {
+      .detail-grid, .journey, .balance-grid { grid-template-columns: 1fr; }
+      .portal-window-head, .portal-family { flex-direction: column; }
+      .portal-tabs { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+  <link rel="preconnect" href="https://us.i.posthog.com" crossorigin>
+  <link rel="preconnect" href="https://us-assets.i.posthog.com" crossorigin>
+  <script src="/posthog-array.js" defer></script>
+  <script src="/posthog-init.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="container nav-inner">
+      <a class="brand" href="/">
+        <svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+          <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.3"/>
+          <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <text x="26" y="25" font-family="Georgia,serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
+        </svg>
+        <span>Microschool Ledger</span>
+      </a>
+      <div class="nav-links">
+        <a href="/features.html">Features</a>
+        <a href="/pricing/">Pricing</a>
+        <a href="/homeschool-coop-billing-software/">For co-ops</a>
+        <a href="/resources/faq.html" aria-current="page">Resources</a>
+        <a href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener">Try demo</a>
+        <a href="https://app.microschoolledger.com">Log in</a>
+        <a class="btn btn-primary nav-cta" href="/#contact" data-cta="request_demo" data-location="navigation">Request a demo</a>
+      </div>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+        <span class="menu-bars" aria-hidden="true"></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="/features.html">Features</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/homeschool-coop-billing-software/">For co-ops</a>
+      <a href="/resources/faq.html" aria-current="page">Resources</a>
+      <a href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener">Try demo ↗</a>
+      <a href="https://app.microschoolledger.com">Log in</a>
+      <a class="btn btn-primary" href="/#contact" data-cta="request_demo" data-location="mobile_navigation">Request a demo</a>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <header class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Family portal guide</div>
+          <h1>Give families answers—<em>before they need to ask.</em></h1>
+          <p>One calm, self-service place where parents can understand what they owe, find an invoice, pay online, handle field trips, and keep their household information current.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="/#contact" data-cta="request_demo" data-location="hero">See it in a demo</a>
+            <a class="btn btn-light" href="/features.html#portal" data-cta="explore_features" data-location="hero">View all features</a>
+          </div>
+          <div class="hero-note">Passwordless access · Mobile-friendly · Built for real school-family relationships</div>
+        </div>
+
+        <aside class="portal-overview" aria-label="Family Portal overview">
+          <div class="portal-overview-head">
+            <strong>One family account</strong>
+            <span>Everything parents need throughout the school year</span>
+          </div>
+          <ul class="check-list">
+            <li>Balances, charges, payments, and scholarship credits</li>
+            <li>Invoices available whenever a family needs one</li>
+            <li>Card, ACH, Apple Pay, Google Pay, and autopay</li>
+            <li>Field-trip details, RSVPs, payments, and waitlists</li>
+            <li>Separate access for more than one parent</li>
+            <li>Self-service contact and household updates</li>
+          </ul>
+        </aside>
+      </div>
+    </header>
+
+    <div class="gold-stripe"></div>
+
+    <div class="section-white">
+      <nav class="container anchor-nav" aria-label="On this page">
+        <a href="#account">Family account</a>
+        <a href="#invoices">Invoices &amp; payments</a>
+        <a href="#trips">Field trips</a>
+        <a href="#household">Household information</a>
+        <a href="#school">For your school</a>
+      </nav>
+    </div>
+
+    <section class="section section-soft" id="account">
+      <div class="container split">
+        <div>
+          <div class="section-heading">
+            <div class="eyebrow">A clearer family experience</div>
+            <h2>Everything starts with one understandable account.</h2>
+            <p class="section-lead">Families see the same connected picture your school sees: what each student is enrolled in, what has been charged, what has been paid directly or through a scholarship, and what remains.</p>
+          </div>
+          <div class="callout">
+            <h3>No new password to remember.</h3>
+            <p>A parent signs in with an email address already connected to the family. Your school does not have to manage another list of passwords or chase a separate portal invitation.</p>
+          </div>
+        </div>
+
+        <div class="portal-window" aria-label="Illustration of a family account overview">
+          <div class="portal-window-head">
+            <div class="portal-window-brand">The Grow Co-op <small>Family Portal</small></div>
+            <div class="portal-window-user">family@example.com</div>
+          </div>
+          <div class="portal-window-body">
+            <div class="portal-family">
+              <div>
+                <h3>Rivera Family</h3>
+                <p>2 students · 2026–2027 school year</p>
+              </div>
+              <span class="portal-invoice">View invoice</span>
+            </div>
+            <div class="balance-card">
+              <div class="balance-label">Family account</div>
+              <div class="balance-grid">
+                <div class="balance-value"><strong>$9,600</strong><span>Total charged</span></div>
+                <div class="balance-value"><strong>$7,980</strong><span>Total paid</span></div>
+                <div class="balance-value"><strong>$1,620</strong><span>Balance remaining</span></div>
+              </div>
+            </div>
+            <div class="portal-tabs" aria-hidden="true">
+              <div class="portal-tab active">Account</div>
+              <div class="portal-tab">Payments</div>
+              <div class="portal-tab">Field trips</div>
+              <div class="portal-tab">My Info</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-white" id="invoices">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Invoices &amp; payments</div>
+          <h2>From “What do I owe?” to paid—in the same place.</h2>
+          <p class="section-lead">The portal keeps the explanation beside the action. Families can review their account first, then find the right invoice or make a payment without waiting for your staff to resend anything.</p>
+        </div>
+
+        <div class="detail-grid">
+          <article class="detail-card">
+            <h3>See the full account story</h3>
+            <p>Parents can look beyond a single balance and understand how the family arrived there.</p>
+            <ul>
+              <li>Current balance and total paid</li>
+              <li>Charges organized by student and program</li>
+              <li>Direct payments and Florida Step-Up for Students credits</li>
+              <li>Payment history across school years</li>
+            </ul>
+          </article>
+
+          <article class="detail-card">
+            <h3>Open and print invoices</h3>
+            <p>Families can pull up invoices when they need them for their own records or scholarship documentation.</p>
+            <ul>
+              <li>Self-service invoice access</li>
+              <li>Clear program and student detail</li>
+              <li>Printable documentation without an admin email</li>
+              <li>School-specific payment instructions</li>
+            </ul>
+          </article>
+
+          <article class="detail-card">
+            <h3>Pay online</h3>
+            <p>Families can move from reviewing their balance to paying it without leaving the account.</p>
+            <ul>
+              <li>Credit and debit cards through Stripe</li>
+              <li>ACH bank transfer</li>
+              <li>Apple Pay and Google Pay on supported devices</li>
+              <li>Autopay for recurring tuition charges</li>
+            </ul>
+          </article>
+
+          <article class="detail-card">
+            <h3>Pay without signing in</h3>
+            <p>When speed matters, your school can send a secure payment link that opens the family’s current balance directly.</p>
+            <ul>
+              <li>No-login payment page</li>
+              <li>Current balance shown at the time the link opens</li>
+              <li>Useful in reminders and invoice emails</li>
+              <li>A few taps from message to payment</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="trips">
+      <div class="container">
+        <div class="section-heading center">
+          <div class="eyebrow">Field trips &amp; events</div>
+          <h2>Families can decide, RSVP, and pay without a separate form.</h2>
+          <p class="section-lead">Upcoming experiences live beside the family account, so trip details and financial details stay connected.</p>
+        </div>
+
+        <div class="journey">
+          <article class="journey-step">
+            <h3>Review the trip</h3>
+            <p>Parents see the date, description, cost, capacity, and the students who are eligible.</p>
+          </article>
+          <article class="journey-step">
+            <h3>Choose who is attending</h3>
+            <p>The family RSVPs for the appropriate student without your staff copying names from another tool.</p>
+          </article>
+          <article class="journey-step">
+            <h3>Pay the trip charge</h3>
+            <p>When payment is required, the family can handle it as part of the same clear flow.</p>
+          </article>
+          <article class="journey-step">
+            <h3>Join the waitlist</h3>
+            <p>If a trip reaches capacity, overflow moves to an automatic waitlist instead of an admin-managed queue.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-white" id="household">
+      <div class="container split">
+        <div>
+          <div class="section-heading">
+            <div class="eyebrow">Real family structures</div>
+            <h2>One family record can support more than one parent.</h2>
+            <p class="section-lead">Two-household and shared-care families should not have to funnel every account question through one person. Your school can authorize more than one parent email, giving each parent a separate sign-in to the same family account.</p>
+          </div>
+          <div class="callout">
+            <h3>Separate access. One source of truth.</h3>
+            <p>Each authorized parent sees the same balances, invoices, payments, and family activity—without duplicating the family record.</p>
+          </div>
+        </div>
+
+        <div class="detail-card">
+          <h3>Families can keep their own information current</h3>
+          <p>The <em>My Info</em> area lets parents review and correct the household details your school relies on.</p>
+          <ul>
+            <li>Parent and guardian names</li>
+            <li>Primary and additional email addresses</li>
+            <li>Phone numbers and mailing address</li>
+            <li>Second guardian information</li>
+            <li>Communication preferences</li>
+          </ul>
+          <p style="margin-top:1rem;">Before a new school year, your school can also send a private “Confirm your family info” link to every family and test the campaign with one household first.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="school">
+      <div class="container split">
+        <div class="section-heading">
+          <div class="eyebrow">What your school gets back</div>
+          <h2>Self-service for families means fewer interruptions for staff.</h2>
+          <p class="section-lead">The portal is not a separate communication project. It is the family-facing side of the same billing, enrollment, trip, and household information your school already manages in Microschool Ledger.</p>
+        </div>
+        <ul class="feature-list">
+          <li>
+            <strong>Fewer repetitive account emails</strong>
+            <span>Families can answer common balance, invoice, and payment questions themselves.</span>
+          </li>
+          <li>
+            <strong>Cleaner records</strong>
+            <span>Household corrections flow back into the information your staff uses.</span>
+          </li>
+          <li>
+            <strong>Field trips stay connected</strong>
+            <span>RSVPs, capacity, charges, and payments remain part of one system.</span>
+          </li>
+          <li>
+            <strong>A more confident family experience</strong>
+            <span>Parents can see what happened, what is next, and what they can do about it.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="faq">
+      <div class="container">
+        <div class="section-heading center">
+          <div class="eyebrow">Common questions</div>
+          <h2>Family Portal FAQ</h2>
+        </div>
+        <div class="faq-list">
+          <article class="faq-item">
+            <h3>Do families need to create a password?</h3>
+            <p>No. Families use a passwordless sign-in with an email address already connected to their family record.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Can more than one parent access the same account?</h3>
+            <p>Yes. A family can authorize more than one parent email so each parent can use their own sign-in for the same family account.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Can families pay through the portal?</h3>
+            <p>Yes. Families can pay by card, ACH bank transfer, Apple Pay, or Google Pay through Stripe. Schools can also offer autopay and secure no-login payment links.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Can families manage field trips there too?</h3>
+            <p>Yes. Families can review upcoming field trips, RSVP, pay when a trip has a charge, and join an automatic waitlist when capacity is full.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container">
+        <h2>Ready to give families a clearer place to start?</h2>
+        <p>We’ll show you the Family Portal alongside the school-side workflow, so you can see exactly what parents experience and what your staff no longer has to manage by hand.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/#contact" data-cta="request_demo" data-location="final_cta">Request a demo</a>
+          <a class="btn btn-light" href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener" data-cta="try_demo" data-location="final_cta">Try the live demo</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand" href="/">
+        <svg width="28" height="28" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)"/>
+          <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.3"/>
+          <text x="26" y="25" font-family="Georgia,serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">MSL</text>
+        </svg>
+        <span>Microschool Ledger</span>
+      </a>
+      <div class="footer-meta">
+        Built by The Grow Co-op · Boca Raton, Florida · <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a><br>
+        <a href="https://app.microschoolledger.com/terms.html">Terms of Service</a> · <a href="https://app.microschoolledger.com/privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var toggle = document.querySelector('.menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+
+      if (toggle && menu) {
+        toggle.addEventListener('click', function () {
+          var open = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!open));
+          toggle.setAttribute('aria-label', open ? 'Open navigation menu' : 'Close navigation menu');
+          menu.classList.toggle('open', !open);
+        });
+
+        menu.querySelectorAll('a').forEach(function (link) {
+          link.addEventListener('click', function () {
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', 'Open navigation menu');
+            menu.classList.remove('open');
+          });
+        });
+      }
+
+      document.querySelectorAll('[data-cta]').forEach(function (link) {
+        link.addEventListener('click', function () {
+          if (!window.posthog) return;
+          var eventName = link.dataset.cta === 'request_demo' ? 'primary_cta_clicked' : 'secondary_cta_clicked';
+          posthog.capture(eventName, {
+            page: 'family_portal_guide',
+            cta: link.dataset.cta,
+            cta_location: link.dataset.location
+          });
+        });
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && menu && menu.classList.contains('open')) {
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open navigation menu');
+          menu.classList.remove('open');
+          toggle.focus();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
