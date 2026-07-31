@@ -75,6 +75,22 @@
     .section{ padding:5.5rem 0; }
     .gold-stripe{ height:3px; background:linear-gradient(90deg, var(--gold), var(--grass), var(--gold)); }
 
+    .jump-nav{
+      position: sticky; top: 68px; z-index: 40;
+      background: var(--offwhite); border-bottom: 1px solid var(--rock);
+    }
+    .jump-nav-inner{
+      display:flex; gap:1.75rem; overflow-x:auto; padding:.85rem 0;
+      -webkit-overflow-scrolling: touch;
+    }
+    .jump-nav-inner a{
+      flex:0 0 auto; font-size:.82rem; font-weight:600; color:var(--pine);
+      text-decoration:none; white-space:nowrap; padding:.3rem .05rem;
+      border-bottom: 2px solid transparent;
+    }
+    .jump-nav-inner a:hover{ border-bottom-color: var(--gold); }
+    #billing, #portal, #all-features{ scroll-margin-top: 140px; }
+
     .eyebrow{
       display:inline-flex; align-items:center; gap:.65rem;
       font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
@@ -409,6 +425,8 @@
     }
     @media (max-width: 760px){
       nav{ height:64px; }
+      .jump-nav{ top:64px; }
+      .jump-nav-inner{ gap:1.25rem; }
       .nav-links a:not(.nav-cta-link){ display:none; }
       .hero{ padding:7.5rem 0 4rem; }
       .section{ padding:4.25rem 0; }
@@ -501,6 +519,15 @@
   </header>
 
   <div class="gold-stripe"></div>
+
+  <nav class="jump-nav" aria-label="Page sections">
+    <div class="container jump-nav-inner">
+      <a href="#top">Overview</a>
+      <a href="#billing">Billing</a>
+      <a href="#portal">Family Portal</a>
+      <a href="#all-features">All Features</a>
+    </div>
+  </nav>
 
   <section class="section dashboard-preview" id="stepup-feature">
     <div class="container">
