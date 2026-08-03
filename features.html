@@ -251,11 +251,18 @@
     }
     .portal-copy h2{ font-size:clamp(1.9rem,3vw,2.5rem); margin-bottom:.9rem; }
     .portal-copy p{ color:var(--muted); font-size:.98rem; line-height:1.8; margin-bottom:1rem; max-width:62ch; }
+    .portal-copy .portal-distinction{
+      background:var(--gold-light); border:1px solid rgba(201,168,76,.35); border-radius:12px;
+      padding:.9rem 1rem; color:var(--pine);
+    }
     .portal-quote{
       background:white; border-left:4px solid var(--gold); border-radius:0 12px 12px 0; padding:1rem 1rem 1rem 1.1rem;
-      color:var(--pine); font-size:.95rem; line-height:1.7; margin-top:.6rem;
+      color:var(--pine); font-family:'Lora', Georgia, serif; font-size:1rem; font-style:italic; line-height:1.7; margin-top:.6rem;
     }
-    .portal-quote strong{ display:block; margin-top:.45rem; font-size:.84rem; color:var(--muted); }
+    .portal-quote cite{
+      display:block; margin-top:.55rem; color:var(--muted); font-family:'DM Sans', Arial, sans-serif;
+      font-size:.84rem; font-style:normal;
+    }
     .portal-guide-link{
       min-height:44px; display:inline-flex; align-items:center; margin-top:1rem; color:var(--pine);
       font-weight:700; text-underline-offset:3px;
@@ -641,6 +648,10 @@
           payments, invoices, and enrollments. It removes a whole category of repetitive admin emails
           and helps families feel informed instead of uncertain.
         </p>
+        <p class="portal-distinction">
+          <strong>Your school&rsquo;s own family portal &mdash; separate from EMA.</strong>
+          Families see their Microschool Ledger invoices, direct payments, and scholarship credits together in one clear account.
+        </p>
         <p>
           Parents can check their balance, review what each student is enrolled in, pull up an invoice on their own,
           and RSVP to upcoming field trips — without creating data-entry risk or forcing your staff into the middle
@@ -667,10 +678,10 @@
           can test it on one family before the full send.
         </p>
 
-        <div class="portal-quote">
-          "The portal eliminates the category of emails that ask, 'What do I owe?' or 'Can you resend our invoice?' Parents can check for themselves — and pay."
-          <strong>Self-service by design. Clear for families. Less work for your staff.</strong>
-        </div>
+        <blockquote class="portal-quote">
+          &ldquo;The new family portal is amazing and so convenient! I love being able to see the invoices broken down&mdash;it&rsquo;s super helpful.&rdquo;
+          <cite>Erica M. &middot; GROW parent</cite>
+        </blockquote>
         <a class="portal-guide-link" href="/resources/onepager-parent-portal.html">Explore the complete Family Portal guide →</a>
       </div>
 

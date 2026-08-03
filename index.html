@@ -230,6 +230,20 @@
     .trust-item strong{ display:block; font-size:.92rem; color:var(--pine); margin-bottom:.12rem; }
     .trust-item span{ display:block; font-size:.82rem; color:var(--muted); line-height:1.45; }
 
+    .family-quote-band{
+      padding:1.6rem 0; background:var(--gold-light); border-bottom:1px solid var(--rock);
+    }
+    .family-quote-band blockquote{ max-width:920px; margin:0 auto; }
+    .family-quote-band p{
+      font-family:'Lora', Georgia, serif; color:var(--pine); font-size:clamp(1.2rem,2.2vw,1.55rem);
+      line-height:1.55; font-style:italic;
+    }
+    .family-quote-meta{
+      display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-top:.65rem;
+    }
+    .family-quote-meta cite{ color:var(--muted); font-size:.88rem; font-style:normal; }
+    .family-quote-meta a{ color:var(--pine); font-size:.88rem; font-weight:700; text-underline-offset:3px; }
+
     .problem{ background:white; }
     .problem-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.15rem; margin-top:2rem; }
     .problem-card{
@@ -518,6 +532,7 @@
       .hero{ padding:7.5rem 0 4rem; }
       .section{ padding:4.25rem 0; }
       .pricing-duo, .problem-grid, .trust-grid, .statement-metrics{ grid-template-columns:1fr; }
+      .family-quote-meta{ align-items:flex-start; flex-direction:column; }
       .statement-head{ grid-template-columns:1fr; }
       .statement-row, .statement-row.header{ grid-template-columns:1.1fr .7fr .55fr .55fr; font-size:.68rem; }
       .price-card.featured{ transform:none; }
@@ -628,6 +643,18 @@
         <div class="trust-icon">☁️</div>
         <div><strong>No servers. Nightly backups.</strong><span>Runs in a browser with automatic nightly backups and one-click restore.</span></div>
       </div>
+    </div>
+  </section>
+
+  <section class="family-quote-band" aria-label="Family testimonial">
+    <div class="container">
+      <blockquote>
+        <p>&ldquo;The new family portal is amazing and so convenient! I love being able to see the invoices broken down&mdash;it&rsquo;s super helpful.&rdquo;</p>
+        <div class="family-quote-meta">
+          <cite>Erica M. &middot; GROW parent</cite>
+          <a href="/customers/grow-co-op">Read the full Grow Co-op customer story&nbsp;&rarr;</a>
+        </div>
+      </blockquote>
     </div>
   </section>
 
