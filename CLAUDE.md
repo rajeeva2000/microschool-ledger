@@ -56,6 +56,8 @@ The existing `.skip-link` treatment on the public pages is the reference impleme
 - Existing funnel events include `demo_link_clicked`, `demo_requested`, `post_submit_schedule_clicked`, `outbound_landing_viewed`, `primary_cta_clicked`, `secondary_cta_clicked`, `email_clicked`, `phone_clicked`, and `calendly_started`.
 - Prefer stable explicit events for important funnel steps rather than relying only on element-text autocapture. Event names use lowercase snake_case.
 - Do not rename or remove an existing event without updating its PostHog funnel/dashboard consumers.
+- Keep `posthog-init.js` limited to the production marketing hosts so localhost and preview testing do not contaminate acquisition or conversion reporting.
+- Register `marketing_positioning_version` as a shared event property whenever the site launches a meaningful messaging revision.
 
 ## Conversion rules
 
