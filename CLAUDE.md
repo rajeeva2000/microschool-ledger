@@ -15,6 +15,7 @@ Read this file before changing any public page in this repository. These rules p
 - Keep the current Pine, Sand, Grass, Gold, and supporting brand palette from `BRAND.md`.
 - Do not treat brand fonts or colors as performance optimizations. They are intentionally selected.
 - Write the product name as **Microschool Ledger**. Use “MSL” only inside the mark/favicon, never as prose or as a shortened page-title brand.
+- **Exception: MSL Attendance** (owner decision, November 2026) is the name of the free attendance-only product. Write it in full, “MSL Attendance”, in titles, headings and copy for that product; never shorten it to “MSL”. The company and full platform remain “Microschool Ledger”. See `BRAND.md`.
 - On first mention, use “Florida Step-Up for Students”; “Step-Up” is acceptable thereafter.
 - When describing market depth, use **“Deepest integration for Florida Step-Up”**, not “Deepest for Florida Step-Up.”
 
@@ -63,7 +64,7 @@ The existing `.skip-link` treatment on the public pages is the reference impleme
 ## Conversion rules
 
 - The canonical public offer is one complete plan at **$199 per month**. Do not introduce alternate plan names, lower-priced tiers, feature tiers, or “coming soon” packages on any page or resource.
-- **One exception (owner-approved, November 2026): free attendance.** `/free-attendance/` and the homepage `#free-attendance` band offer a free attendance-only account for up to 25 active students, no card. Present it as a separate free tool, never as a tier of the financial product: don't call it a plan of Microschool Ledger's billing, don't promise RSVP, billing or any upgrade price (no "$19"), and keep the $199 plan as the only paid offer. Start free links go to `https://app.microschoolledger.com/?view=start` with `entry_workflow=attendance`, `landing_path` and the visit's `utm_*` (the page scripts add them).
+- **One exception (owner-approved, November 2026): MSL Attendance, free indefinitely.** `/free-attendance/` and the homepage `#free-attendance` band offer MSL Attendance, a free attendance-only account for up to 25 active students, no card. Present it as a separate free tool, never as a tier of the financial product: don't call it a plan of Microschool Ledger's billing, don't promise RSVP, billing or any upgrade price (no "$19"), and keep the $199 plan as the only paid offer. Say "free indefinitely" / "no expiration" only while the Terms of Service state it (draft in the app repo's `docs/legal/`). Support is email only until help documentation exists; don't promise docs. Don't claim setup takes minutes (use "Get started today"). Start free links go to `https://app.microschoolledger.com/?view=start` with `entry_workflow=attendance`, `landing_path` and the visit's `utm_*` (the page scripts add them).
 - The Founding Partner 90-day free period is an introductory offer attached to the $199 plan, not a separate package.
 - Link detailed pricing questions to `/pricing/`; keep price, included-feature, onboarding, and introductory-offer language consistent with that page.
 - The homepage contact form is the primary demo-request path. Do not replace it with an immediate Calendly redirect.
