@@ -14,7 +14,8 @@ Last updated: March 2026
 **Product name:** Microschool Ledger
 **Always written as:** Two words, title case — "Microschool Ledger"
 **Never:** "MicroschoolLedger", "MSL App", "Grow ERP", "the ledger"
-**Short form in UI:** "MSL" (mark/favicon only — never in prose)
+**Short form in UI:** "MSL" (mark/favicon only — never in prose), with one exception: the product name **MSL Attendance** (owner decision, November 2026).
+**MSL Attendance:** the free attendance-only product. Always the full two-word name "MSL Attendance" (never "MSL attendance", "MSL-Attendance" or plain "MSL"). It may appear in headings, page titles, body copy, buttons and emails. Everywhere else, the company and full platform stay "Microschool Ledger". On first mention on a page, connect the two once, e.g. "MSL Attendance, from Microschool Ledger".
 **Tagline:** "Financial management for microschools and homeschool co-ops"
 **Built by:** The Grow Co-op, Boca Raton, FL
 **Contact:** info@microschoolledger.com

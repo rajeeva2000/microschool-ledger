@@ -541,6 +541,14 @@
       .rs-grid{ grid-template-columns:1fr; }
       .founding-block{ grid-template-columns:1fr; }
     }
+    /* Free attendance entry (November 2026) */
+    .free-band{ background:var(--offwhite); border-top:1px solid var(--rock); border-bottom:1px solid var(--rock); padding:3.25rem 0; }
+    .free-band-inner{ display:grid; grid-template-columns:1.4fr auto; gap:2rem; align-items:center; }
+    .free-band h2{ font-size:clamp(1.6rem,2.6vw,2.1rem); margin-bottom:.6rem; }
+    .free-band p{ color:var(--muted); line-height:1.75; max-width:640px; }
+    .free-band-actions{ display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; }
+    .free-band-actions a.text-link{ color:var(--pine); font-weight:600; text-underline-offset:3px; }
+    @media (max-width:760px){ .free-band-inner{ grid-template-columns:1fr; } .free-band-actions .btn{ width:100%; } }
   </style>
   <!-- PostHog analytics (marketing site). Autocapture on. NOTE: this is NOT PII-free —
        the demo-request form deliberately calls posthog.identify(email) on submit so a
@@ -878,6 +886,20 @@
     </div>
   </section>
 
+  <section class="free-band" id="free-attendance" aria-labelledby="free-attendance-heading">
+    <div class="container free-band-inner">
+      <div>
+        <div class="eyebrow">Just need attendance?</div>
+        <h2 id="free-attendance-heading">MSL Attendance: free for up to 25 active students.</h2>
+        <p>Attendance shouldn't be complicated. Or expensive. Mark who's here each school day, including late arrivals and early pickups, and look back or export any time. No credit card and no required demo.</p>
+      </div>
+      <div class="free-band-actions">
+        <a class="btn btn-primary start-free" data-cta-location="homepage_band" href="https://app.microschoolledger.com/?view=start&amp;entry_workflow=attendance&amp;landing_path=/">Get Free Attendance</a>
+        <a class="text-link" href="/free-attendance/">How MSL Attendance works</a>
+      </div>
+    </div>
+  </section>
+
   <section class="section pricing" id="pricing">
     <div class="container">
       <div class="eyebrow">Pricing</div>
@@ -1191,6 +1213,29 @@
         formButton.textContent = "Send demo request";
       }
     });
+  </script>
+  <script>
+    // Free attendance band: carry the campaign into the app and record the click.
+    (function () {
+      var PRODUCTION = ['microschoolledger.com', 'www.microschoolledger.com'];
+      var isProduction = PRODUCTION.indexOf(window.location.hostname) !== -1;
+      var params = new URLSearchParams(window.location.search);
+      var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+      var SAFE = /^[A-Za-z0-9 _.+\-]{1,100}$/;
+      document.querySelectorAll('a.start-free').forEach(function (link) {
+        var url = new URL(link.href);
+        var props = { entry_workflow: 'attendance', offer_version: 'free_attendance_v1', page: 'home', pathname: window.location.pathname, cta_location: link.dataset.ctaLocation || 'unknown' };
+        keys.forEach(function (k) { var v = params.get(k); if (v && SAFE.test(v)) { url.searchParams.set(k, v); props[k] = v; } });
+        link.href = url.toString();
+        link.addEventListener('click', function () {
+          if (!isProduction) {
+            if (Array.isArray(window.__MSL_ANALYTICS_SINK__)) window.__MSL_ANALYTICS_SINK__.push({ type: 'capture', event: 'free_start_clicked', properties: props });
+            return;
+          }
+          if (window.posthog && window.posthog.capture) window.posthog.capture('free_start_clicked', props, { transport: 'sendBeacon', send_instantly: true });
+        });
+      });
+    }());
   </script>
 </body>
 </html>
