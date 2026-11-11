@@ -707,9 +707,10 @@
         <li><strong>OAuth connection</strong> — an admin connects the school's QBO account in Setup with one click; Microschool Ledger handles the token exchange and refresh automatically</li>
         <li><strong>Customer reconciliation</strong> — QBO customers (parents and student sub-customers) are pulled and matched against Microschool Ledger's family and student records; unmatched records on either side are flagged for review</li>
         <li><strong>StepUp Allocation Report</strong> — generates a QBO-ready summary of Step-Up scholarship disbursements by student, program, and funding source; designed to map cleanly to QBO's class/customer structure</li>
-        <li><strong>Payment pull and matching</strong> — QBO payments can be pulled and matched against Microschool Ledger ledger entries with a side-by-side reconciliation view; admin reviews before any ledger write</li>
+        <li><strong>Payment pull and matching</strong> — QBO payments can be pulled and matched against Microschool Ledger ledger entries with a side-by-side reconciliation view; the matches are for review only, and nothing is written to the ledger from QuickBooks</li>
+        <li><strong>Creating missing customers</strong> — when a family or student isn't in QuickBooks yet, an admin can create the parent customer and student sub-customer there with one click</li>
       </ul>
-      <p>The integration is read-and-reconcile, not write-and-sync — which avoids the common failure mode where a two-way sync creates duplicate or misattributed entries in both systems. Tokens are stored server-side only and never exposed to the browser.</p>
+      <p>The only thing Microschool Ledger writes to QuickBooks is customer records, and only when an admin asks. It never sends invoices, payments or other financial transactions to QuickBooks, which avoids the common failure mode where a two-way sync creates duplicate or misattributed entries in both systems. Tokens are stored server-side only and never exposed to the browser.</p>
 
       <h3>3.14 Communications</h3>
       <p>Send targeted announcements to the right families — returning vs. new, enrolled in a specific program, or the full roster — without a separate email tool. Audience segments are built from live enrollment and family data, and a message can start from a saved template. A reusable template library ships with 9 ready-made microschool templates — re-enrollment intent, missing documents, Step Up/ESA approval reminders, autopay failure, field trip deadlines, beginning-of-year assessments, weather closures, volunteer/fundraiser asks, and scholarship award follow-up — alongside the option to write your own.</p>
@@ -842,8 +843,9 @@
       </div>
       <p>Even at $199/month, Microschool Ledger typically pays for itself before the first Step-Up reconciliation of the month is run.</p>
 
-      <h3>Just need attendance?</h3>
-      <p><a href="/free-attendance/">MSL Attendance</a> is a separate free tool for small schools: mark who's here each school day, including late arrivals and early pickups, and look back or export any time. It's free for up to 25 active students, with no credit card. Support is by email at <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a>.</p>
+      <h3>Just need attendance or event RSVPs?</h3>
+      <p><a href="/free-attendance/">MSL Attendance</a> is a separate free tool for small schools: mark who's here each school day, including late arrivals and early pickups, and look back or export any time. It's free for up to 25 active students, with no credit card.</p>
+      <p><a href="/free-events/">MSL Events</a> is a second free tool on the same list of families and students: invite families to field trips and parties, see who's coming, send reminders, and tick off who has paid you. It doesn't take payments. It's also free for up to 25 active students. Support for both is by email at <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a>.</p>
     </div>
 
     <hr class="divider">
