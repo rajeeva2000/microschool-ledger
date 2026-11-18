@@ -390,7 +390,9 @@ footer {
   body.printing-sheet .sheet-credit { display:block; margin-top:5mm; font-size:8pt; color:#555; text-align:center; }
   body.printing-sheet .sheet-credit strong { color:#333; }
   @page { size: landscape; margin: 12mm; }
-  body.printing-sheet .sheet.portrait { page: portrait-form; }
+  /* Keep the whole print document on one page type; a child-only named page
+     can leave an empty default page after the portrait form. */
+  html:has(body.printing-sheet .sheet.portrait) { page: portrait-form; }
   @page portrait-form { size: portrait; margin: 14mm; }
   body.printing-sheet .form-grid td { height:2.25rem; }
   body.printing-sheet .form-line { color:#000; font-size:10.5pt; margin:.3rem 0 !important; }
