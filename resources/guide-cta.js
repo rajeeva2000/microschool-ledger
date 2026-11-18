@@ -1,7 +1,10 @@
-// Practical guides (attendance, field trips): free-tool start links, the
-// printable sheet button, and two explicit funnel events.
+// Practical guides (attendance, field trips, payments, pickup): free-tool
+// start links, paid-plan buttons, the printable sheet button, and funnel events.
 //   guide_viewed       — a guide was viewed (page = data-guide on <body>)
 //   free_start_clicked — a "Start free" link in a guide was chosen
+//   guide_cta_clicked  — a paid-plan button (a[data-cta]) was chosen; demo
+//                        links also send demo_link_clicked
+//   guide_sheet_printed — the printable sheet or form was printed
 // free_start_clicked uses the same properties as /free-attendance/ and
 // /free-events/ (entry_workflow, offer_version, cta_location, campaign
 // fields), plus page = the guide, so guide signups join the existing funnel.
@@ -77,7 +80,15 @@
     });
   });
 
-  // Print only the sign-in sheet, not the whole article.
+  // Paid-plan buttons (pricing, demo request, live demo).
+  document.querySelectorAll('a[data-cta]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      capture('guide_cta_clicked', base({ cta: link.dataset.cta, cta_location: link.dataset.ctaLocation || 'unknown' }), { transport: 'sendBeacon', send_instantly: true });
+      if (link.href.indexOf('org=demo') !== -1) capture('demo_link_clicked', base(), { transport: 'sendBeacon', send_instantly: true });
+    });
+  });
+
+  // Print only the sheet or form, not the whole article.
   document.querySelectorAll('[data-print-sheet]').forEach(function (button) {
     button.addEventListener('click', function () {
       document.body.classList.add('printing-sheet');

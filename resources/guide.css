@@ -389,6 +389,28 @@ footer {
   body.printing-sheet .sheet-credit { display:block; margin-top:5mm; font-size:8pt; color:#555; text-align:center; }
   body.printing-sheet .sheet-credit strong { color:#333; }
   @page { size: landscape; margin: 12mm; }
+  body.printing-sheet .sheet.portrait { page: portrait-form; }
+  @page portrait-form { size: portrait; margin: 14mm; }
+  body.printing-sheet .form-grid td { height:2.25rem; }
+  body.printing-sheet .form-line { color:#000; font-size:10.5pt; margin:.3rem 0 !important; }
+  body.printing-sheet .form-line span { flex-basis:9rem; }
+  body.printing-sheet .form-section-title { margin:.7rem 0 .25rem !important; font-size:9pt; }
+  body.printing-sheet .form-note { font-size:8.5pt; margin:.25rem 0 !important; }
+  body.printing-sheet .sheet.portrait .sheet-title { margin-bottom:2mm !important; }
+  body.printing-sheet .sheet.portrait .sheet-credit { margin-top:3mm; }
 }
 .cta .cta-note a { background:none; color:rgba(255,255,255,.82); padding:0; min-height:0; font-weight:500; text-decoration:underline; text-underline-offset:3px; }
 .footer-copy a { color:rgba(255,255,255,.62); text-underline-offset:3px; }
+
+/* Portrait printable forms (pickup authorization). */
+.form-section-title { font-weight:700; color:var(--pine); font-size:.85rem; text-transform:uppercase; letter-spacing:.08em; margin:1rem 0 .4rem !important; }
+.form-line { display:flex; gap:.6rem; flex-wrap:wrap; font-size:.9rem; color:var(--pine); margin:.5rem 0 !important; }
+.form-line span { flex:1 1 14rem; border-bottom:1px solid var(--ink); padding-bottom:.15rem; }
+.form-note { font-size:.78rem; color:var(--muted); margin:.4rem 0 !important; line-height:1.5 !important; }
+.policy-box { background:white; border:1px dashed var(--grass); border-radius:10px; padding:1.1rem 1.2rem; margin:1.25rem 0; }
+.policy-box p, .policy-box li { font-size:.94rem; }
+.cta .cta-secondary { background:none; border:1px solid rgba(255,255,255,.4); color:white; }
+.form-grid th:nth-child(1) { width:30%; }
+.form-grid th:nth-child(2) { width:22%; }
+.form-grid th:nth-child(3) { width:22%; }
+.form-grid th:nth-child(4) { width:26%; }
