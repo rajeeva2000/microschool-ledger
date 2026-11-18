@@ -370,6 +370,8 @@ footer {
 .sheet td { height:2.1rem; background:white !important; border:1px solid var(--rock); }
 .sheet th { font-size:.66rem; padding:.5rem; }
 .sheet th:first-child { width:22%; }
+.sheet-credit { display:none; }
+.sheet-title { font-family:'Lora', Georgia, serif; font-weight:700; color:var(--pine); font-size:1.05rem; margin:0 0 .6rem !important; }
 .sheet-key { font-size:.78rem; color:var(--muted); margin-top:.6rem; }
 
 @media print {
@@ -381,8 +383,11 @@ footer {
   body.printing-sheet .sheet .table-wrap { overflow:visible; }
   body.printing-sheet .sheet table { min-width:0; width:100%; font-size:11pt; }
   body.printing-sheet .sheet th { background:#eee !important; color:#000 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; font-size:9pt; }
-  body.printing-sheet .sheet td { border:1px solid #555; height:2.4rem; }
+  body.printing-sheet .sheet td { border:1px solid #555; height:2.1rem; }
   body.printing-sheet .sheet-head { font-size:12pt; color:#000; }
+  body.printing-sheet .sheet-title { font-size:16pt; color:#000 !important; margin-bottom:4mm !important; }
+  body.printing-sheet .sheet-credit { display:block; margin-top:5mm; font-size:8pt; color:#555; text-align:center; }
+  body.printing-sheet .sheet-credit strong { color:#333; }
   @page { size: landscape; margin: 12mm; }
 }
 .cta .cta-note a { background:none; color:rgba(255,255,255,.82); padding:0; min-height:0; font-weight:500; text-decoration:underline; text-underline-offset:3px; }
