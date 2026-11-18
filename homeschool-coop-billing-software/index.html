@@ -71,6 +71,29 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/landing.css">
+  <style>
+    #family-billing-example { scroll-margin-top:72px; }
+    .billing-example-grid { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:1.5rem; align-items:start; }
+    .billing-example-card { background:var(--white); border:1px solid var(--rock); border-radius:16px; padding:clamp(1.1rem,3vw,2rem); box-shadow:var(--shadow); min-width:0; }
+    .billing-example-card h3 { font-size:1.3rem; margin:.3rem 0 1rem; }
+    .billing-example-label { color:var(--muted); text-transform:uppercase; letter-spacing:.1em; font-size:.75rem; font-weight:700; }
+    .billing-example-note { color:var(--muted); font-size:.88rem; margin-top:1rem; }
+    .billing-example-table { width:100%; border-collapse:collapse; font-size:.9rem; margin-bottom:1rem; }
+    .billing-example-table caption { text-align:left; color:var(--muted); padding-bottom:.7rem; }
+    .billing-example-table th,.billing-example-table td { padding:.7rem 0; border-bottom:1px solid var(--rock); text-align:left; vertical-align:top; }
+    .billing-example-table th { color:var(--pine); font-weight:600; }
+    .billing-example-table td:last-child,.billing-example-table th:last-child { text-align:right; padding-left:.8rem; white-space:nowrap; font-variant-numeric:tabular-nums; }
+    .billing-example-table tbody th { font-weight:400; }
+    .billing-example-total { background:var(--gold-light); border-radius:10px; padding:1rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; color:var(--pine); }
+    .billing-example-total strong { font-family:'Lora',Georgia,serif; font-size:1.8rem; }
+    .billing-example-steps { padding-left:1.3rem; margin:1rem 0; }
+    .billing-example-steps li { padding-left:.2rem; margin-bottom:.8rem; color:var(--muted); font-size:.93rem; }
+    .billing-example-steps strong { color:var(--pine); }
+    .billing-example-summary { margin:1rem 0; }
+    .billing-example-summary div { display:flex; justify-content:space-between; gap:1rem; padding:.65rem 0; border-bottom:1px solid var(--rock); }
+    .billing-example-summary dd { font-weight:600; color:var(--pine); font-variant-numeric:tabular-nums; }
+    @media (max-width:760px) { .billing-example-grid { grid-template-columns:1fr; } }
+  </style>
   <link rel="preconnect" href="https://us.i.posthog.com" crossorigin>
   <link rel="preconnect" href="https://us-assets.i.posthog.com" crossorigin>
   <script src="/posthog-array.js" defer></script>
@@ -272,6 +295,58 @@
             <li><span>Current family balance</span><strong>Clear</strong></li>
           </ul>
         </aside>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="family-billing-example" aria-labelledby="family-billing-heading">
+      <div class="container">
+        <div class="section-heading center">
+          <div class="eyebrow">A family-billing example</div>
+          <h2 id="family-billing-heading">Two siblings. Two payment sources. One clear balance.</h2>
+          <p class="section-lead">Follow one family from program charges to a partial payment and a scholarship credit. Both the administrator and the parent need to understand the same remaining balance.</p>
+          <p class="billing-example-note">Illustrative statements using fictional names and amounts. Your school’s actual charges and screen layout depend on its setup.</p>
+        </div>
+        <div class="billing-example-grid">
+          <article class="billing-example-card" aria-labelledby="admin-example-heading">
+            <div class="billing-example-label">For the administrator</div>
+            <h3 id="admin-example-heading">See how the $250 balance is calculated.</h3>
+            <table class="billing-example-table">
+              <caption>Rivera family · sample billing period</caption>
+              <thead><tr><th scope="col">Charge or payment</th><th scope="col">Amount</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Maya · program charge</th><td>$600</td></tr>
+                <tr><th scope="row">Leo · program charge</th><td>$400</td></tr>
+                <tr><th scope="row">Leo · sibling discount</th><td>−$50</td></tr>
+                <tr><th scope="row">Family payment received</th><td>−$300</td></tr>
+                <tr><th scope="row">Scholarship payment received and credited</th><td>−$400</td></tr>
+              </tbody>
+            </table>
+            <div class="billing-example-total"><span>Remaining family balance</span><strong>$250</strong></div>
+            <ol class="billing-example-steps">
+              <li><strong>$950 charged after the discount.</strong> Each student’s program remains identifiable.</li>
+              <li><strong>$650 remains after the family pays.</strong> A $300 payment does not mark the whole account paid.</li>
+              <li><strong>$250 remains after the scholarship credit.</strong> Count the $400 once it has been received and credited, not while it is only expected.</li>
+            </ol>
+          </article>
+          <article class="billing-example-card" aria-labelledby="parent-example-heading">
+            <div class="billing-example-label">For the parent</div>
+            <h3 id="parent-example-heading">“What makes up our balance?”</h3>
+            <p>The parent can trace the remaining amount to the family’s charges and payment history, rather than ask your team to rebuild a statement.</p>
+            <dl class="billing-example-summary">
+              <div><dt>Program charges</dt><dd>$1,000</dd></div>
+              <div><dt>Sibling discount</dt><dd>−$50</dd></div>
+              <div><dt>Family payment</dt><dd>−$300</dd></div>
+              <div><dt>Scholarship credit</dt><dd>−$400</dd></div>
+            </dl>
+            <div class="billing-example-total"><span>Remaining family balance</span><strong>$250</strong></div>
+            <p class="billing-example-note">This example shows a remaining balance, not a payment deadline. Due dates follow the school’s billing arrangements. Schools without scholarships can record a second family payment instead.</p>
+          </article>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-dark" href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener" data-cta="try_demo" data-location="family_billing_example">Explore the live demo</a>
+          <a class="btn" style="border-color:var(--pine);color:var(--pine);" href="/#contact" data-cta="request_demo" data-location="family_billing_example">Talk through your school’s billing</a>
+        </div>
+        <p class="billing-example-note">Still comparing systems? Use the <a href="/resources/choosing-billing-software.html#billing-demo-checklist">five-step billing demo checklist</a> with any provider.</p>
       </div>
     </section>
 
