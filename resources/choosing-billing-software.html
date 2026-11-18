@@ -31,7 +31,7 @@
         "url": "https://www.microschoolledger.com/resources/choosing-billing-software.html",
         "mainEntityOfPage": "https://www.microschoolledger.com/resources/choosing-billing-software.html",
         "image": "https://www.microschoolledger.com/og-image.png",
-        "dateModified": "2026-07-20",
+        "dateModified": "2026-11-17",
         "author": {
           "@type": "Organization",
           "@id": "https://www.microschoolledger.com/#organization",
@@ -259,6 +259,15 @@
     }
     .callout.warn p { color:var(--warn-text); }
 
+    .article h2[id] { scroll-margin-top:88px; }
+    .approach-grid { display:grid; gap:1rem; margin:1.2rem 0 1.8rem; }
+    .approach-card { background:white; border:1px solid var(--rock); border-radius:10px; padding:1.3rem; }
+    .approach-card h3 { margin:0 0 .65rem; }
+    .approach-card p:last-child { margin-bottom:0; }
+    .evaluation-list li { margin-bottom:1rem; padding-left:.3rem; }
+    .evaluation-list strong { display:block; }
+    .article a:focus-visible { outline:3px solid var(--gold); outline-offset:4px; }
+    .article table { overflow-wrap:anywhere; }
     .criteria-grid {
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -434,8 +443,8 @@
       <h1>What to look for in billing software for your <em>homeschool co-op</em></h1>
       <div class="hero-meta">
         <span>By Rajeev, The Grow Co-op</span>
-        <span>March 2026</span>
-        <span>7 min read</span>
+        <span>Updated November 17, 2026</span>
+        <span>10 min read</span>
       </div>
     </div>
   </header>
@@ -447,11 +456,36 @@
         Most billing tools weren’t built for the way homeschool co-ops and microschools actually run. The problem usually isn’t that the software is bad — it’s that it assumes a completely different structure than the one your school lives with every month.
       </p>
 
+      <p>This guide is for co-op and microschool operators collecting tuition or program fees from families. If you only need to track attendance or organize a trip, start with the <a href="/free-attendance/">free attendance tracker</a> or <a href="/free-events/">free event RSVP tool</a>.</p>
+
       <div class="callout">
         <div class="callout-label">Honest disclosure</div>
         <p>
           We built Microschool Ledger specifically for this problem. This guide is our honest attempt to explain what actually matters when you’re choosing software — including places where many schools outgrow spreadsheets long before they realize it.
         </p>
+      </div>
+
+      <h2 id="compare-approaches">Which billing approach fits your co-op?</h2>
+      <p>Start with the work your team actually does. A spreadsheet may be enough for a simple program. More software becomes useful when keeping balances accurate takes more time than collecting the payments.</p>
+      <div class="approach-grid">
+        <article class="approach-card">
+          <h3>A spreadsheet and payment links</h3>
+          <p><strong>A reasonable fit:</strong> One straightforward fee, few changes, and an administrator who can keep the records current.</p>
+          <p><strong>Work to plan for:</strong> Enter payments, apply discounts, calculate balances, and send family statements yourself. Decide who checks the sheet against the money received.</p>
+          <p><strong>Reconsider when:</strong> Different versions of a balance circulate, or matching payments becomes a recurring cleanup task.</p>
+        </article>
+        <article class="approach-card">
+          <h3>General invoicing software</h3>
+          <p><strong>A reasonable fit:</strong> Your main job is sending invoices and collecting payments, and the system can represent your family accounts clearly.</p>
+          <p><strong>Work to check:</strong> Ask how it handles two siblings, different class fees, discounts, and scholarship credits. Capabilities vary; confirm what is included and what requires a separate record or manual entry.</p>
+          <p><strong>Reconsider when:</strong> A second spreadsheet is still needed to explain what each family owes.</p>
+        </article>
+        <article class="approach-card">
+          <h3>A billing system built for schools and co-ops</h3>
+          <p><strong>A reasonable fit:</strong> Programs, student enrollments, family balances, payment plans, and parent statements need to stay connected.</p>
+          <p><strong>Work to plan for:</strong> Set up your school’s pricing and check the starting balances. Compare the subscription, payment-processing costs, setup help, and export options.</p>
+          <p><strong>Check before committing:</strong> Have the provider demonstrate your billing rules. A school-specific label alone does not establish a good fit.</p>
+        </article>
       </div>
 
       <h2>Why generic tools struggle with co-op billing</h2>
@@ -589,6 +623,18 @@
           Many schools stay with spreadsheets too long because spreadsheets are familiar. But familiarity and sustainability are not the same thing. Once your billing system starts living partly in your head, that’s usually the moment to upgrade.
         </p>
       </div>
+
+      <h2 id="billing-demo-checklist">Five things to test before choosing billing software</h2>
+      <p>Ask each provider to walk through the same fictional family. Maya has a $600 program charge; her sibling Leo has a $400 charge and a $50 sibling discount. The family pays $300, then a $400 scholarship payment is received and credited. The remaining balance should be <strong>$250</strong>.</p>
+      <ol class="evaluation-list">
+        <li><strong>Keep both students in one family account.</strong> Can you see each student’s program and still give the parent one understandable balance?</li>
+        <li><strong>Apply the sibling discount once.</strong> Check that the charges total $950 after the $50 discount. Ask what happens if a student changes programs.</li>
+        <li><strong>Record the partial family payment.</strong> After $300 is paid, $650 should remain. Ask how the system distinguishes a partial payment from a fully paid account.</li>
+        <li><strong>Credit a scholarship payment only when received.</strong> After the $400 credit, $250 should remain. An expected award should not be presented as money already received. If your school does not accept scholarships, use a second family payment instead.</li>
+        <li><strong>Check the parent view and export.</strong> Can the parent explain the $250 from the itemized charges and payments? Can your administrator download the records and find the same figures?</li>
+      </ol>
+      <p>Use fictional information in an initial demo. Bring your actual pricing rules to a follow-up conversation, without sharing student or payment records through a public form.</p>
+      <p><a href="/homeschool-coop-billing-software/#family-billing-example">See the same family-billing example for Microschool Ledger</a>, then decide whether the workflow fits your co-op.</p>
 
       <h2>What we believe is worth prioritizing</h2>
 
