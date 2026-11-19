@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Microschool Tuition &amp; Budget Calculator | Microschool Ledger</title>
+  <meta name="description" content="Plan microschool tuition, program discounts, deposits, payment schedules, and annual costs. Use the free calculator and download your results without an account.">
+  <link rel="canonical" href="https://www.microschoolledger.com/tools/microschool-tuition-calculator/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Microschool Ledger">
+  <meta property="og:title" content="Microschool Tuition &amp; Budget Calculator | Microschool Ledger">
+  <meta property="og:description" content="Plan microschool tuition, program discounts, deposits, payment schedules, and annual costs. Use the free calculator and download your results without an account.">
+  <meta property="og:url" content="https://www.microschoolledger.com/tools/microschool-tuition-calculator/">
+  <meta property="og:image" content="https://www.microschoolledger.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Microschool Tuition &amp; Budget Calculator | Microschool Ledger">
+  <meta name="twitter:description" content="Plan microschool tuition, program discounts, deposits, payment schedules, and annual costs. Use the free calculator and download your results without an account.">
+  <meta name="twitter:image" content="https://www.microschoolledger.com/og-image.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/landing.css">
+  <link rel="preconnect" href="https://us.i.posthog.com" crossorigin>
+  <link rel="preconnect" href="https://us-assets.i.posthog.com" crossorigin>
+  <script src="/posthog-array.js" defer></script>
+  <script src="/posthog-init.js" defer></script>
+  <link rel="stylesheet" href="./calculator.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Microschool Tuition and Budget Calculator", "url": "https://www.microschoolledger.com/tools/microschool-tuition-calculator/", "description": "Plan microschool tuition, program discounts, deposits, payment schedules, and annual costs. Use the free calculator and download your results without an account.", "applicationCategory": "FinanceApplication", "operatingSystem": "Web browser", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "Microschool Ledger", "url": "https://www.microschoolledger.com/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.microschoolledger.com/"}, {"@type": "ListItem", "position": 2, "name": "Microschool tuition calculator", "item": "https://www.microschoolledger.com/tools/microschool-tuition-calculator/"}]}]}</script>
+  <script src="./model.js" defer></script>
+  <script src="./calculator.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="container nav-inner">
+      <a class="brand" href="/">
+        <svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+          <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.3"/>
+          <line x1="0" y1="13" x2="40" y2="13" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="21" x2="40" y2="21" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <line x1="0" y1="29" x2="40" y2="29" stroke="white" stroke-width="0.6" opacity="0.2"/>
+          <text x="26" y="25" font-family="Georgia,serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle">MSL</text>
+        </svg>
+        <span>Microschool Ledger</span>
+      </a>
+      <div class="nav-links">
+        <a href="/features.html">Features</a>
+        <a href="/pricing/">Pricing</a>
+        <a href="/homeschool-coop-billing-software/">For co-ops</a>
+        <a href="/resources/faq.html">Resources</a>
+        <a href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener">Try demo</a>
+        <a href="https://app.microschoolledger.com">Log in</a>
+        <a class="btn btn-primary nav-cta" href="/#contact" data-cta="request_demo" data-location="navigation">Request a demo</a>
+      </div>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+        <span class="menu-bars" aria-hidden="true"></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="/features.html">Features</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/homeschool-coop-billing-software/">For co-ops</a>
+      <a href="/resources/faq.html">Resources</a>
+      <a href="https://app.microschoolledger.com?org=demo" target="_blank" rel="noopener">Try demo ↗</a>
+      <a href="https://app.microschoolledger.com">Log in</a>
+      <a class="btn btn-primary" href="/#contact" data-cta="request_demo" data-location="mobile_navigation">Request a demo</a>
+    </div>
+  </nav>
+  <main id="main-content">
+    <header class="calculator-hero container">
+      <p class="eyebrow">A little clarity before the school year</p>
+      <h1>Microschool tuition<br>and budget calculator.</h1>
+      <p class="calculator-intro">See how your tuition, program mix, and expenses fit together. Plan for deposits and the months ahead, then take your numbers with you.</p>
+      <p class="calculator-promise">Free to use · No account or email needed · Download your results</p>
+    </header>
+    <section class="container calculator-layout" aria-labelledby="calculator-heading">
+      <div class="calculator-inputs">
+        <h2 id="calculator-heading">Build a simple school-year plan</h2>
+        <p>Start with the fictional example, or replace it with your estimates. All amounts are in US dollars.</p>
+        <noscript><p class="calculator-error">Turn on JavaScript to calculate and download your plan. The planning guide below is available without it.</p></noscript>
+        <form id="tuition-form" class="ph-no-capture" novalidate>
+          <fieldset class="input-section">
+            <legend><span class="step-number">1</span> Your programs</legend>
+            <p id="enrollment-help" class="field-help">Count enrollments in each program, even when a student takes both. We do not add them into a unique-student count.</p>
+            <div id="programs"></div>
+            <button class="btn btn-outline" type="button" id="add-program">+ Add another program</button>
+            <p class="field-help">Up to six programs. A deposit is part of tuition, with the remainder divided into payments beginning in month 1.</p>
+          </fieldset>
+          <fieldset class="input-section">
+            <legend><span class="step-number">2</span> Your operating costs</legend>
+            <div class="field-grid">
+              <div class="field field-wide"><label for="staffing">Annual staffing, including your pay ($)</label><input id="staffing" name="staffing" type="number" min="0" max="10000000" step="0.01" value="72000" required inputmode="decimal"></div>
+              <div class="field"><label for="space">Monthly space and utilities ($)</label><input id="space" name="space" type="number" min="0" max="10000000" step="0.01" value="1500" required inputmode="decimal"></div>
+              <div class="field"><label for="other">Other annual costs ($)</label><input id="other" name="other" type="number" min="0" max="10000000" step="0.01" value="10000" required inputmode="decimal" aria-describedby="other-help"></div>
+            </div>
+            <p id="other-help" class="field-help">Include curriculum, supplies, insurance, software, and other recurring costs. Spread annual costs over 12 operating months.</p>
+          </fieldset>
+          <fieldset class="input-section">
+            <legend><span class="step-number">3</span> What you expect to collect</legend>
+            <div class="field-grid">
+              <div class="field"><label for="collection-rate">Tuition you expect to collect (%)</label><input id="collection-rate" name="collectionRate" type="number" min="0" max="100" step="0.01" value="100" required inputmode="decimal"></div>
+              <div class="field"><label for="processing-rate">Payment costs (% of receipts)</label><input id="processing-rate" name="processingRate" type="number" min="0" max="20" step="0.01" value="0" required inputmode="decimal"></div>
+            </div>
+            <p class="field-help">Use your own blended payment-cost rate, including any fixed fees. A 95% collection assumption means 5% of planned tuition is not received within this model.</p>
+          </fieldset>
+          <p id="calculator-error" class="calculator-error" role="alert" hidden></p>
+          <div class="form-actions"><button class="btn btn-dark" type="submit">Update my estimate</button><button class="text-button" type="button" id="reset-example">Reset to example</button></div>
+        </form>
+      </div>
+      <aside class="calculator-results" aria-labelledby="results-heading" aria-busy="false">
+        <div class="results-top"><p class="eyebrow">Your school-year estimate</p><h2 id="results-heading">A clearer picture.</h2><p id="result-status" role="status" aria-live="polite">The fictional example is ready to calculate.</p></div>
+        <div id="results-body" class="ph-no-capture" hidden>
+          <div class="result-primary"><span id="net-label">Projected annual surplus</span><strong id="net-result"></strong><p>After estimated collections, payment costs, and 12 months of operating costs.</p></div>
+          <dl class="result-lines"><div><dt>Tuition before discounts</dt><dd id="gross-result"></dd></div><div><dt>Estimated discounts</dt><dd id="discount-result"></dd></div><div><dt>Tuition after discounts</dt><dd id="billed-result"></dd></div><div><dt>Expected collections</dt><dd id="receipts-result"></dd></div><div><dt>Payment costs</dt><dd id="fees-result"></dd></div><div><dt>Operating costs</dt><dd id="costs-result"></dd></div></dl>
+          <div class="result-insight"><h3>Tuition needed to cover costs</h3><strong id="target-result"></strong><p>Approximate annual billed tuition after discounts, at your collection and payment-cost rates.</p></div>
+          <div class="result-insight"><h3>If enrollment revenue is 10% lower</h3><strong id="lower-result"></strong><p>Projected surplus or shortfall, keeping operating costs unchanged.</p></div>
+          <div class="result-insight"><h3>Look beyond the annual total</h3><p><strong id="upfront-result"></strong> in expected upfront deposits. The modeled schedule needs <strong id="reserve-result"></strong> in additional cash to stay above zero.</p><p>This starts with no cash on hand and assumes receipts arrive before each month’s expenses. Late payments and startup costs need a separate cushion.</p><a href="#payment-schedule">See the payment schedule ↓</a></div>
+        </div>
+        <div class="result-actions"><button type="button" class="btn btn-dark" id="download-results" disabled>Download results (.csv)</button><p>Opens in Excel or Google Sheets. Includes your assumptions, program payments, and monthly totals.</p><a class="btn btn-outline" href="/#contact" data-cta="request_demo" data-location="calculator_results">Request a billing demo</a></div>
+      </aside>
+    </section>
+    <section class="container schedule-section" id="payment-schedule" aria-labelledby="schedule-heading" hidden>
+      <div class="section-heading"><p class="eyebrow">Deposits now. Payments over the year.</p><h2 id="schedule-heading">What comes in, and when.</h2><p class="section-lead">Each program’s deposit is credited toward tuition. All remaining payment schedules start together in month 1; operating costs continue for 12 months.</p></div>
+      <div id="program-summary" class="program-summary ph-no-capture"></div>
+      <details class="schedule-details"><summary>View the 12-month cash schedule</summary><div class="table-scroll" role="region" aria-label="Monthly cash schedule; scroll horizontally to see all columns" tabindex="0"><table><caption>Expected receipts and operating costs, starting with zero cash on hand</caption><thead><tr><th scope="col">Period</th><th scope="col">Receipts</th><th scope="col">Payment costs</th><th scope="col">Operating costs</th><th scope="col">Cash remaining</th></tr></thead><tbody id="schedule-rows" class="ph-no-capture"></tbody></table></div></details>
+    </section>
+    <section class="container planning-guide" aria-labelledby="planning-heading">
+      <div class="section-heading"><p class="eyebrow">How to use your estimate</p><h2 id="planning-heading">Set tuition with the whole year in view.</h2></div>
+      <div class="guide-grid"><article><h3>Start with the cost of running your school</h3><p>Include your own compensation, staff, space, and recurring expenses. Compare the tuition you expect to receive with what your school needs to spend, not just the price of nearby schools.</p></article><article><h3>Allow for the discounts you actually offer</h3><p>Estimate the combined annual effect of family, program-combination, and sibling discounts for each program. For example, $6,000 of discounts on $60,000 of program tuition is a 10% allowance. Enter it once.</p></article><article><h3>Check timing as well as totals</h3><p>Tuition can cover annual costs while leaving a quiet month short of cash. Compare deposits and payment months with your full year of expenses. Scholarship receipts replace family payments toward tuition; they are not extra tuition revenue.</p></article></div>
+      <details class="assumptions"><summary>What this calculator assumes</summary><ul><li>One school year of tuition and 12 months of operating costs. Enrollment and costs stay constant; there are no midyear withdrawals or additions.</li><li>Deposits arrive upfront. Remaining payments begin in month 1. Different program start dates, late receipts, and scholarship disbursement dates are not modeled.</li><li>The same collection percentage and blended payment-cost rate apply to every receipt, including deposits. Actual methods and fees may vary.</li><li>Annual operating costs are spread evenly over 12 months. Startup purchases, taxes, debt payments, grants, and cash already on hand are excluded.</li><li>Discounts use one estimated percentage per program. The calculator does not apply family-level rules or check which students take multiple programs.</li><li>Dollar amounts round to cents. The final payment can differ slightly so the deposit and payments equal the annual tuition after discounts.</li><li>This is a planning estimate, not a quote or a guarantee of enrollment, collections, or financial results. Your entries are not saved when you leave or reload this page.</li></ul></details>
+    </section>
+    <section class="final-cta"><div class="container"><p class="eyebrow">From planning tuition to managing it</p><h2>Your real billing rules deserve more than an average.</h2><p>Microschool Ledger supports family pricing categories, program pricing and combination discounts, sibling discounts, deposits, and payment plans. In a demo, walk through your school’s rules and see how charges and payments reach one family balance.</p><div class="hero-actions"><a class="btn btn-primary" href="/#contact" data-cta="request_demo" data-location="calculator_final">Request a demo</a><a class="btn btn-light" href="/pricing/" data-cta="pricing" data-location="calculator_final">See pricing</a></div><p class="calculator-next-link">Still comparing? <a href="/resources/choosing-billing-software.html">Use the billing software checklist</a>.</p></div></section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand" href="/">
+        <svg width="28" height="28" viewBox="0 0 40 40" aria-hidden="true">
+          <rect x="0.5" y="0.5" width="39" height="39" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)"/>
+          <line x1="12" y1="0" x2="12" y2="40" stroke="#c9a84c" stroke-width="2.3"/>
+          <text x="26" y="25" font-family="Georgia,serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">MSL</text>
+        </svg>
+        <span>Microschool Ledger</span>
+      </a>
+      <div class="footer-meta">
+        Built by The Grow Co-op · Boca Raton, Florida · <a href="mailto:info@microschoolledger.com">info@microschoolledger.com</a><br>
+        <a href="https://app.microschoolledger.com/terms.html">Terms of Service</a> · <a href="https://app.microschoolledger.com/privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
